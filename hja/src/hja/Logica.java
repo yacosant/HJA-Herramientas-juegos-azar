@@ -100,7 +100,8 @@ public class Logica {
            
            while( j<5 && !cierto){
                if(i!=j){
-                   if(i==j)cierto=true;
+                   char c= cartas[j].getValor();
+                   if(carta==c)cierto=true;
                    manos[cont]="Pareja";
                    cont++;
                }

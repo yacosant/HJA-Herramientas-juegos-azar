@@ -90,12 +90,38 @@ public class Logica {
         return mano;
     }
     
-    void pareja(){
+        void pareja(int a){
         boolean cierto= false;
-        int i=0, j=0;
+        int i=0, j;
+        char anterior =cartas[a].getValor();
         
         while( i<5 && !cierto){
+           j=0;
            char carta= cartas[i].getValor();
+           if(carta!=anterior){
+                while( j<5 && !cierto){
+                    if(i!=j){
+                        char c= cartas[j].getValor();
+                        if(carta==c){
+                            cierto=true;
+                            manos[cont]="Pareja";
+                            cont++;
+                        }
+                    }
+                    j++;
+                }
+           }
+           }
+           i++;
+    }
+    
+    void pareja1(){
+        boolean cierto= false;
+        int i=0, j;
+        
+        while( i<5 && !cierto){
+           j=0;
+            char carta= cartas[i].getValor();
            
            while( j<5 && !cierto){
                if(i!=j){

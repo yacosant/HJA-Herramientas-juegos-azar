@@ -91,7 +91,6 @@ public class Logica {
     }
     
     void pareja(){
-        String mano= "Pareja";
         boolean cierto= false;
         int i=0, j=0;
         
@@ -101,15 +100,17 @@ public class Logica {
            while( j<5 && !cierto){
                if(i!=j){
                    char c= cartas[j].getValor();
-                   if(carta==c)cierto=true;
-                   manos[cont]="Pareja";
-                   cont++;
+                   if(carta==c){
+                       cierto=true;
+                       manos[cont]="Pareja";
+                       cont++;
+                   }
                }
                j++;
            }
            }
            i++;
-        }
+    }
          
     void cartaAlta(){
         boolean cierto =false;

@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author YVCX
- */
+
 public class Archivo {
     
 

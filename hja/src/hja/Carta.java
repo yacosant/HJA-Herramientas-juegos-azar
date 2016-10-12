@@ -5,17 +5,11 @@
  */
 package hja;
 
-/**
- *
- * @author YVCX
- */
-
-
 public class Carta {
    private char color;
-   private char valor; 
+   private int valor; 
    
-    public Carta(char val, char col){
+    public Carta(int val, char col){
         valor= val;
         color=col;
     }
@@ -24,7 +18,7 @@ public class Carta {
         return color;
     }
     
-    public char getValor() {
+    public int getValor() {
         return valor;
     }
 

@@ -43,6 +43,25 @@ public class Logica {
 		// high card (carta alta)
 
 	}
+        
+        boolean escaleraDeColor(Carta[] cartas) {
+		boolean esEscalera = false,posible = true;
+		ordenador(cartas);
+		int cont;
+		for (int i = 0; i < cartas.length && posible; i++) {
+			cont = 0;
+			for (int j = i + 1; j <= cartas.length && posible; j++) {
+				if (cartas[i].getColor()+1 == cartas[j].getColor() 
+                                    && cartas[i].getValor()+1 == cartas[j].getValor()) {
+					cont++;
+					if (cont == 4)
+						esEscalera = true;
+				}else
+					posible = false;
+			}
+		}
+		return esEscalera;
+	}
 
 	boolean escalera(Carta[] cartas) {
 		boolean esEscalera = false,posible = true;
@@ -103,12 +122,7 @@ public class Logica {
 		return esColor;
 	}
 
-	boolean escaleraDeColor(Carta[] cartas) {
-		boolean esEscalera = false;
-
-		return esEscalera;
-	}
-
+	
 	boolean trio(Carta[] cartas) {
 		boolean esTrio = false;
 		int cont = 0;

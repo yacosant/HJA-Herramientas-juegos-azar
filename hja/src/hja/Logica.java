@@ -52,7 +52,7 @@ public class Logica {
 			cont = 0;
 			for (int j = i + 1; j <= cartas.length && posible; j++) {
 				if(cartas[i].getColor() == cartas[j].getColor() 
-						&& cartas[i].getValor() == 13 && cartas[j].getValor() == 2))
+						&& cartas[i].getValor() == 13 && cartas[j].getValor() == 2)
 					cont++;
 				else if (cartas[i].getColor() == cartas[j].getColor() 
 						&& cartas[i].getValor()+1 == cartas[j].getValor())

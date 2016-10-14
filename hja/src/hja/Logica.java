@@ -44,20 +44,24 @@ public class Logica {
 
 	}
         
-        boolean escaleraDeColor(Carta[] cartas) {
+	boolean escaleraDeColor(Carta[] cartas) {
 		boolean esEscalera = false,posible = true;
 		ordenador(cartas);
 		int cont;
 		for (int i = 0; i < cartas.length && posible; i++) {
 			cont = 0;
 			for (int j = i + 1; j <= cartas.length && posible; j++) {
-				if (cartas[i].getColor()+1 == cartas[j].getColor() 
-                                    && cartas[i].getValor()+1 == cartas[j].getValor()) {
+				if(cartas[i].getColor() == cartas[j].getColor() 
+						&& cartas[i].getValor() == 13 && cartas[j].getValor() == 2))
 					cont++;
-					if (cont == 4)
-						esEscalera = true;
-				}else
+				else if (cartas[i].getColor() == cartas[j].getColor() 
+						&& cartas[i].getValor()+1 == cartas[j].getValor())
+					cont++;
+				else
 					posible = false;
+				
+				if (cont == 4)
+					esEscalera = true;
 			}
 		}
 		return esEscalera;
@@ -70,12 +74,15 @@ public class Logica {
 		for (int i = 0; i < cartas.length && posible; i++) {
 			cont = 0;
 			for (int j = i + 1; j <= cartas.length && posible; j++) {
-				if (cartas[i].getValor()+1 == cartas[j].getValor()) {
+				if(cartas[i].getValor() == 13 && cartas[j].getValor() == 2)//el unico caso distinto,considerando as como 13
 					cont++;
-					if (cont == 4)
-						esEscalera = true;
-				}else
+				else if(cartas[i].getValor()+1 == cartas[j].getValor())
+					cont++;
+				else
 					posible = false;
+
+				if (cont == 4)
+					esEscalera = true;
 			}
 		}
 		return esEscalera;

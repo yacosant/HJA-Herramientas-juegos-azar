@@ -6,14 +6,15 @@ public class Logica {
 
 	// private Carta[] cartas;
 	// private int cont = 0;
-	// private String[] manos = new String[9];
+	//private String[] manos = new String[9];
 
 	// public void setCartas(Carta[] cartas) {
 	// this.cartas = cartas;
 	// }
 
 	void comprobar() {
-
+            String mejorJugada = "";
+            Carta[] cartas =null;
 		// aqui s ehacen todas las llamadas a cada uno de los metodos que
 		// comprueban una mano.
 		// En el array de string se guardan las manos que si se han producido, y
@@ -25,23 +26,25 @@ public class Logica {
 		// Lamadas a:
 
 		// straight flush(escalerade color)
-
-		// four-of-a-kind (or quads) (poker)
-
+                if(escaleraDecolor(cartas)) mejorJugada="Escalera de color";
+                // four-of-a-kind (or quads) (poker)
+                else if (poker(cartas)) mejorJugada="Poker";
 		// full house (or boat) (full)
-
+                else if(full(cartas)) mejorJugada="Full";
 		// flush(color)
-
+                 else if(color(cartas)) mejorJugada="Color";
 		// straight(escalera)
-
+                else if(escalera(cartas)) mejorJugada="Escalera";
 		// three-of-a-kind(trío)
-
+                 else if(trio(cartas)) mejorJugada="Trio";
 		// two-pair(doblepareja)
-
+                 else if(doblePareja(cartas)) mejorJugada="Doble Pareja";
 		// pair (parejao par)
-
+                 else if(pareja(cartas)) mejorJugada="Pareja";
 		// high card (carta alta)
-
+                 else if(cartaAlta(cartas)) mejorJugada="Carta Alta";
+                
+                
 	}
         
 	boolean escaleraDeColor(Carta[] cartas) {

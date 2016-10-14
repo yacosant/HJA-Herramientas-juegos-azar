@@ -44,16 +44,28 @@ public class Logica {
 
 	}
 
-	boolean escaleraColor(Carta[] cartas) {
-		boolean esEscalera = false;
-
+	boolean escalera(Carta[] cartas) {
+		boolean esEscalera = false,posible = true;
+		ordenador(cartas);
+		
+		for (int i = 0; i < cartas.length && posible; i++) {
+			cont = 0;
+			for (int j = i + 1; j <= cartas.length && posible; j++) {
+				if (cartas[i].getValor()+1 == cartas[j].getValor()) {
+					cont++;
+					if (cont == 4)
+						esEscalera = true;
+				}else
+					posibe = false;
+			}
+		}
 		return esEscalera;
 	}
 
 	boolean poker(Carta[] cartas) {
 		boolean esPoker = false;
 		int cont = 0;
-		for (int i = 0; i < cartas.length; i++) {
+		for (int i = 0; i < cartas.length ; i++) {
 			cont = 0;
 			for (int j = i + 1; j <= cartas.length; j++) {
 				if (cartas[i].getValor() == cartas[j].getValor()) {
@@ -65,7 +77,7 @@ public class Logica {
 		}
 		return esPoker;
 	}
-
+ 
 	boolean full(Carta[] cartas) {
 		boolean esFull = false;
 		if (trio(cartas))
@@ -75,22 +87,23 @@ public class Logica {
 	}
 
 	boolean color(Carta[] cartas) {
-		boolean esColor = false;
+		boolean esColor = false,posible = true;
 		int cont = 0;
-		for (int i = 0; i < cartas.length; i++) {
+		for (int i = 0; i < cartas.length && posible; i++) {
 			cont = 0;
-			for (int j = i + 1; j <= cartas.length; j++) {
+			for (int j = i + 1; j <= cartas.length && posible; j++) {
 				if (cartas[i].getColor() == cartas[j].getColor()) {
 					cont++;
-					if (cont == 3)
+					if (cont == 4)//antes ponia 3 eso es para el proyecto de color
 						esColor = true;
-				}
+				}else
+					posible = false;
 			}
 		}
 		return esColor;
 	}
 
-	boolean escalera(Carta[] cartas) {
+	boolean escaleraDeColor(Carta[] cartas) {
 		boolean esEscalera = false;
 
 		return esEscalera;
@@ -150,6 +163,21 @@ public class Logica {
 				cartaAlta = cartas[i].getValor();
 		}
 		return cartaAlta;
+	}
+	
+	public static void ordenador(Carta[] cartas){
+
+		for(int i=0;i<cartas.length-1;i++){
+			for(int j=i+1;j<cartas.length;j++){
+				if(cartas[i]>cartas[j]){
+
+					Carta aux=cartas[i];
+					cartas[i]=cartas[j];
+					cartas[j]=aux;
+
+				}
+			}
+		}
 	}
 	// String escaleraColor(){
 	// String mano= "";

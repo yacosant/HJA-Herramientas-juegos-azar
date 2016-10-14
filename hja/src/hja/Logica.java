@@ -50,6 +50,7 @@ public class Logica {
 	boolean escaleraDeColor(Carta[] cartas) {
 		boolean esEscalera = false,posible = true;
 		ordenador(cartas);
+<<<<<<< HEAD
 		int cont = 0;
 		
 		while(cont < cartas.length-1 && posible) {
@@ -68,6 +69,24 @@ public class Logica {
 		if(cont == 4)
 			esEscalera = true;
 			
+=======
+		int cont=0;
+		while (cont < cartas.length && posible) {
+						
+                   if (cartas[cont].getColor() == cartas[cont+1].getColor() 
+                                    && cartas[cont].getValor()+1 == cartas[cont+1].getValor())
+                            cont++;
+                   else if (cont==3 && cartas[cont].getColor() == cartas[cont+1].getColor() 
+                                    && cartas[cont].getValor() == 5 
+                                    && cartas[cont+1].getValor()== 13)
+                            cont++;
+                   else
+                            posible = false;
+
+                    if (cont == 4)
+                            esEscalera = true;
+             }
+>>>>>>> origin/master
 		
 		return esEscalera;
 	}

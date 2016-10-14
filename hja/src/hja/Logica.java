@@ -50,23 +50,25 @@ public class Logica {
 	boolean escaleraDeColor(Carta[] cartas) {
 		boolean esEscalera = false,posible = true;
 		ordenador(cartas);
-		int cont;
-		for (int i = 0; i < cartas.length && posible; i++) {
-			cont = 0;
-			for (int j = i + 1; j <= cartas.length && posible; j++) {
-				if(cartas[i].getColor() == cartas[j].getColor() 
-						&& cartas[i].getValor() == 13 && cartas[j].getValor() == 2)
-					cont++;
-				else if (cartas[i].getColor() == cartas[j].getColor() 
-						&& cartas[i].getValor()+1 == cartas[j].getValor())
-					cont++;
-				else
-					posible = false;
-				
-				if (cont == 4)
-					esEscalera = true;
-			}
+		int cont = 0;
+		
+		while(cont < cartas.length-1 && posible) {
+			
+			if(cartas[i].getColor() == cartas[j].getColor() && 
+					cartas[cont].getValor()+1 == cartas[cont+1].getValor())
+				cont++;
+			else
+				posible = false;
 		}
+		
+		if(cont==3 && cartas[cont].getValor()==5 && cartas[cont+1].getValor()==13)
+			cont++;
+		//mejor hacer este if fuera ya que solo entraremos una vez,poniendo length-1 arriba
+		
+		if(cont == 4)
+			esEscalera = true;
+			
+		
 		return esEscalera;
 	}
 
@@ -76,20 +78,17 @@ public class Logica {
 		ordenador(cartas);
 		int cont = 0;
 		
-		//if(cartas[cont].getValor() == 13 && cartas[cont+1].getValor() == 2)
-		//	cont++;
-                //nunca se cumplira que el 13 s eordene antes del 2, este if nunca se dará
-		
-		while(cont < cartas.length && posible) {
+		while(cont < cartas.length-1 && posible) {
 			
 			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor())
-                            cont++;
-                        else if(cont==3 && cartas[cont].getValor()==5 && cartas[cont+1].getValor()==13)
-                            cont++;
-                        else
+				cont++;
+			else
 				posible = false;
 		}
-
+		
+		if(cont==3 && cartas[cont].getValor()==5 && cartas[cont+1].getValor()==13)
+			cont++;
+		//mismo coment que en la de color mejor solo una vez
 		if (cont == 4)
 			esEscalera = true;
 		

@@ -88,6 +88,25 @@ public class Logica {
 		return esEscalera;
 	}
 
+        boolean escaleraSinDobleFor(Carta[] cartas) {
+		boolean esEscalera = false,posible = true;
+		ordenador(cartas);
+		int cont;
+		for (int i = 0; i < cartas.length && posible; i++) {
+			cont = 0;
+			
+                        if(cartas[i].getValor() == 13 && cartas[i+1].getValor() == 2)//el unico caso distinto,considerando as como 13
+                                cont++;
+                        else if(cartas[i].getValor()+1 == cartas[i+1].getValor())
+                                cont++;
+                        else posible = false;
+
+                        if (cont == 4) esEscalera = true;
+		
+		}
+		return esEscalera;
+	}
+        
 	boolean poker(Carta[] cartas) {
 		boolean esPoker = false;
 		int cont = 0;

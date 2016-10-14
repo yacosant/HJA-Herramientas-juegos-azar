@@ -50,23 +50,23 @@ public class Logica {
 	boolean escaleraDeColor(Carta[] cartas) {
 		boolean esEscalera = false,posible = true;
 		ordenador(cartas);
-		int cont;
-		for (int i = 0; i < cartas.length && posible; i++) {
-			cont = 0;
-			for (int j = i + 1; j <= cartas.length && posible; j++) {
-				if(cartas[i].getColor() == cartas[j].getColor() 
-						&& cartas[i].getValor() == 13 && cartas[j].getValor() == 2)
-					cont++;
-				else if (cartas[i].getColor() == cartas[j].getColor() 
-						&& cartas[i].getValor()+1 == cartas[j].getValor())
-					cont++;
-				else
-					posible = false;
-				
-				if (cont == 4)
-					esEscalera = true;
-			}
-		}
+		int cont=0;
+		while (cont < cartas.length && posible) {
+						
+                   if (cartas[cont].getColor() == cartas[cont+1].getColor() 
+                                    && cartas[cont].getValor()+1 == cartas[cont+1].getValor())
+                            cont++;
+                   else if (cont==3 && cartas[cont].getColor() == cartas[cont+1].getColor() 
+                                    && cartas[cont].getValor() == 5 
+                                    && cartas[cont+1].getValor()== 13)
+                            cont++;
+                   else
+                            posible = false;
+
+                    if (cont == 4)
+                            esEscalera = true;
+             }
+		
 		return esEscalera;
 	}
 

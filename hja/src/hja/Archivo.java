@@ -7,15 +7,48 @@ package hja;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
+
 
 
 public class Archivo {
     
+static public void cargar(String archivo) {
+		/*
+		 * String cadena; FileReader f = new FileReader(archivo);
+		 * 
+		 * int caract = f.read();
+		 * 
+		 * //while(!caract.isNull()){}
+		 */
+		// Leemos el contenido del fichero
 
+		File fichero = new File(archivo);
+		Scanner s = null;
+                String linea="";
+		try {
+			s = new Scanner(fichero);
+			while (s.hasNext()){
+			linea = s.nextLine(); // Guardamos la linea en un String
+                    }
+			System.out.println(linea);
+			StringBuffer bf = new StringBuffer(linea);
+			String a = bf.substring(0,2);
+			String b = bf.substring(2,4);
+			String c = bf.substring(4,6);
+			String d = bf.substring(6,8);
+			System.out.println(c);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Leemos linea a linea el fichero
+		
+	}
     
     static public void guardar(Carta[] cartas){
         String linea="";

@@ -47,7 +47,7 @@ public class Logica {
 	boolean escalera(Carta[] cartas) {
 		boolean esEscalera = false,posible = true;
 		ordenador(cartas);
-		
+		int cont;
 		for (int i = 0; i < cartas.length && posible; i++) {
 			cont = 0;
 			for (int j = i + 1; j <= cartas.length && posible; j++) {
@@ -56,7 +56,7 @@ public class Logica {
 					if (cont == 4)
 						esEscalera = true;
 				}else
-					posibe = false;
+					posible = false;
 			}
 		}
 		return esEscalera;

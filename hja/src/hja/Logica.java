@@ -76,15 +76,17 @@ public class Logica {
 		ordenador(cartas);
 		int cont = 0;
 		
-		if(cartas[cont].getValor() == 13 && cartas[cont+1].getValor() == 2)
-			cont++;
+		//if(cartas[cont].getValor() == 13 && cartas[cont+1].getValor() == 2)
+		//	cont++;
                 //nunca se cumplira que el 13 s eordene antes del 2, este if nunca se dará
 		
 		while(cont < cartas.length && posible) {
 			
 			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor())
-				cont++;
-			else
+                            cont++;
+                        else if(cont==3 && cartas[cont].getValor()==5 && cartas[cont+1].getValor()==13)
+                            cont++;
+                        else
 				posible = false;
 		}
 

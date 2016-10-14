@@ -67,6 +67,29 @@ public class Logica {
 		return esEscalera;
 	}
 
+        boolean escaleraDeColorSinDosFor(Carta[] cartas) {
+		boolean esEscalera = false,posible = true;
+		ordenador(cartas);
+		int cont;
+		for (int i = 0; i < cartas.length && posible; i++) {
+			cont = 0;
+		
+                    if(cartas[i].getColor() == cartas[i+1].getColor() 
+                                    && cartas[i].getValor() == 13 && cartas[i+1].getValor() == 2)
+                            cont++;
+                    else if (cartas[i].getColor() == cartas[i+1].getColor() 
+                                    && cartas[i].getValor()+1 == cartas[i+1].getValor())
+                            cont++;
+                    else
+                            posible = false;
+
+                    if (cont == 4)
+                            esEscalera = true;
+
+		}
+		return esEscalera;
+	}
+        
 	boolean escalera(Carta[] cartas) {
 		
 		boolean esEscalera = false,posible = true;

@@ -70,29 +70,6 @@ public class Logica {
 		return esEscalera;
 	}
 
-        boolean escaleraDeColorSinDosFor(Carta[] cartas) {
-		boolean esEscalera = false,posible = true;
-		ordenador(cartas);
-		int cont;
-		for (int i = 0; i < cartas.length && posible; i++) {
-			cont = 0;
-		
-                    if(cartas[i].getColor() == cartas[i+1].getColor() 
-                                    && cartas[i].getValor() == 13 && cartas[i+1].getValor() == 2)
-                            cont++;
-                    else if (cartas[i].getColor() == cartas[i+1].getColor() 
-                                    && cartas[i].getValor()+1 == cartas[i+1].getValor())
-                            cont++;
-                    else
-                            posible = false;
-
-                    if (cont == 4)
-                            esEscalera = true;
-
-		}
-		return esEscalera;
-	}
-        
 	boolean escalera(Carta[] cartas) {
 		
 		boolean esEscalera = false,posible = true;
@@ -101,6 +78,7 @@ public class Logica {
 		
 		if(cartas[cont].getValor() == 13 && cartas[cont+1].getValor() == 2)
 			cont++;
+                //nunca se cumplira que el 13 s eordene antes del 2, este if nunca se dará
 		
 		while(cont < cartas.length && posible) {
 			
@@ -116,25 +94,7 @@ public class Logica {
 		return esEscalera;
 	}
 
-        boolean escaleraSinDobleFor(Carta[] cartas) {
-		boolean esEscalera = false,posible = true;
-		ordenador(cartas);
-		int cont;
-		for (int i = 0; i < cartas.length && posible; i++) {
-			cont = 0;
-			
-                        if(cartas[i].getValor() == 13 && cartas[i+1].getValor() == 2)//el unico caso distinto,considerando as como 13
-                                cont++;
-                        else if(cartas[i].getValor()+1 == cartas[i+1].getValor())
-                                cont++;
-                        else posible = false;
-
-                        if (cont == 4) esEscalera = true;
-		
-		}
-		return esEscalera;
-	}
-        
+  
 	boolean poker(Carta[] cartas) {
 		boolean esPoker = false;
 		int cont = 0;

@@ -1,5 +1,14 @@
 package hja;
 
+import logica.Archivo;
+import logica.Carta;
+import logica.Logica;
+
+/**
+ * 
+ * @author Grupo 1
+ *
+ */
 public class Hja {
 
 	/**
@@ -7,16 +16,13 @@ public class Hja {
 	 *            the command line arguments
 	 */
 	public static void main(String[] args) {
-		// TODO code application logic here
+		// leemos archivo
+		Archivo ar = new Archivo();
+		Logica log = new Logica();
 		Carta[] cartas = new Carta[5];
-		cartas[0] = new Carta('A', 'd');
-		cartas[1] = new Carta('B', 'd');
-		cartas[2] = new Carta('C', 'd');
-		cartas[3] = new Carta('E', 'd');
-		cartas[4] = new Carta('F', 'd');
-
-		Archivo.guardar(cartas);
-
+		cartas = ar.cargar("prueba.txt");
+		String respuesta = log.comprobar(cartas);
+		System.out.println(respuesta);
 	}
 
 }

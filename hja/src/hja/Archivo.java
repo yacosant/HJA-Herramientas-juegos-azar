@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hja;
 
 import java.io.BufferedWriter;
@@ -12,66 +7,72 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
-
+/**
+ * 
+ * @author Grupo 1
+ *
+ */
 public class Archivo {
-    
-static public void cargar(String archivo) {
-		/*
-		 * String cadena; FileReader f = new FileReader(archivo);
-		 * 
-		 * int caract = f.read();
-		 * 
-		 * //while(!caract.isNull()){}
-		 */
-		// Leemos el contenido del fichero
 
+	public Carta[] cargar(String archivo) {
+
+		Carta[] cartas = new Carta[5];
 		File fichero = new File(archivo);
 		Scanner s = null;
-                String linea="";
+		String linea = "";
 		try {
 			s = new Scanner(fichero);
-			while (s.hasNext()){
-			linea = s.nextLine(); // Guardamos la linea en un String
-                    }
-			System.out.println(linea);
-			StringBuffer bf = new StringBuffer(linea);
-			String a = bf.substring(0,2);
-			String b = bf.substring(2,4);
-			String c = bf.substring(4,6);
-			String d = bf.substring(6,8);
-			System.out.println(c);
+			while (s.hasNext()) {
+				linea = s.nextLine(); // Guardamos la linea en un String
+				StringBuffer bf = new StringBuffer(linea);
+				int i = 0, cont = 0, valor;
+				while (i < bf.length()) {
+					if (bf.charAt(i) == 'A')
+						valor = 14;
+					else if (bf.charAt(i) == 'K')
+						valor = 13;
+					else if (bf.charAt(i) == 'Q')
+						valor = 12;
+					else if (bf.charAt(i) == 'J')
+						valor = 11;
+					else if (bf.charAt(i) == 'T')
+						valor = 10;
+					else
+						valor = bf.charAt(i) - 48;
+					cartas[cont] = new Carta(valor, bf.charAt(i + 1));
+					i += 2;
+					cont++;
+				}
+			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error en la lectura del fichero");
+		}
+		return cartas;
+
+	}
+
+	static public void guardar(Carta[] cartas) {
+		String linea = "";
+		String nombre = "salida.txt";
+		// File fichero = new File(nombre);
+		try {
+			BufferedWriter buffer = new BufferedWriter(new FileWriter(nombre));
+
+			for (int i = 0; i < 5; i++) {
+				linea = linea + String.valueOf(cartas[i].getValor()) + String.valueOf(cartas[i].getColor());
+			}
+			buffer.write(linea);
+
+			// pintar las conclusiones obtenidas!
+			//
+			//
+			//
+
+			buffer.close();
+
+		} catch (IOException ex) {
+			System.err.println("Error: Ha habido algun problema al crear el archivo.");
 		}
 
-		// Leemos linea a linea el fichero
-		
 	}
-    
-    static public void guardar(Carta[] cartas){
-        String linea="";
-        String nombre = "salida.txt";
-        //File fichero = new File(nombre);
-        try {
-            BufferedWriter buffer = new BufferedWriter(new FileWriter(nombre));
-          
-            for (int i=0;i<5;i++){
-             linea = linea + String.valueOf(cartas[i].getValor()) + String.valueOf(cartas[i].getColor());
-            }
-            buffer.write(linea);
-            
-            //pintar las conclusiones obtenidas!
-            //
-            //
-            //
-            
-            buffer.close();
-            
-        } catch (IOException ex) {
-            System.err.println("Error: Ha habido algun problema al crear el archivo.");
-        }
-        
-    }
 }

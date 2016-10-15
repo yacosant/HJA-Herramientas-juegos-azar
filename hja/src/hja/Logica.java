@@ -168,17 +168,17 @@ public class Logica {
 		String carta = null;
 		boolean posible = true;
 		int cont = 0;
-		for (int i = 0; i < cartas.length && posible; i++) {
-			cont = 0;
-			for (int j = i + 1; j < cartas.length && posible; j++) {
-				if (cartas[i].getColor() == cartas[j].getColor()) {
-					cont++;
-					if (cont == 4)
-						carta = charToColor(cartas[i].getColor());
-				} else
-					posible = false;
-			}
+		
+		while(cont < cartas.length && posible) {
+			if (cartas[cont].getColor() == cartas[cont+1].getColor())
+				cont++;
+			else
+				posible = false;
 		}
+		
+		if(cont == 4)
+			carta = charToColor(cartas[i].getColor());
+		
 		return carta;
 	}
 

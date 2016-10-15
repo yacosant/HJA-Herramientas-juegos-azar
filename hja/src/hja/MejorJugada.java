@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hja;
 
 import java.io.BufferedWriter;
@@ -11,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -21,52 +16,12 @@ import java.util.Scanner;
  */
 public class MejorJugada {
        private ArrayList<Carta[]> manos;
-        //private Carta[][] manos;
+       private ArrayList<String> lineas;
 
 	public MejorJugada() {
-		//this.manos = new Carta[2][5];
+		this.lineas = new ArrayList<String>();
                 this.manos = new ArrayList<Carta[]>();
 	}
-
-        /*
-	public Carta[][] cargar(String archivo) {
-
-		File fichero = new File(archivo);
-		Scanner s = null;
-		String linea = "";
-		try {
-			s = new Scanner(fichero);
-			int man = 0;
-			while (s.hasNext()) {
-				linea = s.nextLine(); // Guardamos la linea en un String
-				StringBuffer bf = new StringBuffer(linea);
-				int i = 0, cont = 0, valor;
-				while (i < bf.length()) {
-					if (bf.charAt(i) == 'A')
-						valor = 14;
-					else if (bf.charAt(i) == 'K')
-						valor = 13;
-					else if (bf.charAt(i) == 'Q')
-						valor = 12;
-					else if (bf.charAt(i) == 'J')
-						valor = 11;
-					else if (bf.charAt(i) == 'T')
-						valor = 10;
-					else
-						valor = bf.charAt(i) - 48;
-					manos[man][cont] = new Carta(valor, bf.charAt(i + 1));
-					i += 2;
-					cont++;
-				}
-				man++;
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println("Error en la lectura del fichero");
-		}
-		return manos;
-
-	}
-        */
 
         public ArrayList<Carta[]> cargar(String archivo) {
 
@@ -79,6 +34,7 @@ public class MejorJugada {
 		
 			while (s.hasNext()) {
 				linea = s.nextLine(); // Guardamos la linea en un String
+                                lineas.add(linea);
 				StringBuffer bf = new StringBuffer(linea);
 				int i = 0, cont = 0, valor;
 				while (i < bf.length()) {
@@ -110,24 +66,19 @@ public class MejorJugada {
 	}
 
         
-	static public void guardar(Carta[] cartas) {
-		String linea = "";
+	public void guardar(String texto, int cont) {
 		String nombre = "salida.txt";
-		// File fichero = new File(nombre);
+		File fichero = new File(nombre);
 		try {
-			BufferedWriter buffer = new BufferedWriter(new FileWriter(nombre));
+                    FileWriter salida = new FileWriter(fichero, true);
+                    
+                    //BufferedWriter buffer = new BufferedWriter(new FileWriter(nombre));
 
-			for (int i = 0; i < 5; i++) {
-				linea = linea + String.valueOf(cartas[i].getValor()) + String.valueOf(cartas[i].getColor());
-			}
-			buffer.write(linea);
-
-			// pintar las conclusiones obtenidas!
-			//
-			//
-			//
-
-			buffer.close();
+                            salida.write(lineas.get(cont));
+                            salida.write("\r\n");
+                            salida.write(texto);
+                            salida.write("\r\n");
+                        salida.close();
 
 		} catch (IOException ex) {
 			System.err.println("Error: Ha habido algun problema al crear el archivo.");

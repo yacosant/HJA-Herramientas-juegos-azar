@@ -1,1 +1,8 @@
-AdBdCdEdFd
+4h4h4p7p7h
+-Best hand: Full house: Three-of-a-kind four and pair of seven
+4h5p4p7p8h
+-Best hand: Pair: four
+-Draw: Straight Flush GutShot
+-Draw: Straight GutShot
+8h4h4p8p7h
+-Best hand: Two-pair:  four eight

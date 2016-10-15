@@ -104,6 +104,7 @@ public class Hja {
 		int cont = 0;
 		while (cont < manos.size()) {
 			String respuesta = log.comprobar(manos.get(cont));
+                        ar.guardar(respuesta, cont);
 			System.out.println(respuesta);
 			cont++;
 		}

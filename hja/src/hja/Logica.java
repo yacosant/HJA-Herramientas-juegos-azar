@@ -21,7 +21,7 @@ public class Logica {
 	 * @return
 	 */
 	String comprobar(Carta[] cartas) {
-		String mejorJugada = "Best hand: ";
+		String mejorJugada = "-Best hand: ";
 		// aqui s ehacen todas las llamadas a cada uno de los metodos que
 		// comprueban una mano.
 		// En el array de string se guardan las manos que si se han producido, y
@@ -34,35 +34,35 @@ public class Logica {
 
 		// straight flush(escalerade color)
 		if (escaleraDeColor(cartas))
-			mejorJugada = "Straight Flush: ";
+			mejorJugada += "Straight Flush: ";
 		// four-of-a-kind (or quads) (poker)
 		else if (poker(cartas) != null)
-			mejorJugada = "Four-of-a-kind: " + poker(cartas);
+			mejorJugada += "Four-of-a-kind: " + poker(cartas);
 		// full house (or boat) (full)
 		else if (full(cartas) != null)
-			mejorJugada = full(cartas);
+			mejorJugada += full(cartas);
 		// flush(color)
 		else if (color(cartas) != null)
-			mejorJugada = "Flush: " + color(cartas);
+			mejorJugada += "Flush: " + color(cartas);
 		// straight(escalera)
 		else if (escalera(cartas))
-			mejorJugada = "Straight";
+			mejorJugada += "Straight";
 		// three-of-a-kind(trío)
 		else if (trio(cartas) != null)
-			mejorJugada = "Three-of-a-kind: " + trio(cartas);
+			mejorJugada += "Three-of-a-kind: " + trio(cartas);
 		// two-pair(doblepareja)
 		else if (doblePareja(cartas) != null)
-			mejorJugada = "Two-pair: " + doblePareja(cartas);
+			mejorJugada += "Two-pair: " + doblePareja(cartas);
 		// pair (parejao par)
 		else if (pareja(cartas) != null)
-			mejorJugada = "Pair: " + pareja(cartas);
+			mejorJugada += "Pair: " + pareja(cartas);
 		// high card (carta alta)
 		else
-			mejorJugada = "High Card: " + cartaAlta(cartas);
+			mejorJugada += "High Card: " + cartaAlta(cartas);
 		
 		//Proyectos
 		if(proyectoEscaleraC){
-			mejorJugada += '\n' + "Draw: Straight Flush";
+			mejorJugada += "\r\n" + "-Draw: Straight Flush";
 			if(gutshot)
 				mejorJugada += " GutShot";
 			else
@@ -70,7 +70,7 @@ public class Logica {
 		}
 
 		if(proyectoEscalera){
-			mejorJugada += '\n' + "Draw: Straight";
+			mejorJugada += "\r\n" + "-Draw: Straight";
 			if(gutshot)
 				mejorJugada += " GutShot";
 			else
@@ -78,7 +78,7 @@ public class Logica {
 		}
 
 		if(proyectoColor)
-			mejorJugada += '\n' + "Draw: Flush";
+			mejorJugada += "\r\n" + "-Draw: Flush";
 		
 		
 		return mejorJugada;

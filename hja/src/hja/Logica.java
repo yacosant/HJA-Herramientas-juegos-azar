@@ -13,7 +13,6 @@ public class Logica {
 	private boolean proyectoColor = false;
 	private boolean proyectoEscalera = false;
 	private boolean proyectoEscaleraC = false;
-	private boolean open-ended = false;
 	private boolean gutshot = false;
 	/**
 	 * Recorre el array de cartas para comprobar que jugada tiene
@@ -60,6 +59,28 @@ public class Logica {
 		// high card (carta alta)
 		else
 			mejorJugada = "High Card: " + cartaAlta(cartas);
+		
+		//Proyectos
+		if(proyectoEscaleraC){
+			mejorJugada += '\n' + "Draw: Straight Flush";
+			if(gutshot)
+				mejorJugada += " GutShot";
+			else
+				mejorJugada += " Open-ended";
+		}
+
+		if(proyectoEscalera){
+			mejorJugada += '\n' + "Draw: Straight";
+			if(gutshot)
+				mejorJugada += " GutShot";
+			else
+				mejorJugada += " Open-ended";
+		}
+
+		if(proyectoColor)
+			mejorJugada += '\n' + "Draw: Flush";
+		
+		
 		return mejorJugada;
 
 	}
@@ -76,7 +97,7 @@ public class Logica {
 
 		int cont = 0;
 
-		while (cont < cartas.length  && posible) {
+		while (cont < cartas.length-1  && posible) {
 
 			if (cartas[cont].getColor() == cartas[cont + 1].getColor()
 					&& cartas[cont].getValor() + 1 == cartas[cont + 1].getValor())
@@ -88,15 +109,14 @@ public class Logica {
 		if(cont == 3){
 			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
 				cont++;
-			else{
-				this.open-ended = true;
+			else
 				this.proyectoEscaleraC = true;
-			}
+			
 			
 		}else if (cont == 4)
 			esEscalera = true;
 		else
-			this.proyectoEscaleraC = buscarProyecto(cartas,cont);
+			this.proyectoEscaleraC = buscarProyectoE(cartas,cont);
 			
 
 		return esEscalera;
@@ -114,7 +134,7 @@ public class Logica {
 		ordenador(cartas);
 		int cont = 0;
 
-		while (cont < cartas.length  && posible) {
+		while (cont < cartas.length-1  && posible) {
 
 			if (cartas[cont].getValor() + 1 == cartas[cont + 1].getValor())
 				cont++;
@@ -125,14 +145,13 @@ public class Logica {
 		if(cont == 3){
 			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
 				cont++;
-			else{
-				this.open-ended = true;
+			else
 				this.proyectoEscalera = true;
-			}
+			
 		}else if (cont == 4)
 			esEscalera = true;
 		else
-			this.proyectoEscalera = buscarProyecto(cartas,cont);
+			this.proyectoEscalera = buscarProyectoE(cartas,cont);
 
 		return esEscalera;
 	}
@@ -187,7 +206,7 @@ public class Logica {
 		boolean posible = true;
 		int cont = 0;
 		
-		while(cont < cartas.length && posible) {
+		while(cont < cartas.length-1 && posible) {
 			if (cartas[cont].getColor() == cartas[cont+1].getColor())
 				cont++;
 			else
@@ -195,7 +214,7 @@ public class Logica {
 		}
 		
 		if(cont == 4)
-			carta = charToColor(cartas[i].getColor());
+			carta = charToColor(cartas[cont].getColor());
 		else
 			this.proyectoColor = buscarProyectoC(cartas,cont);
 			
@@ -306,43 +325,57 @@ public class Logica {
 	}
 	
 	private boolean buscarProyectoE(Carta[] cartas,int cont){
-		
-		boolean draw = false;
-		
-		if(cartas[cont-1].getValor()+2 == cartas[cont+1].getValor()){
+
+		boolean draw = false,start=false;
+
+		if(cont == 0){
+			cont++;
+			draw=true;
+			start=true;
+		}
+		else if(cartas[cont-1].getValor()+2 == cartas[cont+1].getValor()){
 			draw=true;
 			cont++;
 		}
-		
-		while (cont < cartas.length  && draw){
-			if(cartas[cont].getValor() == cartas[cont+1].getValor())
+
+		while (cont < cartas.length-1  && draw){
+			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor())
 				cont++;
+			else if(start && cartas[cont].getValor()+2 == cartas[cont+1].getValor()){
+				cont++;
+				start = false;
+			}
 			else
 				draw = false;
 		}
-		
+
 		this.gutshot = draw;
-		
+
 		return draw;
 
 	}
 	
 	private boolean buscarProyectoC(Carta[] cartas,int cont){
-		
+
 		boolean draw = false;
-		
-		if(cartas[cont-1].getColor() == cartas[cont+1].getColor()){
+
+		if(cont == 0){
+			cont++;
+			draw=true;
+		}
+		else if(cartas[cont-1].getColor() == cartas[cont+1].getColor()){
+
 			draw=true;
 			cont++;
 		}
-		
-		while (cont < cartas.length  && draw){
+
+		while (cont < cartas.length-1  && draw){
 			if(cartas[cont].getColor() == cartas[cont+1].getColor())
 				cont++;
 			else
 				draw = false;
 		}
-		
+
 		return draw;
 	}
 	

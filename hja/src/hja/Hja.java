@@ -15,10 +15,10 @@ public class Hja {
 	 */
 
 	enum GameInfo { //Enumerado de los juegos que tenemos
-		OMAHA("om", "Omaha"),
-		CincoCartas("cincoC", "CincoCartas"),
-		DosCartas("dos", "DosCartas"),
-		NJugadores("nJug","Njugadores");
+		OMAHA("1", "1"),
+		CincoCartas("2", "2"),
+		DosCartas("3", "3"),
+		NJugadores("4","4");
 
 		private String id;
 		private String desc;

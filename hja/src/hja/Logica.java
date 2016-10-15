@@ -8,7 +8,13 @@ import hja.Carta;
  *
  */
 public class Logica {
-
+	
+	
+	private boolean proyectoColor = false;
+	private boolean proyectoEscalera = false;
+	private boolean proyectoEscaleraC = false;
+	private boolean open-ended = false;
+	private boolean gutshot = false;
 	/**
 	 * Recorre el array de cartas para comprobar que jugada tiene
 	 * 
@@ -16,7 +22,7 @@ public class Logica {
 	 * @return
 	 */
 	String comprobar(Carta[] cartas) {
-		String mejorJugada = "";
+		String mejorJugada = "Best hand: ";
 		// aqui s ehacen todas las llamadas a cada uno de los metodos que
 		// comprueban una mano.
 		// En el array de string se guardan las manos que si se han producido, y
@@ -29,31 +35,31 @@ public class Logica {
 
 		// straight flush(escalerade color)
 		if (escaleraDeColor(cartas))
-			mejorJugada = "Escalera de color";
+			mejorJugada = "Straight Flush: ";
 		// four-of-a-kind (or quads) (poker)
 		else if (poker(cartas) != null)
-			mejorJugada = "Poker: " + poker(cartas);
+			mejorJugada = "Four-of-a-kind: " + poker(cartas);
 		// full house (or boat) (full)
 		else if (full(cartas) != null)
 			mejorJugada = full(cartas);
 		// flush(color)
 		else if (color(cartas) != null)
-			mejorJugada = "Color: " + color(cartas);
+			mejorJugada = "Flush: " + color(cartas);
 		// straight(escalera)
 		else if (escalera(cartas))
-			mejorJugada = "Escalera";
+			mejorJugada = "Straight";
 		// three-of-a-kind(tr√≠o)
 		else if (trio(cartas) != null)
-			mejorJugada = "Trio: " + trio(cartas);
+			mejorJugada = "Three-of-a-kind: " + trio(cartas);
 		// two-pair(doblepareja)
 		else if (doblePareja(cartas) != null)
-			mejorJugada = "Doble Pareja de" + doblePareja(cartas);
+			mejorJugada = "Two-pair: " + doblePareja(cartas);
 		// pair (parejao par)
 		else if (pareja(cartas) != null)
-			mejorJugada = "Pareja: " + pareja(cartas);
+			mejorJugada = "Pair: " + pareja(cartas);
 		// high card (carta alta)
 		else
-			mejorJugada = "Carta Alta: " + cartaAlta(cartas);
+			mejorJugada = "High Card: " + cartaAlta(cartas);
 		return mejorJugada;
 
 	}
@@ -70,22 +76,28 @@ public class Logica {
 
 		int cont = 0;
 
-		while (cont < cartas.length - 1 && posible) {
+		while (cont < cartas.length  && posible) {
 
 			if (cartas[cont].getColor() == cartas[cont + 1].getColor()
 					&& cartas[cont].getValor() + 1 == cartas[cont + 1].getValor())
 				cont++;
 			else
-				posible = false;
+				posible = false;	
 		}
 
-		if (cont == 3 && cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
-			cont++;
-		// mejor hacer este if fuera ya que solo entraremos una vez,poniendo
-		// length-1 arriba
-
-		if (cont == 4)
+		if(cont == 3){
+			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
+				cont++;
+			else{
+				this.open-ended = true;
+				this.proyectoEscaleraC = true;
+			}
+			
+		}else if (cont == 4)
 			esEscalera = true;
+		else
+			this.proyectoEscaleraC = buscarProyecto(cartas,cont);
+			
 
 		return esEscalera;
 	}
@@ -102,19 +114,25 @@ public class Logica {
 		ordenador(cartas);
 		int cont = 0;
 
-		while (cont < cartas.length - 1 && posible) {
+		while (cont < cartas.length  && posible) {
 
 			if (cartas[cont].getValor() + 1 == cartas[cont + 1].getValor())
 				cont++;
 			else
 				posible = false;
 		}
-
-		if (cont == 3 && cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
-			cont++;
-		// mismo coment que en la de color mejor solo una vez
-		if (cont == 4)
+		
+		if(cont == 3){
+			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
+				cont++;
+			else{
+				this.open-ended = true;
+				this.proyectoEscalera = true;
+			}
+		}else if (cont == 4)
 			esEscalera = true;
+		else
+			this.proyectoEscalera = buscarProyecto(cartas,cont);
 
 		return esEscalera;
 	}
@@ -153,7 +171,7 @@ public class Logica {
 		if (trio(cartas) != null) {
 			trio = trio(cartas);
 			if (pareja(cartas) != null && !trio.equals(pareja(cartas)))
-				carta = "Full: Trio de " + trio + " y pareja de " + pareja(cartas);
+				carta = "Full house: Three-of-a-kind " + trio + " and pair of " + pareja(cartas);
 		}
 		return carta;
 	}
@@ -178,6 +196,9 @@ public class Logica {
 		
 		if(cont == 4)
 			carta = charToColor(cartas[i].getColor());
+		else
+			this.proyectoColor = buscarProyectoC(cartas,cont);
+			
 		
 		return carta;
 	}
@@ -283,6 +304,49 @@ public class Logica {
 			}
 		}
 	}
+	
+	private boolean buscarProyectoE(Carta[] cartas,int cont){
+		
+		boolean draw = false;
+		
+		if(cartas[cont-1].getValor()+2 == cartas[cont+1].getValor()){
+			draw=true;
+			cont++;
+		}
+		
+		while (cont < cartas.length  && draw){
+			if(cartas[cont].getValor() == cartas[cont+1].getValor())
+				cont++;
+			else
+				draw = false;
+		}
+		
+		this.gutshot = draw;
+		
+		return draw;
+
+	}
+	
+	private boolean buscarProyectoC(Carta[] cartas,int cont){
+		
+		boolean draw = false;
+		
+		if(cartas[cont-1].getColor() == cartas[cont+1].getColor()){
+			draw=true;
+			cont++;
+		}
+		
+		while (cont < cartas.length  && draw){
+			if(cartas[cont].getColor() == cartas[cont+1].getColor())
+				cont++;
+			else
+				draw = false;
+		}
+		
+		return draw;
+	}
+	
+	
 
 	/**
 	 * Parsea el color de la carta
@@ -294,16 +358,16 @@ public class Logica {
 		String color = null;
 		switch (valor) {
 		case 'h':
-			color = "Corazones";
+			color = "Hearts";
 			break;
 		case 'd':
-			color = "Diamantes";
+			color = "Diamonds";
 			break;
 		case 'c':
-			color = "TrÈboles";
+			color = "Clubs";
 			break;
 		case 's':
-			color = "Picas";
+			color = "Spades";
 			break;
 		default:
 			break;
@@ -322,31 +386,31 @@ public class Logica {
 		String carta = null;
 		switch (valor) {
 		case 2:
-			carta = "dos";
+			carta = "two";
 			break;
 		case 3:
-			carta = "tres";
+			carta = "three";
 			break;
 		case 4:
-			carta = "cuatro";
+			carta = "four";
 			break;
 		case 5:
-			carta = "cinco";
+			carta = "five";
 			break;
 		case 6:
-			carta = "seis";
+			carta = "six";
 			break;
 		case 7:
-			carta = "siete";
+			carta = "seven";
 			break;
 		case 8:
-			carta = "ocho";
+			carta = "eight";
 			break;
 		case 9:
-			carta = "nueve";
+			carta = "nine";
 			break;
 		case 10:
-			carta = "diez";
+			carta = "ten";
 			break;
 		case 11:
 			carta = "Jack";
@@ -358,7 +422,7 @@ public class Logica {
 			carta = "King";
 			break;
 		case 14:
-			carta = "Aces";
+			carta = "Ace";
 			break;
 		default:
 			break;

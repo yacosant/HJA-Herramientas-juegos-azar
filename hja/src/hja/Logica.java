@@ -1,6 +1,6 @@
-package logica;
+package hja;
 
-import logica.Carta;
+import hja.Carta;
 
 /**
  * 

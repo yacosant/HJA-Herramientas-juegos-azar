@@ -1,9 +1,5 @@
 package hja;
 
-import logica.Archivo;
-import logica.Carta;
-import logica.Logica;
-
 /**
  * 
  * @author Grupo 1
@@ -17,12 +13,16 @@ public class Hja {
 	 */
 	public static void main(String[] args) {
 		// leemos archivo
-		Archivo ar = new Archivo();
+		MejorJugada ar = new MejorJugada();
 		Logica log = new Logica();
-		Carta[] cartas = new Carta[5];
-		cartas = ar.cargar("prueba.txt");
-		String respuesta = log.comprobar(cartas);
-		System.out.println(respuesta);
+		Carta[][] manos  = new Carta[3][5];
+		manos = ar.cargar("prueba.txt");
+		int cont = 0;
+		while (cont < manos.length) {
+			String respuesta = log.comprobar(manos[cont]);
+			System.out.println(respuesta);
+			cont++;
+		}
 	}
 
 }

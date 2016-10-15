@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package hja;
 
 import java.io.BufferedWriter;
@@ -12,16 +17,22 @@ import java.util.Scanner;
  * @author Grupo 1
  *
  */
-public class Archivo {
+public class MejorJugada {
 
-	public Carta[] cargar(String archivo) {
+	private Carta[][] manos;
 
-		Carta[] cartas = new Carta[5];
+	public MejorJugada() {
+		this.manos = new Carta[2][5];
+	}
+
+	public Carta[][] cargar(String archivo) {
+
 		File fichero = new File(archivo);
 		Scanner s = null;
 		String linea = "";
 		try {
 			s = new Scanner(fichero);
+			int man = 0;
 			while (s.hasNext()) {
 				linea = s.nextLine(); // Guardamos la linea en un String
 				StringBuffer bf = new StringBuffer(linea);
@@ -39,15 +50,16 @@ public class Archivo {
 						valor = 10;
 					else
 						valor = bf.charAt(i) - 48;
-					cartas[cont] = new Carta(valor, bf.charAt(i + 1));
+					manos[man][cont] = new Carta(valor, bf.charAt(i + 1));
 					i += 2;
 					cont++;
 				}
+				man++;
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error en la lectura del fichero");
 		}
-		return cartas;
+		return manos;
 
 	}
 

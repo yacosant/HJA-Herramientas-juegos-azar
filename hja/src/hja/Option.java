@@ -1,7 +1,0 @@
-
-package hja;
-
-
-class Option {
-    
-}

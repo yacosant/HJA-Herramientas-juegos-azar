@@ -117,7 +117,7 @@ public class Logica {
 		}else if (cont == 4)
 			esEscalera = true;
 		else
-			this.proyectoEscaleraC = buscarProyectoE(cartas,cont);
+			this.proyectoEscaleraC = buscarProyectoEC(cartas,cont);
 			
 
 		return esEscalera;
@@ -343,6 +343,40 @@ public class Logica {
 			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor())
 				cont++;
 			else if(start && cartas[cont].getValor()+2 == cartas[cont+1].getValor()){
+				cont++;
+				start = false;
+			}
+			else
+				draw = false;
+		}
+
+		this.gutshot = draw;
+
+		return draw;
+
+	}
+	
+	private boolean buscarProyectoEC(Carta[] cartas,int cont){
+
+		boolean draw = false,start=false;
+
+		if(cont == 0){
+			cont++;
+			draw=true;
+			start=true;
+		}
+		else if(cartas[cont-1].getValor()+2 == cartas[cont+1].getValor() 
+				&& cartas[cont-1].getColor() == cartas[cont+1].getColor()){
+			draw=true;
+			cont++;
+		}
+
+		while (cont < cartas.length-1  && draw){
+			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor()
+					&& cartas[cont-1].getColor() == cartas[cont+1].getColor())
+				cont++;
+			else if(start && cartas[cont].getValor()+2 == cartas[cont+1].getValor()
+					&& cartas[cont-1].getColor() == cartas[cont+1].getColor()){
 				cont++;
 				start = false;
 			}

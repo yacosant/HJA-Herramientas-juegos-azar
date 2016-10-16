@@ -1,13 +1,17 @@
 
 import hja.Carta;
 import hja.MejorJugada;
+
 import java.util.ArrayList;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
+import MainPrueba.GameInfo;
 
 
 
@@ -19,9 +23,13 @@ import org.apache.commons.cli.ParseException;
  *
  */
 public class Hja {
-	
+
 	final private static GameInfo DEFAULT_GAME = GameInfo.CincoCartas;
-        private static ArrayList<Carta[]> manos;
+       
+	private static ArrayList<Carta[]> manos;
+	private static String txtEntrada; //Atributos para guardar los txt de los parametros
+	private static String txtSalida;
+
 
 	/**
 	 * @param args
@@ -63,12 +71,16 @@ public class Hja {
 		Options cmdLineOptions = new Options();
 
 		cmdLineOptions.addOption(constructGameOption()); // -g or --game
+		cmdLineOptions.addOption(constructEntradaTxtOption()); // -ent or --entrada
+		cmdLineOptions.addOption(constructSalidaTxtOption()); // -salida or --salida
 
 		CommandLineParser parser = new DefaultParser();
 
 		try{
 			CommandLine line = parser.parse(cmdLineOptions, args);
-			parseGameOption(line);
+			parseEntradaTxtOption(line); //Primero cargamos el archivo
+			parseGameOption(line); //Jugamos
+			parseSalidaTxtOption(line); //Guardamos resultados
 		
 		String[] remaining = line.getArgs();
 		if (remaining.length > 0) {
@@ -79,9 +91,39 @@ public class Hja {
 		}
 
 	} catch (ParseException e) {
-		System.out.println("No existe ese comando");
+		System.out.println("No existe ese comando o faltan comandos obligatorios");
 	}
 }
+	//Construimos el comando para txt de entrada
+	private static Option constructEntradaTxtOption() {
+		return new Option("ent", "entrada", true,
+				"Txt para cargar las cartas");
+	}
+
+	//parseamos comando para txt de entrada
+
+	private static void parseEntradaTxtOption(CommandLine line) throws ParseException{
+		 txtEntrada = line.getOptionValue("ent");
+
+			System.out.println("Usted quiere cargar el archivo " + txtEntrada +".txt");
+	}
+
+
+
+	//Creamos comando para txt de salida
+	private static Option constructSalidaTxtOption() {
+		return new Option("sal", "salida", true,
+				"Txt para salir");
+	}
+
+	//parseamos comando para txt de Salida
+
+	private static void parseSalidaTxtOption(CommandLine line) throws ParseException{
+		 txtSalida = line.getOptionValue("sal");
+		System.out.println("Usted quiere guardar en el archivo " + txtSalida +".txt");
+		
+	}
+	
 	
 	//Creamos el comando. Con -g metemos que juego queremos
 	private static Option constructGameOption() { 
@@ -116,9 +158,11 @@ public class Hja {
 		switch ( selectedGame ) {
 		case CincoCartas:
 			System.out.println("le has metido un 1");
-                        MejorJugada ar = new MejorJugada();
-                        manos = ar.cargar("prueba.txt");
+            MejorJugada ar = new MejorJugada();
+            manos = ar.cargar(txtEntrada);
+            //QUEDA GUARDAR
 			break;
+			
 		case DosCartas:
 			System.out.println("le has metido un 2");
 			break;
@@ -133,7 +177,7 @@ public class Hja {
 
 	public static void main(String[] args) {
 		manos  = new ArrayList<Carta[]>();
-                parseArgs(args);
+        parseArgs(args);
 
 		//COMENTO ESTO PARA VER SI PARSEA BIEN
 		

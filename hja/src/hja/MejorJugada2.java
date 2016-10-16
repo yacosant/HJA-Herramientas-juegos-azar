@@ -20,6 +20,7 @@ public class MejorJugada2 {
         public CartasModo2 cargar(String archivo) {
             CartasModo2 cartas = new CartasModo2(cartasMano, cartasMesa);
 		File fichero = new File(archivo);
+                int num=0;
 		Scanner s = null;
 		String linea = "";
                 Carta[] mano;
@@ -39,11 +40,14 @@ public class MejorJugada2 {
                                     i += 2;
                                     cont++;
                                 }
-                                i+=3; //saltar las dos ; y el numero.
+                                
+                                i++;
+                                num = bf.charAt(i);
+                                i += 2;
                                 
                                 mesa = new Carta[5];
                                 cont=0;
-                                while (i < bf.length()) {
+                                while (i < num*2) {
 					valor= conversion(bf.charAt(i));
 					mesa[cont]= new Carta(valor, bf.charAt(i + 1));
 					i += 2;

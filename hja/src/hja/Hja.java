@@ -15,7 +15,7 @@ import org.apache.commons.cli.ParseException;
 
  *
  */
-public class mainHJA {
+public class Hja {
 	
 	final private static GameInfo DEFAULT_GAME = GameInfo.CincoCartas;
 

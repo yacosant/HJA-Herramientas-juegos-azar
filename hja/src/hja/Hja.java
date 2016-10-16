@@ -1,4 +1,7 @@
 
+import hja.Carta;
+import hja.MejorJugada;
+import java.util.ArrayList;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -18,7 +21,7 @@ import org.apache.commons.cli.ParseException;
 public class Hja {
 	
 	final private static GameInfo DEFAULT_GAME = GameInfo.CincoCartas;
-
+        private static ArrayList<Carta[]> manos;
 
 	/**
 	 * @param args
@@ -113,6 +116,8 @@ public class Hja {
 		switch ( selectedGame ) {
 		case CincoCartas:
 			System.out.println("le has metido un 1");
+                        MejorJugada ar = new MejorJugada();
+                        manos = ar.cargar("prueba.txt");
 			break;
 		case DosCartas:
 			System.out.println("le has metido un 2");
@@ -127,7 +132,8 @@ public class Hja {
 	}
 
 	public static void main(String[] args) {
-		parseArgs(args);
+		manos  = new ArrayList<Carta[]>();
+                parseArgs(args);
 
 		//COMENTO ESTO PARA VER SI PARSEA BIEN
 		
@@ -135,7 +141,7 @@ public class Hja {
 //		MejorJugada ar = new MejorJugada();
 //		Logica log = new Logica();
 //		//Carta[][] manos  = new Carta[3][5];
-//                ArrayList<Carta[]> manos  = new ArrayList<Carta[]>();
+                //ArrayList<Carta[]> manos  = new ArrayList<Carta[]>();
 //		manos = ar.cargar("prueba.txt");
 //		int cont = 0;
 //		while (cont < manos.size()) {

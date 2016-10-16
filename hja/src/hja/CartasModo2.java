@@ -23,4 +23,16 @@ public class CartasModo2 {
         return cartasMesa;
     }
     
+    public ArrayList<Carta> juntar(int pos){
+       ArrayList<Carta> c = new ArrayList<Carta>();
+       
+       for (int i=0; i<cartasMano.size(); i++){
+           c.add(cartasMano.get(pos)[i]);
+       }
+        for (int i=0; i<cartasMesa.size(); i++){
+           c.add(cartasMesa.get(pos)[i]);
+       }
+       
+       return c;
+    }
 }

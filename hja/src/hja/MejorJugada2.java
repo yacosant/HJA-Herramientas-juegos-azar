@@ -1,7 +1,10 @@
 package hja;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +59,34 @@ public class MejorJugada2 {
 		}
                 
 		return cartas;
+
+	}
+        
+        public void guardar(String texto, int cont) {
+		String nombre = "salida.txt";
+		File fichero = new File(nombre);
+		try {
+                    FileWriter salida = new FileWriter(fichero, true);
+                    
+                    if(cont==0){
+                        BufferedWriter buffer = new BufferedWriter(new FileWriter(nombre));
+                            buffer.write(lineas.get(cont));
+                            buffer.write("\r\n");
+                            buffer.write(texto);
+                            buffer.write("\r\n");
+                        buffer.close();
+                    }
+                    else{
+                            salida.write(lineas.get(cont));
+                            salida.write("\r\n");
+                            salida.write(texto);
+                            salida.write("\r\n");
+                        salida.close();
+                    }
+
+		} catch (IOException ex) {
+			System.err.println("Error: Ha habido algun problema al crear el archivo.");
+		}
 
 	}
         

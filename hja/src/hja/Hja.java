@@ -1,6 +1,9 @@
 
 import hja.Carta;
+import hja.CartasModo2;
+import hja.Logica;
 import hja.MejorJugada;
+import hja.MejorJugada2;
 
 import java.util.ArrayList;
 
@@ -11,7 +14,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import MainPrueba.GameInfo;
+
 
 
 
@@ -29,6 +32,9 @@ public class Hja {
 	private static ArrayList<Carta[]> manos;
 	private static String txtEntrada; //Atributos para guardar los txt de los parametros
 	private static String txtSalida;
+        private static MejorJugada ar;
+        private static MejorJugada2 ar2;
+        private static Logica log = new Logica();
 
 
 	/**
@@ -142,7 +148,8 @@ public class Hja {
 	private static void parseGameOption(CommandLine line) throws ParseException {
 		String gameVal = line.getOptionValue("g", DEFAULT_GAME.getId());
 		GameInfo selectedGame = null;
-
+                int cont = 0;
+                
 		for (GameInfo g : GameInfo.values()) {
 			if (g.getId().equals(gameVal)) {
 				selectedGame = g;
@@ -158,13 +165,22 @@ public class Hja {
 		switch ( selectedGame ) {
 		case CincoCartas:
 			System.out.println("le has metido un 1");
-            MejorJugada ar = new MejorJugada();
-            manos = ar.cargar(txtEntrada);
-            //QUEDA GUARDAR
-			break;
+                    ar = new MejorJugada();
+                    manos = ar.cargar(txtEntrada);
+                        while (cont < manos.size()) {
+			String respuesta = log.comprobar(manos.get(cont));
+                        ar.guardar(respuesta, cont);
+			System.out.println(respuesta);
+			cont++;
+		}        
+                 cont=0;
+            
+		break;
 			
 		case DosCartas:
 			System.out.println("le has metido un 2");
+                     
+                     ar2 = new MejorJugada2();   
 			break;
 		case NJugadores:
 			System.out.println("le has metido un 3");
@@ -172,13 +188,15 @@ public class Hja {
 		case OMAHA:
 			System.out.println("le has metido un 4");
 		}
-
+                
 	}
 
 	public static void main(String[] args) {
 		manos  = new ArrayList<Carta[]>();
-        parseArgs(args);
-
+            parseArgs(args);
+                
+                
+		
 		//COMENTO ESTO PARA VER SI PARSEA BIEN
 		
 //		// leemos archivo

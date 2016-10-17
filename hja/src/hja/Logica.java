@@ -20,7 +20,7 @@ public class Logica {
 	 * @param cartas
 	 * @return
 	 */
-	String comprobar(Carta[] cartas) {
+	public String comprobar(Carta[] cartas) {
 		String mejorJugada = "-Best hand: ";
 		// aqui s ehacen todas las llamadas a cada uno de los metodos que
 		// comprueban una mano.

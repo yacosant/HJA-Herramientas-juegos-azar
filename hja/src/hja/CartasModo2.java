@@ -9,10 +9,12 @@ import java.util.ArrayList;
 public class CartasModo2 {
     private ArrayList<Carta[]> cartasMano;
     private ArrayList<Carta[]> cartasMesa;
+    private int size;
     
     public CartasModo2(ArrayList<Carta[]> mano, ArrayList<Carta[]> mesa){
         cartasMano=mano;
         cartasMesa=mesa;
+        size= cartasMesa.size();
     }
 
     public ArrayList<Carta[]> getCartasMano() {
@@ -35,4 +37,9 @@ public class CartasModo2 {
        
        return c;
     }
+
+    public int getSize() {
+        return size;
+    }
+    
 }

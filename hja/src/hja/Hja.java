@@ -179,8 +179,19 @@ public class Hja {
 			
 		case DosCartas:
 			System.out.println("le has metido un 2");
+                     CartasModo2 c = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
+                     ar2 = new MejorJugada2(); 
+                     c= ar2.cargar(txtEntrada);
+                     manos= c.juntar();
                      
-                     ar2 = new MejorJugada2();   
+                    while (cont < manos.size()) {
+                      String respuesta = log.comprobar(manos.get(cont));
+                      ar.guardar(respuesta, cont);
+                      System.out.println(respuesta);
+                      cont++;
+                    }        
+                     cont=0;
+                     
 			break;
 		case NJugadores:
 			System.out.println("le has metido un 3");

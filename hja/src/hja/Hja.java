@@ -149,6 +149,7 @@ public class Hja {
 		String gameVal = line.getOptionValue("g", DEFAULT_GAME.getId());
 		GameInfo selectedGame = null;
                 int cont = 0;
+                boolean proyecto= true;
                 
 		for (GameInfo g : GameInfo.values()) {
 			if (g.getId().equals(gameVal)) {
@@ -168,7 +169,7 @@ public class Hja {
                     ar = new MejorJugada();
                     manos = ar.cargar(txtEntrada);
                         while (cont < manos.size()) {
-			String respuesta = log.comprobar(manos.get(cont));
+			String respuesta = log.comprobar(true,manos.get(cont));
                         ar.guardar(txtSalida, respuesta, cont);
 			System.out.println(respuesta);
 			cont++;
@@ -182,10 +183,11 @@ public class Hja {
                      CartasModo2 c = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
                      ar = new MejorJugada(); 
                      c= ar.cargarModo2(txtEntrada);
+                     if(c.getSize()==5) proyecto= false;
                      manos= c.juntar();
                      
                     while (cont < manos.size()) {
-                      String respuesta = log.comprobar(manos.get(cont));
+                      String respuesta = log.comprobar(proyecto,manos.get(cont));
                       ar.guardar(txtSalida, respuesta, cont);
                       System.out.println(respuesta);
                       cont++;

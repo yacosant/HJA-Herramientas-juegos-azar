@@ -20,7 +20,7 @@ public class Logica {
 	 * @param cartas
 	 * @return
 	 */
-	public String comprobar(Carta[] cartas) {
+	public String comprobar(boolean proyect,Carta[] cartas) {
 		String mejorJugada = "-Best hand: ";
 		// aqui s ehacen todas las llamadas a cada uno de los metodos que
 		// comprueban una mano.
@@ -60,27 +60,28 @@ public class Logica {
 		else
 			mejorJugada += "High Card: " + cartaAlta(cartas);
 		
-		//Proyectos
-		if(proyectoEscaleraC){
-			mejorJugada += "\r\n" + "-Draw: Straight Flush";
-			if(gutshot)
-				mejorJugada += " GutShot";
-			else
-				mejorJugada += " Open-ended";
-		}
+                if(proyect){
+                    //Proyectos
+                    if(proyectoEscaleraC){
+                            mejorJugada += "\r\n" + "-Draw: Straight Flush";
+                            if(gutshot)
+                                    mejorJugada += " GutShot";
+                            else
+                                    mejorJugada += " Open-ended";
+                    }
 
-		if(proyectoEscalera){
-			mejorJugada += "\r\n" + "-Draw: Straight";
-			if(gutshot)
-				mejorJugada += " GutShot";
-			else
-				mejorJugada += " Open-ended";
-		}
+                    if(proyectoEscalera){
+                            mejorJugada += "\r\n" + "-Draw: Straight";
+                            if(gutshot)
+                                    mejorJugada += " GutShot";
+                            else
+                                    mejorJugada += " Open-ended";
+                    }
 
-		if(proyectoColor)
-			mejorJugada += "\r\n" + "-Draw: Flush";
-		
-		
+                    if(proyectoColor)
+                            mejorJugada += "\r\n" + "-Draw: Flush";
+
+                }
 		return mejorJugada;
 
 	}

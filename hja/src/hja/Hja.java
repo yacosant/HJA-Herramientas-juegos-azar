@@ -1,3 +1,4 @@
+package hja;
 
 import hja.Carta;
 import hja.CartasModo2;

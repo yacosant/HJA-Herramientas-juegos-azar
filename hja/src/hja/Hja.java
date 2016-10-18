@@ -3,7 +3,7 @@ import hja.Carta;
 import hja.CartasModo2;
 import hja.Logica;
 import hja.MejorJugada;
-import hja.MejorJugada2;
+
 
 import java.util.ArrayList;
 
@@ -33,7 +33,6 @@ public class Hja {
 	private static String txtEntrada; //Atributos para guardar los txt de los parametros
 	private static String txtSalida;
         private static MejorJugada ar;
-        private static MejorJugada2 ar2;
         private static Logica log = new Logica();
 
 
@@ -111,7 +110,7 @@ public class Hja {
 	private static void parseEntradaTxtOption(CommandLine line) throws ParseException{
 		 txtEntrada = line.getOptionValue("ent");
 
-			System.out.println("Usted quiere cargar el archivo " + txtEntrada +".txt");
+			System.out.println("Usted quiere cargar el archivo " + txtEntrada);
 	}
 
 
@@ -126,7 +125,7 @@ public class Hja {
 
 	private static void parseSalidaTxtOption(CommandLine line) throws ParseException{
 		 txtSalida = line.getOptionValue("sal");
-		System.out.println("Usted quiere guardar en el archivo " + txtSalida +".txt");
+		System.out.println("Usted quiere guardar en el archivo " + txtSalida);
 		
 	}
 	
@@ -169,7 +168,7 @@ public class Hja {
                     manos = ar.cargar(txtEntrada);
                         while (cont < manos.size()) {
 			String respuesta = log.comprobar(manos.get(cont));
-                        ar.guardar(respuesta, cont);
+                        ar.guardar(txtSalida, respuesta, cont);
 			System.out.println(respuesta);
 			cont++;
 		}        
@@ -180,13 +179,13 @@ public class Hja {
 		case DosCartas:
 			System.out.println("le has metido un 2");
                      CartasModo2 c = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
-                     ar2 = new MejorJugada2(); 
-                     c= ar2.cargar(txtEntrada);
+                     ar = new MejorJugada(); 
+                     c= ar.cargarModo2(txtEntrada);
                      manos= c.juntar();
                      
                     while (cont < manos.size()) {
                       String respuesta = log.comprobar(manos.get(cont));
-                      ar.guardar(respuesta, cont);
+                      ar.guardar(txtSalida, respuesta, cont);
                       System.out.println(respuesta);
                       cont++;
                     }        

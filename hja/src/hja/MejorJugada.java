@@ -15,12 +15,15 @@ import java.util.Scanner;
  *
  */
 public class MejorJugada {
-       private ArrayList<Carta[]> manos;
+
        private ArrayList<String> lineas;
+       private ArrayList<Carta[]> cartasMano;
+       private ArrayList<Carta[]> cartasMesa;
 
 	public MejorJugada() {
 		this.lineas = new ArrayList<String>();
-                this.manos = new ArrayList<Carta[]>();
+                this.cartasMano = new ArrayList<Carta[]>();
+                 this.cartasMesa = new ArrayList<Carta[]>();
 	}
 
         public ArrayList<Carta[]> cargar(String archivo) {
@@ -54,20 +57,69 @@ public class MejorJugada {
 					i += 2;
 					cont++;
 				}
-                                manos.add(mano);
+                                cartasMano.add(mano);
                                 mano = new Carta[5];
 				
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Error en la lectura del fichero");
 		}
-		return manos;
+		return cartasMano;
 
 	}
 
+         public CartasModo2 cargarModo2(String archivo) {
+            CartasModo2 cartas = new CartasModo2(cartasMano, cartasMesa);
+		File fichero = new File(archivo);
+                int num=0;
+		Scanner s = null;
+		String linea = "";
+                Carta[] mano;
+                Carta[] mesa;
+		try {
+			s = new Scanner(fichero);
+		
+			while (s.hasNext()) {
+				linea = s.nextLine(); // Guardamos la linea en un String
+                                lineas.add(linea);
+				StringBuffer bf = new StringBuffer(linea);
+				int i = 0, cont = 0, valor;
+                                mano = new Carta[2];
+				while(i<2){
+                                    valor= conversion(bf.charAt(i));
+                                    mano[cont]= new Carta(valor, bf.charAt(i + 1));
+                                    i += 2;
+                                    cont++;
+                                }
+                                
+                                i++;
+                                num = bf.charAt(i);
+                                i += 2;
+                                
+                                mesa = new Carta[5];
+                                cont=0;
+                                while (i < num*2) {
+					valor= conversion(bf.charAt(i));
+					mesa[cont]= new Carta(valor, bf.charAt(i + 1));
+					i += 2;
+					cont++;
+				}
+                                cartasMano.add(mano);
+                                cartasMesa.add(mesa);
+                                
+				
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Error en la lectura del fichero");
+		}
+                
+		return cartas;
+
+	}
         
-	public void guardar(String texto, int cont) {
-		String nombre = "salida.txt";
+        
+	public void guardar(String nombre, String texto, int cont) {
+		
 		File fichero = new File(nombre);
 		try {
                     FileWriter salida = new FileWriter(fichero, true);
@@ -93,4 +145,23 @@ public class MejorJugada {
 		}
 
 	}
+        
+        int conversion (char c){
+            int valor;
+            if (c == 'A')
+                    valor = 14;
+            else if (c == 'K')
+                    valor = 13;
+            else if (c == 'Q')
+                    valor = 12;
+            else if (c == 'J')
+                    valor = 11;
+            else if (c == 'T')
+                    valor = 10;
+            else
+                    valor = c - 48;
+            
+            return valor;
+        }
+	
 }

@@ -197,6 +197,10 @@ public class Hja {
 			break;
 		case NJugadores:
 			System.out.println("le has metido un 3");
+                        CartasModo2 c3 = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
+                        ar = new MejorJugada(); 
+                        c3= ar.cargarModo3(txtEntrada);
+                        
 			break;
 		case OMAHA:
 			System.out.println("le has metido un 4");

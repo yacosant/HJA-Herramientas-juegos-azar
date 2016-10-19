@@ -117,7 +117,61 @@ public class MejorJugada {
 
 	}
         
-        
+    public CartasModo2 cargarModo3(String archivo) {
+            CartasModo2 cartas = new CartasModo2(cartasMano, cartasMesa);
+		File fichero = new File(archivo);
+                int num=0;
+		Scanner s = null;
+		String linea = "";
+                Carta[] mano;
+                Carta[] mesa;
+		try {
+			s = new Scanner(fichero);
+		
+			while (s.hasNext()) {
+				linea = s.nextLine(); // Guardamos la linea en un String
+                                lineas.add(linea);
+				StringBuffer bf = new StringBuffer(linea);
+				int i = 0, cont = 0, valor, jug, tamanyo;
+                                jug = conversion(bf.charAt(i));
+                                tamanyo = jug * 7;
+                                mano = new Carta[2];
+                                
+                                
+                                while(i<tamanyo){
+                                
+                                i += 3; //;Jx
+                                    while(i<2){
+                                        valor= conversion(bf.charAt(i));
+                                        mano[cont]= new Carta(valor, bf.charAt(i + 1));
+                                        i += 2;
+                                        cont++;
+                                    }
+                                    cont=0;
+                                    cartasMano.add(mano);
+                                }
+                                i++; //;
+                                mesa = new Carta[5];
+                                
+                                tamanyo+=10;
+                                while (i < tamanyo) {
+					valor= conversion(bf.charAt(i));
+					mesa[cont]= new Carta(valor, bf.charAt(i + 1));
+					i += 2;
+					cont++;
+				}
+                                
+                                cartasMesa.add(mesa);
+                                
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Error en la lectura del fichero");
+		}
+                
+		return cartas;
+
+	}
+                
 	public void guardar(String nombre, String texto, int cont) {
 		
 		File fichero = new File(nombre);

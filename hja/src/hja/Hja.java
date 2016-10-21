@@ -200,6 +200,8 @@ public class Hja {
                         CartasModo2 c3 = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
                         ar = new MejorJugada(); 
                         c3= ar.cargarModo3(txtEntrada);
+                        manos = c3.juntar();
+                        log.comprobarModo3(manos);
                         
 			break;
 		case OMAHA:

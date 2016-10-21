@@ -1,6 +1,7 @@
 package hja;
 
 import hja.Carta;
+import java.util.ArrayList;
 
 /**
  * 
@@ -498,4 +499,52 @@ public class Logica {
 		return carta;
 	}
 
+        public void comprobarModo3() {
+            
+            
+        }
+        
+        public void comprobarModo3(ArrayList<Carta[]> cartas) {
+            
+            for(int i=0; i<cartas.size(); i++){
+                comprobarJugadorModo3(cartas.get(i));
+                
+            }
+            
+        }
+        
+        private Modo3 comprobarJugadorModo3(Carta[] cartas) {
+            Modo3 c = new Modo3();
+            
+            if (escaleraDeColor(cartas))
+			c.setPeso(8);
+		// four-of-a-kind (or quads) (poker)
+		else if (poker(cartas) != null)
+			c.setPeso(7);
+		// full house (or boat) (full)
+		else if (full(cartas) != null)
+			c.setPeso(6);
+		// flush(color)
+		else if (color(cartas) != null)
+			c.setPeso(5);
+		// straight(escalera)
+		else if (escalera(cartas))
+			c.setPeso(4);
+		// three-of-a-kind(trío)
+		else if (trio(cartas) != null)
+			c.setPeso(3);
+		// two-pair(doblepareja)
+		else if (doblePareja(cartas) != null)
+			c.setPeso(2);
+		// pair (parejao par)
+		else if (pareja(cartas) != null)
+			c.setPeso(1);
+		// high card (carta alta)
+		else
+                        c.setPeso(0);
+            
+           
+            return c;
+        }
+        
 }

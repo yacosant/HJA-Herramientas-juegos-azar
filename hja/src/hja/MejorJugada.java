@@ -161,7 +161,7 @@ public class MejorJugada {
 					cont++;
 				}
                                 
-                                cartasMesa.add(mesa);
+                                for(int j=0; j<5; j++)cartasMesa.add(mesa);
                                 
 			}
 		} catch (FileNotFoundException e) {

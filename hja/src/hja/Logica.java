@@ -1,7 +1,6 @@
 package hja;
 
 import hja.Carta;
-
 import java.util.ArrayList;
 
 /**
@@ -535,46 +534,17 @@ public class Logica {
 
 
 	}
-	
+
 	public void comprobarModo3(ArrayList<Carta[]> cartas) {
 
 		for(int i=0; i<cartas.size(); i++){
-			darPesoJugadasModo3(cartas.get(i));
+			comprobarJugadorModo3(cartas.get(i));
 
 		}
 
 	}
-	
-	public int buscarJugadaMaxPeso(ArrayList<Carta[]> cartasj1, ArrayList<Carta[]> cartasj2 ) {
 
-		Modo3 J1 = new Modo3();
-		Modo3 J2 = new Modo3();
-	
-		//LA IDEA es buscar el peso maximo, para asi tener la mejor jugada. 
-		//En caso de empate miramos la jugada por dentro
-		int max=0;
-		
-		for(int i=0; i<cartasj1.size()-1; i++) 
-			J1 = darPesoJugadasModo3(cartasj1.get(i));
-		
-		for(int j=0; j<cartasj2.size(); j++)
-			J2 = darPesoJugadasModo3(cartasj2.get(j));
-			
-		
-		if(J1.getPeso() > J2.getPeso())
-			max=J1.getPeso();
-		
-		else if(J2.getPeso()>J1.getPeso())
-			max=J2.getPeso();
-		
-		else if(J1.getPeso()==J2.getPeso()){
-			//LLAMAR A METODO PARA BUSCAR POR DENTRO DE LA JUGADA
-		}
-	
-		return max;
-	}
-
-	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
+	private Modo3 comprobarJugadorModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
 
 		if (escaleraDeColor(cartas))
@@ -604,6 +574,7 @@ public class Logica {
 		else
 			c.setPeso(0);
 
-            return c;
-        }
+
+		return c;
+	}
 }

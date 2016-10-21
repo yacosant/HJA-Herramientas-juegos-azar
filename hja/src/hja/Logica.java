@@ -9,21 +9,22 @@ import java.util.ArrayList;
  *
  */
 public class Logica {
-	
-	
+
+	//Booleanos de tipos de proyectos
 	private boolean proyectoColor = false;
 	private boolean proyectoEscalera = false;
 	private boolean proyectoEscaleraC = false;
 	private boolean gutshot = false;
+
 	/**
 	 * Recorre el array de cartas para comprobar que jugada tiene
 	 * 
 	 * @param cartas
 	 * @return
 	 */
-	public String comprobar(boolean proyect,Carta[] cartas) {
+	public String comprobar(boolean proyect,Carta[] cartas) { //Metodo que te devuelve la mejor jugada
 		String mejorJugada = "-Best hand: ";
-		// aqui s ehacen todas las llamadas a cada uno de los metodos que
+		// aqui se hacen todas las llamadas a cada uno de los metodos que
 		// comprueban una mano.
 		// En el array de string se guardan las manos que si se han producido, y
 		// en funcion de si se han producido,
@@ -33,7 +34,7 @@ public class Logica {
 		// ----
 		// Lamadas a:
 
-		// straight flush(escalerade color)
+		// straight flush(escalera de color)
 		if (escaleraDeColor(cartas))
 			mejorJugada += "Straight Flush: ";
 		// four-of-a-kind (or quads) (poker)
@@ -60,29 +61,31 @@ public class Logica {
 		// high card (carta alta)
 		else
 			mejorJugada += "High Card: " + cartaAlta(cartas);
-		
-                if(proyect){
-                    //Proyectos
-                    if(proyectoEscaleraC){
-                            mejorJugada += "\r\n" + "-Draw: Straight Flush";
-                            if(gutshot)
-                                    mejorJugada += " GutShot";
-                            else
-                                    mejorJugada += " Open-ended";
-                    }
 
-                    if(proyectoEscalera){
-                            mejorJugada += "\r\n" + "-Draw: Straight";
-                            if(gutshot)
-                                    mejorJugada += " GutShot";
-                            else
-                                    mejorJugada += " Open-ended";
-                    }
+		if(proyect){
+			//Proyectos
+			if(proyectoEscaleraC){
+				mejorJugada += "\r\n" + "-Draw: Straight Flush";
 
-                    if(proyectoColor)
-                            mejorJugada += "\r\n" + "-Draw: Flush";
+				if(gutshot)
+					mejorJugada += " GutShot";
+				else
+					mejorJugada += " Open-ended";
+			}
 
-                }
+			if(proyectoEscalera){
+				mejorJugada += "\r\n" + "-Draw: Straight";
+
+				if(gutshot)
+					mejorJugada += " GutShot";
+				else
+					mejorJugada += " Open-ended";
+			}
+
+			if(proyectoColor)
+				mejorJugada += "\r\n" + "-Draw: Flush";
+		}
+
 		return mejorJugada;
 
 	}
@@ -93,33 +96,41 @@ public class Logica {
 	 * @param cartas
 	 * @return
 	 */
+
+	//Metodos para ver que jugada tienes 
+
 	boolean escaleraDeColor(Carta[] cartas) {
 		boolean esEscalera = false, posible = true;
-		ordenador(cartas);
+		ordenador(cartas); //Ordenamos las cartas
 
 		int cont = 0;
 
 		while (cont < cartas.length-1  && posible) {
 
+			//Si tienen mismo color y un el valor de la carta es uno mas, aumentamos el contador
 			if (cartas[cont].getColor() == cartas[cont + 1].getColor()
 					&& cartas[cont].getValor() + 1 == cartas[cont + 1].getValor())
 				cont++;
-			else
+
+			else //Si no cumple lo anterior no es posible tener escalera de color
 				posible = false;	
 		}
 
-		if(cont == 3){
+		if(cont == 3){ //El valor 13 = As.
+
 			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
 				cont++;
+
 			else
-				this.proyectoEscaleraC = true;
-			
-			
-		}else if (cont == 4)
+				this.proyectoEscaleraC = true; 
+
+
+		}else if (cont == 4) //Si contador es igual a 4 ya tenemos escalera
 			esEscalera = true;
+
 		else
 			this.proyectoEscaleraC = buscarProyectoEC(cartas,cont);
-			
+
 
 		return esEscalera;
 	}
@@ -140,19 +151,22 @@ public class Logica {
 
 			if (cartas[cont].getValor() + 1 == cartas[cont + 1].getValor())
 				cont++;
+
 			else
 				posible = false;
 		}
-		
-		if(cont == 3){
+
+		if(cont == 3){ //El valor 13 es el as
 			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13)
 				cont++;
+
 			else
 				this.proyectoEscalera = true;
-			
+
 		}else if (cont == 4)
 			esEscalera = true;
-		else
+
+		else 
 			this.proyectoEscalera = buscarProyectoE(cartas,cont);
 
 		return esEscalera;
@@ -170,9 +184,10 @@ public class Logica {
 		for (int i = 0; i < cartas.length; i++) {
 			cont = 0;
 			for (int j = i + 1; j < cartas.length; j++) {
-				if (cartas[i].getValor() == cartas[j].getValor()) {
+				if (cartas[i].getValor() == cartas[j].getValor()) { //Miramos si tenemos cartas iguales
 					cont++;
-					if (cont == 3)
+
+					if (cont == 3) //Si tenemos 4 cartas iguales las pasamos de entero a carta
 						carta = intToCarta(cartas[i].getValor());
 				}
 			}
@@ -189,8 +204,10 @@ public class Logica {
 	String full(Carta[] cartas) {
 		String carta = null;
 		String trio = null;
+
 		if (trio(cartas) != null) {
 			trio = trio(cartas);
+
 			if (pareja(cartas) != null && !trio.equals(pareja(cartas)))
 				carta = "Full house: Three-of-a-kind " + trio + " and pair of " + pareja(cartas);
 		}
@@ -207,20 +224,21 @@ public class Logica {
 		String carta = null;
 		boolean posible = true;
 		int cont = 0;
-		
+
 		while(cont < cartas.length-1 && posible) {
 			if (cartas[cont].getColor() == cartas[cont+1].getColor())
 				cont++;
 			else
 				posible = false;
 		}
-		
+
 		if(cont == 4)
 			carta = charToColor(cartas[cont].getColor());
+
 		else
 			this.proyectoColor = buscarProyectoC(cartas,cont);
-			
-		
+
+
 		return carta;
 	}
 
@@ -256,12 +274,15 @@ public class Logica {
 		boolean salir = true;
 		int cont = 0, i = 0, j;
 		String pareja = "";
+
 		while (i < cartas.length) {
 			j = i + 1;
 			salir = true;
-			while (j < cartas.length && salir) {
-				if (cartas[i].getValor() == cartas[j].getValor()) {
+			while (j < cartas.length && salir) {//Miramos una pareja y salimos. Volvemos a entrar en el bucle a buscar mas parejas
+
+				if (cartas[i].getValor() == cartas[j].getValor()) { 
 					cont++;
+
 					salir = false;
 					pareja += " " + intToCarta(cartas[i].getValor());
 				}
@@ -269,8 +290,10 @@ public class Logica {
 			}
 			i++;
 		}
-		if (cont >= 2)
+
+		if (cont >= 2) //Si hemos encontrado dos o mas parejas devolvemos que hay doblePareja
 			return pareja;
+
 		return null;
 	}
 
@@ -280,6 +303,7 @@ public class Logica {
 	 * @param cartas
 	 * @return
 	 */
+
 	String pareja(Carta[] cartas) {
 		String carta = null;
 
@@ -312,7 +336,7 @@ public class Logica {
 	 * 
 	 * @param cartas
 	 */
-	public static void ordenador(Carta[] cartas) {
+	public static void ordenador(Carta[] cartas) { //Metodo para ordenar las cartas. Util para escaleras
 
 		for (int i = 0; i < cartas.length - 1; i++) {
 			for (int j = i + 1; j < cartas.length; j++) {
@@ -325,7 +349,9 @@ public class Logica {
 			}
 		}
 	}
-	
+
+	//Metodos para ver si hay proyectos de jugadas
+
 	private boolean buscarProyectoE(Carta[] cartas,int cont){
 
 		boolean draw = false,start=false;
@@ -335,6 +361,7 @@ public class Logica {
 			draw=true;
 			start=true;
 		}
+
 		else if(cartas[cont-1].getValor()+2 == cartas[cont+1].getValor()){
 			draw=true;
 			cont++;
@@ -356,7 +383,7 @@ public class Logica {
 		return draw;
 
 	}
-	
+
 	private boolean buscarProyectoEC(Carta[] cartas,int cont){
 
 		boolean draw = false,start=false;
@@ -390,7 +417,7 @@ public class Logica {
 		return draw;
 
 	}
-	
+
 	private boolean buscarProyectoC(Carta[] cartas,int cont){
 
 		boolean draw = false;
@@ -414,8 +441,8 @@ public class Logica {
 
 		return draw;
 	}
-	
-	
+
+
 
 	/**
 	 * Parsea el color de la carta
@@ -423,6 +450,8 @@ public class Logica {
 	 * @param valor
 	 * @return
 	 */
+
+	//Metodo para pasar de char a color
 	private String charToColor(char valor) {
 		String color = null;
 		switch (valor) {
@@ -451,6 +480,8 @@ public class Logica {
 	 *            entero con el valor de la carta
 	 * @return
 	 */
+
+	//Metodo para pasar de entero a Carta
 	private String intToCarta(int valor) {
 		String carta = null;
 		switch (valor) {
@@ -499,24 +530,24 @@ public class Logica {
 		return carta;
 	}
 
-        public void comprobarModo3() {
-            
-            
-        }
-        
-        public void comprobarModo3(ArrayList<Carta[]> cartas) {
-            
-            for(int i=0; i<cartas.size(); i++){
-                comprobarJugadorModo3(cartas.get(i));
-                
-            }
-            
-        }
-        
-        private Modo3 comprobarJugadorModo3(Carta[] cartas) {
-            Modo3 c = new Modo3();
-            
-            if (escaleraDeColor(cartas))
+	public void comprobarModo3() {
+
+
+	}
+
+	public void comprobarModo3(ArrayList<Carta[]> cartas) {
+
+		for(int i=0; i<cartas.size(); i++){
+			comprobarJugadorModo3(cartas.get(i));
+
+		}
+
+	}
+
+	private Modo3 comprobarJugadorModo3(Carta[] cartas) {
+		Modo3 c = new Modo3();
+
+		if (escaleraDeColor(cartas))
 			c.setPeso(8);
 		// four-of-a-kind (or quads) (poker)
 		else if (poker(cartas) != null)
@@ -541,10 +572,9 @@ public class Logica {
 			c.setPeso(1);
 		// high card (carta alta)
 		else
-                        c.setPeso(0);
-            
-           
-            return c;
-        }
-        
+			c.setPeso(0);
+
+
+		return c;
+	}
 }

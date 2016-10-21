@@ -16,6 +16,7 @@ public class Logica {
 	private boolean proyectoEscalera = false;
 	private boolean proyectoEscaleraC = false;
 	private boolean gutshot = false;
+	private ArrayList<Modo3> jugadores = new ArrayList<Modo3>();
 
 	/**
 	 * Recorre el array de cartas para comprobar que jugada tiene
@@ -530,15 +531,14 @@ public class Logica {
 		}
 		return carta;
 	}
-	
+
 	public void comprobarModo3() {
 
 
 	}
 	
-
 	public void comprobarModo3(ArrayList<Carta[]> cartas) {
-
+		
 		for(int i=0; i<cartas.size(); i++){
 			Modo3 c;
 			c = darPesoJugadasModo3(cartas.get(i));
@@ -548,7 +548,7 @@ public class Logica {
 		}
 
 	}
-
+	
 	public ArrayList<Modo3> ordenarManos() {
 		int cont,peso = 8,nPesos,posMejor;
 		boolean empate = false;
@@ -557,18 +557,18 @@ public class Logica {
 			empatados = new ArrayList<Modo3>();
 			nPesos = 0;
 			cont = 0;
-
+			
 			while(cont < jugadores.size())
 				if(jugadores.get(cont).getPeso() == peso){
 					empatados.add(jugadores.get(cont));
 					nPesos++;
 					cont++;
 				}
-
+			
 			if(nPesos > 1);
-			posMejor = desempateMano(empatados);//desempate de damaso
+				posMejor = desempateMano(empatados);//desEmpate de damaso
 
-
+			
 			if(posMejor == -1)//Ha habido empate,no importa el orden
 				for(int i = 0;i<empatados.size();i++)
 					ordenados.add(empatados.get(i));
@@ -578,54 +578,43 @@ public class Logica {
 					if(i != posMejor)
 						ordenados.add(empatados.get(i));
 			}
-
 			
-	public void comprobarJugador(ArrayList<Carta[]> cartas) {
-
-		for(int i=0; i<cartas.size(); i++){
-			Modo3 c = new Modo3();
-			c=darPesoJugadasModo3(cartas.get(i));
-			c.setJugador(i);
-			c.setCartas(darMano(cartas.get(i)));
-			jugadores.add(c);
 		}
-	}
-
-
-
+		
+		
 		return ordenados;
-
-
-
-	public int desempateManos(ArrayList<Modo3> jugadores){
-		ArrayList<Carta> cartas =  new ArrayList<Carta>();
-		int posMano=0;
-
-		for(int i=0; i<jugadores.size()-1;i++){
-			for(int h=i+1;h<jugadores.size();h++){
-
-				if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
-					if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
-						posMano = i;
-
-					else if(jugadores.get(i).getPeso()==7) //poker
-						if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
-							posMano = i;
-//
-//					else if(jugadores.get(i).getPeso()==6) //full
-//
-//					else if(jugadores.get(i).getPeso()==5) //color
-//
-//					else if(jugadores.get(i).getPeso()==3) //trio
-//
-//					else if(jugadores.get(i).getPeso()==2) //doble pareja
-//
-//					else if(jugadores.get(i).getPeso()==1) //pareja
-			}
-		}
-		return posMano;
+	
 
 	}
+	
+	public int desempateManos(ArrayList<Modo3> jugadores){
+		  ArrayList<Carta> cartas =  new ArrayList<Carta>();
+		  int posMano=0;
+
+		  for(int i=0; i<jugadores.size()-1;i++){
+		   for(int h=i+1;h<jugadores.size();h++){
+
+		    if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
+		     if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+		      posMano = i;
+
+		     else if(jugadores.get(i).getPeso()==7) //poker
+		      if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+		       posMano = i;
+		
+//		     else if(jugadores.get(i).getPeso()==6) //full
+		
+//		     else if(jugadores.get(i).getPeso()==5) //color
+		
+//		     else if(jugadores.get(i).getPeso()==3) //trio
+	
+//		     else if(jugadores.get(i).getPeso()==2) //doble pareja
+		
+//		     else if(jugadores.get(i).getPeso()==1) //pareja
+		   }
+		  }
+		  return posMano;
+		 }
 
 	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
@@ -657,10 +646,9 @@ public class Logica {
 		else
 			c.setPeso(0);
 
-
 		return c;
 	}
-
+	
 	private ArrayList<Carta> manoJugador(Carta[] cartas){
 
 		ArrayList<Carta> a = new ArrayList<Carta>();
@@ -671,30 +659,17 @@ public class Logica {
 		return a;
 
 	}
-}
-
-            return c;
-        }
 	
 	public int valorMaxMano(ArrayList<Carta> cartas){ //Te devuelve el valor de la carta mas alta de una mano
-		
+
 		int max=0;
-		
-        for (int i = 0; i < cartas.size(); i++) {
-        	max=0;
-            if (cartas.get(i).getValor()> max) {
-                max = cartas.get(i).getValor();
-            }
-        }
+
+		for (int i = 0; i < cartas.size(); i++) {
+			max=0;
+			if (cartas.get(i).getValor()> max) {
+				max = cartas.get(i).getValor();
+			}
+		}
 		return max;
 	}
-	
-	public ArrayList<Carta> darMano(Carta[] cartas){
-		ArrayList<Carta> mano = new ArrayList<Carta>();
-
-		for(int i=0;i<cartas.length;i++)
-			mano.add(cartas[i]);
-		
-		return mano;
-	}
-
+}

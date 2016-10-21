@@ -539,40 +539,53 @@ public class Logica {
 	public void comprobarModo3(ArrayList<Carta[]> cartas) {
 
 		for(int i=0; i<cartas.size(); i++){
-			darPesoJugadasModo3(cartas.get(i));
-
+			Modo3 c;
+			c = darPesoJugadasModo3(cartas.get(i));
+			c.setJugador(i);
+			c.setCartas(manoJugador(cartas.get(i)));
+			jugadores.add(c);
 		}
 
 	}
-	
-	public int buscarJugadaMaxPeso(ArrayList<Carta[]> cartasj1, ArrayList<Carta[]> cartasj2 ) {
 
-		Modo3 J1 = new Modo3();
-		Modo3 J2 = new Modo3();
-	
-		//LA IDEA es buscar el peso maximo, para asi tener la mejor jugada. 
-		//En caso de empate miramos la jugada por dentro
-		int max=0;
-		
-		for(int i=0; i<cartasj1.size()-1; i++) 
-			J1 = darPesoJugadasModo3(cartasj1.get(i));
-		
-		for(int j=0; j<cartasj2.size(); j++)
-			J2 = darPesoJugadasModo3(cartasj2.get(j));
-			
-		
-		if(J1.getPeso() > J2.getPeso())
-			max=J1.getPeso();
-		
-		else if(J2.getPeso()>J1.getPeso())
-			max=J2.getPeso();
-		
-		else if(J1.getPeso()==J2.getPeso()){
-			//LLAMAR A METODO PARA BUSCAR POR DENTRO DE LA JUGADA
+	public ArrayList<Modo3> ordenarManos() {
+		int cont,peso = 8,nPesos,posMejor;
+		boolean empate = false;
+		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
+		while(peso >= 0){
+			empatados = new ArrayList<Modo3>();
+			nPesos = 0;
+			cont = 0;
+
+			while(cont < jugadores.size())
+				if(jugadores.get(cont).getPeso() == peso){
+					empatados.add(jugadores.get(cont));
+					nPesos++;
+					cont++;
+				}
+
+			if(nPesos > 1);
+			posMejor = desempateMano(empatados);//desEmpate de damaso
+
+
+			if(posMejor == -1)//Ha habido empate,no importa el orden
+				for(int i = 0;i<empatados.size();i++)
+					ordenados.add(empatados.get(i));
+			else{
+				ordenados.add(empatados.get(posMejor));//añado primero el que gana el desempate 
+				for(int i = 0;i<empatados.size();i++)//luego los demas sin importar el orden
+					if(i != posMejor)
+						ordenados.add(empatados.get(i));
+			}
+
 		}
-	
-		return max;
+
+
+		return ordenados;
+
+
 	}
+
 
 	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
@@ -604,6 +617,17 @@ public class Logica {
 		else
 			c.setPeso(0);
 
-            return c;
-        }
+		return c;
+	}
+
+	private ArrayList<Carta> manoJugador(Carta[] cartas){
+
+		ArrayList<Carta> a = new ArrayList<Carta>();
+
+		for(int i =0;i<cartas.length;i++)
+			a.add(cartas[i]);
+
+		return a;
+
+	}
 }

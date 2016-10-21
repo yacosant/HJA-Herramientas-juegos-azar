@@ -565,7 +565,7 @@ public class Logica {
 				}
 
 			if(nPesos > 1);
-			posMejor = desempateMano(empatados);//desEmpate de damaso
+			posMejor = desempateMano(empatados);//desempate de damaso
 
 
 			if(posMejor == -1)//Ha habido empate,no importa el orden

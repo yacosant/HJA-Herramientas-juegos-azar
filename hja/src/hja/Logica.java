@@ -538,7 +538,6 @@ public class Logica {
 	
 	public void comprobarJugador(ArrayList<Carta[]> cartas) {
 
-		
 		for(int i=0; i<cartas.size(); i++){
 			Modo3 c = new Modo3();
 			c=darPesoJugadasModo3(cartas.get(i));
@@ -546,7 +545,6 @@ public class Logica {
 			c.setCartas(darMano(cartas.get(i)));
 			jugadores.add(c);
 		}
-
 	}
 
 	public int desempateManos(ArrayList<Modo3> jugadores){
@@ -624,7 +622,6 @@ public class Logica {
         }
 		return max;
 	}
-	
 	
 	public ArrayList<Carta> darMano(Carta[] cartas){
 		ArrayList<Carta> mano = new ArrayList<Carta>();

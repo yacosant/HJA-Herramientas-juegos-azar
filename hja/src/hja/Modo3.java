@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public class Modo3 {
     private ArrayList<Carta> cartas;
     private int peso;
-
+    private int jugador;
+    
     public ArrayList<Carta> getCartas() {
         return cartas;
     }
@@ -29,6 +30,14 @@ public class Modo3 {
 
     public void setPeso(int peso) {
         this.peso = peso;
+    }
+
+    public int getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(int jugador) {
+        this.jugador = jugador;
     }
     
 }

@@ -1,6 +1,7 @@
 package hja;
 
 import hja.Carta;
+
 import java.util.ArrayList;
 
 /**
@@ -529,22 +530,56 @@ public class Logica {
 		}
 		return carta;
 	}
-
+	
 	public void comprobarModo3() {
 
 
 	}
+	
+	public void comprobarJugador(ArrayList<Carta[]> cartas) {
 
-	public void comprobarModo3(ArrayList<Carta[]> cartas) {
-
+		
 		for(int i=0; i<cartas.size(); i++){
-			comprobarJugadorModo3(cartas.get(i));
-
+			Modo3 c = new Modo3();
+			c=darPesoJugadasModo3(cartas.get(i));
+			c.setJugador(i);
+			c.setCartas(darMano(cartas.get(i)));
+			jugadores.add(c);
 		}
 
 	}
 
-	private Modo3 comprobarJugadorModo3(Carta[] cartas) {
+	public int desempateManos(ArrayList<Modo3> jugadores){
+		ArrayList<Carta> cartas =  new ArrayList<Carta>();
+		int posMano=0;
+
+		for(int i=0; i<jugadores.size()-1;i++){
+			for(int h=i+1;h<jugadores.size();h++){
+
+				if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
+					if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+						posMano = i;
+
+					else if(jugadores.get(i).getPeso()==7) //poker
+						if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+							posMano = i;
+//
+//					else if(jugadores.get(i).getPeso()==6) //full
+//
+//					else if(jugadores.get(i).getPeso()==5) //color
+//
+//					else if(jugadores.get(i).getPeso()==3) //trio
+//
+//					else if(jugadores.get(i).getPeso()==2) //doble pareja
+//
+//					else if(jugadores.get(i).getPeso()==1) //pareja
+			}
+		}
+		return posMano;
+	}
+	
+
+	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
 
 		if (escaleraDeColor(cartas))
@@ -574,7 +609,28 @@ public class Logica {
 		else
 			c.setPeso(0);
 
-
-		return c;
+            return c;
+        }
+	
+	public int valorMaxMano(ArrayList<Carta> cartas){ //Te devuelve el valor de la carta mas alta de una mano
+		
+		int max=0;
+		
+        for (int i = 0; i < cartas.size(); i++) {
+        	max=0;
+            if (cartas.get(i).getValor()> max) {
+                max = cartas.get(i).getValor();
+            }
+        }
+		return max;
 	}
-}
+	
+	
+	public ArrayList<Carta> darMano(Carta[] cartas){
+		ArrayList<Carta> mano = new ArrayList<Carta>();
+
+		for(int i=0;i<cartas.length;i++)
+			mano.add(cartas[i]);
+		
+		return mano;
+	}

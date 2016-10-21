@@ -536,7 +536,7 @@ public class Logica {
 
 	}
 	
-<<<<<<< HEAD
+
 	public void comprobarModo3(ArrayList<Carta[]> cartas) {
 
 		for(int i=0; i<cartas.size(); i++){
@@ -579,7 +579,7 @@ public class Logica {
 						ordenados.add(empatados.get(i));
 			}
 
-=======
+			
 	public void comprobarJugador(ArrayList<Carta[]> cartas) {
 
 		for(int i=0; i<cartas.size(); i++){
@@ -588,16 +588,15 @@ public class Logica {
 			c.setJugador(i);
 			c.setCartas(darMano(cartas.get(i)));
 			jugadores.add(c);
->>>>>>> origin/master
 		}
 	}
 
-<<<<<<< HEAD
+
 
 		return ordenados;
 
 
-=======
+
 	public int desempateManos(ArrayList<Modo3> jugadores){
 		ArrayList<Carta> cartas =  new ArrayList<Carta>();
 		int posMano=0;
@@ -625,14 +624,9 @@ public class Logica {
 			}
 		}
 		return posMano;
->>>>>>> origin/master
+
 	}
-	
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
 
@@ -663,7 +657,7 @@ public class Logica {
 		else
 			c.setPeso(0);
 
-<<<<<<< HEAD
+
 		return c;
 	}
 
@@ -678,7 +672,7 @@ public class Logica {
 
 	}
 }
-=======
+
             return c;
         }
 	
@@ -703,4 +697,4 @@ public class Logica {
 		
 		return mano;
 	}
->>>>>>> origin/master
+

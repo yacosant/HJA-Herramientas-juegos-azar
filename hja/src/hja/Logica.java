@@ -588,33 +588,58 @@ public class Logica {
 	}
 	
 	public int desempateManos(ArrayList<Modo3> jugadores){
-		  ArrayList<Carta> cartas =  new ArrayList<Carta>();
-		  int posMano=0;
+		ArrayList<Carta> cartas =  new ArrayList<Carta>();
+		int posMano=-1;
 
-		  for(int i=0; i<jugadores.size()-1;i++){
-		   for(int h=i+1;h<jugadores.size();h++){
+		for(int i=0; i<jugadores.size()-1;i++){
+			for(int h=i+1;h<jugadores.size();h++){
+				
+				if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
+					if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+						posMano = i;
 
-		    if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
-		     if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
-		      posMano = i;
+					else if(jugadores.get(i).getPeso()==7){ //poker
+						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
+							posMano = i;
+						else
+							posMano=h;
+					}
 
-		     else if(jugadores.get(i).getPeso()==7) //poker
-		      if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
-		       posMano = i;
-		
-//		     else if(jugadores.get(i).getPeso()==6) //full
-		
-//		     else if(jugadores.get(i).getPeso()==5) //color
-		
-//		     else if(jugadores.get(i).getPeso()==3) //trio
-	
-//		     else if(jugadores.get(i).getPeso()==2) //doble pareja
-		
-//		     else if(jugadores.get(i).getPeso()==1) //pareja
-		   }
-		  }
-		  return posMano;
-		 }
+//					else if(jugadores.get(i).getPeso()==6) //full
+//
+//					else if(jugadores.get(i).getPeso()==5) //color
+
+					else if(jugadores.get(i).getPeso()==3){ //trio
+						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
+							posMano = i;
+						else
+							posMano=h;
+					}
+
+					else if(jugadores.get(i).getPeso()==2){//doble pareja
+
+						int anteriorJi = desempateCartaRep(jugadores.get(i).getCartas(),-1);
+						int anteriorJh = desempateCartaRep(jugadores.get(h).getCartas(),-1);
+
+
+						if(desempateCartaRep(jugadores.get(i).getCartas(), anteriorJi)>desempateCartaRep(jugadores.get(h).getCartas(),anteriorJh))
+							posMano = i;
+						else
+							posMano=h;
+					} 
+
+					else if(jugadores.get(i).getPeso()==1){//pareja
+						
+						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
+							posMano = i;
+						else
+							posMano=h;
+						
+					} 
+			}
+		}
+		return posMano;
+	}
 
 	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
@@ -672,4 +697,27 @@ public class Logica {
 		}
 		return max;
 	}
+	
+	private static int desempateCartaRep(ArrayList<Carta> cartas,int anterior){
+		int valor=0,i=0,j;
+		boolean repetido = false;
+
+		while(i < cartas.size() && !repetido){
+			valor = cartas.get(i).getValor();
+			if(valor != anterior){
+				j=i+1;
+				while(j<cartas.size() && !repetido){
+					if(valor == cartas.get(j).getValor())
+						repetido = true;
+
+					j++;
+
+				}
+			}
+			i++;
+		}
+
+		return valor;
+	}
+	
 }

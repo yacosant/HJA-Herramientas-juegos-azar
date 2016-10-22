@@ -171,7 +171,6 @@ public class Logica {
 	private Carta[] dobleParejaModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		boolean salir = true;
-		;
 		int cont = 0, i = 0, j;
 		while (i < cartas.length) {
 			j = i + 1;

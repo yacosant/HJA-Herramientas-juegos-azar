@@ -96,6 +96,7 @@ public class Logica {
 	public Carta[] comprobarModo3(boolean proyect, Carta[] cartas) {
 		Modo3 c = new Modo3();
 		Carta[] mejoresCartas = null;
+		ordenador(cartas);
 		mejoresCartas = escaleraDeColorModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(8);
@@ -104,6 +105,12 @@ public class Logica {
 		mejoresCartas = pokerModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(7);
+			for (int i = 0; i < cartas.length; i++) {
+				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
+					mejoresCartas[4] = cartas[i];
+					return mejoresCartas;
+				}
+			}
 			return mejoresCartas;
 		}
 		mejoresCartas = fullModo3(cartas);
@@ -124,19 +131,46 @@ public class Logica {
 		mejoresCartas = trioModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(3);
+			boolean primero = true;
+			for (int i = 0; i < cartas.length; i++) {
+				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
+					if (primero) {
+						mejoresCartas[3] = cartas[i];
+						primero = false;
+					} else {
+						mejoresCartas[3] = cartas[i];
+						return mejoresCartas;
+					}
+				}
+			}
 			return mejoresCartas;
 		}
 		mejoresCartas = dobleParejaModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(2);
+			for (int i = 0; i < cartas.length; i++) {
+				if (cartas[i].getValor() != mejoresCartas[0].getValor()
+						&& cartas[i].getValor() != mejoresCartas[2].getValor()) {
+					mejoresCartas[4] = cartas[i];
+					return mejoresCartas;
+				}
+			}
 			return mejoresCartas;
 		}
 		mejoresCartas = parejaModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(1);
+			int cont = 2;
+			for (int i = 0; i < cartas.length; i++) {
+				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
+					mejoresCartas[cont] = cartas[i];
+					cont++;
+					if (cont == 5)
+						return mejoresCartas;
+				}
+			}
 			return mejoresCartas;
 		}
-		ordenador(cartas);
 		for (int i = 0; i < mejoresCartas.length; i++)
 			mejoresCartas[i] = cartas[i];
 		c.setPeso(0);

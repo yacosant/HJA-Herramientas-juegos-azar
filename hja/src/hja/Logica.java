@@ -143,11 +143,117 @@ public class Logica {
 		return mejoresCartas;
 	}
 
+	private Carta[] fullModo3(Carta[] cartas) {
+		ordenador(cartas);
+		Carta[] mejoresCartas = new Carta[5];
+		Carta[] mejoresCartasTrio = new Carta[3];
+		Carta[] mejoresCartasPareja = new Carta[2];
+		
+		mejoresCartasTrio = trioModo3(cartas);
+		if (!mejoresCartasTrio.equals(null)) {
+			for (int i = 0; i < cartas.length; i++)
+				if (mejoresCartasPareja[0].getValor() == cartas[i].getValor())
+					cartas[i] = null;
+			mejoresCartasPareja = parejaModo3(cartas);
+			if (!mejoresCartasPareja.equals(null)) {
+				mejoresCartas[0] = mejoresCartasTrio[0];
+				mejoresCartas[1] = mejoresCartasTrio[1];
+				mejoresCartas[2] = mejoresCartasTrio[2];
+				mejoresCartas[3] = mejoresCartasPareja[0];
+				mejoresCartas[4] = mejoresCartasPareja[1];
+				return mejoresCartas;
+				
+			}
+		}
+		return null;
+	}
+
+	private Carta[] dobleParejaModo3(Carta[] cartas) {
+		Carta[] mejoresCartas = new Carta[5];
+		boolean salir = true;
+		;
+		int cont = 0, i = 0, j;
+		while (i < cartas.length) {
+			j = i + 1;
+			salir = true;
+			while (j < cartas.length && salir) {
+				if (cartas[i].getValor() == cartas[j].getValor()) {
+					mejoresCartas[cont] = new Carta(cartas[i].getValor(), cartas[i].getColor());
+					mejoresCartas[cont + 1] = new Carta(cartas[j].getValor(), cartas[j].getColor());
+					cont += 2;
+					salir = false;
+					if (cont > 2)
+						return mejoresCartas;
+				}
+				j++;
+			}
+			i++;
+		}
+		return null;
+	}
+
+	private Carta[] colorModo3(Carta[] cartas) {
+		Carta[] mejoresCartas = new Carta[5];
+		int cont = 0;
+
+		while (cont < cartas.length - 1) {
+			if (cartas[cont].getColor() == cartas[cont + 1].getColor()) {
+				mejoresCartas[cont] = new Carta(cartas[cont].getValor(), cartas[cont].getColor());
+				cont++;
+			}
+			if (cont == 4) {
+				mejoresCartas[cont] = new Carta(cartas[cont + 1].getValor(), cartas[cont + 1].getColor());
+				return mejoresCartas;
+			}
+		}
+		return null;
+	}
+
+	private Carta[] escaleraModo3(Carta[] cartas) {
+		Carta[] mejoresCartas = new Carta[5];
+		ordenador(cartas); // Ordenamos las cartas
+		int cont = 0, cart = 0;
+
+		while (cont < cartas.length - 1) {
+			if (cartas[cont].getValor() + 1 == cartas[cont + 1].getValor()) {
+				mejoresCartas[cart] = new Carta(cartas[cont].getValor(), cartas[cont].getColor());
+				cart++;
+				if (mejoresCartas.length - 1 == cart) // si es el ultimo con el
+														// que
+					// coincidio se añade
+					mejoresCartas[cart] = new Carta(cartas[cont + 1].getValor(), cartas[cont + 1].getColor());
+			}
+			if (mejoresCartas[4].equals(null))
+				return mejoresCartas;
+			cont++;
+		}
+		return null;
+	}
+
+	private Carta[] trioModo3(Carta[] cartas) {
+		Carta[] mejoresCartas = new Carta[5];
+		int cont = 0;
+		for (int i = 0; i < cartas.length; i++) {
+			cont = 0;
+			for (int j = i + 1; j < cartas.length; j++) {
+				if (cartas[i].getValor() == cartas[j].getValor()) {
+					mejoresCartas[cont] = new Carta(cartas[i].getValor(), cartas[i].getColor());
+					cont++;
+					if (cont == 2) {
+						mejoresCartas[cont] = new Carta(cartas[j].getValor(), cartas[j].getColor());
+						return mejoresCartas;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	private Carta[] parejaModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		for (int i = 0; i < cartas.length; i++) {
 			for (int j = i + 1; j < cartas.length; j++) {
-				if (cartas[i].getValor() == cartas[j].getValor()){
+				if (cartas[i].getValor() == cartas[j].getValor()) {
 					mejoresCartas[0] = new Carta(cartas[i].getValor(), cartas[i].getColor());
 					mejoresCartas[1] = new Carta(cartas[j].getValor(), cartas[j].getColor());
 					return mejoresCartas;
@@ -166,7 +272,7 @@ public class Logica {
 				if (cartas[i].getValor() == cartas[j].getValor()) {
 					mejoresCartas[cont] = new Carta(cartas[i].getValor(), cartas[i].getColor());
 					cont++;
-					if (cont == 3) { //añadimos la ultima carta
+					if (cont == 3) { // añadimos la ultima carta
 						mejoresCartas[cont] = new Carta(cartas[j].getValor(), cartas[j].getColor());
 						return mejoresCartas;
 					}
@@ -179,19 +285,21 @@ public class Logica {
 	public Carta[] escaleraDeColorModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		ordenador(cartas); // Ordenamos las cartas
-		int cont = 0;
+		int cont = 0, cart = 0;
 
 		while (cont < cartas.length - 1) {
 			if (cartas[cont].getColor() == cartas[cont + 1].getColor()
 					&& cartas[cont].getValor() + 1 == cartas[cont + 1].getValor()) {
-				mejoresCartas[cont] = new Carta(cartas[cont].getValor(), cartas[cont].getColor());
-				cont++;
-				if (cartas.length == cont) // si es el ultimo con el que
-											// coincidio se añade
-					mejoresCartas[cont] = new Carta(cartas[cont].getValor(), cartas[cont].getColor());
+				mejoresCartas[cart] = new Carta(cartas[cont].getValor(), cartas[cont].getColor());
+				cart++;
+				if (mejoresCartas.length - 1 == cart) // si es el ultimo con el
+														// que
+					// coincidio se añade
+					mejoresCartas[cart] = new Carta(cartas[cont + 1].getValor(), cartas[cont + 1].getColor());
 			}
 			if (mejoresCartas[4].equals(null))
 				return mejoresCartas;
+			cont++;
 		}
 		return null;
 	}

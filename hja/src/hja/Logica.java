@@ -105,7 +105,7 @@ public class Logica {
 		mejoresCartas = pokerModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(7);
-			for (int i = 0; i < cartas.length; i++) {
+			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
 					mejoresCartas[4] = cartas[i];
 					return mejoresCartas;
@@ -132,7 +132,7 @@ public class Logica {
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(3);
 			boolean primero = true;
-			for (int i = 0; i < cartas.length; i++) {
+			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
 					if (primero) {
 						mejoresCartas[3] = cartas[i];
@@ -148,7 +148,7 @@ public class Logica {
 		mejoresCartas = dobleParejaModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(2);
-			for (int i = 0; i < cartas.length; i++) {
+			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()
 						&& cartas[i].getValor() != mejoresCartas[2].getValor()) {
 					mejoresCartas[4] = cartas[i];
@@ -161,7 +161,7 @@ public class Logica {
 		if (!mejoresCartas.equals(null)) {
 			c.setPeso(1);
 			int cont = 2;
-			for (int i = 0; i < cartas.length; i++) {
+			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
 					mejoresCartas[cont] = cartas[i];
 					cont++;
@@ -171,7 +171,7 @@ public class Logica {
 			}
 			return mejoresCartas;
 		}
-		for (int i = 0; i < mejoresCartas.length; i++)
+		for (int i = cartas.length - 1; i >= 0; i--)
 			mejoresCartas[i] = cartas[i];
 		c.setPeso(0);
 		return mejoresCartas;

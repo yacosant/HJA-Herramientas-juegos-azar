@@ -98,12 +98,12 @@ public class Logica {
 		Carta[] mejoresCartas = null;
 		ordenador(cartas);
 		mejoresCartas = escaleraDeColorModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(8);
 			return mejoresCartas;
 		}
 		mejoresCartas = pokerModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(7);
 			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
@@ -114,22 +114,22 @@ public class Logica {
 			return mejoresCartas;
 		}
 		mejoresCartas = fullModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(6);
 			return mejoresCartas;
 		}
 		mejoresCartas = colorModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(5);
 			return mejoresCartas;
 		}
 		mejoresCartas = escaleraModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(4);
 			return mejoresCartas;
 		}
 		mejoresCartas = trioModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(3);
 			boolean primero = true;
 			for (int i = cartas.length - 1; i >= 0; i--) {
@@ -146,7 +146,7 @@ public class Logica {
 			return mejoresCartas;
 		}
 		mejoresCartas = dobleParejaModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(2);
 			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()
@@ -158,7 +158,7 @@ public class Logica {
 			return mejoresCartas;
 		}
 		mejoresCartas = parejaModo3(cartas);
-		if (!mejoresCartas.equals(null)) {
+		if (mejoresCartas != null) {
 			jugador.setPeso(1);
 			int cont = 2;
 			for (int i = cartas.length - 1; i >= 0; i--) {
@@ -171,8 +171,10 @@ public class Logica {
 			}
 			return mejoresCartas;
 		}
+		
 		for (int i = cartas.length - 1; i >= 0; i--)
 			mejoresCartas[i] = cartas[i];
+		
 		jugador.setPeso(0);
 		return mejoresCartas;
 	}

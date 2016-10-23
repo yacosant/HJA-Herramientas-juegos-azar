@@ -1,7 +1,7 @@
 package hja;
 
 import hja.Carta;
-import logica.Modo3;
+
 
 import java.util.ArrayList;
 
@@ -93,18 +93,18 @@ public class Logica {
 
 	}
 	
-	public Carta[] comprobarModo3(boolean proyect, Carta[] cartas) {
-		Modo3 c = new Modo3();
+	public Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
+		
 		Carta[] mejoresCartas = null;
 		ordenador(cartas);
 		mejoresCartas = escaleraDeColorModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(8);
+			jugador.setPeso(8);
 			return mejoresCartas;
 		}
 		mejoresCartas = pokerModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(7);
+			jugador.setPeso(7);
 			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
 					mejoresCartas[4] = cartas[i];
@@ -115,22 +115,22 @@ public class Logica {
 		}
 		mejoresCartas = fullModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(6);
+			jugador.setPeso(6);
 			return mejoresCartas;
 		}
 		mejoresCartas = colorModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(5);
+			jugador.setPeso(5);
 			return mejoresCartas;
 		}
 		mejoresCartas = escaleraModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(4);
+			jugador.setPeso(4);
 			return mejoresCartas;
 		}
 		mejoresCartas = trioModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(3);
+			jugador.setPeso(3);
 			boolean primero = true;
 			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
@@ -147,7 +147,7 @@ public class Logica {
 		}
 		mejoresCartas = dobleParejaModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(2);
+			jugador.setPeso(2);
 			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()
 						&& cartas[i].getValor() != mejoresCartas[2].getValor()) {
@@ -159,7 +159,7 @@ public class Logica {
 		}
 		mejoresCartas = parejaModo3(cartas);
 		if (!mejoresCartas.equals(null)) {
-			c.setPeso(1);
+			jugador.setPeso(1);
 			int cont = 2;
 			for (int i = cartas.length - 1; i >= 0; i--) {
 				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
@@ -173,7 +173,7 @@ public class Logica {
 		}
 		for (int i = cartas.length - 1; i >= 0; i--)
 			mejoresCartas[i] = cartas[i];
-		c.setPeso(0);
+		jugador.setPeso(0);
 		return mejoresCartas;
 	}
 
@@ -242,7 +242,7 @@ public class Logica {
 		return null;
 	}
 
-	private Carta[] escaleraModo3(Carta[] cartas) {
+	/*private Carta[] escaleraModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		ordenador(cartas); // Ordenamos las cartas
 		int cont = 0, cart = 0;
@@ -256,13 +256,71 @@ public class Logica {
 					// coincidio se añade
 					mejoresCartas[cart] = new Carta(cartas[cont + 1].getValor(), cartas[cont + 1].getColor());
 			}
-			if (mejoresCartas[4].equals(null))
+			if (mejoresCartas[4] == (null))
 				return mejoresCartas;
 			cont++;
 		}
 		return null;
-	}
+	}*/
+	
+	private Carta[] escaleraModo3(Carta[] cartas){
+		Carta[] mejoresCartas = new Carta[5];
 
+		int cont = 0, cart = 0;
+		boolean esc = false,escA = false;
+
+		while (cont < cartas.length-1 && !escA) {
+
+			if (cartas[cont].getValor() + 1 == cartas[cont + 1].getValor()){
+				if(!esc){
+					mejoresCartas[cart] = cartas[cont];
+					if(cart<5)
+						cart++;
+				}else{//Si ha habido escalera pero puede ser mayor
+					for(int i = 0;i<mejoresCartas.length-1;i++)
+						mejoresCartas[i] = mejoresCartas[i+1];
+
+					mejoresCartas[mejoresCartas.length-1] = cartas[cont];
+				}
+			}else{//penultima pos no coincide con ult pero hacia escalera
+				if(cart == 5)
+					for(int i = 0;i<mejoresCartas.length-1;i++)
+						mejoresCartas[i] = mejoresCartas[i+1];
+				mejoresCartas[cart-1] = cartas[cont];
+				cart = 0;
+			}
+			cont++;
+
+			//Unico caso de escalera 1,2,3,4,5
+			if(cart == 3){
+				if(cartas[cont+1].getValor() != 6 && cartas[cont].getValor() == 5 && cartas[cartas.length-1].getValor() == 14){
+					mejoresCartas[cart] = cartas[cont];
+					mejoresCartas[cart+1] = cartas[cartas.length-1];
+					esc = true;
+					escA = true;
+				}
+			}else if(cart == 5)
+				esc = true;
+		}
+		//ult pos que no se entra en el bucle
+		if(!escA && cartas[cont].getValor()  == cartas[cont -1].getValor()+1){
+			if(esc == true){
+				for(int i = 0;i<mejoresCartas.length-1;i++)
+					mejoresCartas[i] = mejoresCartas[i+1];
+				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
+			}else{
+				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
+				esc = true;
+			}
+		}
+
+		if(!esc)
+			mejoresCartas = null;
+
+		return mejoresCartas;
+
+	}
+	
 	private Carta[] trioModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		int cont = 0;
@@ -315,7 +373,7 @@ public class Logica {
 		return null;
 	}
 
-	public Carta[] escaleraDeColorModo3(Carta[] cartas) {
+	/*public Carta[] escaleraDeColorModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		ordenador(cartas); // Ordenamos las cartas
 		int cont = 0, cart = 0;
@@ -330,11 +388,72 @@ public class Logica {
 					// coincidio se añade
 					mejoresCartas[cart] = new Carta(cartas[cont + 1].getValor(), cartas[cont + 1].getColor());
 			}
-			if (mejoresCartas[4].equals(null))
+			if (mejoresCartas[4] == null)
 				return mejoresCartas;
 			cont++;
 		}
 		return null;
+	}*/
+	
+	public static Carta[] escaleraDeColorModo3(Carta[] cartas) {
+		Carta[] mejoresCartas = new Carta[5];
+
+		int cont = 0, cart = 0;
+		boolean esc = false,escA = false;
+
+		while (cont < cartas.length-1 && !escA) {
+
+			if (cartas[cont].getColor() == cartas[cont + 1].getColor()
+					&& cartas[cont].getValor() + 1 == cartas[cont + 1].getValor()){
+				if(!esc){
+					mejoresCartas[cart] = cartas[cont];
+					if(cart<5)
+						cart++;
+				}else{//Si ha habido escalera pero puede ser mayor
+					for(int i = 0;i<mejoresCartas.length-1;i++)
+						mejoresCartas[i] = mejoresCartas[i+1];
+
+					mejoresCartas[mejoresCartas.length-1] = cartas[cont];
+				}
+			}else{//penultima pos no coincide con ult pero hacia escalera
+				if(cart == 5)
+					for(int i = 0;i<mejoresCartas.length-1;i++)
+						mejoresCartas[i] = mejoresCartas[i+1];
+				mejoresCartas[cart-1] = cartas[cont];
+				cart = 0;
+			}
+			cont++;
+
+			//Unico caso de escalera 1,2,3,4,5
+			if(cart == 3){
+				if(cartas[cont+1].getValor() != 6 && cartas[cont].getValor() == 5 && cartas[cartas.length-1].getValor() == 14 &&
+						mejoresCartas[2].getColor() == cartas[cont].getColor() && mejoresCartas[2].getColor() == cartas[cartas.length-1].getColor()){
+					mejoresCartas[cart] = cartas[cont];
+					mejoresCartas[cart+1] = cartas[cartas.length-1];
+					esc = true;
+					escA = true;
+				}
+			}else if(cart == 5)
+				esc = true;
+		}
+		//ult pos que no se entra en el bucle
+		if(!escA && cartas[cont].getColor() == cartas[cont -1].getColor()
+				&& cartas[cont].getValor()  == cartas[cont -1].getValor()+1){
+			if(esc == true){
+				for(int i = 0;i<mejoresCartas.length-1;i++)
+					mejoresCartas[i] = mejoresCartas[i+1];
+				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
+			}else{
+				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
+				esc = true;
+			}
+		}
+
+		if(!esc)
+			mejoresCartas = null;
+
+		return mejoresCartas;
+
 	}
 
 	/**
@@ -785,18 +904,18 @@ public class Logica {
 	public void comprobarModo3(ArrayList<Carta[]> cartas) {
 		
 		for(int i=0; i<cartas.size(); i++){
-			Modo3 c;
-			c = darPesoJugadasModo3(cartas.get(i));
+			Modo3 c = new Modo3();
 			c.setJugador(i);
-			c.setCartas(manoJugador(cartas.get(i)));
+			c.setCartas(comprobarModo3(cartas.get(i), c));
 			jugadores.add(c);
 		}
 
 	}
 	
-	public ArrayList<Modo3> ordenarManos() {
+	private ArrayList<Modo3> ordenarManos() {
+		
 		int cont,peso = 8,nPesos,posMejor;
-		boolean empate = false;
+	
 		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
 		while(peso >= 0){
 			empatados = new ArrayList<Modo3>();
@@ -832,8 +951,8 @@ public class Logica {
 
 	}
 	
-	public int desempateManos(ArrayList<Modo3> jugadores){
-		ArrayList<Carta> cartas =  new ArrayList<Carta>();
+	private int desempateManos(ArrayList<Modo3> jugadores){
+	
 		int posMano=-1;
 
 		for(int i=0; i<jugadores.size()-1;i++){
@@ -886,7 +1005,7 @@ public class Logica {
 		return posMano;
 	}
 
-	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
+	/*private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
 
 		if (escaleraDeColor(cartas))
@@ -918,41 +1037,32 @@ public class Logica {
 
 		return c;
 	}
+	*/
+
 	
-	private ArrayList<Carta> manoJugador(Carta[] cartas){
-
-		ArrayList<Carta> a = new ArrayList<Carta>();
-
-		for(int i =0;i<cartas.length;i++)
-			a.add(cartas[i]);
-
-		return a;
-
-	}
-	
-	public int valorMaxMano(ArrayList<Carta> cartas){ //Te devuelve el valor de la carta mas alta de una mano
+	private int valorMaxMano(Carta[] cartas){ //Te devuelve el valor de la carta mas alta de una mano
 
 		int max=0;
 
-		for (int i = 0; i < cartas.size(); i++) {
+		for (int i = 0; i < cartas.length; i++) {
 			max=0;
-			if (cartas.get(i).getValor()> max) {
-				max = cartas.get(i).getValor();
+			if (cartas[i].getValor()> max) {
+				max = cartas[i].getValor();
 			}
 		}
 		return max;
 	}
-	
-	private static int desempateCartaRep(ArrayList<Carta> cartas,int anterior){
+
+	private int desempateCartaRep(Carta[] cartas,int anterior){
 		int valor=0,i=0,j;
 		boolean repetido = false;
 
-		while(i < cartas.size() && !repetido){
-			valor = cartas.get(i).getValor();
+		while(i < cartas.length && !repetido){
+			valor = cartas[i].getValor();
 			if(valor != anterior){
 				j=i+1;
-				while(j<cartas.size() && !repetido){
-					if(valor == cartas.get(j).getValor())
+				while(j<cartas.length && !repetido){
+					if(valor == cartas[j].getValor())
 						repetido = true;
 
 					j++;

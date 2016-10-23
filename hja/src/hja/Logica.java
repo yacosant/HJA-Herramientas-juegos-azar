@@ -686,15 +686,18 @@ public class Logica {
 	}
 	
 	public int valorMaxMano(ArrayList<Carta> cartas){ //Te devuelve el valor de la carta mas alta de una mano
-
+		
 		int max=0;
+	    for (int i = 0; i < cartas.size(); i++) {
+	    		if (cartas.get(i).getValor()> max) {
+	    			if(cartas.get(i).getValor() !=14)
+	    				max = cartas.get(i).getValor();
+	    			else
+	    				if(cartas.get(i-1).getValor() == 13)
+	    					max = cartas.get(i).getValor();
 
-		for (int i = 0; i < cartas.size(); i++) {
-			max=0;
-			if (cartas.get(i).getValor()> max) {
-				max = cartas.get(i).getValor();
-			}
-		}
+	        }
+	    }
 		return max;
 	}
 	

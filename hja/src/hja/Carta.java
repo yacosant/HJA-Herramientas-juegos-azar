@@ -21,5 +21,10 @@ public class Carta {
 	public int getValor() {
 		return valor;
 	}
+	
+	public int setValor(int v){
+		valor=v;
+		return valor;
+	}
 
 }

@@ -119,7 +119,7 @@ public class MejorJugada {
 		} catch (FileNotFoundException e) {
 			System.out.println("Error en la lectura del fichero");
 		}
-
+                cartas.setSize(cartasMano.size()); 
 		return cartas;
 
 	}

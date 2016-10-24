@@ -27,13 +27,15 @@ public class CartasModo2 {
 	}
 
 
-	public ArrayList<Carta[]> juntar(){ //Metodo para juntar el arrayList mano y arrayList mesa
+	public ArrayList<Carta[]> juntar(int modo){ //Metodo para juntar el arrayList mano y arrayList mesa
 		ArrayList<Carta[]> cartas = new ArrayList<Carta[]>();
+                Carta[] c=null;
 		int i=0;
                 for(int pos=0; pos<size; pos++){
 
-			Carta[] c = new Carta[5]; //Creamos un array de Carta con el tama�o de la mesa mas 2 (las cartas de la mano)
-
+			if(modo==2) c= new Carta[5]; //Creamos un array de Carta con el tama�o de la mesa mas 2 (las cartas de la mano)
+                        else if(modo==3)c = new Carta[7];
+                        
 			for (i=0; i<2; i++){ //Cogemos las cartas de la mano
 				c[i]=(cartasMano.get(pos)[i]);
 			}

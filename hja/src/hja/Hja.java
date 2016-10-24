@@ -173,7 +173,7 @@ public class Hja {
 			CartasModo2 c = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
 			c= ar.cargarModo2(txtEntrada);
 			if(c.getSize()==5) proyecto= false;
-			manos= c.juntar();
+			manos= c.juntar(2);
 
 			while (cont < manos.size()) {
 				String respuesta = log.comprobar(proyecto,manos.get(cont));
@@ -189,9 +189,9 @@ public class Hja {
 			System.out.println("le has metido un 3");
 			CartasModo2 c3 = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
 			c3= ar.cargarModo3(txtEntrada);
-			manos = c3.juntar();
-			log.comprobarModo3(manos);
-
+			manos = c3.juntar(3);
+			String salida= log.comprobarModo3(manos);
+                        ar.guardar(txtSalida, salida, 0);
 			break;
 
 		case OMAHA:

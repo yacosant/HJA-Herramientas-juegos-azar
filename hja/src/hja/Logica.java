@@ -899,7 +899,8 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	}
 
 	
-	public static ArrayList<Modo3> comprobarModo3(ArrayList<Carta[]> cartas) {
+	//public ArrayList<Modo3> comprobarModo3(ArrayList<Carta[]> cartas) {
+        public String comprobarModo3(ArrayList<Carta[]> cartas) {
 		ArrayList<Modo3> jugadores = new ArrayList<Modo3>();
 		
 		for(int i=0; i<cartas.size(); i++){
@@ -918,7 +919,8 @@ private static Carta[] colorModo3(Carta[] cartas) {
 		
 		
 		
-		return ordenarManos(jugadores);
+            //return ordenarManos(jugadores);
+            return salida(ordenarManos(jugadores));
 
 	}
 	
@@ -927,15 +929,9 @@ private static Carta[] colorModo3(Carta[] cartas) {
             
             for(int i=0; i<jugadores.size();i++){
                 salida+= "J" + Integer.toString(i)+ ": " + cartasString(jugadores.get(i).getCartas());
-                salida+= manoString(jugadores.get(i).getPeso());
+                salida+= " (" + manoString(jugadores.get(i).getPeso()) + ")";
+                salida+="\n";
             }
-            /*
-            J3: 6c7c8c9hTh (Straight)
-            J1: AhAcKsTh9h (Pair of Aces)
-            J4: 4sKcKsTh9h (Pair of Kings)
-            J2: JsJhKsTh9h (Pair of Jacks)
-            */
-            
             return salida;
         }
         
@@ -947,23 +943,18 @@ private static Carta[] colorModo3(Carta[] cartas) {
             return c;
         }
         
-
         private String manoString(int peso){
            String c="";
-            if(peso==14) c="";
-            else if(peso==12)c="";
-            else if(peso==11)c="";
-            else if(peso==10)c="";
-            else if(peso==9)c="";
-            else if(peso==8)c="";
-            else if(peso==7)c="";
-            else if(peso==6)c="";
-            else if(peso==5)c="";
-            else if(peso==4)c="";
-            else if(peso==3)c="";
-            else if(peso==2)c="";
-            else if(peso==1)c="";
-            else if(peso==0)c="";
+            if(peso==8) c="Straight Flush";
+            else if(peso==7)c="Poker";
+            else if(peso==6)c="Full";
+            else if(peso==5)c="Flush";
+            else if(peso==4)c="Straight";
+            else if(peso==3)c="Three of a kind";
+            else if(peso==2)c="Two Pair";
+            else if(peso==1)c="Pair";
+            else if(peso==0)c="High Card";
+           
             return c;
         }
 

@@ -1,13 +1,7 @@
 package hja;
 
-import hja.Carta;
-import hja.CartasModo2;
-import hja.Logica;
-import hja.MejorJugada;
-
 
 import java.util.ArrayList;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -208,23 +202,5 @@ public class Hja {
 	public static void main(String[] args) {
 		manos  = new ArrayList<Carta[]>();
 		parseArgs(args);
-
-
-
-		//COMENTO ESTO PARA VER SI PARSEA BIEN
-
-		//		// leemos archivo
-		//		MejorJugada ar = new MejorJugada();
-		//		Logica log = new Logica();
-		//		//Carta[][] manos  = new Carta[3][5];
-		//ArrayList<Carta[]> manos  = new ArrayList<Carta[]>();
-		//		manos = ar.cargar("prueba.txt");
-		//		int cont = 0;
-		//		while (cont < manos.size()) {
-		//			String respuesta = log.comprobar(manos.get(cont));
-		//			System.out.println(respuesta);
-		//			cont++;
-		//		}
-		//	}
 	}
 }

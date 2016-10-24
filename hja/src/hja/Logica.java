@@ -903,10 +903,6 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		return carta;
 	}
 
-	public void comprobarModo3() {
-
-
-	}
 	
 	public void comprobarModo3(ArrayList<Carta[]> cartas) {
 		

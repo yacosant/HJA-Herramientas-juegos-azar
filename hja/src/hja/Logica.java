@@ -899,7 +899,7 @@ public class Logica {
 	}
 
 	
-	public static ArrayList<Modo3> comprobarModo3(ArrayList<Carta[]> cartas) {
+	public ArrayList<Modo3> comprobarModo3(ArrayList<Carta[]> cartas) {
 		ArrayList<Modo3> jugadores = new ArrayList<Modo3>();
 		
 		for(int i=0; i<cartas.size(); i++){
@@ -916,14 +916,14 @@ public class Logica {
 			jugadores.add(c);
 		}
 		
-		
-		
 		return ordenarManos(jugadores);
 
 	}
 	
+        
+        
 	public ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
-		int cont,peso = 8,nPesos,posMejor;
+		int cont,peso = 8,nPesos,posMejor=0;
 
 		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
 		while(peso >= 0){

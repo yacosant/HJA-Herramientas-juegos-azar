@@ -155,7 +155,7 @@ public class Hja {
 		switch ( selectedGame ) {
 
 		case CincoCartas: //Apartado 1
-			System.out.println("le has metido un 1");
+			System.out.println("Modo 1");
 			
 			manos = ar.cargar(txtEntrada);
 			while (cont < manos.size()) {
@@ -169,7 +169,7 @@ public class Hja {
 			break;
 
 		case DosCartas: //Apartado 2
-			System.out.println("le has metido un 2");
+			System.out.println("Modo 2");
 			CartasModo2 c = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
 			c= ar.cargarModo2(txtEntrada);
 			if(c.getSize()==5) proyecto= false;
@@ -186,16 +186,19 @@ public class Hja {
 			break;
 
 		case NJugadores: //Apartado 3
-			System.out.println("le has metido un 3");
+			System.out.println("Modo 3");
 			CartasModo2 c3 = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
 			c3= ar.cargarModo3(txtEntrada);
 			manos = c3.juntar();
-			log.comprobarModo3(manos);
-
+                        
+                        for(int i=0; i<manos.size() ; i++){
+                            log.comprobarModo3(manos);
+                            ar.guardarModo3(txtSalida,);
+                        }
 			break;
 
 		case OMAHA:
-			System.out.println("le has metido un 4");
+			System.out.println("Modo 4");
 		}         
 	}
 

@@ -923,7 +923,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 	}
 	
 	public ArrayList<Modo3> ordenarManos() {
-		int cont,peso = 8,nPesos,posMejor;
+		int cont,peso = 8,nPesos,posMejor=0;
 		boolean empate = false;
 		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
 		while(peso >= 0){
@@ -938,8 +938,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 					cont++;
 				}
 			
-			if(nPesos > 1);
-				posMejor = desempateManos(empatados);//desEmpate de damaso
+			if(nPesos > 1)	posMejor = desempateManos(empatados);//desEmpate de damaso
 
 			
 			if(posMejor == -1)//Ha habido empate,no importa el orden

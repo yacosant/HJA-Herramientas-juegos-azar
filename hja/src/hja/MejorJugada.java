@@ -148,12 +148,12 @@ public class MejorJugada {
 				tamanyo = jug * 7; 
 				mano = new Carta[2];
 
-
+                                i++;
 				while(i<tamanyo){
 
 					i += 3; //Leemos el Jx
 
-					while(i<2){ //Leemos las cartas que tiene cada jugador en su mano
+					while(cont<2){ //Leemos las cartas que tiene cada jugador en su mano
 						valor = conversion(bf.charAt(i));
 						mano[cont]= new Carta(valor, bf.charAt(i + 1));
 						i += 2;
@@ -165,7 +165,7 @@ public class MejorJugada {
 				i++; 
 				mesa = new Carta[5];
 
-				tamanyo+=10;
+				tamanyo+=12;
 
 				while (i < tamanyo) { //Leemos las cartas de la mesa
 					valor= conversion(bf.charAt(i));
@@ -174,7 +174,7 @@ public class MejorJugada {
 					cont++;
 				}
 
-				for(int j=0; j<5; j++) //Añadimos todas las cartas de la mesa
+				for(int j=0; j<cartasMano.size(); j++) //Aï¿½adimos todas las cartas de la mesa
 					cartasMesa.add(mesa);
 
 			}

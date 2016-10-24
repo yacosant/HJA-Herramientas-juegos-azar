@@ -156,13 +156,13 @@ public class Hja {
 		if (selectedGame == null) {
 			throw new ParseException("No existe ese juego");
 		}
-
+                ar = new MejorJugada();
 		//Switch de los juegos que hay 
 		switch ( selectedGame ) {
 
 		case CincoCartas: //Apartado 1
 			System.out.println("le has metido un 1");
-			ar = new MejorJugada();
+			
 			manos = ar.cargar(txtEntrada);
 			while (cont < manos.size()) {
 				String respuesta = log.comprobar(true,manos.get(cont));
@@ -177,7 +177,6 @@ public class Hja {
 		case DosCartas: //Apartado 2
 			System.out.println("le has metido un 2");
 			CartasModo2 c = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
-			ar = new MejorJugada(); 
 			c= ar.cargarModo2(txtEntrada);
 			if(c.getSize()==5) proyecto= false;
 			manos= c.juntar();
@@ -195,7 +194,6 @@ public class Hja {
 		case NJugadores: //Apartado 3
 			System.out.println("le has metido un 3");
 			CartasModo2 c3 = new CartasModo2(new ArrayList<Carta[]>(),new ArrayList<Carta[]>());
-			ar = new MejorJugada(); 
 			c3= ar.cargarModo3(txtEntrada);
 			manos = c3.juntar();
 			log.comprobarModo3(manos);

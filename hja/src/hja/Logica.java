@@ -924,8 +924,8 @@ public class Logica {
             String salida="";
             
             for(int i=0; i<jugadores.size();i++){
-                salida+= "J" + Integer.toString(i)+ ": " + 
-                        jugadores.get(i).getCartas();
+                salida+= "J" + Integer.toString(i)+ ": " + cartasString(jugadores.get(i).getCartas());
+                salida+= manoString(jugadores.get(i).getPeso());
             }
             /*
             J3: 6c7c8c9hTh (Straight)
@@ -937,12 +937,16 @@ public class Logica {
             return salida;
         }
         
-        private String cartas(ArrayList<Carta> cartas){
+        private String cartasString(ArrayList<Carta> cartas){
             String c="";
             for(int i=0; i<cartas.size(); i++){
                 c+= cartas.get(i).getValor() + cartas.get(i).getColor();
             }
             return c;
+        }
+        
+        private String manoString(int peso){
+       
         }
         
 	public ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {

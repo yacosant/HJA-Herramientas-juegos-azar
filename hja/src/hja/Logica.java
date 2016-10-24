@@ -16,7 +16,7 @@ public class Logica {
 	private boolean proyectoEscalera = false;
 	private boolean proyectoEscaleraC = false;
 	private boolean gutshot = false;
-
+//
 
 	/**
 	 * Recorre el array de cartas para comprobar que jugada tiene

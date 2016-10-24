@@ -920,7 +920,30 @@ public class Logica {
 
 	}
 	
+        public String salida(ArrayList<Modo3> jugadores){
+            String salida="";
+            
+            for(int i=0; i<jugadores.size();i++){
+                salida+= "J" + Integer.toString(i)+ ": " + 
+                        jugadores.get(i).getCartas();
+            }
+            /*
+            J3: 6c7c8c9hTh (Straight)
+            J1: AhAcKsTh9h (Pair of Aces)
+            J4: 4sKcKsTh9h (Pair of Kings)
+            J2: JsJhKsTh9h (Pair of Jacks)
+            */
+            
+            return salida;
+        }
         
+        private String cartas(ArrayList<Carta> cartas){
+            String c="";
+            for(int i=0; i<cartas.size(); i++){
+                c+= cartas.get(i).getValor() + cartas.get(i).getColor();
+            }
+            return c;
+        }
         
 	public ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
 		int cont,peso = 8,nPesos,posMejor=0;

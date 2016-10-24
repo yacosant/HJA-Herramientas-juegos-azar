@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @author YVCX
  */
 public class Modo3 {
-	private ArrayList<Carta> cartas;
+	private Carta[] cartas;
 	private int peso;
 	private int jugador;
 
-	public ArrayList<Carta> getCartas() {
+	public Carta[] getCartas() {
 		return cartas;
 	}
 
@@ -24,7 +24,7 @@ public class Modo3 {
 		return peso;
 	}
 
-	public void setCartas(ArrayList<Carta> cartas) {
+	public void setCartas(Carta[] cartas) {
 		this.cartas = cartas;
 	}
 

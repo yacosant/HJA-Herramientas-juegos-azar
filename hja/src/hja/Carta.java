@@ -22,9 +22,8 @@ public class Carta {
 		return valor;
 	}
 	
-	public int setValor(int v){
+	public void setValor(int v){
 		valor=v;
-		return valor;
 	}
 
 }

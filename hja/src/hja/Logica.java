@@ -92,7 +92,7 @@ public class Logica {
 
 	}
 	
-	public Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
+public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		
 		Carta[] mejoresCartas = null;
 		ordenador(cartas);
@@ -174,14 +174,15 @@ public class Logica {
 	}
 
 
+
 	private static Carta[] cartaAltaModo3(Carta[] cartas){
 		Carta[] mejoresCartas = new Carta[5];
 		boolean salir=false;
 		int j=1;
-		mejoresCartas[0] = new Carta (cartas[cartas.length-1].getValor(), cartas[cartas.length-1].getColor());
+		mejoresCartas[0] = cartas[cartas.lenght-1]);
 		
 			for (int i = cartas.length-2; i >0 && !salir; i--) {
-					mejoresCartas[j] = new Carta (cartas[i].getValor(), cartas[i].getColor());
+					mejoresCartas[j] = cartas[i];
 					j++;
 					if(j==5)
 					salir=true;
@@ -191,7 +192,7 @@ public class Logica {
 	}
 	
 	private static Carta[] fullModo3(Carta[] cartas) {
-		ordenador(cartas);
+
 		Carta[] mejoresCartas = new Carta[5];
 		Carta[] mejoresCartasTrio = new Carta[3];
 		Carta[] mejoresCartasPareja = new Carta[2];
@@ -199,17 +200,22 @@ public class Logica {
 		
 		mejoresCartasTrio = trioModo3(cartas);
 		if (mejoresCartasTrio != null) {
-
+			
+			int valor = mejoresCartasTrio[0].getValor();
+			
 			for (int i = 0; i < cartas.length; i++){
-				if (mejoresCartasTrio[0].getValor() == cartas[i].getValor()){
-					guardarValor=cartas[i].getValor();
+				if ( valor == cartas[i].getValor()){
 					cartas[i].setValor(-1);
 				}
 			}
 			
 			mejoresCartasPareja = parejaModo3(cartas);
-			if (mejoresCartasPareja != null && mejoresCartasPareja[0].getValor() != -1 ) {
-
+			if (mejoresCartasPareja != null) {
+					
+				for(int i=0;i<mejoresCartasTrio.length-2;i++)
+					if(mejoresCartasTrio[i].getValor()==-1)
+						mejoresCartasTrio[i].setValor(valor);
+					
 					mejoresCartas[0] = mejoresCartasTrio[0];
 					mejoresCartas[1] = mejoresCartasTrio[1];
 					mejoresCartas[2] = mejoresCartasTrio[2];
@@ -227,17 +233,18 @@ public class Logica {
 		return null;
 	}
 	
+	
 	private static Carta[] trioModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
-		int cont = 0;
-		for (int i = 0; i < cartas.length; i++) {
+		int cont;
+		for (int i = cartas.length-1; i > 0 ; i--) {
 			cont = 0;
-			for (int j = i + 1; j < cartas.length; j++) {
+			for (int j = i - 1; j >= 0; j--) {
 				if (cartas[i].getValor() == cartas[j].getValor()) {
-					mejoresCartas[cont] = new Carta(cartas[i].getValor(), cartas[i].getColor());
+					mejoresCartas[cont] = cartas[j];
 					cont++;
 					if (cont == 2) {
-						mejoresCartas[cont] = new Carta(cartas[j].getValor(), cartas[j].getColor());
+						mejoresCartas[cont] = cartas[i];
 						return mejoresCartas;
 					}
 				}
@@ -246,7 +253,8 @@ public class Logica {
 		return null;
 	}
 	
-	private Carta[] escaleraModo3(Carta[] cartas){
+	
+	private static Carta[] escaleraModo3(Carta[] cartas){
 		Carta[] mejoresCartas = new Carta[5];
 
 		int cont = 0, cart = 0;
@@ -293,7 +301,7 @@ public class Logica {
 				for(int i = 0;i<mejoresCartas.length-1;i++)
 					mejoresCartas[i] = mejoresCartas[i+1];
 				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
-			}else{
+			}else if(cart == 4){
 				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
 				esc = true;
 			}
@@ -305,6 +313,7 @@ public class Logica {
 		return mejoresCartas;
 
 	}
+	
 	
 	public static Carta[] escaleraDeColorModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
@@ -355,7 +364,7 @@ public class Logica {
 				for(int i = 0;i<mejoresCartas.length-1;i++)
 					mejoresCartas[i] = mejoresCartas[i+1];
 				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
-			}else if(!esc){
+			}else if(cart == 4){
 				mejoresCartas[mejoresCartas.length-1] = cartas[cont];
 				esc = true;
 			}
@@ -375,10 +384,10 @@ public class Logica {
 			cont = 0;
 			for (int j = i + 1; j < cartas.length; j++) {
 				if (cartas[i].getValor() == cartas[j].getValor()) {
-					mejoresCartas[cont] = new Carta(cartas[i].getValor(), cartas[i].getColor());
+					mejoresCartas[cont] = cartas[i];
 					cont++;
 					if (cont == 3) { // añadimos la ultima carta
-						mejoresCartas[cont] = new Carta(cartas[j].getValor(), cartas[j].getColor());
+						mejoresCartas[cont] = cartas[j];
 						return mejoresCartas;
 					}
 				}
@@ -387,14 +396,14 @@ public class Logica {
 		return null;
 	}
 
-	private Carta[] dobleParejaModo3(Carta[] cartas) {
+	private static Carta[] dobleParejaModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		boolean salir = true;
-		int cont = 0, i = 0, j;
-		while (i < cartas.length) {
-			j = i + 1;
+		int cont = 0, i = cartas.length-1, j;
+		while (i > 0) {
+			j = i - 1;
 			salir = true;
-			while (j < cartas.length && salir) {
+			while (j >= 0 && salir) {
 				if (cartas[i].getValor() == cartas[j].getValor()) {
 					mejoresCartas[cont] = cartas[i];
 					mejoresCartas[cont + 1] = cartas[j];
@@ -413,14 +422,14 @@ public class Logica {
 						return mejoresCartas;
 					}
 				}
-				j++;
+				j--;
 			}
-			i++;
+			i--;
 		}
 		return null;
 	}
 
-	private Carta[] colorModo3(Carta[] cartas) {
+	private static Carta[] colorModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		int cont = cartas.length - 1,color = 0,j;
 		boolean col = false;
@@ -442,7 +451,8 @@ public class Logica {
 			color = 0;
 			cont--;
 		}
-		return null;	}
+		return null;	
+	}
 
 	//Metodos para ver que jugada tienes 
 
@@ -545,11 +555,11 @@ public class Logica {
 
 	private static Carta[] parejaModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
-		for (int i = 0; i < cartas.length; i++) {
+		for (int i = 0; i < cartas.length-1; i++) {
 			for (int j = i + 1; j < cartas.length; j++) {
-				if (cartas[i].getValor() == cartas[j].getValor()) {
-					mejoresCartas[0] = new Carta(cartas[i].getValor(), cartas[i].getColor());
-					mejoresCartas[1] = new Carta(cartas[j].getValor(), cartas[j].getColor());
+				if (cartas[i].getValor() == cartas[j].getValor() && cartas[i].getValor() != -1) {
+					mejoresCartas[0] = cartas[i];
+					mejoresCartas[1] = cartas[j];
 
 					return mejoresCartas;
 				}
@@ -902,9 +912,8 @@ public class Logica {
 		
 		for(int i=0; i<cartas.size(); i++){
 			Modo3 c;
-			c = darPesoJugadasModo3(cartas.get(i));
 			c.setJugador(i);
-			c.setCartas(manoJugador(cartas.get(i)));
+			c.setCartas(comprobarModo3(cartas,c));
 			jugadores.add(c);
 		}
 

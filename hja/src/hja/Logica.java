@@ -179,7 +179,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		Carta[] mejoresCartas = new Carta[5];
 		boolean salir=false;
 		int j=1;
-		mejoresCartas[0] = cartas[cartas.lenght-1]);
+		mejoresCartas[0] = cartas[cartas.length-1];
 		
 			for (int i = cartas.length-2; i >0 && !salir; i--) {
 					mejoresCartas[j] = cartas[i];
@@ -1093,99 +1093,4 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 
 		return valor;
 	}
-
-	// A PARTIR DE AQUI LAS MEJORAS HECHAS POR DAMASO A LO DE JONI.
-	//PONGO ESTO XQ EL GITHUB Y LO DE JONI NO LO PUEDO VER PERO ME HA DICHO EDU QUE ESTA AQUI
-	//POR SI SALEN LOS METODOS ESTOS DOS VECES QUEDAOS DESDE AQUI HACIA DELANTE.
-	/*
-public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
-		
-		Carta[] mejoresCartas = new Carta[5];
-		ordenador(cartas);
-//		mejoresCartas = escaleraDeColorModo3(cartas);
-//		
-//		if (mejoresCartas != null) {
-//			jugador.setPeso(8);
-//			return mejoresCartas;
-//		}
-//		
-		mejoresCartas = pokerModo3(cartas);
-		if (mejoresCartas != null) {
-			jugador.setPeso(7);
-			for (int i = cartas.length - 1; i >= 0; i--) {
-				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
-					mejoresCartas[4] = cartas[i];
-					return mejoresCartas;
-				}
-			}
-			return mejoresCartas;
-		}
-		mejoresCartas = fullModo3(cartas);
-		if (mejoresCartas != null) {
-			jugador.setPeso(6);
-			return mejoresCartas;
-		}
-//		mejoresCartas = colorModo3(cartas);
-//		if (mejoresCartas != null) {
-//			jugador.setPeso(5);
-//			return mejoresCartas;
-//		}
-//		mejoresCartas = escaleraModo3(cartas);
-//		if (mejoresCartas != null) {
-//			jugador.setPeso(4);
-//			return mejoresCartas;
-//		}
-		mejoresCartas = trioModo3(cartas);
-		if (mejoresCartas != null) {
-			jugador.setPeso(3);
-			boolean primero = true;
-			for (int i = cartas.length - 1; i >= 0; i--) {
-				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
-					if (primero) {
-						mejoresCartas[3] = cartas[i];
-						primero = false;
-					} else {
-						mejoresCartas[4] = cartas[i];
-						return mejoresCartas;
-					}
-				}
-			}
-			return mejoresCartas;
-		}
-		mejoresCartas = dobleParejaModo3(cartas);
-		if (mejoresCartas != null) {
-			jugador.setPeso(2);
-			for (int i = cartas.length - 1; i >= 0; i--) {
-				if (cartas[i].getValor() != mejoresCartas[0].getValor()
-						&& cartas[i].getValor() != mejoresCartas[2].getValor()) {
-					mejoresCartas[4] = cartas[i];
-					return mejoresCartas;
-				}
-			}
-			return mejoresCartas;
-		}
-		mejoresCartas = parejaModo3(cartas);
-		if (mejoresCartas != null) {
-			jugador.setPeso(1);
-			int cont = 2;
-			for (int i = cartas.length - 1; i >= 0; i--) {
-				if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
-					mejoresCartas[cont] = cartas[i];
-					cont++;
-					if (cont == 5)
-						return mejoresCartas;
-				}
-			}
-			return mejoresCartas;
-		}
-		
-		mejoresCartas = cartaAltaModo3(cartas);
-		if (mejoresCartas != null) {
-			jugador.setPeso(0);
-			return mejoresCartas;
-		}
-	
-		
-		return mejoresCartas;
-		}*/
 }

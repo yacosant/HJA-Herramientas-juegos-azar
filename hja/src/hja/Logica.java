@@ -1038,36 +1038,56 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
 
-		if (escaleraDeColor(cartas))
+		if (escaleraDeColor(cartas)){
 			c.setPeso(8);
+                        c.setMano("Straight Flush");
+                }
 		// four-of-a-kind (or quads) (poker)
-		else if (poker(cartas) != null)
+		else if (poker(cartas) != null){
 			c.setPeso(7);
+                        c.setMano("Poker");
+                }
 		// full house (or boat) (full)
-		else if (full(cartas) != null)
-			c.setPeso(6);
+		else if (full(cartas) != null){
+                        c.setPeso(6);
+                        c.setMano("Full");
+                }			
 		// flush(color)
-		else if (color(cartas) != null)
+		else if (color(cartas) != null){
 			c.setPeso(5);
+                         c.setMano("Flush");
+                }
 		// straight(escalera)
-		else if (escalera(cartas))
+		else if (escalera(cartas)){
 			c.setPeso(4);
+                        c.setMano("Straight");
+                }
 		// three-of-a-kind(trío)
-		else if (trio(cartas) != null)
+		else if (trio(cartas) != null){
 			c.setPeso(3);
+                        c.setMano("Three of a kind");
+                }
 		// two-pair(doblepareja)
-		else if (doblePareja(cartas) != null)
+		else if (doblePareja(cartas) != null){
 			c.setPeso(2);
+                        c.setMano("Two Pair");
+                }
 		// pair (parejao par)
-		else if (pareja(cartas) != null)
+		else if (pareja(cartas) != null){
 			c.setPeso(1);
+                        c.setMano("Pair");
+                }
 		// high card (carta alta)
-		else
+                else{
 			c.setPeso(0);
+                        c.setMano("High Card");
+                }
 
 		return c;
 	}
-	
+        
+        
+	/*
 	private ArrayList<Carta> manoJugador(Carta[] cartas){
 
 		ArrayList<Carta> a = new ArrayList<Carta>();
@@ -1077,7 +1097,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 
 		return a;
 
-	}
+	}*/
 	
 	public int valorMaxMano(ArrayList<Carta> cartas){ //Te devuelve el valor de la carta mas alta de una mano
 

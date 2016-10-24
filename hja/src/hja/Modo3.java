@@ -11,6 +11,15 @@ public class Modo3 {
 	private ArrayList<Carta> cartas;
 	private int peso;
 	private int jugador;
+        private String mano;
+
+    public String getMano() {
+        return mano;
+    }
+
+    public void setMano(String mano) {
+        this.mano = mano;
+    }
 
 	public ArrayList<Carta> getCartas() {
 		return cartas;

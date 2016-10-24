@@ -947,126 +947,27 @@ private static Carta[] colorModo3(Carta[] cartas) {
             return c;
         }
         
-<<<<<<< HEAD
+
         private String manoString(int peso){
-       
+           String c="";
+            if(peso==14) c="";
+            else if(peso==12)c="";
+            else if(peso==11)c="";
+            else if(peso==10)c="";
+            else if(peso==9)c="";
+            else if(peso==8)c="";
+            else if(peso==7)c="";
+            else if(peso==6)c="";
+            else if(peso==5)c="";
+            else if(peso==4)c="";
+            else if(peso==3)c="";
+            else if(peso==2)c="";
+            else if(peso==1)c="";
+            else if(peso==0)c="";
+            return c;
         }
-        
-	public ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
-		int cont,peso = 8,nPesos,posMejor=0;
 
-		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
-		while(peso >= 0){
-			empatados = new ArrayList<Modo3>();
-			nPesos = 0;
-			cont = 0;
-			
-			while(cont < jugadores.size())
-				if(jugadores.get(cont).getPeso() == peso){
-					empatados.add(jugadores.get(cont));
-					nPesos++;
-					cont++;
-				}
-			
-			if(nPesos > 1)
-				posMejor = desempateManos(empatados);//desEmpate de damaso
-
-			
-			if(posMejor == -1)//Ha habido empate,no importa el orden
-				for(int i = 0;i<empatados.size();i++)
-					ordenados.add(empatados.get(i));
-			else{
-				ordenados.add(empatados.get(posMejor));//a�ado primero el que gana el desempate 
-				for(int i = 0;i<empatados.size();i++)//luego los demas sin importar el orden
-					if(i != posMejor)
-						ordenados.add(empatados.get(i));
-			}
-			
-		}
-		
-		
-		return ordenados;
-	
-
-	}
-	
-	public int desempateManos(ArrayList<Modo3> jugadores){
-
-		int posMano=-1;
-
-		for(int i=0; i<jugadores.size()-1;i++){
-			for(int h=i+1;h<jugadores.size();h++){
-				
-				if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
-					if(valorMaxMano(jugadores.get(i).getCartas(),true)>valorMaxMano(jugadores.get(h).getCartas(),true))
-						posMano = i;
-					else
-						posMano=h;
-
-					else if(jugadores.get(i).getPeso()==7){ //poker
-						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
-							posMano = i;
-						else
-							posMano=h;
-					}
-
-					else if(jugadores.get(i).getPeso()==6){ //full
-						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
-							posMano = i;
-						else
-							posMano=h;
-					} 
-
-					else if(jugadores.get(i).getPeso()==5){ //color
-						
-						if(valorMaxMano(jugadores.get(i).getCartas(),false)>valorMaxMano(jugadores.get(h).getCartas(),false))
-							posMano = i;
-						else
-							posMano=h;
-						
-					}
-
-					else if(jugadores.get(i).getPeso()==3){ //trio
-						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
-							posMano = i;
-						else
-							posMano=h;
-					}
-
-					else if(jugadores.get(i).getPeso()==2){//doble pareja
-
-						int anteriorJi = desempateCartaRep(jugadores.get(i).getCartas(),-1);
-						int anteriorJh = desempateCartaRep(jugadores.get(h).getCartas(),-1);
-
-
-						if(anteriorJi == anteriorJh){ //Si la priemra pareja es igual miramos la segunda
-							if(desempateCartaRep(jugadores.get(i).getCartas(), anteriorJi)>desempateCartaRep(jugadores.get(h).getCartas(),anteriorJh))
-								posMano = i;
-							else
-								posMano=h;
-						}
-						else{ //Si la primera pareja ya no es igual no hay que mirar mas
-							if(anteriorJi>anteriorJh)
-								posMano=i;
-							else
-								posMano=h;
-						}
-					} 
-
-					else if(jugadores.get(i).getPeso()==1){//pareja
-						
-						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
-							posMano = i;
-						else
-							posMano=h;
-						
-					} 
-			}
-		}
-		return posMano;
-	}
-=======
-        public static ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
+    public static ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
     		int contJug=0,peso = 8,nPesos,posMejor,pos;
     		boolean seguir = false;
     		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
@@ -1187,10 +1088,9 @@ private static Carta[] colorModo3(Carta[] cartas) {
     					}
     			}
     		}
-    		return posMano;
+    		return posMano;//pos del ganador
     	}
->>>>>>> origin/master
-
+     
 /*	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
 

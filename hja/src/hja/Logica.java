@@ -386,7 +386,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 				if (cartas[i].getValor() == cartas[j].getValor()) {
 					mejoresCartas[cont] = cartas[i];
 					cont++;
-					if (cont == 3) { // añadimos la ultima carta
+					if (cont == 3) { // aï¿½adimos la ultima carta
 						mejoresCartas[cont] = cartas[j];
 						return mejoresCartas;
 					}
@@ -911,9 +911,16 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 	public void comprobarModo3(ArrayList<Carta[]> cartas) {
 		
 		for(int i=0; i<cartas.size(); i++){
-			Modo3 c;
+			Modo3 c = new Modo3();
 			c.setJugador(i);
-			c.setCartas(comprobarModo3(cartas,c));
+                        
+                        Carta[] car =comprobarModo3(cartas.get(i),c);
+                        ArrayList<Carta> listaCarta = new ArrayList<Carta>();
+                        
+                        for(int j=0; j<car.length;j++){
+                            listaCarta.add(car[j]); //cambiamos de carta[] a arraylis<Carta>
+                        }
+			c.setCartas(listaCarta);
 			jugadores.add(c);
 		}
 
@@ -943,7 +950,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 				for(int i = 0;i<empatados.size();i++)
 					ordenados.add(empatados.get(i));
 			else{
-				ordenados.add(empatados.get(posMejor));//añado primero el que gana el desempate 
+				ordenados.add(empatados.get(posMejor));//aï¿½ado primero el que gana el desempate 
 				for(int i = 0;i<empatados.size();i++)//luego los demas sin importar el orden
 					if(i != posMejor)
 						ordenados.add(empatados.get(i));
@@ -1013,7 +1020,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 								posMano=h;
 						}
 						else{ //Si la primera pareja ya no es igual no hay que mirar mas
-							if(anteriorji>anteriorJh)
+							if(anteriorJi>anteriorJh)
 								posMano=i;
 							else
 								posMano=h;

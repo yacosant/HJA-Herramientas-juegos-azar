@@ -967,6 +967,8 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 				if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
 					if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
 						posMano = i;
+					else
+						posMano=h;
 
 					else if(jugadores.get(i).getPeso()==7){ //poker
 						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
@@ -975,9 +977,21 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 							posMano=h;
 					}
 
-//					else if(jugadores.get(i).getPeso()==6) //full
-//
-//					else if(jugadores.get(i).getPeso()==5) //color
+					else if(jugadores.get(i).getPeso()==6){ //full
+						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
+							posMano = i;
+						else
+							posMano=h;
+					} 
+
+					else if(jugadores.get(i).getPeso()==5){ //color
+						
+						if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+							posMano = i;
+						else
+							posMano=h;
+						
+					}
 
 					else if(jugadores.get(i).getPeso()==3){ //trio
 						if(desempateCartaRep(jugadores.get(i).getCartas(),-1)>desempateCartaRep(jugadores.get(h).getCartas(),-1))
@@ -992,10 +1006,18 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 						int anteriorJh = desempateCartaRep(jugadores.get(h).getCartas(),-1);
 
 
-						if(desempateCartaRep(jugadores.get(i).getCartas(), anteriorJi)>desempateCartaRep(jugadores.get(h).getCartas(),anteriorJh))
-							posMano = i;
-						else
-							posMano=h;
+						if(anteriorJi == anteriorJh){ //Si la priemra pareja es igual miramos la segunda
+							if(desempateCartaRep(jugadores.get(i).getCartas(), anteriorJi)>desempateCartaRep(jugadores.get(h).getCartas(),anteriorJh))
+								posMano = i;
+							else
+								posMano=h;
+						}
+						else{ //Si la primera pareja ya no es igual no hay que mirar mas
+							if(anteriorji>anteriorJh)
+								posMano=i;
+							else
+								posMano=h;
+						}
 					} 
 
 					else if(jugadores.get(i).getPeso()==1){//pareja

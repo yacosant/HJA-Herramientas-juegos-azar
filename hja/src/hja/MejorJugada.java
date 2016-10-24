@@ -91,7 +91,7 @@ public class MejorJugada {
 				int i = 0, cont = 0, valor;
 				mano = new Carta[2];
 
-				while(i<2){ //Primero cargamos las cartas de la mano
+				while(cont<2){ //Primero cargamos las cartas de la mano
 					valor= conversion(bf.charAt(i));
 					mano[cont]= new Carta(valor, bf.charAt(i + 1));
 					i += 2;
@@ -99,13 +99,13 @@ public class MejorJugada {
 				}
 
 				i++;
-				num = bf.charAt(i);
+				num = conversion(bf.charAt(i));
 				i += 2;
 
-				mesa = new Carta[5];
+				mesa = new Carta[num];
 				cont=0;
 
-				while (i < num*2) { //Cargamos las cartas de la mesa
+				while (cont < num) { //Cargamos las cartas de la mesa
 					valor= conversion(bf.charAt(i));
 					mesa[cont]= new Carta(valor, bf.charAt(i + 1));
 					i += 2;
@@ -146,11 +146,11 @@ public class MejorJugada {
 				jug = conversion(bf.charAt(i));
 
 				tamanyo = jug * 7; 
-				mano = new Carta[2];
+				
 
                                 i++;
 				while(i<tamanyo){
-
+                                        mano = new Carta[2];
 					i += 3; //Leemos el Jx
 
 					while(cont<2){ //Leemos las cartas que tiene cada jugador en su mano
@@ -172,7 +172,7 @@ public class MejorJugada {
 					mesa[cont]= new Carta(valor, bf.charAt(i + 1));
 					i += 2;
 					cont++;
-				}
+			}
 
 				for(int j=0; j<cartasMano.size(); j++) //A�adimos todas las cartas de la mesa
 					cartasMesa.add(mesa);
@@ -181,7 +181,7 @@ public class MejorJugada {
 		} catch (FileNotFoundException e) {
 			System.out.println("Error en la lectura del fichero");
 		}
-
+                cartas.setSize(cartasMano.size()); 
 		return cartas;
 
 	}

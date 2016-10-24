@@ -16,7 +16,6 @@ public class CartasModo2 {
 	public CartasModo2(ArrayList<Carta[]> mano, ArrayList<Carta[]> mesa){
 		cartasMano=mano;
 		cartasMesa=mesa;
-		size= cartasMesa.size();
 	}
 
 	public ArrayList<Carta[]> getCartasMano() {
@@ -30,16 +29,17 @@ public class CartasModo2 {
 
 	public ArrayList<Carta[]> juntar(){ //Metodo para juntar el arrayList mano y arrayList mesa
 		ArrayList<Carta[]> cartas = new ArrayList<Carta[]>();
-		for(int pos=0; pos<size; pos++){
+		int i=0;
+                for(int pos=0; pos<size; pos++){
 
-			Carta[] c = new Carta[size+2]; //Creamos un array de Carta con el tamaño de la mesa mas 2 (las cartas de la mano)
+			Carta[] c = new Carta[size+2]; //Creamos un array de Carta con el tamaï¿½o de la mesa mas 2 (las cartas de la mano)
 
-			for (int i=0; i<2; i++){ //Cogemos las cartas de la mano
+			for (i=0; i<2; i++){ //Cogemos las cartas de la mano
 				c[i]=(cartasMano.get(pos)[i]);
 			}
 
-			for (int i=0; i<cartasMesa.size(); i++){ //Cogemos las cartas de la mesa
-				c[i+2]=(cartasMesa.get(pos)[i]);
+			for (int j=0; j<cartasMesa.size(); j++){ //Cogemos las cartas de la mesa
+				c[i+2]=(cartasMesa.get(pos)[j]);
 			}
 
 			cartas.add(c); 
@@ -51,5 +51,10 @@ public class CartasModo2 {
 	public int getSize() {
 		return size;
 	}
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+        
 
 }

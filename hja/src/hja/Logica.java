@@ -16,7 +16,7 @@ public class Logica {
 	private boolean proyectoEscalera = false;
 	private boolean proyectoEscaleraC = false;
 	private boolean gutshot = false;
-	private ArrayList<Modo3> jugadores = new ArrayList<Modo3>();
+
 
 	/**
 	 * Recorre el array de cartas para comprobar que jugada tiene
@@ -92,7 +92,7 @@ public class Logica {
 
 	}
 	
-public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
+	public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		
 		Carta[] mejoresCartas = null;
 		ordenador(cartas);
@@ -173,8 +173,6 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		return mejoresCartas;
 	}
 
-
-
 	private static Carta[] cartaAltaModo3(Carta[] cartas){
 		Carta[] mejoresCartas = new Carta[5];
 		boolean salir=false;
@@ -196,7 +194,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		Carta[] mejoresCartas = new Carta[5];
 		Carta[] mejoresCartasTrio = new Carta[3];
 		Carta[] mejoresCartasPareja = new Carta[2];
-		int guardarValor=0;;
+
 		
 		mejoresCartasTrio = trioModo3(cartas);
 		if (mejoresCartasTrio != null) {
@@ -227,12 +225,11 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 			else
 				for(int i=0;i<cartas.length;i++){
 					if(cartas[i].getValor()==-1)
-						cartas[i].setValor(guardarValor);
+						cartas[i].setValor(valor);
 				}
 			}
 		return null;
 	}
-	
 	
 	private static Carta[] trioModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
@@ -252,8 +249,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		}
 		return null;
 	}
-	
-	
+
 	private static Carta[] escaleraModo3(Carta[] cartas){
 		Carta[] mejoresCartas = new Carta[5];
 
@@ -313,7 +309,6 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		return mejoresCartas;
 
 	}
-	
 	
 	public static Carta[] escaleraDeColorModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
@@ -904,27 +899,32 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 	}
 
 	
-	public void comprobarModo3(ArrayList<Carta[]> cartas) {
+	public static ArrayList<Modo3> comprobarModo3(ArrayList<Carta[]> cartas) {
+		ArrayList<Modo3> jugadores = new ArrayList<Modo3>();
 		
 		for(int i=0; i<cartas.size(); i++){
 			Modo3 c = new Modo3();
 			c.setJugador(i);
-                        
-                        Carta[] car =comprobarModo3(cartas.get(i),c);
-                        ArrayList<Carta> listaCarta = new ArrayList<Carta>();
-                        
-                        for(int j=0; j<car.length;j++){
-                            listaCarta.add(car[j]); //cambiamos de carta[] a arraylis<Carta>
-                        }
+
+			Carta[] car =comprobarModo3(cartas.get(i),c);
+			ArrayList<Carta> listaCarta = new ArrayList<Carta>();
+
+			for(int j=0; j<car.length;j++)
+				listaCarta.add(car[j]); //cambiamos de carta[] a arraylis<Carta>
+			
 			c.setCartas(listaCarta);
 			jugadores.add(c);
 		}
+		
+		
+		
+		return ordenarManos(jugadores);
 
 	}
 	
-	public ArrayList<Modo3> ordenarManos() {
+	public ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
 		int cont,peso = 8,nPesos,posMejor;
-		boolean empate = false;
+
 		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
 		while(peso >= 0){
 			empatados = new ArrayList<Modo3>();
@@ -938,7 +938,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 					cont++;
 				}
 			
-			if(nPesos > 1);
+			if(nPesos > 1)
 				posMejor = desempateManos(empatados);//desEmpate de damaso
 
 			
@@ -961,14 +961,14 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 	}
 	
 	public int desempateManos(ArrayList<Modo3> jugadores){
-		ArrayList<Carta> cartas =  new ArrayList<Carta>();
+
 		int posMano=-1;
 
 		for(int i=0; i<jugadores.size()-1;i++){
 			for(int h=i+1;h<jugadores.size();h++){
 				
 				if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4) //Escalera normal y de color
-					if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+					if(valorMaxMano(jugadores.get(i).getCartas(),true)>valorMaxMano(jugadores.get(h).getCartas(),true))
 						posMano = i;
 					else
 						posMano=h;
@@ -989,7 +989,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 
 					else if(jugadores.get(i).getPeso()==5){ //color
 						
-						if(valorMaxMano(jugadores.get(i).getCartas())>valorMaxMano(jugadores.get(h).getCartas()))
+						if(valorMaxMano(jugadores.get(i).getCartas(),false)>valorMaxMano(jugadores.get(h).getCartas(),false))
 							posMano = i;
 						else
 							posMano=h;
@@ -1036,7 +1036,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		return posMano;
 	}
 
-	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
+/*	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
 		Modo3 c = new Modo3();
 
 		if (escaleraDeColor(cartas))
@@ -1068,52 +1068,38 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 
 		return c;
 	}
+	*/
+
 	
-	private ArrayList<Carta> manoJugador(Carta[] cartas){
+	public int valorMaxMano(ArrayList<Carta> cartas,boolean escalera){ //Te devuelve el valor de la carta mas alta de una mano
 
-		ArrayList<Carta> a = new ArrayList<Carta>();
-
-		for(int i =0;i<cartas.length;i++)
-			a.add(cartas[i]);
-
-		return a;
-
-	}
-	
-	public int valorMaxMano(ArrayList<Carta> cartas){ //Te devuelve el valor de la carta mas alta de una mano
-
-		int max=0;
-
-		for (int i = 0; i < cartas.size(); i++) {
-    		if (cartas.get(i).getValor()> max) {
-    			if(cartas.get(i).getValor() !=14)
-    				max = cartas.get(i).getValor();
-    			else
-    				if(cartas.get(i-1).getValor() == 13)
-    					max = cartas.get(i).getValor();
-
-        }
+		int max=cartas.get(cartas.size()-1).getValor();
+		
+		if(escalera && max ==14 && cartas.get(cartas.size()-2).getValor() == 5)//Caso de escalera acabada en 5 
+			max = 5;
+		
+		return max;
     }
-	return max;
-}
+
+
 	
 	private static int desempateCartaRep(ArrayList<Carta> cartas,int anterior){
-		int valor=0,i=0,j;
+		int valor=0,i=cartas.size()-1,j;
 		boolean repetido = false;
 
-		while(i < cartas.size() && !repetido){
+		while(i > 0 && !repetido){
 			valor = cartas.get(i).getValor();
 			if(valor != anterior){
-				j=i+1;
-				while(j<cartas.size() && !repetido){
+				j=i-1;
+				while(j>=0 && !repetido){
 					if(valor == cartas.get(j).getValor())
 						repetido = true;
 
-					j++;
+					j--;
 
 				}
 			}
-			i++;
+			i--;
 		}
 
 		return valor;

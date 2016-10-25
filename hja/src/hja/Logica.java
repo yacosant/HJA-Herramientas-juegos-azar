@@ -953,7 +953,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
             
             for(int i=0; i<jugadores.size();i++){
                 salida+= "J" + Integer.toString(jugadores.get(i).getJugador()+1) + ": " + cartasString(jugadores.get(i).getCartas());
-                salida+= " (" + manoString(jugadores.get(i).getPeso()) + ")";
+                salida+= " (" + manoString(jugadores.get(i)) + ")";
                 salida+="\r\n";
             }
             return salida;
@@ -967,8 +967,9 @@ private static Carta[] colorModo3(Carta[] cartas) {
             return c;
         }
         
-        private String manoString(int peso){
+        private String manoString(Modo3 jug){
            String c="";
+           int peso= jug.getPeso();
             if(peso==8) c="Straight Flush";
             else if(peso==7)c="Poker";
             else if(peso==6)c="Full";

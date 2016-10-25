@@ -970,14 +970,24 @@ private static Carta[] colorModo3(Carta[] cartas) {
         private String manoString(Modo3 jug){
            String c="";
            int peso= jug.getPeso();
+           
             if(peso==8) c="Straight Flush";
             else if(peso==7)c="Poker";
             else if(peso==6)c="Full";
-            else if(peso==5)c="Flush";
+            else if(peso==5){
+                c="Flush of" + charToColor(jug.getCartas().get(0).getColor()) + "s";
+            }
             else if(peso==4)c="Straight";
-            else if(peso==3)c="Three of a kind";
-            else if(peso==2)c="Two Pair";
-            else if(peso==1)c="Pair";
+            else if(peso==3){
+                c="Three of " + intToCarta(jug.getCartas().get(0).getValor()) + "s";
+            }
+            else if(peso==2){
+                c="Two Pair of " + intToCarta(jug.getCartas().get(0).getValor()) + "s";
+                c+=" and " + intToCarta(jug.getCartas().get(2).getValor()) + "s";
+            }
+            else if(peso==1){
+                c="Pair of " + intToCarta(jug.getCartas().get(0).getValor()) + "s";
+            }
             else if(peso==0)c="High Card";
            
             return c;

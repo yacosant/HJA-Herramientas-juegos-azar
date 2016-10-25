@@ -74,9 +74,9 @@ public class Hja {
 		try{
 			CommandLine line = parser.parse(cmdLineOptions, args);
 			parseEntradaTxtOption(line); //Primero cargamos el archivo
-			parseGameOption(line); //Jugamos
 			parseSalidaTxtOption(line); //Guardamos resultados
-
+                        parseGameOption(line); //Jugamos
+			
 			String[] remaining = line.getArgs();
 			if (remaining.length > 0) {
 				String error = "Illegal arguments:";

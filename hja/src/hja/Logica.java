@@ -897,7 +897,31 @@ private static Carta[] colorModo3(Carta[] cartas) {
 		}
 		return carta;
 	}
-
+        
+    private String intToChar(int valor) {
+		String carta = null;
+		switch (valor) {
+		case 10:
+			carta = "T";
+			break;
+		case 11:
+			carta = "J";
+			break;
+		case 12:
+			carta = "Q";
+			break;
+		case 13:
+			carta = "K";
+			break;
+		case 14:
+			carta = "A";
+			break;
+		default:
+                        carta=Integer.toString(valor);
+			break;
+		}
+		return carta;
+	}
 	
 	//public ArrayList<Modo3> comprobarModo3(ArrayList<Carta[]> cartas) {
         public String comprobarModo3(ArrayList<Carta[]> cartas) {
@@ -928,9 +952,9 @@ private static Carta[] colorModo3(Carta[] cartas) {
             String salida="";
             
             for(int i=0; i<jugadores.size();i++){
-                salida+= "J" + Integer.toString(i)+ ": " + cartasString(jugadores.get(i).getCartas());
+                salida+= "J" + Integer.toString(jugadores.get(i).getJugador()+1) + ": " + cartasString(jugadores.get(i).getCartas());
                 salida+= " (" + manoString(jugadores.get(i).getPeso()) + ")";
-                salida+="\n";
+                salida+="\r\n";
             }
             return salida;
         }
@@ -938,7 +962,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
         private String cartasString(ArrayList<Carta> cartas){
             String c="";
             for(int i=0; i<cartas.size(); i++){
-                c+= cartas.get(i).getValor() + cartas.get(i).getColor();
+                c+= intToChar(cartas.get(i).getValor()) + cartas.get(i).getColor();
             }
             return c;
         }

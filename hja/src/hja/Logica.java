@@ -468,10 +468,10 @@ private static Carta[] colorModo3(Carta[] cartas) {
 				posible = false;	
 		}
 		
-		if(cont == 3){ //El valor 13 = As.
+		if(cont == 3){ //El valor 14 = As.
 
-			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 1)
-				cont++;
+			if(cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 14)
+				esEscalera = true;
 
 			else
 				this.proyectoEscaleraC = true; 
@@ -730,15 +730,21 @@ private static Carta[] colorModo3(Carta[] cartas) {
 			start=true;
 		}
 
-		else if(cartas[cont-1].getValor()+2 == cartas[cont+1].getValor()){
+		else if(cont == 2 && cartas[cont].getValor()+2 == cartas[cont+2].getValor()){
 			draw=true;
-			cont++;
+			gutshot = true;
+			return draw;
+		}else{
+			if(cartas[cont].getValor()+2 == cartas[cont+2].getValor()){
+				draw = true;
+				cont+=2;
+			}
 		}
 
 		while (cont < cartas.length-1  && draw){
-			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor())
+			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor() || cartas[cont].getValor() == 5 && cartas[cont+1].getValor() == 14)
 				cont++;
-			else if(start && cartas[cont].getValor()+2 == cartas[cont+1].getValor()){
+			else if(start && (cartas[cont].getValor()+2 == cartas[cont+2].getValor() || cartas[cont].getValor() == 5 && cartas[cont+2].getValor() == 14)){
 				cont++;
 				start = false;
 			}
@@ -761,18 +767,27 @@ private static Carta[] colorModo3(Carta[] cartas) {
 			draw=true;
 			start=true;
 		}
-		else if(cartas[cont-1].getValor()+2 == cartas[cont+1].getValor() 
-				&& cartas[cont-1].getColor() == cartas[cont+1].getColor()){
+		else if(cont ==2 && cartas[cont].getValor()+2 == cartas[cont+2].getValor() 
+				&& cartas[cont].getColor() == cartas[cont+2].getColor()){
 			draw=true;
 			cont++;
+			gutshot = true;
+			return true;
+		}else{
+			if(cartas[cont].getValor()+2 == cartas[cont+2].getValor() 
+					&& cartas[cont].getColor() == cartas[cont+2].getColor()){
+				draw = true;
+				cont+=2;
+			}
+			
 		}
 
 		while (cont < cartas.length-1  && draw){
-			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor()
-					&& cartas[cont-1].getColor() == cartas[cont+1].getColor())
+			if((cartas[cont].getValor()+1 == cartas[cont+1].getValor() || cartas[cont].getValor() == 5 && cartas[cont+1].getValor() == 14)
+					&& cartas[cont].getColor() == cartas[cont+1].getColor())
 				cont++;
-			else if(start && cartas[cont].getValor()+2 == cartas[cont+1].getValor()
-					&& cartas[cont-1].getColor() == cartas[cont+1].getColor()){
+			else if((start && cartas[cont].getValor()+2 == cartas[cont+2].getValor() || cartas[cont].getValor() == 5 && cartas[cont+2].getValor() == 14)
+					&& cartas[cont].getColor() == cartas[cont+2].getColor()){
 				cont++;
 				start = false;
 			}
@@ -791,13 +806,21 @@ private static Carta[] colorModo3(Carta[] cartas) {
 		boolean draw = false;
 
 		if(cont == 0){
-			cont++;
+			if(cartas[cont].getColor() == cartas[cont+2].getColor())
+				cont+=2;
+			else
+				cont++;
+			
 			draw=true;
 		}
-		else if(cartas[cont-1].getColor() == cartas[cont+1].getColor()){
-
+		else if(cont == 2 && cartas[cont].getColor() == cartas[cont+2].getColor()){
 			draw=true;
-			cont++;
+			return draw;
+		}else{
+			if(cartas[cont].getColor() == cartas[cont+2].getColor()){
+				draw = true;
+				cont+=2;
+			}
 		}
 
 		while (cont < cartas.length-1  && draw){
@@ -809,7 +832,6 @@ private static Carta[] colorModo3(Carta[] cartas) {
 
 		return draw;
 	}
-
 
 
 	/**

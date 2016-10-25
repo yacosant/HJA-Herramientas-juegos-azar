@@ -177,7 +177,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 private static Carta[] cartaAltaModo3(Carta[] cartas){
 	Carta[] mejoresCartas = new Carta[5];
 	boolean salir=false;
-	int j=1;
+	int j=0;
 	mejoresCartas[0] = cartas[cartas.length-1];
 	
 		for (int i = cartas.length-1; i >0 && !salir; i--) {

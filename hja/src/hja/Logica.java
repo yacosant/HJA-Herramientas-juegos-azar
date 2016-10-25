@@ -92,7 +92,7 @@ public class Logica {
 
 	}
 	
-public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
+public  Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 		
 		Carta[] mejoresCartas = null;
 		ordenador(cartas);
@@ -174,7 +174,7 @@ public static Carta[] comprobarModo3(Carta[] cartas,Modo3 jugador) {
 	}
 
 
-private static Carta[] cartaAltaModo3(Carta[] cartas){
+private Carta[] cartaAltaModo3(Carta[] cartas){
 	Carta[] mejoresCartas = new Carta[5];
 	boolean salir=false;
 	int j=0;
@@ -190,7 +190,7 @@ private static Carta[] cartaAltaModo3(Carta[] cartas){
 	return mejoresCartas;
 }
 	
-private static Carta[] fullModo3(Carta[] cartas) {
+private Carta[] fullModo3(Carta[] cartas) {
 
 	Carta[] mejoresCartas = new Carta[5];
 	Carta[] mejoresCartasTrio = new Carta[3];
@@ -232,7 +232,7 @@ private static Carta[] fullModo3(Carta[] cartas) {
 	return null;
 }
 	
-private static Carta[] trioModo3(Carta[] cartas) {
+private Carta[] trioModo3(Carta[] cartas) {
 	Carta[] mejoresCartas = new Carta[5];
 	int cont;
 	for (int i = cartas.length-1; i > 0 ; i--) {
@@ -251,7 +251,7 @@ private static Carta[] trioModo3(Carta[] cartas) {
 	return null;
 }
 
-private static Carta[] escaleraModo3(Carta[] cartas){
+private Carta[] escaleraModo3(Carta[] cartas){
 	Carta[] mejoresCartas = new Carta[5];
 
 	int cont = 0, cart = 0;
@@ -310,7 +310,7 @@ private static Carta[] escaleraModo3(Carta[] cartas){
 	return mejoresCartas;
 
 }
-public static Carta[] escaleraDeColorModo3(Carta[] cartas) {
+private Carta[] escaleraDeColorModo3(Carta[] cartas) {
 	Carta[] mejoresCartas = new Carta[5];
 
 	int cont = 0, cart = 0;
@@ -372,7 +372,7 @@ public static Carta[] escaleraDeColorModo3(Carta[] cartas) {
 
 }
 
-private static Carta[] pokerModo3(Carta[] cartas) {
+private Carta[] pokerModo3(Carta[] cartas) {
 	Carta[] mejoresCartas = new Carta[5];
 	int cont = 0;
 	for (int i = 0; i < cartas.length-1; i++) {
@@ -391,7 +391,7 @@ private static Carta[] pokerModo3(Carta[] cartas) {
 	return null;
 }
 
-private static Carta[] dobleParejaModo3(Carta[] cartas) {
+private Carta[] dobleParejaModo3(Carta[] cartas) {
 	Carta[] mejoresCartas = new Carta[5];
 	boolean salir = true;
 	int cont = 0, i = cartas.length-1, j;
@@ -424,7 +424,7 @@ private static Carta[] dobleParejaModo3(Carta[] cartas) {
 	return null;
 }
 
-private static Carta[] colorModo3(Carta[] cartas) {
+private Carta[] colorModo3(Carta[] cartas) {
 	Carta[] mejoresCartas = new Carta[5];
 	int cont = 0,color = 0,j;
 	boolean col = false;
@@ -451,7 +451,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 
 	//Metodos para ver que jugada tienes 
 
-	boolean escaleraDeColor(Carta[] cartas) {
+private	boolean escaleraDeColor(Carta[] cartas) {
 		boolean esEscalera = false, posible = true;
 		ordenador(cartas); //Ordenamos las cartas
 
@@ -548,7 +548,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	}
 
 
-	private static Carta[] parejaModo3(Carta[] cartas) {
+	private Carta[] parejaModo3(Carta[] cartas) {
 		Carta[] mejoresCartas = new Carta[5];
 		for (int i = 0; i < cartas.length-1; i++) {
 			for (int j = i + 1; j < cartas.length; j++) {
@@ -569,7 +569,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	 * @param cartas
 	 * @return
 	 */
-	String full(Carta[] cartas) {
+private String full(Carta[] cartas) {
 		String carta = null;
 		String trio = null;
 
@@ -588,7 +588,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	 * @param cartas
 	 * @return
 	 */
-	String color(Carta[] cartas) {
+private String color(Carta[] cartas) {
 		String carta = null;
 		boolean posible = true;
 		int cont = 0;
@@ -616,7 +616,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	 * @param cartas
 	 * @return
 	 */
-	String trio(Carta[] cartas) {
+private String trio(Carta[] cartas) {
 		String carta = null;
 		int cont = 0;
 		for (int i = 0; i < cartas.length; i++) {
@@ -638,7 +638,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	 * @param cartas
 	 * @return
 	 */
-	String doblePareja(Carta[] cartas) {
+private String doblePareja(Carta[] cartas) {
 		boolean salir = true;
 		int cont = 0, i = 0, j;
 		String pareja = "";
@@ -672,7 +672,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	 * @return
 	 */
 
-	String pareja(Carta[] cartas) {
+private String pareja(Carta[] cartas) {
 		String carta = null;
 
 		for (int i = 0; i < cartas.length; i++) {
@@ -704,7 +704,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 	 * 
 	 * @param cartas
 	 */
-	public static void ordenador(Carta[] cartas) { //Metodo para ordenar las cartas. Util para escaleras
+private void ordenador(Carta[] cartas) { //Metodo para ordenar las cartas. Util para escaleras
 
 		for (int i = 0; i < cartas.length - 1; i++) {
 			for (int j = i + 1; j < cartas.length; j++) {
@@ -720,7 +720,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 
 	//Metodos para ver si hay proyectos de jugadas
 
-	private boolean buscarProyectoE(Carta[] cartas,int cont){
+private boolean buscarProyectoE(Carta[] cartas,int cont){
 
 		boolean draw = false,start=false;
 
@@ -758,7 +758,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
 
 	}
 
-	private boolean buscarProyectoEC(Carta[] cartas,int cont){
+private boolean buscarProyectoEC(Carta[] cartas,int cont){
 
 		boolean draw = false,start=false;
 
@@ -1018,7 +1018,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
             return c;
         }
 
-    public static ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
+    private  ArrayList<Modo3> ordenarManos(ArrayList<Modo3> jugadores) {
     		int contJug=0,peso = 8,nPesos,posMejor,pos;
     		boolean seguir = false;
     		ArrayList<Modo3> empatados,ordenados = new ArrayList<Modo3>();
@@ -1058,7 +1058,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
     		return ordenados;
     	}
     	
-    	public static int desempateManos(ArrayList<Modo3> jugadores){
+    	private int desempateManos(ArrayList<Modo3> jugadores){
 
         int posMano=-1, valorAct=0, valorAnt=0, valorMax=0,posMax=0;
 
@@ -1240,20 +1240,20 @@ private static Carta[] colorModo3(Carta[] cartas) {
         return posMax;//pos del ganador
        }
     
-    	private static int parejaAltaDP(ArrayList<Carta> cartas){
+    	private int parejaAltaDP(ArrayList<Carta> cartas){
     		return cartas.get(0).getValor();
     	}
     	
-    	private static int parejaBajaDP(ArrayList<Carta> cartas){
+    	private int parejaBajaDP(ArrayList<Carta> cartas){
     		return cartas.get(2).getValor();
     	}
     
      
-    	 private static int desEmpateTrioFull(ArrayList<Carta> cartas){
+    	 private int desEmpateTrioFull(ArrayList<Carta> cartas){
     		   return cartas.get(0).getValor(); 
     		     }
 	
-    	public static int valorMaxMano(ArrayList<Carta> cartas,boolean escalera){ //Te devuelve el valor de la carta mas alta de una mano
+    	private int valorMaxMano(ArrayList<Carta> cartas,boolean escalera){ //Te devuelve el valor de la carta mas alta de una mano
 
     		int max=cartas.get(cartas.size()-1).getValor();
     		
@@ -1264,7 +1264,7 @@ private static Carta[] colorModo3(Carta[] cartas) {
         }
         
         	
-    	private static int desempateCartaRep(ArrayList<Carta> cartas,int anterior){
+    	private int desempateCartaRep(ArrayList<Carta> cartas,int anterior){
     		int valor=0,i=cartas.size()-1,j;
     		boolean repetido = false;
 

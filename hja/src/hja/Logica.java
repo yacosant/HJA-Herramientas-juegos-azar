@@ -971,11 +971,14 @@ private static Carta[] colorModo3(Carta[] cartas) {
            String c="";
            int peso= jug.getPeso();
            
-            if(peso==8) c="Straight Flush";
-            else if(peso==7)c="Poker";
-            else if(peso==6)c="Full";
+            if(peso==8) c="Straight Flush of " + charToColor(jug.getCartas().get(0).getColor()) + "s";
+            else if(peso==7)c="Poker of "+ intToCarta(jug.getCartas().get(0).getValor()) + "s";
+            else if(peso==6){
+                c="Full of Three "+ intToCarta(jug.getCartas().get(0).getValor()) + "s";
+                c+=" and Two " + intToCarta(jug.getCartas().get(3).getValor()) + "s";
+            }
             else if(peso==5){
-                c="Flush of" + charToColor(jug.getCartas().get(0).getColor()) + "s";
+                c="Flush of " + charToColor(jug.getCartas().get(0).getColor()) + "s";
             }
             else if(peso==4)c="Straight";
             else if(peso==3){
@@ -1208,40 +1211,6 @@ private static Carta[] colorModo3(Carta[] cartas) {
     		return posMax;//pos del ganador
     	}
      
-/*	private Modo3 darPesoJugadasModo3(Carta[] cartas) {
-		Modo3 c = new Modo3();
-
-		if (escaleraDeColor(cartas))
-			c.setPeso(8);
-		// four-of-a-kind (or quads) (poker)
-		else if (poker(cartas) != null)
-			c.setPeso(7);
-		// full house (or boat) (full)
-		else if (full(cartas) != null)
-			c.setPeso(6);
-		// flush(color)
-		else if (color(cartas) != null)
-			c.setPeso(5);
-		// straight(escalera)
-		else if (escalera(cartas))
-			c.setPeso(4);
-		// three-of-a-kind(trío)
-		else if (trio(cartas) != null)
-			c.setPeso(3);
-		// two-pair(doblepareja)
-		else if (doblePareja(cartas) != null)
-			c.setPeso(2);
-		// pair (parejao par)
-		else if (pareja(cartas) != null)
-			c.setPeso(1);
-		// high card (carta alta)
-		else
-			c.setPeso(0);
-
-		return c;
-	}
-	*/
-
 	
     	public static int valorMaxMano(ArrayList<Carta> cartas,boolean escalera){ //Te devuelve el valor de la carta mas alta de una mano
 

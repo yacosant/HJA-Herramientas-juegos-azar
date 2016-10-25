@@ -426,14 +426,14 @@ private static Carta[] dobleParejaModo3(Carta[] cartas) {
 
 private static Carta[] colorModo3(Carta[] cartas) {
 	Carta[] mejoresCartas = new Carta[5];
-	int cont = cartas.length - 1,color = 0,j;
+	int cont = 0,color = 0,j;
 	boolean col = false;
 
-	while (cont > 0 && !col) {
-		j = cont-1;
+	while (cont < cartas.length-1 && !col) {
+		j = cont+1;
 		mejoresCartas[color] = cartas[cont];
 		color++;
-		while(j >= 0){
+		while(j < cartas.length-1){
 			if (cartas[cont].getColor() == cartas[j].getColor()) {
 				mejoresCartas[color] = cartas[j];
 				color++;
@@ -441,10 +441,10 @@ private static Carta[] colorModo3(Carta[] cartas) {
 			if (color == 5) 
 				return mejoresCartas;
 			
-			j--;
+			j++;
 		}
 		color = 0;
-		cont--;
+		cont++;
 	}
 	return null;	
 }
@@ -1038,179 +1038,198 @@ private static Carta[] colorModo3(Carta[] cartas) {
     	
     	public static int desempateManos(ArrayList<Modo3> jugadores){
 
-    		int posMano=-1, valorAct=0, valorAnt=0, valorMax=0,posMax=0;
+        int posMano=-1, valorAct=0, valorAnt=0, valorMax=0,posMax=0;
 
-    		for(int i=0; i<jugadores.size();i++){
-    			for(int h=i+1;h<jugadores.size();h++){
-    				
-    				if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4){ //Escalera normal y de color
-    					valorAct=valorMaxMano(jugadores.get(h).getCartas(),true);
-    					valorAnt=valorMaxMano(jugadores.get(i).getCartas(),true);
-    					
-    					if(valorAct>valorAnt){
-    						//posMano = i;
-    						if(valorAct > valorMax){
-    							valorMax=valorAct;
-    							posMax=i;
-    						}
-    					}
-    					
-    					else{
-    						//posMano=h;
-    						if(valorAnt > valorMax){
-    							valorMax=valorAnt;
-    							posMax=h;
-    						}
-    					}
-    					
-    				}
+        for(int i=0; i<jugadores.size();i++){
+         for(int h=i+1;h<jugadores.size();h++){
 
-    					else if(jugadores.get(i).getPeso()==7){ //poker
-    						valorAct=desempateCartaRep(jugadores.get(i).getCartas(),-1);
-    						valorAnt=desempateCartaRep(jugadores.get(h).getCartas(),-1);
-    						
-    							if(valorAct>valorAnt){
-    	    						//posMano = i;
-    	    						if(valorAct > valorMax){
-    	    							valorMax=valorAct;
-    	    							posMax=i;
-    	    						}
-    	    					}
-    	    					
-    	    					else{
-    	    						//posMano=h;
-    	    						if(valorAnt > valorMax){
-    	    							valorMax=valorAnt;
-    	    							posMax=h;
-    	    						}
-    	    					}
-    					}
+          if(jugadores.get(i).getPeso() == 8 || jugadores.get(i).getPeso() == 4){ //Escalera normal y de color
+           valorAct=valorMaxMano(jugadores.get(i).getCartas(),true);
+           valorAnt=valorMaxMano(jugadores.get(h).getCartas(),true);
 
-    					else if(jugadores.get(i).getPeso()==6){ //full
-    						valorAct=desempateCartaRep(jugadores.get(i).getCartas(),-1);
-    						valorAnt=desempateCartaRep(jugadores.get(h).getCartas(),-1);
-    						
-    							if(valorAct>valorAnt){
-    	    						//posMano = i;
-    	    						if(valorAct > valorMax){
-    	    							valorMax=valorAct;
-    	    							posMax=i;
-    	    						}
-    	    					}
-    	    					
-    	    					else{
-    	    						//posMano=h;
-    	    						if(valorAnt > valorMax){
-    	    							valorMax=valorAnt;
-    	    							posMax=h;
-    	    						}
-    	    					}
-    					}
-    					else if(jugadores.get(i).getPeso()==5){ //color
-    						
-    						valorAct=valorMaxMano(jugadores.get(h).getCartas(),true);
-        					valorAnt=valorMaxMano(jugadores.get(i).getCartas(),true);
-        					
-        					if(valorAct>valorAnt){
-        						//posMano = i;
-        						if(valorAct > valorMax){
-        							valorMax=valorAct;
-        							posMax=i;
-        						}
-        					}
-        					
-        					else{
-        						//posMano=h;
-        						if(valorAnt > valorMax){
-        							valorMax=valorAnt;
-        							posMax=h;
-        						}
-        					}
-        					
-    					}
+           if(valorAct>valorAnt){
+            //posMano = i;
+            if(valorAct > valorMax){
+             valorMax=valorAct;
+             posMax=i;
+            }
+           }
 
-    					else if(jugadores.get(i).getPeso()==3){ //trio
-    						valorAct=desempateCartaRep(jugadores.get(i).getCartas(),-1);
-    						valorAnt=desempateCartaRep(jugadores.get(h).getCartas(),-1);
-    						
-    							if(valorAct>valorAnt){
-    	    						//posMano = i;
-    	    						if(valorAct > valorMax){
-    	    							valorMax=valorAct;
-    	    							posMax=i;
-    	    						}
-    	    					}
-    	    					
-    	    					else{
-    	    						//posMano=h;
-    	    						if(valorAnt > valorMax){
-    	    							valorMax=valorAnt;
-    	    							posMax=h;
-    	    						}
-    	    					}
-    					}
+           else{
+            //posMano=h;
+            if(valorAnt > valorMax){
+             valorMax=valorAnt;
+             posMax=h;
+            }
+           }
 
-    					else if(jugadores.get(i).getPeso()==2){//doble pareja
-    						  
-    				        valorAct = desempateCartaRep(jugadores.get(i).getCartas(),-1);
-    				        valorAnt = desempateCartaRep(jugadores.get(h).getCartas(),-1);
-    				        
-    				        if(valorAct == valorAnt){ //Si la priemra pareja es igual miramos la segunda
-    				         valorAct = desempateCartaRep(jugadores.get(i).getCartas(), valorAct);
-    				         valorAnt = desempateCartaRep(jugadores.get(h).getCartas(),valorAnt);
-    				         if(valorAct>valorAnt)
-    				          if(valorAct > valorMax){
-    				           valorMax = valorAct;
-    				           posMax = i;
-    				          }
-    				         else
-    				          if(valorAnt > valorMax){
-    				              valorMax=valorAnt;
-    				              posMax=h;
-    				             }
-    				        }
-    				        else{ //Si la primera pareja ya no es igual no hay que mirar mas
-    				         if(valorAct>valorAnt)
-    				          if(valorAct > valorMax){
-    				           valorMax = valorAct;
-    				           posMax = i;
-    				          }
-    				         
-    				         else
-    				             if(valorAnt > valorMax){
-    				              valorMax=valorAnt;
-    				              posMax=h;
-    				             }
-    				        }
-    				       }
-    					
-    				
-    					else if(jugadores.get(i).getPeso()==0){//Carta-Alta
+          }
 
-    						valorAct=valorMaxMano(jugadores.get(h).getCartas(),true);
-        					valorAnt=valorMaxMano(jugadores.get(i).getCartas(),true);
-        					
-        					if(valorAct>valorAnt){
-        						//posMano = i;
-        						if(valorAct > valorMax){
-        							valorMax=valorAct;
-        							posMax=i;
-        						}
-        					}
-        					
-        					else{
-        						//posMano=h;
-        						if(valorAnt > valorMax){
-        							valorMax=valorAnt;
-        							posMax=h;
-        						}
-        					}
-    					}
-    			}
-    		}
-    		return posMax;//pos del ganador
+          else if(jugadores.get(i).getPeso()==7){ //poker
+           valorAct=desempateCartaRep(jugadores.get(i).getCartas(),-1);
+           valorAnt=desempateCartaRep(jugadores.get(h).getCartas(),-1);
+
+           if(valorAct>valorAnt){
+            //posMano = i;
+            if(valorAct > valorMax){
+             valorMax=valorAct;
+             posMax=i;
+            }
+           }
+
+           else{
+            //posMano=h;
+            if(valorAnt > valorMax){
+             valorMax=valorAnt;
+             posMax=h;
+            }
+           }
+          }
+
+          else if(jugadores.get(i).getPeso()==6){ //full
+           valorAct=desEmpateTrioFull(jugadores.get(i).getCartas());
+           valorAnt=desEmpateTrioFull(jugadores.get(h).getCartas());
+
+           if(valorAct>valorAnt){
+            //posMano = i;
+            if(valorAct > valorMax){
+             valorMax=valorAct;
+             posMax=i;
+            }
+           }
+
+           else{
+            //posMano=h;
+            if(valorAnt > valorMax){
+             valorMax=valorAnt;
+             posMax=h;
+            }
+           }
+          }
+          else if(jugadores.get(i).getPeso()==5){ //color
+
+           valorAct=valorMaxMano(jugadores.get(i).getCartas(),true);
+           valorAnt=valorMaxMano(jugadores.get(h).getCartas(),true);
+
+           if(valorAct>valorAnt){
+            //posMano = i;
+            if(valorAct > valorMax){
+             valorMax=valorAct;
+             posMax=i;
+            }
+           }
+
+           else{
+            //posMano=h;
+            if(valorAnt > valorMax){
+             valorMax=valorAnt;
+             posMax=h;
+            }
+           }
+
+          }
+
+          else if(jugadores.get(i).getPeso()==3){ //trio
+           valorAct=desempateCartaRep(jugadores.get(i).getCartas(),-1);
+           valorAnt=desempateCartaRep(jugadores.get(h).getCartas(),-1);
+
+           if(valorAct>valorAnt){
+            //posMano = i;
+            if(valorAct > valorMax){
+             valorMax=valorAct;
+             posMax=i;
+            }
+           }
+
+           else{
+            //posMano=h;
+            if(valorAnt > valorMax){
+             valorMax=valorAnt;
+             posMax=h;
+            }
+           }
+          }
+
+          else if(jugadores.get(i).getPeso()==2){//doble pareja
+           
+           valorAct = parejaAltaDP(jugadores.get(i).getCartas());
+           valorAnt = parejaAltaDP(jugadores.get(h).getCartas());
+           
+           if(valorAct == valorAnt){ //Si la priemra pareja es igual miramos la segunda
+            valorAct = parejaBajaDP(jugadores.get(i).getCartas());
+            valorAnt = parejaBajaDP(jugadores.get(h).getCartas());
+            if(valorAct>valorAnt){
+             if(valorAct > valorMax){
+              valorMax = valorAct;
+              posMax = i;
+             }
+            }else{
+             if(valorAnt > valorMax){
+                 valorMax=valorAnt;
+                 posMax=h;
+                }
+            }
+           }
+           else{ //Si la primera pareja ya no es igual no hay que mirar mas
+            if(valorAct>valorAnt)
+             if(valorAct > valorMax){
+              valorMax = valorAct;
+              posMax = i;
+             }
+            
+            else
+                if(valorAnt > valorMax){
+                 valorMax=valorAnt;
+                 posMax=h;
+                }
+           }
+          } 
+
+          else if(jugadores.get(i).getPeso()==1){//pareja
+           valorAct=desempateCartaRep(jugadores.get(i).getCartas(),-1);
+           valorAnt=desempateCartaRep(jugadores.get(h).getCartas(),-1);
+
+           if(valorAct>valorAnt){
+            //posMano = i;
+            if(valorAct > valorMax){
+             valorMax=valorAct;
+             posMax=i;
+            }
+           }
+
+           else{
+            //posMano=h;
+            if(valorAnt > valorMax){
+             valorMax=valorAnt;
+             posMax=h;
+            }
+           }
+          }
+
+          else if(jugadores.get(i).getPeso()==0){//Carta-Alta
+
+           if(valorMaxMano(jugadores.get(i).getCartas(),false)>valorMaxMano(jugadores.get(h).getCartas(),false))
+            posMano = i;
+           else
+            posMano=h;
+          }
+         }
+        }
+        return posMax;//pos del ganador
+       }
+    
+    	private static int parejaAltaDP(ArrayList<Carta> cartas){
+    		return cartas.get(0).getValor();
     	}
+    	
+    	private static int parejaBajaDP(ArrayList<Carta> cartas){
+    		return cartas.get(2).getValor();
+    	}
+    
      
+    	 private static int desEmpateTrioFull(ArrayList<Carta> cartas){
+    		   return cartas.get(0).getValor(); 
+    		     }
 	
     	public static int valorMaxMano(ArrayList<Carta> cartas,boolean escalera){ //Te devuelve el valor de la carta mas alta de una mano
 
@@ -1221,8 +1240,8 @@ private static Carta[] colorModo3(Carta[] cartas) {
     		
     		return max;
         }
-
-	
+        
+        	
     	private static int desempateCartaRep(ArrayList<Carta> cartas,int anterior){
     		int valor=0,i=cartas.size()-1,j;
     		boolean repetido = false;

@@ -180,11 +180,15 @@ public class Hja {
 
             case NJugadores: //Apartado 3
                 System.out.println("le has metido un 3");
-                CartasModo2 c3 = new CartasModo2(new ArrayList<Carta[]>(), new ArrayList<Carta[]>());
+                ArrayList<CartasModo2> c3 = new ArrayList<CartasModo2>();    
                 c3 = ar.cargarModo3(txtEntrada);
-                manos = c3.juntar(3);
-                String salida = log.comprobarModo3(manos);
-                ar.guardar(txtSalida, salida, 0);
+                              
+                for(int i=0; i<c3.size(); i++){
+                	manos = c3.get(i).juntar(3);
+                	String salida = log.NUEVOcomprobarModo3(manos);
+	                ar.guardar(txtSalida, salida, i);
+                }
+                
                 break;
 
             case OMAHA:

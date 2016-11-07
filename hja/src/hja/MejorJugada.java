@@ -124,9 +124,10 @@ public class MejorJugada {
 
     }
 
-    public CartasModo2 cargarModo3(String archivo) {
+    public ArrayList<CartasModo2> cargarModo3(String archivo) {
 
         CartasModo2 cartas = new CartasModo2(cartasMano, cartasMesa);
+        ArrayList<CartasModo2> listaCartas = new ArrayList<CartasModo2>();
         File fichero = new File(archivo);
         int num = 0;
         Scanner s = null;
@@ -177,13 +178,14 @@ public class MejorJugada {
                 {
                     cartasMesa.add(mesa);
                 }
-
+             cartas.setSize(cartasMano.size());
+             listaCartas.add(cartas);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error en la lectura del fichero");
         }
-        cartas.setSize(cartasMano.size());
-        return cartas;
+        
+        return listaCartas;
 
     }
 

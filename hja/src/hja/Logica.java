@@ -973,7 +973,27 @@ public class Logica {
             jugadores.add(c);
         }
 
-        //return ordenarManos(jugadores);
+        return salida(ordenarManos(jugadores));
+
+    }
+    
+    public String NUEVOcomprobarModo3(ArrayList<Carta[]> cartas) {
+        ArrayList<Modo3> jugadores = new ArrayList<Modo3>();
+    
+        for (int i = 0; i < cartas.size(); i++) {
+            Modo3 c = new Modo3();
+            c.setJugador(i);
+
+            Carta[] car = comprobarModo3(cartas.get(i), c);
+            ArrayList<Carta> listaCarta = new ArrayList<Carta>();
+
+            for (int j = 0; j < car.length; j++) {
+                listaCarta.add(car[j]); //cambiamos de carta[] a arraylis<Carta>
+            }
+            c.setCartas(listaCarta);
+            jugadores.add(c);
+        }
+
         return salida(ordenarManos(jugadores));
 
     }

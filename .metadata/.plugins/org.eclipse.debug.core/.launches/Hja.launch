@@ -7,6 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="hja.Hja"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-g 2 -ent Test2.txt -sal sal2.txt"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-g 3 -ent Test3.txt -sal sal3.txt"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="hja"/>
 </launchConfiguration>

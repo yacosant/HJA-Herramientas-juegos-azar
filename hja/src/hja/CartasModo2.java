@@ -33,7 +33,7 @@ public class CartasModo2 {
         for (int pos = 0; pos < size; pos++) {
 
             if (modo == 2) {
-                c = new Carta[cartasMesa.size()+1]; //Creamos un array de Carta con el tama�o de la mesa mas 2 (las cartas de la mano)
+                c = new Carta[cartasMesa.get(pos).length+2]; //Creamos un array de Carta con el tama�o de la mesa mas 2 (las cartas de la mano)
             } else if (modo == 3) {
                 c = new Carta[7];
             }
@@ -42,7 +42,7 @@ public class CartasModo2 {
                 c[i] = (cartasMano.get(pos)[i]);
             }
 
-            for (int j = 0; j < cartasMesa.size(); j++) { //Cogemos las cartas de la mesa
+            for (int j = 0; j < cartasMesa.get(pos).length; j++) { //Cogemos las cartas de la mesa
                 c[j + i] = (cartasMesa.get(pos)[j]);
             }
 

@@ -25,6 +25,9 @@ public class Logica {
      * @return
      */
     public String comprobar(boolean proyect, Carta[] cartas) { //Metodo que te devuelve la mejor jugada
+        proyectoColor = false;
+        proyectoEscalera = false;
+        proyectoEscaleraC = false;
         String mejorJugada = "-Best hand: ";
         // aqui se hacen todas las llamadas a cada uno de los metodos que
         // comprueban una mano.
@@ -57,8 +60,8 @@ public class Logica {
         else if (doblePareja(cartas) != null) {
             mejorJugada += "Two-pair: " + doblePareja(cartas);
         } // pair (parejao par)
-        else if (pareja(cartas) != null) {
-            mejorJugada += "Pair: " + pareja(cartas);
+        else if (pareja(cartas,-1) != null) {
+            mejorJugada += "Pair: " + pareja(cartas,-1);
         } // high card (carta alta)
         else {
             mejorJugada += "High Card: " + cartaAlta(cartas);
@@ -489,19 +492,18 @@ public class Logica {
 
         if (cont == 3) { //El valor 14 = As.
 
-            if (cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 14) {
+            if (cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 14 
+            		&& cartas[cont].getColor() == cartas[cont + 1].getColor())
                 esEscalera = true;
-            } else {
+            else 
                 this.proyectoEscaleraC = true;
-            }
+            
 
-        } else if (cont == 4) //Si contador es igual a 4 ya tenemos escalera
-        {
+        }else if (cont == 4) //Si contador es igual a 4 ya tenemos escalera
             esEscalera = true;
-        } else {
+         else 
             this.proyectoEscaleraC = buscarProyectoEC(cartas, cont);
-        }
-
+        
         return esEscalera;
     }
 
@@ -528,16 +530,16 @@ public class Logica {
 
         if (cont == 3) { //El valor 13 es el as
             if (cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 13) {
-                cont++;
-            } else {
+                esEscalera = true;
+            } else 
                 this.proyectoEscalera = true;
-            }
+            
 
         } else if (cont == 4) {
             esEscalera = true;
-        } else {
+        } else
             this.proyectoEscalera = buscarProyectoE(cartas, cont);
-        }
+        
 
         return esEscalera;
     }
@@ -591,12 +593,13 @@ public class Logica {
     private String full(Carta[] cartas) {
         String carta = null;
         String trio = null;
-
+        int cartaTrio = 0;
+        
         if (trio(cartas) != null) {
             trio = trio(cartas);
-
-            if (pareja(cartas) != null && !trio.equals(pareja(cartas))) {
-                carta = "Full house: Three-of-a-kind " + trio + " and pair of " + pareja(cartas);
+            cartaTrio = cartaToInt(trio);
+            if (pareja(cartas,cartaTrio) != null){
+                carta = "Full house: Three-of-a-kind " + trio + " and pair of " + pareja(cartas,cartaTrio);
             }
         }
         return carta;
@@ -620,10 +623,12 @@ public class Logica {
                 posible = false;
             }
         }
-
-        if (cont == 4) {
+        
+        if(cont == 3)
+        	this.proyectoColor = true;
+        else if (cont == 4) {
             carta = charToColor(cartas[cont].getColor());
-        } else {
+        } else{
             this.proyectoColor = buscarProyectoC(cartas, cont);
         }
 
@@ -694,12 +699,12 @@ public class Logica {
      * @param cartas
      * @return
      */
-    private String pareja(Carta[] cartas) {
+    private String pareja(Carta[] cartas,int valor) {
         String carta = null;
 
         for (int i = 0; i < cartas.length; i++) {
             for (int j = i + 1; j < cartas.length; j++) {
-                if (cartas[i].getValor() == cartas[j].getValor()) {
+                if (cartas[i].getValor() == cartas[j].getValor() && cartas[i].getValor() != valor) {
                     carta = intToCarta(cartas[i].getValor());
                 }
             }
@@ -745,33 +750,36 @@ public class Logica {
     //Metodos para ver si hay proyectos de jugadas
     private boolean buscarProyectoE(Carta[] cartas, int cont) {
 
-        boolean draw = false, start = false;
+        boolean draw = false, gut = false;
 
         if (cont == 0) {
-            cont++;
-            draw = true;
-            start = true;
-        } else if (cont == 2 && cartas[cont].getValor() + 2 == cartas[cont + 2].getValor()) {
-            draw = true;
-            gutshot = true;
-            return draw;
-        } else if (cartas[cont].getValor() + 2 == cartas[cont + 2].getValor()) {
+        	
+        	if(cartas[cont].getValor() == cartas[cont+1].getValor()){
+        		cont++;
+        		draw = true;
+        	}else{
+        		if(cartas[cont].getValor()+2 == cartas[cont+2].getValor()){
+        			gut = true;
+        			draw = true;
+        			cont += 2;
+        		}
+        	}
+        	
+        } else if ((cont == 1 || cont == 2) && cartas[cont].getValor() + 2 == cartas[cont + 2].getValor()) {
             draw = true;
             cont += 2;
-        }
+            gut=true;
+        } 
 
         while (cont < cartas.length - 1 && draw) {
             if (cartas[cont].getValor() + 1 == cartas[cont + 1].getValor() || cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 14) {
                 cont++;
-            } else if (start && (cartas[cont].getValor() + 2 == cartas[cont + 2].getValor() || cartas[cont].getValor() == 5 && cartas[cont + 2].getValor() == 14)) {
-                cont++;
-                start = false;
-            } else {
+            }else {
                 draw = false;
             }
         }
-
-        this.gutshot = draw;
+        
+        this.gutshot = gut;
 
         return draw;
 
@@ -779,38 +787,50 @@ public class Logica {
 
     private boolean buscarProyectoEC(Carta[] cartas, int cont) {
 
-        boolean draw = false, start = false;
+        boolean draw = false, gut = false;
 
         if (cont == 0) {
-            cont++;
-            draw = true;
-            start = true;
-        } else if (cont == 2 && cartas[cont].getValor() + 2 == cartas[cont + 2].getValor()
-                && cartas[cont].getColor() == cartas[cont + 2].getColor()) {
-            draw = true;
-            cont++;
-            gutshot = true;
-            return true;
-        } else if (cartas[cont].getValor() + 2 == cartas[cont + 2].getValor()
-                && cartas[cont].getColor() == cartas[cont + 2].getColor()) {
-            draw = true;
-            cont += 2;
+        	if(cartas[cont].getValor() == cartas[cont+1].getValor() 
+        			&& cartas[cont].getValor()+1 == cartas[cont+2].getValor()){
+        		if(cartas[cont].getColor() == cartas[cont+2].getColor() 
+        				|| cartas[cont+1].getColor() == cartas[cont+2].getColor()){
+        			cont+=2;
+        			draw = true;
+        		}
+        	}else{
+        		if(cartas[cont].getValor()+2 == cartas[cont+2].getValor() 
+        				&& cartas[cont].getColor() == cartas[cont+2].getColor()){
+        			gut = true;
+        			draw = true;
+        			cont += 2;
+        		}
+        		
+        	}		
+        } else if ((cont == 1 || cont == 2) && cartas[cont].getValor() + 2 == cartas[cont + 2].getValor()
+        		&& cartas[cont].getColor() == cartas[cont + 2].getColor()) {
+        	draw = true;
+        	gut = true;
+        	cont+=2;
+
         }
 
         while (cont < cartas.length - 1 && draw) {
-            if ((cartas[cont].getValor() + 1 == cartas[cont + 1].getValor() || cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 14)
-                    && cartas[cont].getColor() == cartas[cont + 1].getColor()) {
-                cont++;
-            } else if ((start && cartas[cont].getValor() + 2 == cartas[cont + 2].getValor() || cartas[cont].getValor() == 5 && cartas[cont + 2].getValor() == 14)
-                    && cartas[cont].getColor() == cartas[cont + 2].getColor()) {
-                cont++;
-                start = false;
-            } else {
-                draw = false;
-            }
+        	if ((cartas[cont].getValor() + 1 == cartas[cont + 1].getValor() || cartas[cont].getValor() == 5 && cartas[cont + 1].getValor() == 14)
+        			&& cartas[cont].getColor() == cartas[cont + 1].getColor()) {
+        		cont++;
+        	}else 
+        		draw = false;
+        	
+        }
+        
+        if(cartas[4].getValor() == cartas[3].getValor()){
+        	if(cartas[2].getValor() + 2 == cartas[3].getValor() 
+        			&& (cartas[2].getColor() == cartas[3].getColor() || cartas[2].getColor() == cartas[4].getColor())){
+        		draw = true;
+        	}
         }
 
-        this.gutshot = draw;
+        this.gutshot = gut;
 
         return draw;
 
@@ -826,15 +846,13 @@ public class Logica {
             } else {
                 cont++;
             }
-
             draw = true;
-        } else if (cont == 2 && cartas[cont].getColor() == cartas[cont + 2].getColor()) {
-            draw = true;
-            return draw;
-        } else if (cartas[cont].getColor() == cartas[cont + 2].getColor()) {
+            
+        }else if ( (cont == 1 || cont == 2) && cartas[cont].getColor() == cartas[cont + 2].getColor()) {
             draw = true;
             cont += 2;
         }
+
 
         while (cont < cartas.length - 1 && draw) {
             if (cartas[cont].getColor() == cartas[cont + 1].getColor()) {
@@ -923,6 +941,54 @@ public class Logica {
                 break;
             case 14:
                 carta = "Ace";
+                break;
+            default:
+                break;
+        }
+        return carta;
+    }
+    
+    private int cartaToInt(String valor) {
+        int carta = 0;
+        switch (valor) {
+            case "two":
+                carta = 2;
+                break;
+            case "three":
+                carta = 3;
+                break;
+            case "four":
+                carta = 4;
+                break;
+            case "five":
+                carta = 5;
+                break;
+            case "six":
+                carta = 6;
+                break;
+            case "seven":
+                carta = 7;
+                break;
+            case "eight":
+                carta = 8;
+                break;
+            case "nine":
+                carta = 9;
+                break;
+            case "ten":
+                carta = 10;
+                break;
+            case "Jack":
+                carta = 11;
+                break;
+            case "Queen":
+                carta = 12;
+                break;
+            case "King":
+                carta = 13;
+                break;
+            case "Ace":
+                carta = 14;
                 break;
             default:
                 break;

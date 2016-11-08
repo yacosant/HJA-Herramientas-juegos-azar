@@ -18,7 +18,7 @@ J5: AhKcQsTd9s (High Card)
 J6: AhKcQsTd9s (High Card)
 
 4;J1Ah9c;J2Kh9s;J3Qh9h;J4Jh9d;5h7hTh2h5c
-J3: 2h5h7h9hTh (Flush of Heartss)
+J3: 2h5h7h9hTh (Flush of Hearts)
 J2: 5h5cKhTh9s (Pair of fives)
 J4: 5h5cJhTh9d (Pair of fives)
 J1: 5h5cAhTh9c (Pair of fives)

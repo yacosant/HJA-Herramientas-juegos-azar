@@ -1088,14 +1088,14 @@ public class Logica {
         int peso = jug.getPeso();
 
         if (peso == 8) {
-            c = "Straight Flush of " + charToColor(jug.getCartas().get(0).getColor()) + "s";
+            c = "Straight Flush of " + charToColor(jug.getCartas().get(0).getColor());
         } else if (peso == 7) {
             c = "Poker of " + intToCarta(jug.getCartas().get(0).getValor()) + "s";
         } else if (peso == 6) {
             c = "Full of Three " + intToCarta(jug.getCartas().get(0).getValor()) + "s";
             c += " and Two " + intToCarta(jug.getCartas().get(3).getValor()) + "s";
         } else if (peso == 5) {
-            c = "Flush of " + charToColor(jug.getCartas().get(0).getColor()) + "s";
+            c = "Flush of " + charToColor(jug.getCartas().get(0).getColor());
         } else if (peso == 4) {
             c = "Straight";
         } else if (peso == 3) {

@@ -447,26 +447,29 @@ public class Logica {
 
     private Carta[] colorModo3(Carta[] cartas) {
         Carta[] mejoresCartas = new Carta[5];
-        int cont = 0, color = 0, j;
+        int cont = cartas.length-1, color, j;
         boolean col = false;
 
-        while (cont < cartas.length - 1 && !col) {
-            j = cont + 1;
+        
+        while (cont >= 0 && !col) {
+        	color = 0;
+            j = cont - 1;
             mejoresCartas[color] = cartas[cont];
             color++;
-            while (j < cartas.length - 1) {
-                if (cartas[cont].getColor() == cartas[j].getColor()) {
+            while (j >= 0) {
+                if (mejoresCartas[0].getColor() == cartas[j].getColor()) {
                     mejoresCartas[color] = cartas[j];
                     color++;
                 }
                 if (color == 5) {
+                	ordenador(mejoresCartas);
                     return mejoresCartas;
                 }
 
-                j++;
+                j--;
             }
             color = 0;
-            cont++;
+            cont--;
         }
         return null;
     }

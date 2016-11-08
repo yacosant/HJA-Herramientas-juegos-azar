@@ -139,6 +139,9 @@ public class MejorJugada {
             s = new Scanner(fichero);
 
             while (s.hasNext()) {
+            	cartasMano = new ArrayList<Carta[]>();
+                cartasMesa = new ArrayList<Carta[]>();
+            	cartas = new CartasModo2(cartasMano, cartasMesa);
                 linea = s.nextLine(); // Guardamos la linea en un String
                 lineas.add(linea);
                 StringBuffer bf = new StringBuffer(linea);

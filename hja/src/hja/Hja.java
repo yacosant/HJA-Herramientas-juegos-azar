@@ -21,7 +21,7 @@ public class Hja {
     private static ArrayList<Carta[]> manos;
     private static String txtEntrada; //Atributos para guardar los txt de los parametros
     private static String txtSalida;
-    private static MejorJugada ar;
+    private static Cargar ar;
     private static Logica log = new Logica();
 
     /**
@@ -141,14 +141,14 @@ public class Hja {
         if (selectedGame == null) {
             throw new ParseException("No existe ese juego");
         }
-        ar = new MejorJugada();
+       
         //Switch de los juegos que hay 
         switch (selectedGame) {
 
             case CincoCartas: //Apartado 1
                 System.out.println("le has metido un 1");
-
-                manos = ar.cargar(txtEntrada);
+                ar = new CargarModo1();
+                manos = (ArrayList<Carta[]>) ar.cargar(txtEntrada);
                 while (cont < manos.size()) {
                     String respuesta = log.comprobar(true, manos.get(cont));
                     ar.guardar(txtSalida, respuesta, cont);
@@ -161,8 +161,9 @@ public class Hja {
 
             case DosCartas: //Apartado 2
                 System.out.println("le has metido un 2");
+                ar = new CargarModo2();
                 CartasModo2 c = new CartasModo2(new ArrayList<Carta[]>(), new ArrayList<Carta[]>());
-                c = ar.cargarModo2(txtEntrada);
+                c = (CartasModo2) ar.cargar(txtEntrada);
                 if (c.getSize() == 5) {
                     proyecto = false;
                 }
@@ -180,8 +181,9 @@ public class Hja {
 
             case NJugadores: //Apartado 3
                 System.out.println("le has metido un 3");
-                ArrayList<CartasModo2> c3 = new ArrayList<CartasModo2>();    
-                c3 = ar.cargarModo3(txtEntrada);
+                ArrayList<CartasModo2> c3 = new ArrayList<CartasModo2>(); 
+                ar = new CargarModo3();
+                c3 = (ArrayList<CartasModo2>) ar.cargar(txtEntrada);
                               
                 for(int i=0; i<c3.size(); i++){
                 	manos = c3.get(i).juntar(3);

@@ -5,6 +5,8 @@
  */
 package guihja;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JSlider;
 
 /**
@@ -36,6 +38,12 @@ public class Principal extends javax.swing.JPanel {
         jSlider1 = new javax.swing.JSlider();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+
+        tablero1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablero1MousePressed(evt);
+            }
+        });
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,7 +200,7 @@ public class Principal extends javax.swing.JPanel {
                 for(int x=0;x<=max; x++){
                     tablero1.pintar(c+x*h, d+x*v,0);
                 }
-               //i++;
+              
             }
             else  tablero1.pintar(a, b,0);
             
@@ -201,7 +209,7 @@ public class Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
@@ -213,9 +221,15 @@ public class Principal extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jTextField1.setText("");
+        jTextField2.setText("0.0%");
         tablero1.reset();
         jSlider1.setValue(0);
+        LogicaGui.setPorcentaje(0.0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tablero1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablero1MousePressed
+        jTextField2.setText(LogicaGui.getPorcentaje()+"%");
+    }//GEN-LAST:event_tablero1MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

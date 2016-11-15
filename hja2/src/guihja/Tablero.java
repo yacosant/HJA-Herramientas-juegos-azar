@@ -8,6 +8,8 @@ package guihja;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -17,18 +19,32 @@ public class Tablero extends javax.swing.JPanel {
 
     private Button[][] tableroBot = new Button [13][13];
     private boolean suiters=false;
+    private String tecla;
     /**
      * Creates new form Tablero
      */
     public Tablero() {
+      
         initComponents();
          this.setLayout (new GridLayout (13,13)); 
-         
+         ActionListener ac;          
+          LogicaGui.setT(this);
         for(int i=14; i>=2; i--){
             suiters=false;
             for(int j=14; j>=2;j--){
+                ac = new ActionListener(){
+                  public void actionPerformed(ActionEvent e)
+                  {
+                    tecla=e.getActionCommand();
+                      LogicaGui.pulsacion(tecla);
+                    ;}
+                  
+                };
+                
+                
                 tableroBot[i-2][j-2]= new Button();
                 tableroBot[i-2][j-2].setLabel(valorBoton(i,j));
+                tableroBot[i-2][j-2].addActionListener(ac);
                 this.add(tableroBot[i-2][j-2]);
             }
         }

@@ -35,6 +35,7 @@ public class Principal extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         jTextField2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,7 +43,7 @@ public class Principal extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Jugador 1");
+        jLabel1.setText("Jugador ");
 
         jButton1.setText("Pintar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,16 +67,22 @@ public class Principal extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setText("Limpiar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tablero1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -84,8 +91,10 @@ public class Principal extends javax.swing.JPanel {
                             .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2))))
+                            .addComponent(jTextField2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,7 +106,8 @@ public class Principal extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,15 +142,21 @@ public class Principal extends javax.swing.JPanel {
             
             //SI ES XX+
             if(i<input.length() && input.charAt(i)=='+'){
-                //max=tablero1.tam()-a+3;
+                max=tablero1.tam()-a+2;
                 
                 if(a<b){
                     v=0;
+                    h=1;
                     max=b-a;
                 }
                 else if(a>b){
                     h=0;
+                    v=1;
                     max=a-b;
+                }
+                else{
+                    v=1;
+                    h=1;
                 }
                    
                 for(int x=0;x<max; x++){
@@ -148,6 +164,7 @@ public class Principal extends javax.swing.JPanel {
                 }
                i++;
             }
+            
             if((i)<input.length() && input.charAt(i)=='-'){
                 i++;
                 c=LogicaGui.CharToInt(input.charAt(i));
@@ -191,11 +208,19 @@ public class Principal extends javax.swing.JPanel {
         double valor= jSlider1.getValue();
         valor=valor/10;
         jTextField2.setText(valor+"%");
+        LogicaGui.setPorcentaje(valor);
     }//GEN-LAST:event_jSlider1StateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextField1.setText("");
+        tablero1.reset();
+        jSlider1.setValue(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTextField jTextField1;

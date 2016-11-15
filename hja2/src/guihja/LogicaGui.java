@@ -10,6 +10,8 @@ package guihja;
  * @author YVCX
  */
 public class LogicaGui {
+    
+    private static double porcentaje;
        
     public static String intToChar(int valor) {
         String carta = null;
@@ -75,5 +77,15 @@ public class LogicaGui {
         }
         return carta;
     }
+
+    public static double getPorcentaje() {
+        return porcentaje;
+    }
+
+    public static void setPorcentaje(double porcentaje) {
+        LogicaGui.porcentaje = porcentaje;
+    }
+    
+    
 
 }

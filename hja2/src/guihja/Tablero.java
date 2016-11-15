@@ -27,7 +27,8 @@ public class Tablero extends javax.swing.JPanel {
         for(int i=14; i>=2; i--){
             suiters=false;
             for(int j=14; j>=2;j--){
-                tableroBot[i-2][j-2]= new Button(valorBoton(i,j));
+                tableroBot[i-2][j-2]= new Button();
+                tableroBot[i-2][j-2].setLabel(valorBoton(i,j));
                 this.add(tableroBot[i-2][j-2]);
             }
         }
@@ -36,22 +37,45 @@ public class Tablero extends javax.swing.JPanel {
     
     private String valorBoton (int i, int j){
         String valor, a, b;
+        int color=2;
             a= LogicaGui.intToChar(i);
             b= LogicaGui.intToChar(j);
             
             if(i>j || i==j) valor= a+b;
             else valor = b+a;
             
-            if(i==j)suiters=true;
-            else if(suiters)valor += "s";
+            if(i==j){
+                suiters=true;
+                color=3;
+            }
+            else if(suiters){
+                valor += "s";
+                color=4;
+            }
             else if(!suiters) valor += "o";
+            pintar(i,j,color);
         return valor;
     }
     
-    public void pintar(int i, int j){
-        tableroBot[i-2][j-2].setBackground(Color.yellow);
+    public void pintar(int i, int j, int mode){
+        switch(mode){
+            case 0: tableroBot[i-2][j-2].setBackground(Color.yellow); break;
+            case 1: tableroBot[i-2][j-2].setBackground(new Color(255,102,255)); break; //magenta de porcentaje
+            case 2: tableroBot[i-2][j-2].setBackground(new Color(240,240,240)); break; //defult gris
+            case 3: tableroBot[i-2][j-2].setBackground(new Color(153,255,153)); break; //verde
+            case 4: tableroBot[i-2][j-2].setBackground(new Color(255,153,153)); break; //rojo
+            default: tableroBot[i-2][j-2].setBackground(new Color(240,240,240)); break;
+        }
     }
     
+    public void reset(){
+        for(int i=14; i>=2; i--){
+            suiters=false;
+            for(int j=14; j>=2;j--){
+            valorBoton(i,j);
+            }
+        }
+    }
     public int tam(){
         return 13;
     }

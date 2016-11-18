@@ -12,6 +12,7 @@ package guihja;
 public class LogicaGui {
     
     private static double porcentaje;
+    static final Posicion[] ranking = {new Posicion(14,14),new Posicion(13,13),new Posicion(14,13)};
        
     public static String intToChar(int valor) {
         String carta = null;
@@ -86,6 +87,32 @@ public class LogicaGui {
         LogicaGui.porcentaje = porcentaje;
     }
     
+    public static void sumarPorcentaje(int i, int j){
+    	if(i == j)
+    		LogicaGui.porcentaje += 0.45;
+    	else if (i<j)
+    		LogicaGui.porcentaje += 0.9;
+    	else
+    		LogicaGui.porcentaje += 0.3;
+    }
     
+    public static void restarPorcentaje(int i, int j){
+    	if(i == j)
+    		LogicaGui.porcentaje -= 0.45;
+    	else if (i<j)
+    		LogicaGui.porcentaje -= 0.9;
+    	else
+    		LogicaGui.porcentaje -= 0.3;
+    }
+    
+    public static String porcentajeString(){
+    	return String.valueOf(redondear(LogicaGui.porcentaje,2));
+    }
+    
+    public static double redondear(double numero,int digitos){ 
+    	int cifras=(int) Math.pow(10,digitos);         
+    	return Math.rint(numero*cifras)/cifras;    
+    }
 
+    
 }

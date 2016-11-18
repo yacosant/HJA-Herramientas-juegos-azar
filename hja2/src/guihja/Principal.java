@@ -161,11 +161,12 @@ public class Principal extends javax.swing.JPanel {
                    
                 for(int x=0;x<max; x++){
                     tablero1.pintar(a+x*h, b+x*v,0);
+                    LogicaGui.sumarPorcentaje(a+x*h,b+x*v);
                 }
                i++;
             }
             
-            if((i)<input.length() && input.charAt(i)=='-'){
+            else if((i)<input.length() && input.charAt(i)=='-'){
                 i++;
                 c=LogicaGui.CharToInt(input.charAt(i));
                 d=LogicaGui.CharToInt(input.charAt(i+1));
@@ -191,13 +192,21 @@ public class Principal extends javax.swing.JPanel {
                 
                 for(int x=0;x<=max; x++){
                     tablero1.pintar(c+x*h, d+x*v,0);
+                    LogicaGui.sumarPorcentaje(c+x*h,d+x*v);
                 }
                //i++;
             }
-            else  tablero1.pintar(a, b,0);
+            else{
+            	tablero1.pintar(a, b,0);
+            	LogicaGui.sumarPorcentaje(a,b);
+            }
+
+           
+            
             
             i++; //saltar la coma
         }
+        jTextField2.setText(LogicaGui.porcentajeString() + "%");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -213,6 +222,8 @@ public class Principal extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jTextField1.setText("");
+        jTextField2.setText("0,0%");
+        LogicaGui.setPorcentaje(0);
         tablero1.reset();
         jSlider1.setValue(0);
     }//GEN-LAST:event_jButton2ActionPerformed

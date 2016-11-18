@@ -5,6 +5,8 @@
  */
 package guihja;
 
+import java.util.ArrayList;
+
 
 
 /**
@@ -98,25 +100,9 @@ public class LogicaGui {
             y=posiciones.get(i).getY();
             t.pintar(x+2, y+2, 1);
         }
-    public static void sumarPorcentaje(int i, int j){
-    	if(i == j)
-    		LogicaGui.porcentaje += 0.45;
-    	else if (i<j)
-    		LogicaGui.porcentaje += 0.9;
-    	else
-    		LogicaGui.porcentaje += 0.3;
     }
-    
-	 public void pintarPorcentaje(Tablero t, ArrayList<Posicion> posiciones){
-        int x,y;
-        for(int i=0;i<posiciones.size();i++){
-            x=posiciones.get(i).getX();
-            y=posiciones.get(i).getY();
-            t.pintar(x+2, y+2, 1);
-        }
-    }
-	
-	public static void pulsacion(String s){
+ 
+    public static void pulsacion(String s){
         int a,b,i=0;
         double valor=0;
         char c;
@@ -140,6 +126,10 @@ public class LogicaGui {
        sumar(valor);
      }
 	
+    private static void sumar(double i){
+        porcentaje +=i;
+    }
+    
     public static void restarPorcentaje(int i, int j){
     	if(i == j)
     		LogicaGui.porcentaje -= 0.45;
@@ -157,9 +147,6 @@ public class LogicaGui {
     	return String.valueOf(redondear(LogicaGui.porcentaje,2));
     }
 
-
-
-    
     public static double redondear(double numero,int digitos){ 
     	int cifras=(int) Math.pow(10,digitos);         
     	return Math.rint(numero*cifras)/cifras;    
@@ -167,3 +154,4 @@ public class LogicaGui {
 
     
 }
+

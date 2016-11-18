@@ -5,6 +5,8 @@
  */
 package guihja;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JSlider;
 
 /**
@@ -161,12 +163,11 @@ public class Principal extends javax.swing.JPanel {
                    
                 for(int x=0;x<max; x++){
                     tablero1.pintar(a+x*h, b+x*v,0);
-                    LogicaGui.sumarPorcentaje(a+x*h,b+x*v);
                 }
                i++;
             }
             
-            else if((i)<input.length() && input.charAt(i)=='-'){
+            if((i)<input.length() && input.charAt(i)=='-'){
                 i++;
                 c=LogicaGui.CharToInt(input.charAt(i));
                 d=LogicaGui.CharToInt(input.charAt(i+1));
@@ -192,25 +193,17 @@ public class Principal extends javax.swing.JPanel {
                 
                 for(int x=0;x<=max; x++){
                     tablero1.pintar(c+x*h, d+x*v,0);
-                    LogicaGui.sumarPorcentaje(c+x*h,d+x*v);
                 }
-               //i++;
+              
             }
-            else{
-            	tablero1.pintar(a, b,0);
-            	LogicaGui.sumarPorcentaje(a,b);
-            }
-
-           
-            
+            else  tablero1.pintar(a, b,0);
             
             i++; //saltar la coma
         }
-        jTextField2.setText(LogicaGui.porcentajeString() + "%");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
@@ -222,12 +215,15 @@ public class Principal extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jTextField1.setText("");
-        jTextField2.setText("0,0%");
-        LogicaGui.setPorcentaje(0);
+        jTextField2.setText("0.0%");
         tablero1.reset();
         jSlider1.setValue(0);
+        LogicaGui.setPorcentaje(0.0);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    public static void updateContador(){
+        jTextField2.setText(LogicaGui.getPorcentaje()+"%");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -235,7 +231,7 @@ public class Principal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private static javax.swing.JTextField jTextField2;
     private guihja.Tablero tablero1;
     // End of variables declaration//GEN-END:variables
 }

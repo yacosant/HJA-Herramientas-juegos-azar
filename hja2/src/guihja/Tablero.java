@@ -24,7 +24,6 @@ public class Tablero extends javax.swing.JPanel {
      * Creates new form Tablero
      */
     public Tablero() {
-      
         initComponents();
          this.setLayout (new GridLayout (13,13)); 
          ActionListener ac;          
@@ -89,6 +88,7 @@ public class Tablero extends javax.swing.JPanel {
             suiters=false;
             for(int j=14; j>=2;j--){
             valorBoton(i,j);
+            LogicaGui.pulsar(i,j,false);
             }
         }
     }

@@ -16,9 +16,10 @@ import java.util.ArrayList;
 public class LogicaGui {
     
     private static double porcentaje;
-	private static Tablero t;
-    static final Posicion[] ranking = {new Posicion(14,14),new Posicion(13,13),new Posicion(14,13),new Posicion(13,14)};
-       
+    private static Tablero t;
+    private static boolean[][] pulsado = new boolean[13][13];
+    private final Posicion[] ranking={new Posicion(14,14),new Posicion(13,13),new Posicion(14,13), new Posicion(13,14)};
+    
     public static String intToChar(int valor) {
         String carta = null;
         switch (valor) {
@@ -103,7 +104,7 @@ public class LogicaGui {
     }
  
     public static void pulsacion(String s){
-        int a,b,i=0;
+        int a,b,i=0, color=3;
         double valor=0;
         char c;
       
@@ -112,37 +113,44 @@ public class LogicaGui {
             if(s.length()==3){
                 c=s.charAt(2);
                 
-                if(c=='s') valor+=0.3;
+                if(c=='s'){
+                    valor+=0.3;
+                    color=4;
+                }
                 else if(c=='o'){
                     int temp=a;
                     a=b;
                     b=temp;
                     valor+=0.9;
+                    color=2;
                 }
                 
             }
             else  valor+=0.5;
-            t.pintar(a,b,0);
-       sumar(valor);
+           
+            if(!marcado(a,b)){
+                sumar(valor);
+                t.pintar(a, b, 0);
+            }
+            else{
+                restar(valor);
+                t.pintar(a,b,color);
+            } 
+            pulsar(a,b,!marcado(a,b));
      }
 	
+    private static boolean marcado(int a, int b){
+        return pulsado[a-2][b-2];
+    }
+    
     private static void sumar(double i){
         porcentaje +=i;
     }
     
-    public static void restarPorcentaje(int i, int j){
-    	if(i == j)
-    		LogicaGui.porcentaje -= 0.45;
-    	else if (i<j)
-    		LogicaGui.porcentaje -= 0.9;
-    	else
-    		LogicaGui.porcentaje -= 0.3;
+    public static void restar(double i){
+    	porcentaje -=i;
     }
-    
-	public static void setT(Tablero t) {
-        LogicaGui.t = t;
-	}
-	
+   
     public static String porcentajeString(){
     	return String.valueOf(redondear(LogicaGui.porcentaje,2));
     }
@@ -152,6 +160,13 @@ public class LogicaGui {
     	return Math.rint(numero*cifras)/cifras;    
     }
 
+    public static void setT(Tablero tab) {
+        t=tab;
+    }
+
+    public static void pulsar(int a,int b, boolean val){
+       pulsado[a-2][b-2]=val;
+    }
     
 }
 

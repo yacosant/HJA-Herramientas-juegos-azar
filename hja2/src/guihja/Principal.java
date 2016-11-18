@@ -14,12 +14,12 @@ import javax.swing.JSlider;
  * @author YVCX
  */
 public class Principal extends javax.swing.JPanel {
-
     /**
      * Creates new form principal
      */
     public Principal() {
         initComponents();
+        t.reset();
     }
 
     /**
@@ -31,7 +31,7 @@ public class Principal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablero1 = new guihja.Tablero();
+        t = new guihja.Tablero();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -83,7 +83,7 @@ public class Principal extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tablero1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -103,7 +103,7 @@ public class Principal extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(tablero1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(t, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +126,7 @@ public class Principal extends javax.swing.JPanel {
         String input = jTextField1.getText(), linea="";
         int a,b,temp,i=0,v=1, h=1, c,d,max=0;
         
-        tablero1.reset();
+        t.reset();
         while(i<input.length()){
         
             a=LogicaGui.CharToInt(input.charAt(i));
@@ -144,7 +144,7 @@ public class Principal extends javax.swing.JPanel {
             
             //SI ES XX+
             if(i<input.length() && input.charAt(i)=='+'){
-                max=tablero1.tam()-a+2;
+                max=t.tam()-a+2;
                 
                 if(a<b){
                     v=0;
@@ -162,7 +162,7 @@ public class Principal extends javax.swing.JPanel {
                 }
                    
                 for(int x=0;x<max; x++){
-                    tablero1.pintar(a+x*h, b+x*v,0);
+                    t.pintar(a+x*h, b+x*v,0);
                 }
                i++;
             }
@@ -192,11 +192,11 @@ public class Principal extends javax.swing.JPanel {
                 }
                 
                 for(int x=0;x<=max; x++){
-                    tablero1.pintar(c+x*h, d+x*v,0);
+                    t.pintar(c+x*h, d+x*v,0);
                 }
               
             }
-            else  tablero1.pintar(a, b,0);
+            else  t.pintar(a, b,0);
             
             i++; //saltar la coma
         }
@@ -216,7 +216,7 @@ public class Principal extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jTextField1.setText("");
         jTextField2.setText("0.0%");
-        tablero1.reset();
+        t.reset();
         jSlider1.setValue(0);
         LogicaGui.setPorcentaje(0.0);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -232,6 +232,6 @@ public class Principal extends javax.swing.JPanel {
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTextField jTextField1;
     private static javax.swing.JTextField jTextField2;
-    private guihja.Tablero tablero1;
+    private guihja.Tablero t;
     // End of variables declaration//GEN-END:variables
 }

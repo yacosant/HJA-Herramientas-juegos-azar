@@ -39,12 +39,6 @@ public class Principal extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
-        tablero1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tablero1MousePressed(evt);
-            }
-        });
-
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -226,11 +220,10 @@ public class Principal extends javax.swing.JPanel {
         jSlider1.setValue(0);
         LogicaGui.setPorcentaje(0.0);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void tablero1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablero1MousePressed
+    
+    public static void updateContador(){
         jTextField2.setText(LogicaGui.getPorcentaje()+"%");
-    }//GEN-LAST:event_tablero1MousePressed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -238,7 +231,7 @@ public class Principal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private static javax.swing.JTextField jTextField2;
     private guihja.Tablero tablero1;
     // End of variables declaration//GEN-END:variables
 }

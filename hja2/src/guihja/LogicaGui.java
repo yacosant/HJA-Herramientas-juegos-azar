@@ -82,7 +82,8 @@ public class LogicaGui {
     }
 
     public static double getPorcentaje() {
-        return porcentaje;
+        double p=Math.round(porcentaje * 100);
+        return (p/100);
     }
 
     public static void setPorcentaje(double porcentaje) {

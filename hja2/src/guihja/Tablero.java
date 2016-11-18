@@ -37,10 +37,10 @@ public class Tablero extends javax.swing.JPanel {
                   {
                     tecla=e.getActionCommand();
                       LogicaGui.pulsacion(tecla);
+                      Principal.updateContador();
                     ;}
                   
                 };
-                
                 
                 tableroBot[i-2][j-2]= new Button();
                 tableroBot[i-2][j-2].setLabel(valorBoton(i,j));

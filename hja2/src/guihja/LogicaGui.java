@@ -139,6 +139,17 @@ public class LogicaGui {
             pulsar(a,b,!marcado(a,b));
      }
 	
+    public static void sumarPorcentaje(int i, int j){
+    	if(i == j)
+    		porcentaje += 0.45;
+    	else if (i<j)
+    		porcentaje += 0.9;
+    	else
+    		porcentaje += 0.3;
+        
+        pulsar(i,j,true);
+    }
+     
     private static boolean marcado(int a, int b){
         return pulsado[a-2][b-2];
     }

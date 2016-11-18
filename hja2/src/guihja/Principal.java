@@ -163,6 +163,7 @@ public class Principal extends javax.swing.JPanel {
                    
                 for(int x=0;x<max; x++){
                     t.pintar(a+x*h, b+x*v,0);
+                    LogicaGui.sumarPorcentaje(a+x*h, b+x*v);
                 }
                i++;
             }
@@ -193,13 +194,19 @@ public class Principal extends javax.swing.JPanel {
                 
                 for(int x=0;x<=max; x++){
                     t.pintar(c+x*h, d+x*v,0);
+                    LogicaGui.sumarPorcentaje(c+x*h, d+x*v);
                 }
               
             }
-            else  t.pintar(a, b,0);
+            else {
+                t.pintar(a, b,0);
+                LogicaGui.sumarPorcentaje(a,b);
+            }
             
             i++; //saltar la coma
         }
+        jTextField2.setText(LogicaGui.getPorcentaje()+"%");
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

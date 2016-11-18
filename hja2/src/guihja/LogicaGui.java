@@ -12,7 +12,7 @@ package guihja;
 public class LogicaGui {
     
     private static double porcentaje;
-    static final Posicion[] ranking = {new Posicion(14,14),new Posicion(13,13),new Posicion(14,13)};
+    static final Posicion[] ranking = {new Posicion(14,14),new Posicion(13,13),new Posicion(14,13),new Posicion(13,14)};
        
     public static String intToChar(int valor) {
         String carta = null;

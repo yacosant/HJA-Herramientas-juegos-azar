@@ -17,8 +17,51 @@ public class LogicaGui {
     
     private static double porcentaje;
     private static Tablero t;
+    private static ArrayList<Posicion> rango;
     private static boolean[][] pulsado = new boolean[13][13];
-    private final Posicion[] ranking={new Posicion(14,14),new Posicion(13,13),new Posicion(14,13), new Posicion(13,14)};
+    private final static Posicion[] ranking={	new Posicion(14,14),new Posicion(13,13),new Posicion(14,13), new Posicion(12,12),
+    											new Posicion(13,14),new Posicion(11,11),new Posicion(14,14),
+    											new Posicion(14,12),new Posicion(10,10),new Posicion(12,14),new Posicion(9,9),
+    											new Posicion(14,11),new Posicion(8,8),new Posicion(14,10),new Posicion(11,14),
+    											new Posicion(7,7),new Posicion(6,6),new Posicion(10,14),new Posicion(14,9),
+    											new Posicion(5,5),new Posicion(14,8),new Posicion(13,12),new Posicion(4,4),
+    											new Posicion(9,14),new Posicion(14,7),new Posicion(13,11),new Posicion(14,5),
+    											new Posicion(8,14),new Posicion(14,6),new Posicion(14,14),new Posicion(14,4),
+    											new Posicion(3,3),new Posicion(13,10),new Posicion(7,14),new Posicion(14,3),
+    											new Posicion(12,13),new Posicion(14,2),new Posicion(5,14),new Posicion(6,14),
+    											new Posicion(4,14),new Posicion(11,13),new Posicion(12,11),new Posicion(3,14),
+    											new Posicion(2,2),new Posicion(13,9),new Posicion(2,14),new Posicion(10,13),
+    											new Posicion(12,10),new Posicion(13,8),new Posicion(13,7),new Posicion(11,10),
+    											new Posicion(9,13),new Posicion(13,6),new Posicion(11,12),new Posicion(12,9),
+    											new Posicion(13,5),new Posicion(8,13),new Posicion(13,4),new Posicion(10,12),
+    											new Posicion(7,13),new Posicion(13,3),new Posicion(12,8),new Posicion(6,13),
+    											new Posicion(13,2),new Posicion(11,9),new Posicion(5,13),new Posicion(9,12),
+    											new Posicion(14,14),new Posicion(10,11),new Posicion(4,13),new Posicion(12,7),
+    											new Posicion(10,9),new Posicion(12,6),new Posicion(3,13),new Posicion(11,8),
+    											new Posicion(12,5),new Posicion(2,13),new Posicion(8,12),new Posicion(12,4),
+    											new Posicion(9,11),new Posicion(12,3),new Posicion(10,8),new Posicion(7,12),
+    											new Posicion(11,7),new Posicion(12,2),new Posicion(6,12),new Posicion(9,8),
+    											new Posicion(5,12),new Posicion(8,11),new Posicion(9,10),new Posicion(11,6),
+    											new Posicion(11,5),new Posicion(10,7),new Posicion(4,12),new Posicion(11,4),
+    											new Posicion(7,11),new Posicion(3,12),new Posicion(9,7),new Posicion(8,10),
+    											new Posicion(11,3),new Posicion(10,6),new Posicion(2,12),new Posicion(11,2),
+    											new Posicion(8,7),new Posicion(6,11),new Posicion(8,9),new Posicion(7,10),
+    											new Posicion(5,11),new Posicion(9,6),new Posicion(10,5),new Posicion(10,4),
+    											new Posicion(8,6),new Posicion(4,11),new Posicion(10,3),new Posicion(7,9),
+    											new Posicion(6,10),new Posicion(9,5),new Posicion(7,6),new Posicion(3,11),
+    											new Posicion(10,2),new Posicion(7,8),new Posicion(8,5),new Posicion(6,9),
+    											new Posicion(2,11),new Posicion(5,10),new Posicion(9,4),new Posicion(7,5),
+    											new Posicion(4,10),new Posicion(6,5),new Posicion(9,3),new Posicion(6,8),
+    											new Posicion(8,4),new Posicion(5,9),new Posicion(3,10),new Posicion(6,7),
+    											new Posicion(9,2),new Posicion(7,4),new Posicion(5,8),new Posicion(2,10),
+    											new Posicion(5,4),new Posicion(6,4),new Posicion(8,3),new Posicion(5,7),
+    											new Posicion(4,9),new Posicion(8,2),new Posicion(7,3),new Posicion(3,9),
+    											new Posicion(5,3),new Posicion(5,6),new Posicion(2,9),new Posicion(4,8),
+    											new Posicion(6,3),new Posicion(4,3),new Posicion(4,7),new Posicion(4,5),
+    											new Posicion(7,2),new Posicion(3,8),new Posicion(6,2),new Posicion(4,6),
+    											new Posicion(5,2),new Posicion(2,8),new Posicion(4,2),new Posicion(3,7),
+    											new Posicion(3,6),new Posicion(3,5),new Posicion(3,2),new Posicion(3,4),
+    											new Posicion(2,7),new Posicion(2,6),new Posicion(2,5),new Posicion(2,4),new Posicion(2,3)};
     
     public static String intToChar(int valor) {
         String carta = null;
@@ -93,15 +136,6 @@ public class LogicaGui {
     public static void setPorcentaje(double porcentaje) {
         LogicaGui.porcentaje = porcentaje;
     }
-    
- public void pintarPorcentaje(Tablero t, ArrayList<Posicion> posiciones){
-        int x,y;
-        for(int i=0;i<posiciones.size();i++){
-            x=posiciones.get(i).getX();
-            y=posiciones.get(i).getY();
-            t.pintar(x+2, y+2, 1);
-        }
-    }
  
     public static void pulsacion(String s){
         int a,b,i=0, color=3;
@@ -126,7 +160,7 @@ public class LogicaGui {
                 }
                 
             }
-            else  valor+=0.5;
+            else  valor+=0.45;
            
             if(!marcado(a,b)){
                 sumar(valor);
@@ -149,6 +183,18 @@ public class LogicaGui {
         
         pulsar(i,j,true);
     }
+    
+    public static double restarPorcentaje(double valor, int i, int j){
+    	if(i == j)
+    		valor -= 0.45;
+    	else if (i<j)
+    		valor -= 0.9;
+    	else
+    		valor -= 0.3;
+    	
+    	return valor;
+        
+    }    
      
     private static boolean marcado(int a, int b){
         return pulsado[a-2][b-2];
@@ -178,6 +224,21 @@ public class LogicaGui {
     public static void pulsar(int a,int b, boolean val){
        pulsado[a-2][b-2]=val;
     }
+
+	public static void pintarPor(double valor, Tablero t2) {
+		int i = 0,x,y;
+		rango = new ArrayList<Posicion>();
+		while(valor > 0){
+			x = ranking[i].getX();
+			y = ranking[i].getY();
+			t2.pintar(x, y, 1);
+			rango.add(ranking[i]);//El rango que mostramos por pantalla
+			valor = LogicaGui.restarPorcentaje(valor,x, y);
+			i++;
+		}
+	}
+	
+    
     
 }
 

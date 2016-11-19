@@ -210,7 +210,7 @@ public class Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-       
+    	
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
@@ -218,6 +218,11 @@ public class Principal extends javax.swing.JPanel {
         valor=valor/10;
         jTextField2.setText(valor+"%");
         LogicaGui.setPorcentaje(valor);
+
+        LogicaGui.pintarPor(valor,t);
+
+        	
+       
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

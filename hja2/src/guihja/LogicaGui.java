@@ -235,17 +235,60 @@ public class LogicaGui {
 			int x,y;
 			x = rango.get(i).getX();
 			y = rango.get(i).getY();
-			if(x == y){
-				for(int p = 0; p<6;p++){
+			if(x == y)
+				for(int p = 0; p<6;p++)
 					combos.add(crearParejaCombo(p,x));
-			}
-		}
+			else if(x > y)
+				for(int s = 0;s<4;s++)
+					combos.add(crearSuitedCombo(s,x,y));
+			else
+				for(int o = 0; o<12;o++)
+					combos.add(crearOffCombo(o,x,y));
+			
 		
 		
+		
 		}
-		return null;
+		return combos;
 	}
 		
+	private static Combo crearOffCombo(int o, int x, int y) {
+		Combo combo;
+		
+		if(o < 3){
+			if(o == 0)
+				combo = new Combo(0,new Carta(x,'h'),new Carta(y,'s'));
+			else if(o == 1)
+				combo = new Combo(0,new Carta(x,'h'),new Carta(y,'d'));
+			else
+				combo = new Combo(0,new Carta(x,'h'),new Carta(y,'t'));
+		}else if(o >= 3 && o < 6){
+			if(o == 3)
+				combo = new Combo(0,new Carta(x,'s'),new Carta(y,'h'));
+			else if(o == 4)
+				combo = new Combo(0,new Carta(x,'s'),new Carta(y,'d'));
+			else
+				combo = new Combo(0,new Carta(x,'s'),new Carta(y,'t'));
+		}else if(o >= 6 && o < 9){
+			if(o == 6)
+				combo = new Combo(0,new Carta(x,'d'),new Carta(y,'h'));
+			else if(o == 7)
+				combo = new Combo(0,new Carta(x,'d'),new Carta(y,'t'));
+			else
+				combo = new Combo(0,new Carta(x,'d'),new Carta(y,'s'));
+		}else{
+			if(o == 9)
+				combo = new Combo(0,new Carta(x,'t'),new Carta(y,'h'));
+			else if(o == 10)
+				combo = new Combo(0,new Carta(x,'t'),new Carta(y,'s'));
+			else
+				combo = new Combo(0,new Carta(x,'t'),new Carta(y,'d'));
+		}
+			
+		
+		return combo;
+	}
+
 	private static Combo crearParejaCombo(int p,int x){
 		Combo combo;
 		if(p < 3){
@@ -266,6 +309,20 @@ public class LogicaGui {
 		return combo;
 	}
 	
+	private static Combo crearSuitedCombo(int s,int x,int y){
+		Combo combo;
+		
+		if(s == 0)
+			combo = new Combo(0,new Carta(x,'h'),new Carta(y,'h'));
+		else if(s == 1)
+			combo = new Combo(0,new Carta(x,'s'),new Carta(y,'s'));
+		else if(s == 2)
+			combo = new Combo(0,new Carta(x,'d'),new Carta(y,'d'));
+		else 
+			combo = new Combo(0,new Carta(x,'t'),new Carta(y,'t'));
+		
+		return combo;
+	}
 }
 
 

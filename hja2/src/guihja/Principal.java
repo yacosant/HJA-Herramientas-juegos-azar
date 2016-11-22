@@ -210,7 +210,16 @@ public class Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-    	
+
+        String tx= jTextField2.getText();
+        String valor = tx.substring(0,tx.length()-1);
+        String newName = valor.substring(0,valor.length()-2)+'.'+valor.substring(valor.length()-1);
+               
+        double v=Double.valueOf(newName);//Double.parseDouble(valor);
+        LogicaGui.pintarPor(v,t);
+        int a= (int)v*10;
+        jSlider1.setValue(a);
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged

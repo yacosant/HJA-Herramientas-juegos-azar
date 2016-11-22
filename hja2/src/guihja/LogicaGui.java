@@ -19,12 +19,12 @@ public class LogicaGui {
 	private static ArrayList<Posicion> rango;
 	private static boolean[][] pulsado = new boolean[13][13];
 	private final static Posicion[] ranking = { new Posicion(14, 14), new Posicion(13, 13), new Posicion(14, 13),
-			new Posicion(12, 12), new Posicion(13, 14), new Posicion(11, 11), new Posicion(14, 14),
+			new Posicion(12, 12), new Posicion(13, 14), new Posicion(11, 11),
 			new Posicion(14, 12), new Posicion(10, 10), new Posicion(12, 14), new Posicion(9, 9), new Posicion(14, 11),
 			new Posicion(8, 8), new Posicion(14, 10), new Posicion(11, 14), new Posicion(7, 7), new Posicion(6, 6),
 			new Posicion(10, 14), new Posicion(14, 9), new Posicion(5, 5), new Posicion(14, 8), new Posicion(13, 12),
 			new Posicion(4, 4), new Posicion(9, 14), new Posicion(14, 7), new Posicion(13, 11), new Posicion(14, 5),
-			new Posicion(8, 14), new Posicion(14, 6), new Posicion(14, 14), new Posicion(14, 4), new Posicion(3, 3),
+			new Posicion(8, 14), new Posicion(14, 6), new Posicion(14, 4), new Posicion(3, 3),
 			new Posicion(13, 10), new Posicion(7, 14), new Posicion(14, 3), new Posicion(12, 13), new Posicion(14, 2),
 			new Posicion(5, 14), new Posicion(6, 14), new Posicion(4, 14), new Posicion(11, 13), new Posicion(12, 11),
 			new Posicion(3, 14), new Posicion(2, 2), new Posicion(13, 9), new Posicion(2, 14), new Posicion(10, 13),
@@ -228,5 +228,44 @@ public class LogicaGui {
 			i++;
 		}
 	}
-
+	
+	public static ArrayList<Combo> crearCombos(ArrayList<Posicion> rango){
+		ArrayList<Combo> combos = new ArrayList<Combo>();
+		for(int i = 0;i<rango.size();i++){
+			int x,y;
+			x = rango.get(i).getX();
+			y = rango.get(i).getY();
+			if(x == y){
+				for(int p = 0; p<6;p++){
+					combos.add(crearParejaCombo(p,x));
+			}
+		}
+		
+		
+		}
+		return null;
+	}
+		
+	private static Combo crearParejaCombo(int p,int x){
+		Combo combo;
+		if(p < 3){
+			if(p == 0)
+				combo = new Combo(0,new Carta(x,'h'),new Carta(x,'s'));
+			else if(p == 1)
+				combo = new Combo(0,new Carta(x,'h'),new Carta(x,'t'));
+			else
+				combo = new Combo(0,new Carta(x,'h'),new Carta(x,'d'));
+		}else if(p >= 3 && p < 5){
+			if(p == 3)
+				combo = new Combo(0,new Carta(x,'s'),new Carta(x,'t'));
+			else 
+				combo = new Combo(0,new Carta(x,'s'),new Carta(x,'d'));
+		}else
+			combo = new Combo(0,new Carta(x,'t'),new Carta(x,'d'));	
+		
+		return combo;
+	}
+	
 }
+
+

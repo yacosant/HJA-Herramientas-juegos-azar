@@ -246,12 +246,19 @@ public class Principal extends javax.swing.JPanel {
         jTextField2.setText(LogicaGui.getPorcentaje()+"%");
     }
 
+    public static void addText(String text){
+        String previo = jTextField1.getText();
+        if(previo.length()!=0) jTextField1.setText(previo+','+text);
+        else jTextField1.setText(text);
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JTextField jTextField1;
+    private static javax.swing.JTextField jTextField1;
     private static javax.swing.JTextField jTextField2;
     private guihja.Tablero t;
     // End of variables declaration//GEN-END:variables

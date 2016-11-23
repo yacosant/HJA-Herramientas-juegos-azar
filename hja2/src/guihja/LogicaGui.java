@@ -160,6 +160,7 @@ public class LogicaGui {
 			t.pintar(a, b, color);
 		}
 		pulsar(a, b, !marcado(a, b));
+                Principal.addText(s);
 	}
 
 	public static void sumarPorcentaje(int i, int j) {

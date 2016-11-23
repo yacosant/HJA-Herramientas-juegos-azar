@@ -7,6 +7,8 @@ package guihja;
 
 import java.util.ArrayList;
 
+
+
 /**
  *
  * @author Grupo 01
@@ -232,6 +234,16 @@ public class LogicaGui {
 		}
 	}
 	
+
+    public ArrayList<Carta> juntar(ArrayList<Carta> board,Combo c) { //Metodo para juntar el arrayList mano y arrayList mesa
+        ArrayList<Carta> cartas = board;
+
+        cartas.add(c.getCarta(1));
+        cartas.add(c.getCarta(2));
+        
+        return cartas;
+    }
+    
 	public static ArrayList<Combo> crearCombos(ArrayList<Posicion> rango){
 		ArrayList<Combo> combos = new ArrayList<Combo>();
 		for(int i = 0;i<rango.size();i++){
@@ -247,10 +259,6 @@ public class LogicaGui {
 			else
 				for(int o = 0; o<12;o++)
 					combos.add(crearOffCombo(o,x,y));
-			
-		
-		
-		
 		}
 		return combos;
 	}
@@ -326,6 +334,360 @@ public class LogicaGui {
 		
 		return combo;
 	}
+	
+
+	public static ArrayList<Combo> reducirCombos(ArrayList<Combo> c,ArrayList<Carta> board){
+		
+		ArrayList<Combo> combos = c;
+		
+		for(int i = 0;i < board.size();i++)
+			for(Combo com : combos)
+				if((board.get(i).getColor() == com.getCarta(1).getColor() && board.get(i).getValor() == com.getCarta(1).getValor())
+						|| (board.get(i).getColor() == com.getCarta(2).getColor() && board.get(i).getValor() == com.getCarta(2).getValor()))
+					combos.remove(com);
+		
+		return combos;
+	}
+	
+	public void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
+
+		Carta[] cartas;
+		int sf=0,quads=0,full=0,flush=0,straight=0,trio=0,dp=0,nhm=0,totalCombos=c.size();
+		
+		for(int i = 0;i<c.size();i++){
+			
+			cartas = (guihja.Carta[]) juntar(board, c.get(i)).toArray();
+			
+			if(hayCombo(escaleraDeColor(cartas),c.get(i)))
+				sf++;
+			else if (hayCombo(poker(cartas),c.get(i))) 
+				quads++;
+			else if (hayCombo(full(cartas),c.get(i))) 
+				full++;
+			else if (hayCombo(color(cartas),c.get(i))) 
+				flush++;
+			else if (hayCombo(escalera(cartas),c.get(i)))
+				straight++;
+			else if (hayCombo(trio(cartas),c.get(i))) 
+				trio++;
+			else if (hayCombo(doblePareja(cartas),c.get(i)))
+				dp++; 
+			else if (hayCombo(pareja(cartas),c.get(i)))
+				;//segun el valor de la pareja sera uno u otro
+			else
+				nhm++;
+			
+			c.remove(i);
+			
+		}
+		
+		//pasar los contadores de combos de arriba visualmente con algun metodo
+	}
+	
+	 private boolean hayCombo(Carta[] cartas,Combo c){
+		
+		 boolean combo = false;
+		 
+		 if(cartas != null)
+			 for(int i = 0;i<cartas.length;i++)
+				 if((cartas[i].getValor() == c.getCarta(1).getValor() && cartas[i].getColor() == c.getCarta(1).getColor()) ||
+						 (cartas[i].getValor() == c.getCarta(2).getValor() && cartas[i].getColor() == c.getCarta(2).getColor()))
+					 combo = true;
+					 
+		 return combo;
+	}
+	 
+	 private Carta[] escaleraDeColor(Carta[] cartas) {
+		 Carta[] mejoresCartas = new Carta[5];
+
+		 int cont = 0, cart = 0;
+		 boolean esc = false, escA = false;
+
+		 while (cont < cartas.length - 1 && !escA) {
+
+			 if (cartas[cont].getColor() == cartas[cont + 1].getColor()
+					 && cartas[cont].getValor() + 1 == cartas[cont + 1].getValor()) {
+				 if (!esc) {
+					 mejoresCartas[cart] = cartas[cont];
+					 if (cart < 5) {
+						 cart++;
+					 }
+				 } else {
+					 for (int i = 0; i < mejoresCartas.length - 1; i++) {
+						 mejoresCartas[i] = mejoresCartas[i + 1];
+					 }
+
+					 mejoresCartas[mejoresCartas.length - 1] = cartas[cont];
+				 }
+			 } else {
+				 if (cart == 5) {
+					 for (int i = 0; i < mejoresCartas.length - 1; i++) {
+						 mejoresCartas[i] = mejoresCartas[i + 1];
+					 }
+					 mejoresCartas[cart - 1] = cartas[cont];
+				 }
+				 cart = 0;
+			 }
+			 cont++;
+
+			 //Unico caso de escalera 1,2,3,4,5
+			 if (cart == 3) {
+				 if (cartas[cont + 1].getValor() != 6 && cartas[cont].getValor() == 5 && cartas[cartas.length - 1].getValor() == 14
+						 && mejoresCartas[2].getColor() == cartas[cont].getColor() && mejoresCartas[2].getColor() == cartas[cartas.length - 1].getColor()) {
+					 mejoresCartas[cart] = cartas[cont];
+					 mejoresCartas[cart + 1] = cartas[cartas.length - 1];
+					 esc = true;
+					 escA = true;
+				 }
+			 } else if (cart == 5) {
+				 esc = true;
+			 }
+		 }
+
+		 if (!escA && cartas[cont].getColor() == cartas[cont - 1].getColor()
+				 && cartas[cont].getValor() == cartas[cont - 1].getValor() + 1) {
+			 if (esc == true) {
+				 for (int i = 0; i < mejoresCartas.length - 1; i++) {
+					 mejoresCartas[i] = mejoresCartas[i + 1];
+				 }
+				 mejoresCartas[mejoresCartas.length - 1] = cartas[cont];
+			 } else if (cart == 4) {
+				 mejoresCartas[mejoresCartas.length - 1] = cartas[cont];
+				 esc = true;
+			 }
+		 }
+
+		 if (!esc) 
+			 mejoresCartas = null;
+
+
+		 return mejoresCartas;
+
+	 }
+
+	 private Carta[] poker(Carta[] cartas) {
+		 Carta[] mejoresCartas = new Carta[5];
+		 int cont = 0;
+		 for (int i = 0; i < cartas.length - 1; i++) {
+			 cont = 0;
+			 for (int j = i + 1; j < cartas.length; j++) {
+				 if (cartas[i].getValor() == cartas[j].getValor()) {
+					 mejoresCartas[cont] = cartas[i];
+					 cont++;
+					 if (cont == 3) { // a�adimos la ultima carta
+						 mejoresCartas[cont] = cartas[j];
+						 return mejoresCartas;
+					 }
+				 }
+			 }
+		 }
+		 return null;
+	 }
+	
+	 private Carta[] full(Carta[] cartas) {
+
+		 Carta[] mejoresCartas = new Carta[5];
+		 Carta[] mejoresCartasTrio = new Carta[3];
+		 Carta[] mejoresCartasPareja = new Carta[2];
+
+		 mejoresCartasTrio = trio(cartas);
+		 if (mejoresCartasTrio != null) {
+
+			 int valor = mejoresCartasTrio[0].getValor();
+
+			 for (int i = 0; i < cartas.length; i++) {
+				 if (valor == cartas[i].getValor()) {
+					 cartas[i].setValor(-1);
+				 }
+			 }
+
+			 mejoresCartasPareja = pareja(cartas);
+			 if (mejoresCartasPareja != null) {
+
+				 for (int i = 0; i < mejoresCartasTrio.length - 2; i++) {
+					 if (mejoresCartasTrio[i].getValor() == -1) {
+						 mejoresCartasTrio[i].setValor(valor);
+					 }
+				 }
+
+				 mejoresCartas[0] = mejoresCartasTrio[0];
+				 mejoresCartas[1] = mejoresCartasTrio[1];
+				 mejoresCartas[2] = mejoresCartasTrio[2];
+				 mejoresCartas[3] = mejoresCartasPareja[0];
+				 mejoresCartas[4] = mejoresCartasPareja[1];
+				 return mejoresCartas;
+
+			 } else {
+				 for (int i = 0; i < cartas.length; i++) {
+					 if (cartas[i].getValor() == -1) {
+						 cartas[i].setValor(valor);
+					 }
+				 }
+			 }
+		 }
+		 return null;
+	 }
+	 
+	 private Carta[] color(Carta[] cartas) {
+		 Carta[] mejoresCartas = new Carta[5];
+		 int cont = cartas.length-1, color, j;
+		 boolean col = false;
+
+
+		 while (cont >= 0 && !col) {
+			 color = 0;
+			 j = cont - 1;
+			 mejoresCartas[color] = cartas[cont];
+			 color++;
+			 while (j >= 0) {
+				 if (mejoresCartas[0].getColor() == cartas[j].getColor()) {
+					 mejoresCartas[color] = cartas[j];
+					 color++;
+				 }
+				 if (color == 5) {
+					 return mejoresCartas;
+				 }
+
+				 j--;
+			 }
+			 color = 0;
+			 cont--;
+		 }
+		 return null;
+	 }
+	 
+	 private Carta[] escalera(Carta[] cartas) {
+		 Carta[] mejoresCartas = new Carta[5];
+
+		 int cont = 0, cart = 0;
+		 boolean esc = false, escA = false;
+
+		 while (cont < cartas.length - 1 && !escA) {
+
+			 if (cartas[cont].getValor() + 1 == cartas[cont + 1].getValor()) {
+				 if (!esc) {
+					 mejoresCartas[cart] = cartas[cont];
+					 if (cart < 5) {
+						 cart++;
+					 }
+				 } else {//Si ha habido escalera pero puede ser mayor
+					 for (int i = 0; i < mejoresCartas.length - 1; i++) {
+						 mejoresCartas[i] = mejoresCartas[i + 1];
+					 }
+
+					 mejoresCartas[mejoresCartas.length - 1] = cartas[cont];
+				 }
+			 } else {//penultima pos no coincide con ult pero hacia escalera
+				 if (cart == 5) {
+
+					 for (int i = 0; i < mejoresCartas.length - 1; i++) {
+						 mejoresCartas[i] = mejoresCartas[i + 1];
+					 }
+					 mejoresCartas[cart - 1] = cartas[cont];
+				 }
+				 cart = 0;
+			 }
+			 cont++;
+
+			 //Unico caso de escalera 1,2,3,4,5
+			 if (cart == 3) {
+				 if (cartas[cont + 1].getValor() != 6 && cartas[cont].getValor() == 5 && cartas[cartas.length - 1].getValor() == 14) {
+					 mejoresCartas[cart] = cartas[cont];
+					 mejoresCartas[cart + 1] = cartas[cartas.length - 1];
+					 esc = true;
+					 escA = true;
+				 }
+			 } else if (cart == 5) {
+				 esc = true;
+			 }
+		 }
+		 //ult pos que no se entra en el bucle
+		 if (!escA && cartas[cont].getValor() == cartas[cont - 1].getValor() + 1) {
+			 if (esc == true) {
+				 for (int i = 0; i < mejoresCartas.length - 1; i++) {
+					 mejoresCartas[i] = mejoresCartas[i + 1];
+				 }
+				 mejoresCartas[mejoresCartas.length - 1] = cartas[cont];
+			 } else if (cart == 4) {
+				 mejoresCartas[mejoresCartas.length - 1] = cartas[cont];
+				 esc = true;
+			 }
+		 }
+
+		 if (!esc) {
+			 mejoresCartas = null;
+		 }
+
+		 return mejoresCartas;
+
+	 }
+	 
+	 private Carta[] trio(Carta[] cartas) {
+		 Carta[] mejoresCartas = new Carta[5];
+		 int cont;
+		 for (int i = cartas.length - 1; i > 0; i--) {
+			 cont = 0;
+			 for (int j = i - 1; j >= 0; j--) {
+				 if (cartas[i].getValor() == cartas[j].getValor()) {
+					 mejoresCartas[cont] = cartas[j];
+					 cont++;
+					 if (cont == 2) {
+						 mejoresCartas[cont] = cartas[i];
+						 return mejoresCartas;
+					 }
+				 }
+			 }
+		 }
+		 return null;
+	 }
+	 
+	 private Carta[] doblePareja(Carta[] cartas) {
+		 Carta[] mejoresCartas = new Carta[5];
+		 boolean salir = true;
+		 int cont = 0, i = cartas.length - 1, j;
+		 while (i > 0) {
+			 j = i - 1;
+			 salir = true;
+			 while (j >= 0 && salir) {
+				 if (cartas[i].getValor() == cartas[j].getValor()) {
+					 mejoresCartas[cont] = cartas[i];
+					 mejoresCartas[cont + 1] = cartas[j];
+					 cont += 2;
+					 salir = false;
+					 if (cont > 2) {
+						 int k = cartas.length - 1;
+						 boolean end = false;
+						 while (k > 0 && !end) {
+							 if (cartas[k].getValor() != mejoresCartas[0].getValor() && cartas[k].getValor() != mejoresCartas[2].getValor()) {
+								 mejoresCartas[4] = cartas[k];
+								 end = true;
+							 }
+							 k--;
+						 }
+						 return mejoresCartas;
+					 }
+				 }
+				 j--;
+			 }
+			 i--;
+		 }
+		 return null;
+	 }
+	 
+	 private Carta[] pareja(Carta[] cartas) {
+		 Carta[] mejoresCartas = new Carta[5];
+		 for (int i = 0; i < cartas.length - 1; i++) {
+			 for (int j = i + 1; j < cartas.length; j++) {
+				 if (cartas[i].getValor() == cartas[j].getValor() && cartas[i].getValor() != -1) {
+					 mejoresCartas[0] = cartas[i];
+					 mejoresCartas[1] = cartas[j];
+
+					 return mejoresCartas;
+				 }
+			 }
+		 }
+		 return null;
+	 }
 }
 
 

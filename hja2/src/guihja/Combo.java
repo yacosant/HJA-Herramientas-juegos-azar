@@ -14,7 +14,14 @@ public class Combo {
 		this.peso=peso;
 	}
 	
-	public Carta getCarta(Carta carta){
+	public Carta getCarta(int i){
+		Carta carta;
+		
+		if(i==1)
+			carta = carta1;
+		else
+			carta = carta2;
+		
 		return carta;
 	}
 	

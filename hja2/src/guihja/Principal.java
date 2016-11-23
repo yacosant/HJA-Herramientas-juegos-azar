@@ -180,7 +180,7 @@ public class Principal extends javax.swing.JPanel {
                     d=temp;
                 }  
 
-                if(input.charAt(i+2)=='o' || input.charAt(i+2)=='s') i+=3;
+                if((i+2)<input.length() && (input.charAt(i+2)=='o' || input.charAt(i+2)=='s')) i+=3;
                 else i+=2;
                 
                 if(a==c){
@@ -191,6 +191,7 @@ public class Principal extends javax.swing.JPanel {
                     max=a-c;
                     v=0;
                 }
+                else  max=a-c;
                 
                 for(int x=0;x<=max; x++){
                     t.pintar(c+x*h, d+x*v,0);

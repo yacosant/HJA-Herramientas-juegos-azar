@@ -155,12 +155,14 @@ public class LogicaGui {
 		if (!marcado(a, b)) {
 			sumar(valor);
 			t.pintar(a, b, 0);
+                        Principal.addPosicion(s);
 		} else {
 			restar(valor);
 			t.pintar(a, b, color);
+                        Principal.deletePosiciones(s);
 		}
 		pulsar(a, b, !marcado(a, b));
-                Principal.addText(s);
+                
 	}
 
 	public static void sumarPorcentaje(int i, int j) {

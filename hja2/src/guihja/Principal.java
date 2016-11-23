@@ -5,8 +5,11 @@
  */
 package guihja;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JSlider;
 
 /**
@@ -17,6 +20,8 @@ public class Principal extends javax.swing.JPanel {
     /**
      * Creates new form principal
      */
+    private static ArrayList<String> posiciones = new ArrayList<String>();
+    
     public Principal() {
         initComponents();
         t.reset();
@@ -128,7 +133,9 @@ public class Principal extends javax.swing.JPanel {
         
         t.reset();
         while(i<input.length()){
-        
+            String[] aaa = input.split(",");
+            for(int k=0; k<aaa.length;k++)posiciones.add(aaa[k]);
+            
             a=LogicaGui.CharToInt(input.charAt(i));
             b=LogicaGui.CharToInt(input.charAt(i+1));
             
@@ -252,6 +259,21 @@ public class Principal extends javax.swing.JPanel {
         if(previo.length()!=0) jTextField1.setText(previo+','+text);
         else jTextField1.setText(text);
         
+    }
+    
+    
+    public static void deletePosiciones(String valor){
+        posiciones.remove(valor); 
+        pintarText();
+    }
+    
+    public static void addPosicion(String valor){
+        posiciones.add(valor);
+        pintarText();
+    }
+    
+    private static void pintarText(){
+       jTextField1.setText(String.join(",",posiciones));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

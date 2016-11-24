@@ -350,47 +350,48 @@ public class LogicaGui {
 	}
 	
 	public void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
-
+                
 		Carta[] cartas;
-		int sf=0,quads=0,full=0,flush=0,straight=0,trio=0,dp=0,nhm=0,op=0,tp=0,pp=0,mp=0,wp=0,totalCombos=c.size();
-		
+                int[] combos = new int[13];
+                for(int i=0; i<13; i++) combos[i]=0;
+              
 		for(int i = 0;i<c.size();i++){
 			
 			cartas = (guihja.Carta[]) juntar(board, c.get(i)).toArray();
 			
 			if(hayCombo(escaleraDeColor(cartas),c.get(i)))
-				sf++;
+				combos[0]++;
 			else if (hayCombo(poker(cartas),c.get(i))) 
-				quads++;
+				combos[1]++;
 			else if (hayCombo(full(cartas),c.get(i))) 
-				full++;
+				combos[2]++;
 			else if (hayCombo(color(cartas),c.get(i))) 
-				flush++;
+				combos[3]++;
 			else if (hayCombo(escalera(cartas),c.get(i)))
-				straight++;
+				combos[4]++;
 			else if (hayCombo(trio(cartas),c.get(i))) 
-				trio++;
+				combos[5]++;
 			else if (hayCombo(doblePareja(cartas),c.get(i)))
-				dp++; 
+				combos[6]++; 
 			else if (hayCombo(pareja(cartas),c.get(i)))
 				if(overPair(board,c.get(i)))
-					op++;
+					combos[7]++;
 				else if(topPair(board, pareja(cartas), c.get(i)))
-					tp++;
+					combos[8]++;
 				else if(pocketPair(board, c.get(i)))
-					pp++;
+					combos[9]++;
 				else if(middlePair(board, pareja(cartas), c.get(i)))
-					mp++;
+					combos[10]++;
 				else 
-					wp++;
+					combos[11]++;
 			
 			else
-				nhm++;
+				combos[12]++;
 			
 			
 		}
+		CombosGui.setValues(combos);//pasar los contadores de combos de arriba visualmente 
 		
-		//pasar los contadores de combos de arriba visualmente con algun metodo
 	}
 	
 	 private boolean hayCombo(Carta[] cartas,Combo c){

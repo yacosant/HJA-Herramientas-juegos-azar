@@ -352,7 +352,7 @@ public class LogicaGui {
 	public void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
 
 		Carta[] cartas;
-		int sf=0,quads=0,full=0,flush=0,straight=0,trio=0,dp=0,nhm=0,totalCombos=c.size();
+		int sf=0,quads=0,full=0,flush=0,straight=0,trio=0,dp=0,nhm=0,op=0,tp=0,pp=0,mp=0,wp=0,totalCombos=c.size();
 		
 		for(int i = 0;i<c.size();i++){
 			
@@ -373,7 +373,17 @@ public class LogicaGui {
 			else if (hayCombo(doblePareja(cartas),c.get(i)))
 				dp++; 
 			else if (hayCombo(pareja(cartas),c.get(i)))
-				;//segun el valor de la pareja sera uno u otro
+				if(overPair(board,c.get(i)))
+					op++;
+				else if(topPair(board, pareja(cartas), c.get(i)))
+					tp++;
+				else if(pocketPair(board, c.get(i)))
+					pp++;
+				else if(middlePair(board, pareja(cartas), c.get(i)))
+					mp++;
+				else 
+					wp++;
+			
 			else
 				nhm++;
 			
@@ -465,7 +475,7 @@ public class LogicaGui {
 	 }
 
 	 private Carta[] poker(Carta[] cartas) {
-		 Carta[] mejoresCartas = new Carta[5];
+		 Carta[] mejoresCartas = new Carta[4];
 		 int cont = 0;
 		 for (int i = 0; i < cartas.length - 1; i++) {
 			 cont = 0;
@@ -622,7 +632,7 @@ public class LogicaGui {
 	 }
 	 
 	 private Carta[] trio(Carta[] cartas) {
-		 Carta[] mejoresCartas = new Carta[5];
+		 Carta[] mejoresCartas = new Carta[3];
 		 int cont;
 		 for (int i = cartas.length - 1; i > 0; i--) {
 			 cont = 0;
@@ -641,7 +651,7 @@ public class LogicaGui {
 	 }
 	 
 	 private Carta[] doblePareja(Carta[] cartas) {
-		 Carta[] mejoresCartas = new Carta[5];
+		 Carta[] mejoresCartas = new Carta[4];
 		 boolean salir = true;
 		 int cont = 0, i = cartas.length - 1, j;
 		 while (i > 0) {
@@ -674,7 +684,7 @@ public class LogicaGui {
 	 }
 	 
 	 private Carta[] pareja(Carta[] cartas) {
-		 Carta[] mejoresCartas = new Carta[5];
+		 Carta[] mejoresCartas = new Carta[2];
 		 for (int i = 0; i < cartas.length - 1; i++) {
 			 for (int j = i + 1; j < cartas.length; j++) {
 				 if (cartas[i].getValor() == cartas[j].getValor() && cartas[i].getValor() != -1) {
@@ -686,6 +696,74 @@ public class LogicaGui {
 			 }
 		 }
 		 return null;
+	 }
+	 
+	 private int cartaAlta(ArrayList<Carta> board){
+		 
+		 int max = 0;
+		 
+		 for(int i = 0;i<board.size();i++)
+			 if(board.get(i).getValor() > max)
+				 max = board.get(i).getValor();
+		 
+		 return max;
+	 }
+	 
+	 private int segundaCartaAlta(ArrayList<Carta> board){
+		 int max = cartaAlta(board);
+		 int segunda = 0;
+		 
+		 for(int i = 0; i < board.size();i++)
+			 if(board.get(i).getValor() > segunda && board.get(i).getValor() != max)
+				 segunda = board.get(i).getValor();
+		 
+		 return segunda;
+	 }
+	 
+	 private boolean overPair(ArrayList<Carta> board,Combo c){
+		 boolean op = false;
+		 int max = cartaAlta(board);
+		 
+		 if(c.getCarta(1).getValor() == c.getCarta(2).getValor())
+			 if(max < c.getCarta(1).getValor())
+				 op = true;
+		 
+		 return op;
+	 }
+	 
+	 private boolean topPair(ArrayList<Carta> board,Carta[] pareja,Combo c){
+		 boolean tp = false;
+		 int max = cartaAlta(board);
+		 
+		 if(c.getCarta(1).getValor() != c.getCarta(2).getValor())
+			 if(max == pareja[0].getValor())
+				 tp = true;
+		 
+
+		 return tp;
+	 }
+	 
+	 private boolean pocketPair(ArrayList<Carta> board,Combo c){
+		 boolean pp = false;
+		 
+		 int max = cartaAlta(board),segunda = segundaCartaAlta(board);
+		 
+		 if(c.getCarta(1).getValor() == c.getCarta(2).getValor())
+			 if(max > c.getCarta(1).getValor() && segunda < c.getCarta(1).getValor())
+				 pp = true;
+		 
+		 return pp;
+	 }
+
+	 private boolean middlePair(ArrayList<Carta> board,Carta[] pareja,Combo c){
+		 boolean mp = false;
+		 int segunda = segundaCartaAlta(board);
+		 
+		 if(c.getCarta(1).getValor() != c.getCarta(2).getValor())
+			 if(segunda == pareja[0].getValor())
+				 mp = true;
+		
+		 return mp;
 	 }
 }
 

@@ -262,6 +262,7 @@ public class Principal extends javax.swing.JPanel {
         jTextField2.setText("0.0%");
         t.reset();
         jSlider1.setValue(0);
+        posiciones.clear();
         LogicaGui.setPorcentaje(0.0);
     }//GEN-LAST:event_jButton2ActionPerformed
     

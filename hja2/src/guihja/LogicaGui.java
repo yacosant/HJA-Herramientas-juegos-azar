@@ -789,7 +789,14 @@ public class LogicaGui {
     }
     
     private static void delCartas(Posicion p){
-        cartas.remove(p);
+        boolean encontrado=false;
+        int i=0;
+        while(!encontrado && i < cartas.size()){
+            if(cartas.get(i).getX()==p.getX() && cartas.get(i).getY()==p.getY())encontrado=true;
+        i++;
+        }
+        if(encontrado) cartas.remove(i-1);
+        
     }
     
     public static void delBoard(Carta c){

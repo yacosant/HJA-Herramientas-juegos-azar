@@ -19,7 +19,10 @@ public class LogicaGui {
 	private static double porcentaje;
 	private static Tablero t;
 	private static ArrayList<Posicion> rango;
+        private static ArrayList<Posicion> cartas =  new ArrayList<Posicion>();
+        private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private static boolean[][] pulsado = new boolean[13][13];
+        
 	private final static Posicion[] ranking = { new Posicion(14, 14), new Posicion(13, 13), new Posicion(14, 13),
 			new Posicion(12, 12), new Posicion(13, 14), new Posicion(11, 11),
 			new Posicion(14, 12), new Posicion(10, 10), new Posicion(12, 14), new Posicion(9, 9), new Posicion(14, 11),
@@ -158,10 +161,12 @@ public class LogicaGui {
 			sumar(valor);
 			t.pintar(a, b, 0);
                         Principal.addPosicion(s);
+                        addCartas(new Posicion(a,b));
 		} else {
 			restar(valor);
 			t.pintar(a, b, color);
                         Principal.deletePosiciones(s);
+                        delCartas(new Posicion(a,b));
 		}
 		pulsar(a, b, !marcado(a, b));
                 
@@ -235,13 +240,16 @@ public class LogicaGui {
 	}
 	
 
-    public ArrayList<Carta> juntar(ArrayList<Carta> board,Combo c) { //Metodo para juntar el arrayList mano y arrayList mesa
+    private static Carta[] juntar(ArrayList<Carta> board,Combo c) { //Metodo para juntar el arrayList mano y arrayList mesa
+        Carta[] cart;
         ArrayList<Carta> cartas = board;
-
         cartas.add(c.getCarta(1));
         cartas.add(c.getCarta(2));
         
-        return cartas;
+        cart = new Carta[cartas.size()];
+        for(int i=0; i<cartas.size(); i++) cart[i]=cartas.get(i);
+        
+        return cart;
     }
     
 	public static ArrayList<Combo> crearCombos(ArrayList<Posicion> rango){
@@ -349,7 +357,7 @@ public class LogicaGui {
 		return combos;
 	}
 	
-	public void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
+	private static void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
                 
 		Carta[] cartas;
                 int[] combos = new int[13];
@@ -357,7 +365,7 @@ public class LogicaGui {
               
 		for(int i = 0;i<c.size();i++){
 			
-			cartas = (guihja.Carta[]) juntar(board, c.get(i)).toArray();
+			cartas = juntar(board, c.get(i));
 			
 			if(hayCombo(escaleraDeColor(cartas),c.get(i)))
 				combos[0]++;
@@ -394,7 +402,7 @@ public class LogicaGui {
 		
 	}
 	
-	 private boolean hayCombo(Carta[] cartas,Combo c){
+	 private static boolean hayCombo(Carta[] cartas,Combo c){
 		
 		 boolean combo = false;
 		 
@@ -407,7 +415,7 @@ public class LogicaGui {
 		 return combo;
 	}
 	 
-	 private Carta[] escaleraDeColor(Carta[] cartas) {
+	 private static Carta[] escaleraDeColor(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[5];
 
 		 int cont = 0, cart = 0;
@@ -475,7 +483,7 @@ public class LogicaGui {
 
 	 }
 
-	 private Carta[] poker(Carta[] cartas) {
+	 private static Carta[] poker(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[4];
 		 int cont = 0;
 		 for (int i = 0; i < cartas.length - 1; i++) {
@@ -494,7 +502,7 @@ public class LogicaGui {
 		 return null;
 	 }
 	
-	 private Carta[] full(Carta[] cartas) {
+	 private static Carta[] full(Carta[] cartas) {
 
 		 Carta[] mejoresCartas = new Carta[5];
 		 Carta[] mejoresCartasTrio = new Carta[3];
@@ -538,7 +546,7 @@ public class LogicaGui {
 		 return null;
 	 }
 	 
-	 private Carta[] color(Carta[] cartas) {
+	 private static Carta[] color(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[5];
 		 int cont = cartas.length-1, color, j;
 		 boolean col = false;
@@ -566,7 +574,7 @@ public class LogicaGui {
 		 return null;
 	 }
 	 
-	 private Carta[] escalera(Carta[] cartas) {
+	 private static Carta[] escalera(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[5];
 
 		 int cont = 0, cart = 0;
@@ -632,7 +640,7 @@ public class LogicaGui {
 
 	 }
 	 
-	 private Carta[] trio(Carta[] cartas) {
+	 private static Carta[] trio(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[3];
 		 int cont;
 		 for (int i = cartas.length - 1; i > 0; i--) {
@@ -651,7 +659,7 @@ public class LogicaGui {
 		 return null;
 	 }
 	 
-	 private Carta[] doblePareja(Carta[] cartas) {
+	 private static Carta[] doblePareja(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[4];
 		 boolean salir = true;
 		 int cont = 0, i = cartas.length - 1, j;
@@ -684,7 +692,7 @@ public class LogicaGui {
 		 return null;
 	 }
 	 
-	 private Carta[] pareja(Carta[] cartas) {
+	 private static Carta[] pareja(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[2];
 		 for (int i = 0; i < cartas.length - 1; i++) {
 			 for (int j = i + 1; j < cartas.length; j++) {
@@ -699,7 +707,7 @@ public class LogicaGui {
 		 return null;
 	 }
 	 
-	 private int cartaAlta(ArrayList<Carta> board){
+	 private static int cartaAlta(ArrayList<Carta> board){
 		 
 		 int max = 0;
 		 
@@ -710,7 +718,7 @@ public class LogicaGui {
 		 return max;
 	 }
 	 
-	 private int segundaCartaAlta(ArrayList<Carta> board){
+	 private static int segundaCartaAlta(ArrayList<Carta> board){
 		 int max = cartaAlta(board);
 		 int segunda = 0;
 		 
@@ -721,7 +729,7 @@ public class LogicaGui {
 		 return segunda;
 	 }
 	 
-	 private boolean overPair(ArrayList<Carta> board,Combo c){
+	 private static boolean overPair(ArrayList<Carta> board,Combo c){
 		 boolean op = false;
 		 int max = cartaAlta(board);
 		 
@@ -732,7 +740,7 @@ public class LogicaGui {
 		 return op;
 	 }
 	 
-	 private boolean topPair(ArrayList<Carta> board,Carta[] pareja,Combo c){
+	 private static boolean topPair(ArrayList<Carta> board,Carta[] pareja,Combo c){
 		 boolean tp = false;
 		 int max = cartaAlta(board);
 		 
@@ -744,7 +752,7 @@ public class LogicaGui {
 		 return tp;
 	 }
 	 
-	 private boolean pocketPair(ArrayList<Carta> board,Combo c){
+	 private static boolean pocketPair(ArrayList<Carta> board,Combo c){
 		 boolean pp = false;
 		 
 		 int max = cartaAlta(board),segunda = segundaCartaAlta(board);
@@ -756,7 +764,7 @@ public class LogicaGui {
 		 return pp;
 	 }
 
-	 private boolean middlePair(ArrayList<Carta> board,Carta[] pareja,Combo c){
+	 private static boolean middlePair(ArrayList<Carta> board,Carta[] pareja,Combo c){
 		 boolean mp = false;
 		 int segunda = segundaCartaAlta(board);
 		 
@@ -766,6 +774,37 @@ public class LogicaGui {
 		
 		 return mp;
 	 }
+         
+    public static void procesar(/*ArrayList<Posicion> cartas,ArrayList<Carta> board*/){
+             ArrayList<Combo> combos= crearCombos(cartas);
+             procesarCombos(combos,board);
+         }
+         
+    private static void addCartas(Posicion p){
+        cartas.add(p);
+    }
+    
+    public static void addBoard(Carta c){
+        board.add(c);
+    }
+    
+    private static void delCartas(Posicion p){
+        cartas.remove(p);
+    }
+    
+    public static void delBoard(Carta c){
+        boolean encontrado=false;
+        int i=0;
+        while(!encontrado && i < board.size()){
+            if(board.get(i).getColor()==c.getColor() && board.get(i).getValor()==c.getValor())encontrado=true;
+        i++;
+        }
+        if(encontrado) board.remove(i-1);
+    }
+    
+    public static int pulsadasBoard(){
+        return board.size();
+    }
 }
 
 

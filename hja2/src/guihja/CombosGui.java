@@ -34,6 +34,7 @@ public class CombosGui extends javax.swing.JPanel {
         CombosGui.jProgressBar11.setValue(v[10]);
         CombosGui.jProgressBar12.setValue(v[11]);
         CombosGui.jProgressBar13.setValue(v[12]);
+        Principal.repaintEst();
     }
     
 

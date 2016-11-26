@@ -283,19 +283,19 @@ public class LogicaGui {
 			else if(o == 1)
 				combo = new Combo(new Carta(x,'h'),new Carta(y,'d'));
 			else
-				combo = new Combo(new Carta(x,'h'),new Carta(y,'t'));
+				combo = new Combo(new Carta(x,'h'),new Carta(y,'c'));
 		}else if(o >= 3 && o < 6){
 			if(o == 3)
 				combo = new Combo(new Carta(x,'s'),new Carta(y,'h'));
 			else if(o == 4)
 				combo = new Combo(new Carta(x,'s'),new Carta(y,'d'));
 			else
-				combo = new Combo(new Carta(x,'s'),new Carta(y,'t'));
+				combo = new Combo(new Carta(x,'s'),new Carta(y,'c'));
 		}else if(o >= 6 && o < 9){
 			if(o == 6)
 				combo = new Combo(new Carta(x,'d'),new Carta(y,'h'));
 			else if(o == 7)
-				combo = new Combo(new Carta(x,'d'),new Carta(y,'t'));
+				combo = new Combo(new Carta(x,'d'),new Carta(y,'c'));
 			else
 				combo = new Combo(new Carta(x,'d'),new Carta(y,'s'));
 		}else{
@@ -317,16 +317,16 @@ public class LogicaGui {
 			if(p == 0)
 				combo = new Combo(new Carta(x,'h'),new Carta(x,'s'));
 			else if(p == 1)
-				combo = new Combo(new Carta(x,'h'),new Carta(x,'t'));
+				combo = new Combo(new Carta(x,'h'),new Carta(x,'c'));
 			else
 				combo = new Combo(new Carta(x,'h'),new Carta(x,'d'));
 		}else if(p >= 3 && p < 5){
 			if(p == 3)
-				combo = new Combo(new Carta(x,'s'),new Carta(x,'t'));
+				combo = new Combo(new Carta(x,'s'),new Carta(x,'c'));
 			else 
 				combo = new Combo(new Carta(x,'s'),new Carta(x,'d'));
 		}else
-			combo = new Combo(new Carta(x,'t'),new Carta(x,'d'));	
+			combo = new Combo(new Carta(x,'c'),new Carta(x,'d'));	
 		
 		return combo;
 	}
@@ -341,7 +341,7 @@ public class LogicaGui {
 		else if(s == 2)
 			combo = new Combo(new Carta(x,'d'),new Carta(y,'d'));
 		else 
-			combo = new Combo(new Carta(x,'t'),new Carta(y,'t'));
+			combo = new Combo(new Carta(x,'c'),new Carta(y,'c'));
 		
 		return combo;
 	}

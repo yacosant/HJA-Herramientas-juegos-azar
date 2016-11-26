@@ -37,7 +37,7 @@ public class CombosGui extends javax.swing.JPanel {
         CombosGui.jProgressBar13.setValue((v[12]/tot)*100);
         Principal.repaintEst();
         System.out.println("---total es:"+tot);
-        for(int i=0; i<tot; i++)System.out.println(v[i]);
+        for(int i=0; i<v.length; i++)System.out.println(v[i]);
     }
     
 

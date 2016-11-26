@@ -168,7 +168,9 @@ public class LogicaGui {
                         Principal.deletePosiciones(s);
                         delCartas(new Posicion(a,b));
 		}
-		pulsar(a, b, !marcado(a, b));
+		LogicaGui.procesar();
+                pulsar(a, b, !marcado(a, b));
+                
                 
 	}
 
@@ -242,7 +244,8 @@ public class LogicaGui {
 
     private static Carta[] juntar(ArrayList<Carta> board,Combo c) { //Metodo para juntar el arrayList mano y arrayList mesa
         Carta[] cart;
-        ArrayList<Carta> cartas = board;
+        ArrayList<Carta> cartas = new ArrayList<Carta>();
+        cartas=(ArrayList<Carta>)board.clone();
         cartas.add(c.getCarta(1));
         cartas.add(c.getCarta(2));
         
@@ -398,7 +401,7 @@ public class LogicaGui {
 			
 			
 		}
-		CombosGui.setValues(combos);//pasar los contadores de combos de arriba visualmente 
+		CombosGui.setValues(combos, c.size());//pasar los contadores de combos de arriba visualmente 
 		
 	}
 	

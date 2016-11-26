@@ -666,29 +666,21 @@ public class LogicaGui {
 	 
 	 private static Carta[] doblePareja(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[4];
+		 mejoresCartas[0] = new Carta(0,'h');
 		 boolean salir = true;
 		 int cont = 0, i = cartas.length - 1, j;
 		 while (i > 0) {
 			 j = i - 1;
 			 salir = true;
 			 while (j >= 0 && salir) {
-				 if (cartas[i].getValor() == cartas[j].getValor()) {
+				 if (cartas[i].getValor() == cartas[j].getValor() && cartas[i].getValor() != mejoresCartas[0].getValor()) {
 					 mejoresCartas[cont] = cartas[i];
 					 mejoresCartas[cont + 1] = cartas[j];
 					 cont += 2;
 					 salir = false;
-					 if (cont > 2) {
-						 int k = cartas.length - 1;
-						 boolean end = false;
-						 while (k > 0 && !end) {
-							 if (cartas[k].getValor() != mejoresCartas[0].getValor() && cartas[k].getValor() != mejoresCartas[2].getValor()) {
-								 mejoresCartas[4] = cartas[k];
-								 end = true;
-							 }
-							 k--;
-						 }
+					 if (cont > 2)
 						 return mejoresCartas;
-					 }
+					 
 				 }
 				 j--;
 			 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package guihja;
-
+//
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.GridLayout;

@@ -422,7 +422,7 @@ public class LogicaGui {
 	 
 	 private static Carta[] escaleraDeColor(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[5];
-
+		 ordenador(cartas);
 		 int cont = 0, cart = 0;
 		 boolean esc = false, escA = false;
 
@@ -581,7 +581,7 @@ public class LogicaGui {
 	 
 	 private static Carta[] escalera(Carta[] cartas) {
 		 Carta[] mejoresCartas = new Carta[5];
-
+		 ordenador(cartas);
 		 int cont = 0, cart = 0;
 		 boolean esc = false, escA = false;
 
@@ -811,6 +811,20 @@ public class LogicaGui {
     
     public static int pulsadasBoard(){
         return board.size();
+    }
+    
+    private static void ordenador(Carta[] cartas) { //Metodo para ordenar las cartas. Util para escaleras
+
+        for (int i = 0; i < cartas.length - 1; i++) {
+            for (int j = i + 1; j < cartas.length; j++) {
+                if (cartas[i].getValor() > cartas[j].getValor()) {
+                    Carta aux = cartas[i];
+                    cartas[i] = cartas[j];
+                    cartas[j] = aux;
+
+                }
+            }
+        }
     }
 }
 

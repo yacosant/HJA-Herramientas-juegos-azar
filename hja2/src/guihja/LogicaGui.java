@@ -365,7 +365,7 @@ public class LogicaGui {
 	private static void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
                 
 		Carta[] cartas;
-                int[] combos = new int[13];
+                double[] combos = new double[13];
                 for(int i=0; i<13; i++) combos[i]=0;
               
 		for(int i = 0;i<c.size();i++){

@@ -20,24 +20,27 @@ public class CombosGui extends javax.swing.JPanel {
         initComponents();
     }
 
-    public static void setValues(int [] v, int tot){
-        if(tot==0)tot=1;
-        CombosGui.jProgressBar1.setValue((v[0]/tot)*100);
-        CombosGui.jProgressBar2.setValue((v[1]/tot)*100);
-        CombosGui.jProgressBar3.setValue((v[2]/tot)*100);
-        CombosGui.jProgressBar4.setValue((v[3]/tot)*100);
-        CombosGui.jProgressBar5.setValue((v[4]/tot)*100);
-        CombosGui.jProgressBar6.setValue((v[5]/tot)*100);
-        CombosGui.jProgressBar7.setValue((v[6]/tot)*100);
-        CombosGui.jProgressBar8.setValue((v[7]/tot)*100);
-        CombosGui.jProgressBar9.setValue((v[8]/tot)*100);
-        CombosGui.jProgressBar10.setValue((v[9]/tot)*100);
-        CombosGui.jProgressBar11.setValue((v[10]/tot)*100);
-        CombosGui.jProgressBar12.setValue((v[11]/tot)*100);
-        CombosGui.jProgressBar13.setValue((v[12]/tot)*100);
-        Principal.repaintEst();
+    public static void setValues(double [] v, int to){
+        double tot=to;
+        if(tot==0)to=1;
+        CombosGui.jProgressBar1.setValue((int)(v[0]*100/tot));
+        CombosGui.jProgressBar1.setString(""+(v[0]*100/tot));
+        CombosGui.jProgressBar2.setValue((int)(v[1]*100/tot));
+        CombosGui.jProgressBar3.setValue((int)(v[2]*100/tot));
+        CombosGui.jProgressBar4.setValue((int)(v[3]*100/tot));
+        CombosGui.jProgressBar5.setValue((int)(v[4]*100/tot));
+        CombosGui.jProgressBar6.setValue((int)(v[5]*100/tot));
+        CombosGui.jProgressBar7.setValue((int)(v[6]*100/tot));
+        CombosGui.jProgressBar8.setValue((int)(v[7]*100/tot));
+        CombosGui.jProgressBar9.setValue((int)(v[8]*100/tot));
+        CombosGui.jProgressBar10.setValue((int)(v[9]*100/tot));
+        CombosGui.jProgressBar11.setValue((int)(v[10]*100/tot));
+        CombosGui.jProgressBar12.setValue((int)(v[11]*100/tot));
+        CombosGui.jProgressBar13.setValue((int)(v[12]*100/tot));
+        //Principal.repaintEst();
         System.out.println("---total es:"+tot);
         for(int i=0; i<v.length; i++)System.out.println(v[i]);
+        Principal.setValues(v, to);
     }
     
 

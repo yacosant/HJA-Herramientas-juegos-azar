@@ -352,10 +352,12 @@ public class LogicaGui {
 		ArrayList<Combo> combos = c;
 		
 		for(int i = 0;i < board.size();i++)
-			for(Combo com : combos)
-				if((board.get(i).getColor() == com.getCarta(1).getColor() && board.get(i).getValor() == com.getCarta(1).getValor())
-						|| (board.get(i).getColor() == com.getCarta(2).getColor() && board.get(i).getValor() == com.getCarta(2).getValor()))
-					combos.remove(com);
+			for(int j = 0;j<combos.size();j++)
+				if((board.get(i).getColor() == combos.get(j).getCarta(1).getColor() && board.get(i).getValor() == combos.get(j).getCarta(1).getValor())
+						|| (board.get(i).getColor() == combos.get(j).getCarta(2).getColor() && board.get(i).getValor() == combos.get(j).getCarta(2).getValor())){
+					combos.remove(j);
+					j--;
+				}
 		
 		return combos;
 	}
@@ -394,7 +396,7 @@ public class LogicaGui {
 				else if(middlePair(board, pareja(cartas), c.get(i)))
 					combos[10]++;
 				else 
-					combos[11]++;
+					combos[11]++; //pareja debil
 			
 			else
 				combos[12]++;
@@ -779,9 +781,12 @@ public class LogicaGui {
 	 }
          
     public static void procesar(/*ArrayList<Posicion> cartas,ArrayList<Carta> board*/){
-             ArrayList<Combo> combos= crearCombos(cartas);
-             procesarCombos(combos,board);
-         }
+    	if(board.size() >= 3 && !cartas.isEmpty()){
+    		ArrayList<Combo> combos= crearCombos(cartas);
+    		combos = reducirCombos(combos, board);
+    		procesarCombos(combos,board);
+    	}
+    }
          
     private static void addCartas(Posicion p){
         cartas.add(p);

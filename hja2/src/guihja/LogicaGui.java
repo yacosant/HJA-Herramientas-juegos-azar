@@ -40,7 +40,7 @@ public class LogicaGui {
 			new Posicion(13, 6), new Posicion(11, 12), new Posicion(12, 9), new Posicion(13, 5), new Posicion(8, 13),
 			new Posicion(13, 4), new Posicion(10, 12), new Posicion(7, 13), new Posicion(13, 3), new Posicion(12, 8),
 			new Posicion(6, 13), new Posicion(13, 2), new Posicion(11, 9), new Posicion(5, 13), new Posicion(9, 12),
-			new Posicion(14, 14), new Posicion(10, 11), new Posicion(4, 13), new Posicion(12, 7), new Posicion(10, 9),
+			new Posicion(10, 11), new Posicion(4, 13), new Posicion(12, 7), new Posicion(10, 9),
 			new Posicion(12, 6), new Posicion(3, 13), new Posicion(11, 8), new Posicion(12, 5), new Posicion(2, 13),
 			new Posicion(8, 12), new Posicion(12, 4), new Posicion(9, 11), new Posicion(12, 3), new Posicion(10, 8),
 			new Posicion(7, 12), new Posicion(11, 7), new Posicion(12, 2), new Posicion(6, 12), new Posicion(9, 8),
@@ -937,11 +937,24 @@ public class LogicaGui {
     	return suited;
     }
 
-	private static void ordenarPos(ArrayList<Posicion> pos){
+	private static void ordenarPos(ArrayList<Posicion> pair){
+		
+    	Collections.sort(pair, new Comparator<Posicion>(){
+    		public int compare(Posicion p1, Posicion p2) {
+    			return new Integer(p1.getX()).compareTo(new Integer(p2.getX()));
+    		}
+    	});
+    }
+	
+	private static void ordenarPosOff(ArrayList<Posicion> pos){
 		
     	Collections.sort(pos, new Comparator<Posicion>(){
     		public int compare(Posicion p1, Posicion p2) {
-    			return new Integer(p1.getX()).compareTo(new Integer(p2.getX()));
+    			Integer a = p1.getY();
+    			Integer b = p2.getY();
+    	
+    			if(a == b)	return new Integer(p1.getX()).compareTo(new Integer(p2.getX()));
+    			else 	return new Integer(p2.getY()).compareTo(new Integer(p1.getY()));
     		}
     	});
     }
@@ -950,7 +963,10 @@ public class LogicaGui {
 		
     	Collections.sort(pair, new Comparator<Posicion>(){
     		public int compare(Posicion p1, Posicion p2) {
-    			return new Integer(p1.getY()).compareTo(new Integer(p2.getY()));
+    			Integer a = p1.getX();
+    			Integer b = p2.getX();
+    			if(a == b)	return new Integer(p1.getY()).compareTo(new Integer(p2.getY()));
+    			else	return new Integer(p2.getX()).compareTo(new Integer(p1.getX()));
     		}
     	});
     }
@@ -1016,7 +1032,7 @@ public class LogicaGui {
 	
 	private static void rangoOffSuited(ArrayList<Posicion> off){
 		
-    	ordenarPos(off);
+    	ordenarPosOff(off);
     	int cont;
     	
     	while(!off.isEmpty()){

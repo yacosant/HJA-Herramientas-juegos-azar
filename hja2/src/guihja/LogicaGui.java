@@ -941,7 +941,7 @@ public class LogicaGui {
 		
     	Collections.sort(pos, new Comparator<Posicion>(){
     		public int compare(Posicion p1, Posicion p2) {
-    			return new Integer(p1.getX()*p1.getY()).compareTo(new Integer(p2.getX()*p2.getY()));
+    			return new Integer(p1.getX()).compareTo(new Integer(p2.getX()));
     		}
     	});
     }

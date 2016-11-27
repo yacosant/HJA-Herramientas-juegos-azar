@@ -302,8 +302,7 @@ public class Principal extends javax.swing.JPanel {
         LogicaGui.setPorcentaje(valor);
 
         LogicaGui.pintarPor(valor,t);
-
-        	
+              	
        
     }//GEN-LAST:event_jSlider1StateChanged
 

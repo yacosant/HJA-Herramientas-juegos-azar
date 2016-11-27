@@ -6,6 +6,8 @@
 package guihja;
 //
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 
@@ -23,6 +25,7 @@ public class LogicaGui {
         private static ArrayList<Posicion> cartas =  new ArrayList<Posicion>();
         private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private static boolean[][] pulsado = new boolean[13][13];
+	 private static ArrayList<String> posiciones = new ArrayList<String>();
         
 	private final static Posicion[] ranking = { new Posicion(14, 14), new Posicion(13, 13), new Posicion(14, 13),
 			new Posicion(12, 12), new Posicion(13, 14), new Posicion(11, 11),
@@ -161,12 +164,12 @@ public class LogicaGui {
 		if (!marcado(a, b)) {
 			sumar(valor);
 			t.pintar(a, b, 0);
-                        Principal.addPosicion(s);
+                       	Principal.addPosicion(s);
                         addCartas(new Posicion(a,b));
 		} else {
 			restar(valor);
 			t.pintar(a, b, color);
-                        Principal.deletePosiciones(s);
+						Principal.deletePosiciones(s);
                         delCartas(new Posicion(a,b));
 		}
 		LogicaGui.procesar();
@@ -889,7 +892,97 @@ public class LogicaGui {
 
         return draw;
     }
+    
+    public static String rango(){
+		
+    	String rango = "";
+    	ArrayList<Posicion> pair /*rangoPair()*/ = new ArrayList<Posicion>(),off = rangoOff(),suited = rangoSuited();
+		pair.add(new Posicion(14,14));
+		pair.add(new Posicion(12,12));
+		pair.add(new Posicion(13,13));
+		
+    	rangoPair(pair);
+    	//rangoOff(off);
+    	//rangoSuited(suited);
 
+    	rango = String.join(",",posiciones);
+    	return rango;
+    	
+    }
+    
+    private static ArrayList<Posicion> rangoPair(){
+    	ArrayList<Posicion> pair = new ArrayList<Posicion>();
+    	
+    	for(int i = 0; i<rango.size();i++)
+    		if(rango.get(i).getX() == rango.get(i).getY())
+    			pair.add(rango.get(i));
+    	
+    	return pair;
+    }
+    
+    private static ArrayList<Posicion> rangoOff(){
+    	ArrayList<Posicion> off = new ArrayList<Posicion>();
+    	
+    	for(int i = 0; i<rango.size();i++)
+    		if(rango.get(i).getX() < rango.get(i).getY())
+    			off.add(rango.get(i));
+    	
+    	return off;
+    }
+    
+    private static ArrayList<Posicion> rangoSuited(){
+    	ArrayList<Posicion> suited = new ArrayList<Posicion>();
+    	
+    	for(int i = 0; i<rango.size();i++)
+    		if(rango.get(i).getX() < rango.get(i).getY())
+    			suited.add(rango.get(i));
+    	
+    	return suited;
+    }
+
+	private static void ordenarPair(ArrayList<Posicion> pair){
+		
+    	Collections.sort(pair, new Comparator<Posicion>(){
+    		public int compare(Posicion p1, Posicion p2) {
+    			return new Integer(p1.getX()).compareTo(new Integer(p2.getX()));
+    		}
+    	});
+    }
+	
+	private static void rangoPair(ArrayList<Posicion> pair){
+    	ordenarPair(pair);
+    	int cont;
+    	
+    	while(!pair.isEmpty()){
+    		cont = 0;
+    		int min = pair.get(cont).getX();
+
+    		boolean seguir = true;
+    		while(seguir && cont < pair.size()-1){
+    			if(pair.get(cont).getX()+1 == pair.get(cont+1).getX())
+    				cont++;
+    			else
+    				seguir = false;
+    		}
+    		
+    		if(pair.get(cont).getX() == 14)
+    			addPosicion(intToChar(min) + intToChar(min) + "+");
+    		else if(cont > 0)
+    			addPosicion(intToChar(cont)+ intToChar(cont) + "-" + intToChar(min)+ intToChar(min));
+    		else
+    			addPosicion(intToChar(min)+intToChar(min));
+    		
+    		for(int i = 0;i<=cont;i++)
+    			pair.remove(0);
+
+    	}
+	}
+	
+    public static void addPosicion(String valor){
+        posiciones.add(valor);
+    }
+    
+	
 }
 
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 
 
+
 /**
  *
  * @author Grupo 01
@@ -365,8 +366,8 @@ public class LogicaGui {
 	private static void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
                 
 		Carta[] cartas;
-                double[] combos = new double[13];
-                for(int i=0; i<13; i++) combos[i]=0;
+                double[] combos = new double[14];
+                for(int i=0; i<14; i++) combos[i]=0;
               
 		for(int i = 0;i<c.size();i++){
 			
@@ -400,6 +401,11 @@ public class LogicaGui {
 			
 			else
 				combos[12]++;
+			
+			
+			if(buscarProyectoC(cartas))
+				combos[13]++;
+			//else if()
 			
 			
 		}
@@ -826,6 +832,55 @@ public class LogicaGui {
             }
         }
     }
+
+   /* private boolean buscarProyectoE(Carta[] cartas) {
+
+        boolean draw = false, gut = false;
+        int cont = 0,str = 0;
+        while(cont < cartas.length-1 && str < 4){
+			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor()){
+				cont++;
+				str++;
+			}
+			else
+				gut = true;
+			
+			while(cont < cartas.length && gut && str < 3){
+				
+				
+			}
+
+        }
+        
+        //this.gutshot = gut;
+
+        return draw;
+
+    }*/
+    
+    
+
+    private static boolean buscarProyectoC(Carta[] cartas) {
+
+        boolean draw = false,color = false;
+        int cont;
+        
+        for(int i = 0;i < cartas.length && !color;i++){
+        	cont = 0;
+        	for(int j = i + 1;j < cartas.length;j++)
+        		if(cartas[i].getColor() == cartas[j].getColor())
+        			cont++;
+        	
+        	if(cont == 3)
+        		draw = true;
+        	else if(cont >= 4)
+        		color = true;
+        }
+        
+
+        return draw;
+    }
+
 }
 
 

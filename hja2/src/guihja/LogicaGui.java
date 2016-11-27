@@ -501,10 +501,10 @@ public class LogicaGui {
 			 cont = 0;
 			 for (int j = i + 1; j < cartas.length; j++) {
 				 if (cartas[i].getValor() == cartas[j].getValor()) {
-					 mejoresCartas[cont] = cartas[i];
+					 mejoresCartas[cont] = cartas[j];
 					 cont++;
 					 if (cont == 3) { // a�adimos la ultima carta
-						 mejoresCartas[cont] = cartas[j];
+						 mejoresCartas[cont] = cartas[i];
 						 return mejoresCartas;
 					 }
 				 }

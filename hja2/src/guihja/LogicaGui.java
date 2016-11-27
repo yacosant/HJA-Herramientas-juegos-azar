@@ -21,11 +21,10 @@ public class LogicaGui {
 
 	private static double porcentaje;
 	private static Tablero t;
-	private static ArrayList<Posicion> rango;
-        private static ArrayList<Posicion> cartas =  new ArrayList<Posicion>();
-        private static ArrayList<Carta> board = new ArrayList<Carta>();
+	private static ArrayList<Posicion> rango = new ArrayList<Posicion>();
+	private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private static boolean[][] pulsado = new boolean[13][13];
-	 private static ArrayList<String> posiciones = new ArrayList<String>();
+	private static ArrayList<String> posiciones = new ArrayList<String>();
         
 	private final static Posicion[] ranking = { new Posicion(14, 14), new Posicion(13, 13), new Posicion(14, 13),
 			new Posicion(12, 12), new Posicion(13, 14), new Posicion(11, 11),
@@ -164,12 +163,10 @@ public class LogicaGui {
 		if (!marcado(a, b)) {
 			sumar(valor);
 			t.pintar(a, b, 0);
-                       	Principal.addPosicion(s);
                         addCartas(new Posicion(a,b));
 		} else {
 			restar(valor);
 			t.pintar(a, b, color);
-						Principal.deletePosiciones(s);
                         delCartas(new Posicion(a,b));
 		}
 		LogicaGui.procesar();
@@ -245,7 +242,6 @@ public class LogicaGui {
 		}
 	}
 	
-
     private static Carta[] juntar(ArrayList<Carta> board,Combo c) { //Metodo para juntar el arrayList mano y arrayList mesa
         Carta[] cart;
         ArrayList<Carta> cartas = new ArrayList<Carta>();
@@ -349,7 +345,6 @@ public class LogicaGui {
 		
 		return combo;
 	}
-	
 
 	public static ArrayList<Combo> reducirCombos(ArrayList<Combo> c,ArrayList<Carta> board){
 		
@@ -782,8 +777,8 @@ public class LogicaGui {
 	 }
          
     public static void procesar(/*ArrayList<Posicion> cartas,ArrayList<Carta> board*/){
-    	if(board.size() >= 3 && !cartas.isEmpty()){
-    		ArrayList<Combo> combos= crearCombos(cartas);
+    	if(board.size() >= 3 && !rango.isEmpty()){
+    		ArrayList<Combo> combos= crearCombos(rango);
     		combos = reducirCombos(combos, board);
     		procesarCombos(combos,board);
     	}
@@ -791,7 +786,7 @@ public class LogicaGui {
     }
          
     private static void addCartas(Posicion p){
-        cartas.add(p);
+        rango.add(p);
     }
     
     public static void addBoard(Carta c){
@@ -801,11 +796,11 @@ public class LogicaGui {
     private static void delCartas(Posicion p){
         boolean encontrado=false;
         int i=0;
-        while(!encontrado && i < cartas.size()){
-            if(cartas.get(i).getX()==p.getX() && cartas.get(i).getY()==p.getY())encontrado=true;
+        while(!encontrado && i < rango.size()){
+            if(rango.get(i).getX()==p.getX() && rango.get(i).getY()==p.getY())encontrado=true;
         i++;
         }
-        if(encontrado) cartas.remove(i-1);
+        if(encontrado) rango.remove(i-1);
         
     }
     
@@ -824,7 +819,11 @@ public class LogicaGui {
     }
     
     public static void clearTab(){
-        cartas.clear();
+        rango.clear();
+    }
+    
+    public static void clearPos(){
+    	posiciones.clear();
     }
     
     public static int pulsadasBoard(){
@@ -896,14 +895,11 @@ public class LogicaGui {
     public static String rango(){
 		
     	String rango = "";
-    	ArrayList<Posicion> pair /*rangoPair()*/ = new ArrayList<Posicion>(),off = rangoOff(),suited = rangoSuited();
-		pair.add(new Posicion(14,14));
-		pair.add(new Posicion(12,12));
-		pair.add(new Posicion(13,13));
+    	ArrayList<Posicion> pair = rangoPair(),off = rangoOff(),suited = rangoSuited();
 		
     	rangoPair(pair);
-    	//rangoOff(off);
-    	//rangoSuited(suited);
+    	rangoOffSuited(off);
+    	rangoSuited(suited);
 
     	rango = String.join(",",posiciones);
     	return rango;
@@ -931,26 +927,36 @@ public class LogicaGui {
     }
     
     private static ArrayList<Posicion> rangoSuited(){
+
     	ArrayList<Posicion> suited = new ArrayList<Posicion>();
     	
     	for(int i = 0; i<rango.size();i++)
-    		if(rango.get(i).getX() < rango.get(i).getY())
+    		if(rango.get(i).getX() > rango.get(i).getY())
     			suited.add(rango.get(i));
     	
     	return suited;
     }
 
-	private static void ordenarPair(ArrayList<Posicion> pair){
+	private static void ordenarPos(ArrayList<Posicion> pos){
+		
+    	Collections.sort(pos, new Comparator<Posicion>(){
+    		public int compare(Posicion p1, Posicion p2) {
+    			return new Integer(p1.getX()*p1.getY()).compareTo(new Integer(p2.getX()*p2.getY()));
+    		}
+    	});
+    }
+	
+	private static void ordenarPosSuited(ArrayList<Posicion> pair){
 		
     	Collections.sort(pair, new Comparator<Posicion>(){
     		public int compare(Posicion p1, Posicion p2) {
-    			return new Integer(p1.getX()).compareTo(new Integer(p2.getX()));
+    			return new Integer(p1.getY()).compareTo(new Integer(p2.getY()));
     		}
     	});
     }
 	
 	private static void rangoPair(ArrayList<Posicion> pair){
-    	ordenarPair(pair);
+    	ordenarPos(pair);
     	int cont;
     	
     	while(!pair.isEmpty()){
@@ -965,15 +971,75 @@ public class LogicaGui {
     				seguir = false;
     		}
     		
-    		if(pair.get(cont).getX() == 14)
+    		if(pair.get(cont).getX() == 14 && cont != 0)
     			addPosicion(intToChar(min) + intToChar(min) + "+");
     		else if(cont > 0)
-    			addPosicion(intToChar(cont)+ intToChar(cont) + "-" + intToChar(min)+ intToChar(min));
+    			addPosicion(intToChar(pair.get(cont).getX())+ intToChar(pair.get(cont).getX()) + "-" + intToChar(min)+ intToChar(min));
     		else
     			addPosicion(intToChar(min)+intToChar(min));
     		
     		for(int i = 0;i<=cont;i++)
     			pair.remove(0);
+
+    	}
+	}
+	
+	private static void rangoSuited(ArrayList<Posicion> suited){
+		
+    	ordenarPosSuited(suited);
+    	int cont;
+    	
+    	while(!suited.isEmpty()){
+    		cont = 0;
+    		int min = suited.get(cont).getX(),min2 = suited.get(cont).getY();
+
+    		boolean seguir = true;
+    		while(seguir && cont < suited.size()-1){
+    			if(suited.get(cont).getX() == suited.get(cont+1).getX() && suited.get(cont).getY()+1 == suited.get(cont+1).getY())
+    				cont++;
+    			else
+    				seguir = false;
+    		}
+    		
+    		if(suited.get(cont).getX()-1 == suited.get(cont).getY() && cont != 0)
+    			addPosicion(intToChar(min) + intToChar(min2)+"s" + "+");
+    		else if(cont > 0)
+    			addPosicion(intToChar(suited.get(cont).getX())+ intToChar(suited.get(cont).getY())+"s" + "-" + intToChar(min)+ intToChar(min2)+"s");
+    		else
+    			addPosicion(intToChar(min)+intToChar(min2)+"s");
+    		
+    		for(int i = 0;i<=cont;i++)
+    			suited.remove(0);
+
+    	}
+	}
+	
+	private static void rangoOffSuited(ArrayList<Posicion> off){
+		
+    	ordenarPos(off);
+    	int cont;
+    	
+    	while(!off.isEmpty()){
+    		cont = 0;
+    		int min = off.get(cont).getY(),min2 = off.get(cont).getX();
+
+    		boolean seguir = true;
+    		while(seguir && cont < off.size()-1){
+    			if(off.get(cont).getY() == off.get(cont+1).getY() && off.get(cont).getX()+1 == off.get(cont+1).getX())
+    				cont++;
+    			else
+    				seguir = false;
+    		}
+    		
+    		if(off.get(cont).getY()-1 == off.get(cont).getX() && cont != 0)
+    			addPosicion(intToChar(min) + intToChar(min2)+"o" + "+");
+    		else if(cont > 0)
+    			addPosicion(intToChar(off.get(cont).getY())+ intToChar(off.get(cont).getX())+ "o" + "-" + intToChar(min)+ intToChar(min2)+"o");
+    		else
+    			addPosicion(intToChar(min)+intToChar(min2)+"o");
+    		
+    		for(int i = 0;i<=cont;i++)
+    			off.remove(0);
 
     	}
 	}

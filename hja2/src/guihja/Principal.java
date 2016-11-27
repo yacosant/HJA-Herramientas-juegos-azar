@@ -314,40 +314,42 @@ public class Principal extends javax.swing.JPanel {
         posiciones.clear();
         LogicaGui.setPorcentaje(0.0);
         LogicaGui.clearTab();
+        LogicaGui.clearPos();
         CombosGui.resetCombos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         BoardGui.resetBoard();
+        pintarText(LogicaGui.rango());
     }//GEN-LAST:event_jButton4ActionPerformed
     
     public static void updateContador(){
         jTextField2.setText(LogicaGui.getPorcentaje()+"%");
     }
 
-    public static void addText(String text){
+    /*public static void addText(String text){
         String previo = jTextField1.getText();
         if(previo.length()!=0) jTextField1.setText(previo+','+text);
         else jTextField1.setText(text);
         
-    }
+    }*/
     
     public static void repaintEst(){
         boardGui1.repaint();
     }
     
-    public static void deletePosiciones(String valor){
+   /*public static void deletePosiciones(String valor){
         posiciones.remove(valor); 
-        pintarText();
+       // pintarText();
     }
     
     public static void addPosicion(String valor){
         posiciones.add(valor);
-        pintarText();
-    }
+        //pintarText();
+    }*/
     
-    private static void pintarText(){
-       jTextField1.setText(String.join(",",posiciones));
+    private static void pintarText(String s){
+       jTextField1.setText(s);
     }
     
     public static void setValues(double [] v, int tot){

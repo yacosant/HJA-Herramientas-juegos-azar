@@ -460,7 +460,7 @@ public class LogicaGui {
 			 cont++;
 
 			 //Unico caso de escalera 1,2,3,4,5
-			 if (cart == 3) {
+			 if (cart == 3 && cont < cartas.length-1) {
 				 if (cartas[cont + 1].getValor() != 6 && cartas[cont].getValor() == 5 && cartas[cartas.length - 1].getValor() == 14
 						 && mejoresCartas[2].getColor() == cartas[cont].getColor() && mejoresCartas[2].getColor() == cartas[cartas.length - 1].getColor()) {
 					 mejoresCartas[cart] = cartas[cont];
@@ -619,7 +619,7 @@ public class LogicaGui {
 			 cont++;
 
 			 //Unico caso de escalera 1,2,3,4,5
-			 if (cart == 3) {
+			 if (cart == 3 && cont < cartas.length-1) {
 				 if (cartas[cont + 1].getValor() != 6 && cartas[cont].getValor() == 5 && cartas[cartas.length - 1].getValor() == 14) {
 					 mejoresCartas[cart] = cartas[cont];
 					 mejoresCartas[cart + 1] = cartas[cartas.length - 1];

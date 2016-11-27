@@ -95,7 +95,7 @@ public class Principal extends javax.swing.JPanel {
 
         jButton3.setText("(Aplicar)");
 
-        jButton4.setText("(Limpiar Board)");
+        jButton4.setText("Limpiar Board");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -314,10 +314,12 @@ public class Principal extends javax.swing.JPanel {
         jSlider1.setValue(0);
         posiciones.clear();
         LogicaGui.setPorcentaje(0.0);
+        LogicaGui.clearTab();
+        CombosGui.resetCombos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        LogicaGui.procesar();
+        BoardGui.resetBoard();
     }//GEN-LAST:event_jButton4ActionPerformed
     
     public static void updateContador(){

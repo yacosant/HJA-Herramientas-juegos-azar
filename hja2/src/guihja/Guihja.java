@@ -21,7 +21,7 @@ public class Guihja {
         JFrame f=  new JFrame();
         f.add(new Principal());
         f.setVisible(true);
-        f.setSize(1050, 650);
+        f.setSize(1050, 750);
         
     }
     

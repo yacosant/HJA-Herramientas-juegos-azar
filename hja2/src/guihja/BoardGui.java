@@ -16,8 +16,8 @@ import java.awt.event.ActionListener;
  * @author YVCX
  */
 public class BoardGui extends javax.swing.JPanel {
-    private Button[][] board = new Button [13][4];
-    private boolean[][] pulsado = new boolean [13][4];
+    private static Button[][] board = new Button [13][4];
+    private static boolean[][] pulsado = new boolean [13][4];
     
     /**
      * Creates new form BoardGui
@@ -84,6 +84,16 @@ public class BoardGui extends javax.swing.JPanel {
             case 3: v="s";break;
         }
        return v;
+    }
+    
+    public static void resetBoard(){
+        for(int i=0; i<4; i++)
+            for(int j=0; j<13; j++){
+                pulsado[j][i]=false;
+                 board[j][i].setBackground(new Color(240,240,240));
+            }
+        LogicaGui.clearBoard();
+        CombosGui.resetCombos();
     }
     
      private int palo(char j){

@@ -784,6 +784,7 @@ public class LogicaGui {
     		combos = reducirCombos(combos, board);
     		procesarCombos(combos,board);
     	}
+        else CombosGui.resetCombos();
     }
          
     private static void addCartas(Posicion p){
@@ -813,6 +814,14 @@ public class LogicaGui {
         i++;
         }
         if(encontrado) board.remove(i-1);
+    }
+    
+    public static void clearBoard(){
+        board.clear();
+    }
+    
+    public static void clearTab(){
+        cartas.clear();
     }
     
     public static int pulsadasBoard(){

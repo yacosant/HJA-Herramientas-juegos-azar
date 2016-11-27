@@ -24,7 +24,6 @@ public class CombosGui extends javax.swing.JPanel {
         double tot=to;
         if(tot==0)to=1;
         CombosGui.jProgressBar1.setValue((int)(v[0]*100/tot));
-        CombosGui.jProgressBar1.setString(""+(v[0]*100/tot));
         CombosGui.jProgressBar2.setValue((int)(v[1]*100/tot));
         CombosGui.jProgressBar3.setValue((int)(v[2]*100/tot));
         CombosGui.jProgressBar4.setValue((int)(v[3]*100/tot));
@@ -43,7 +42,12 @@ public class CombosGui extends javax.swing.JPanel {
         Principal.setValues(v, to);
     }
     
-
+    public static void resetCombos(){
+        double[] v = new double[13];
+         for(int i=0; i<13; i++)v[i]=0;
+         setValues(v,1);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

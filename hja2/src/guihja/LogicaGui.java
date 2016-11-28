@@ -364,7 +364,7 @@ public class LogicaGui {
 	private static void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
                 
 		Carta[] cartas;
-                double[] combos = new double[15];
+                double[] combos = new double[16];
                 for(int i=0; i<combos.length; i++) combos[i]=0;
               
 		for(int i = 0;i<c.size();i++){
@@ -406,6 +406,9 @@ public class LogicaGui {
 			
 			if(hayCombo(proyectoEscAbierta(cartas),c.get(i)))//proyecto esc abierta
 				combos[14]++;
+			
+			if(hayCombo(proyectoGut(cartas),c.get(i)))
+				combos[15]++;
 			
 			
 		}
@@ -849,6 +852,77 @@ public class LogicaGui {
             }
         }
     }
+    
+    private static Carta[] proyectoGut(Carta[] cartas){
+    	
+    	boolean draw = false,esc = false,seguir = true,gutI=false;
+    	Carta[] mejores = new Carta[4];
+    	int cont,gut=0;
+    	
+    	for(int i = 0;i<cartas.length-1 && !esc;i++){
+    		cont = 0;
+    		seguir = true;
+    		if(!draw && cartas[i].getValor()+1 == cartas[i+1].getValor())
+    			mejores[cont] = cartas[i];
+    		else if(cartas[i].getValor() != cartas[i+1].getValor()){
+    			if(!draw && i < cartas.length-2 && cartas[i].getValor()+2 == cartas[i+1].getValor()){    			
+    				gutI = true;
+    				mejores[cont] = cartas[i];
+    			}else
+    				seguir = false;
+    		}
+    		
+    		cont++;
+    		for(int j = i+1;j<cartas.length-1 && seguir;j++){
+    			if(gutI){
+    				gut++;
+    				gutI = false;
+    				if(cartas[j+1].getValor()+1 == cartas[j+2].getValor()){
+    					if(cont == 2){
+    						mejores[cont] = cartas[j];
+    						mejores[cont+1] = cartas[j+1];
+    					}else
+    						mejores[cont] = cartas[j];
+    				}else
+    					seguir = false;
+    				cont++;
+    			}else if(gut <= 1 && !draw && cartas[j].getValor()+1 == cartas[j+1].getValor()){
+    				
+    				if(cont == 2){
+						mejores[cont] = cartas[j];
+						mejores[cont+1] = cartas[j+1];
+					}else
+						mejores[cont] = cartas[j];
+				
+    				cont++;
+    			}else if(cartas[j].getValor()+2 == cartas[j+1].getValor()){
+    				if(cont == 2){
+    					mejores[cont] = cartas[j];
+    					mejores[cont+1] = cartas[j+1];
+    				}else
+    					mejores[cont] = cartas[j];
+    				gut++;
+    				j++;
+    				cont++;
+    				
+    			}else if(cont == 3 && cartas[j].getValor() == 5 && cartas[cartas.length-1].getValor() == 14)
+    				cont++;
+    			else
+    				seguir = false;
+    			
+    		}
+    		if(cont == 3)
+    			draw = true;
+    		else if (cont >= 4){
+    			esc = true;
+    			draw = false;
+    		}
+    		
+    		gutI = false;
+    	}
+    	
+    	return mejores;
+    }
 
     private static Carta[] proyectoEscAbierta(Carta[] cartas) {
 
@@ -879,7 +953,7 @@ public class LogicaGui {
     				cont++;
     			}
 
-    			else if(cont == 3 && cartas[i].getValor() == 5 && cartas[cartas.length-1].getValor() == 14)
+    			else if(cont == 3 && cartas[j].getValor() == 5 && cartas[cartas.length-1].getValor() == 14)
     				cont++;
     			else
     				seguir = false;

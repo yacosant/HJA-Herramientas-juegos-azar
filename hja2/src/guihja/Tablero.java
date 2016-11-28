@@ -37,6 +37,7 @@ public class Tablero extends javax.swing.JPanel {
                     tecla=e.getActionCommand();
                       LogicaGui.pulsacion(tecla);
                       Principal.updateContador();
+                      Principal.pintarText(LogicaGui.rango());
                     ;}
                   
                 };

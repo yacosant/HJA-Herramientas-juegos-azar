@@ -896,7 +896,7 @@ public class LogicaGui {
 		
     	String rango = "";
     	ArrayList<Posicion> pair = rangoPair(),off = rangoOff(),suited = rangoSuited();
-		
+        posiciones.clear();
     	rangoPair(pair);
     	rangoOffSuited(off);
     	rangoSuited(suited);

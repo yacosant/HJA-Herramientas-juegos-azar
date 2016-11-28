@@ -364,8 +364,8 @@ public class LogicaGui {
 	private static void procesarCombos(ArrayList<Combo> c,ArrayList<Carta> board){
                 
 		Carta[] cartas;
-                double[] combos = new double[14];
-                for(int i=0; i<14; i++) combos[i]=0;
+                double[] combos = new double[15];
+                for(int i=0; i<combos.length; i++) combos[i]=0;
               
 		for(int i = 0;i<c.size();i++){
 			
@@ -401,9 +401,10 @@ public class LogicaGui {
 				combos[12]++;
 			
 			
-			if(buscarProyectoC(cartas))
+			if(buscarProyectoC(cartas))//proyecto color
 				combos[13]++;
-			//else if()
+			else if(proyectoEscAbierta(cartas) || proyectoEscAbiertaC(cartas))//proyecto esc abierta
+				combos[14]++;
 			
 			
 		}
@@ -561,7 +562,7 @@ public class LogicaGui {
 		 boolean col = false;
 
 
-		 while (cont >= 0 && !col) {
+		 while (cont > 0 && !col) {
 			 color = 0;
 			 j = cont - 1;
 			 mejoresCartas[color] = cartas[cont];
@@ -844,30 +845,65 @@ public class LogicaGui {
         }
     }
 
-   /* private boolean buscarProyectoE(Carta[] cartas) {
+    private static boolean proyectoEscAbierta(Carta[] cartas) {
 
-        boolean draw = false, gut = false;
-        int cont = 0,str = 0;
-        while(cont < cartas.length-1 && str < 4){
-			if(cartas[cont].getValor()+1 == cartas[cont+1].getValor()){
-				cont++;
-				str++;
-			}
-			else
-				gut = true;
-			
-			while(cont < cartas.length && gut && str < 3){
-				
-				
-			}
+    	boolean draw = false,esc = false,seguir;
+    	int cont=0;
 
-        }
-        
-        //this.gutshot = gut;
+    	for(int i = 0;i<cartas.length-1 && !esc;i++){
+    		cont = 0;
+    		seguir = true;
+    		for(int j = i+1;j<cartas.length && seguir;j++)
+    			if(cartas[i].getValor()+1 == cartas[j].getValor())
+    				cont++;
+    			else if(cont == 3 && cartas[i].getValor() == 5 && cartas[cartas.length-1].getValor() == 14)
+    				cont++;
+    			else
+    				seguir = false;
 
-        return draw;
+    		if(cont == 3)
+    			draw = true;
+    		else if (cont >= 4){
+    			esc = true;
+    			draw = false;
+    		}
 
-    }*/
+    	}
+
+    	return draw;
+
+    }
+
+    private static boolean proyectoEscAbiertaC(Carta[] cartas) {
+
+    	boolean draw = false,esc = false,seguir;
+    	int cont=0;
+
+    	for(int i = 0;i<cartas.length-1 && !esc;i++){
+    		cont = 0;
+    		seguir = true;
+    		for(int j = i+1;j<cartas.length && seguir;j++)
+    			if(cartas[i].getValor()+1 == cartas[j].getValor() && cartas[i].getColor() == cartas[j].getColor())
+    				cont++;
+    			else if(cont == 3 && cartas[i].getValor() == 5 && cartas[cartas.length-1].getValor() == 14 && 
+    					cartas[i].getColor() == cartas[cartas.length-1].getColor())
+    				cont++;
+    			else
+    				seguir = false;
+
+    		if(cont == 3)
+    			draw = true;
+    		else if (cont >= 4){
+    			esc = true;
+    			draw = false;
+    		}
+
+    	}
+
+    	return draw;
+
+    }
+
     
     
 
@@ -876,7 +912,7 @@ public class LogicaGui {
         boolean draw = false,color = false;
         int cont;
         
-        for(int i = 0;i < cartas.length && !color;i++){
+        for(int i = 0;i < cartas.length-1 && !color;i++){
         	cont = 0;
         	for(int j = i + 1;j < cartas.length;j++)
         		if(cartas[i].getColor() == cartas[j].getColor())
@@ -884,8 +920,10 @@ public class LogicaGui {
         	
         	if(cont == 3)
         		draw = true;
-        	else if(cont >= 4)
+        	else if(cont >= 4){
         		color = true;
+        		draw = false;
+        	}
         }
         
 

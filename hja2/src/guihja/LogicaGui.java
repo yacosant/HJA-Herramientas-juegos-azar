@@ -855,7 +855,7 @@ public class LogicaGui {
     
     private static Carta[] proyectoGut(Carta[] cartas){
     	
-    	boolean draw = false,esc = false,seguir = true,gutI=false;
+    	boolean draw = false,esc = false,seguir = true;
     	Carta[] mejores = new Carta[4];
     	int cont,gut=0;
     	
@@ -866,7 +866,7 @@ public class LogicaGui {
     			mejores[cont] = cartas[i];
     		else if(cartas[i].getValor() != cartas[i+1].getValor()){
     			if(!draw && i < cartas.length-2 && cartas[i].getValor()+2 == cartas[i+1].getValor()){    			
-    				gutI = true;
+    				gut++;
     				mejores[cont] = cartas[i];
     			}else
     				seguir = false;
@@ -874,19 +874,7 @@ public class LogicaGui {
     		
     		cont++;
     		for(int j = i+1;j<cartas.length-1 && seguir;j++){
-    			if(gutI){
-    				gut++;
-    				gutI = false;
-    				if(cartas[j+1].getValor()+1 == cartas[j+2].getValor()){
-    					if(cont == 2){
-    						mejores[cont] = cartas[j];
-    						mejores[cont+1] = cartas[j+1];
-    					}else
-    						mejores[cont] = cartas[j];
-    				}else
-    					seguir = false;
-    				cont++;
-    			}else if(gut <= 1 && !draw && cartas[j].getValor()+1 == cartas[j+1].getValor()){
+    			if(gut <= 1 && !draw && cartas[j].getValor()+1 == cartas[j+1].getValor()){
     				
     				if(cont == 2){
 						mejores[cont] = cartas[j];
@@ -917,8 +905,7 @@ public class LogicaGui {
     			esc = true;
     			draw = false;
     		}
-    		
-    		gutI = false;
+
     	}
     	
     	if(!draw)

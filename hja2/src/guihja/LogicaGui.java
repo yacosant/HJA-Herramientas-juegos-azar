@@ -231,7 +231,7 @@ public class LogicaGui {
 		int i = 0, x, y;
 		rango = new ArrayList<Posicion>();
 		t2.reset();
-		while (valor > 0) {
+		while (valor > 0 && i< ranking.length) {
 			x = ranking[i].getX();
 			y = ranking[i].getY();
 			t2.pintar(x, y, 1);

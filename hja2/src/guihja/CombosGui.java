@@ -63,7 +63,7 @@ public class CombosGui extends javax.swing.JPanel {
     
     public static void resetCombos(){
         double[] v = new double[16];
-         for(int i=0; i<16; i++)v[i]=0;
+         for(int i=0; i<16; i++)v[i]=00.00;
          setValues(v,1);
     }
     
@@ -149,65 +149,91 @@ public class CombosGui extends javax.swing.JPanel {
 
         jLabel2.setText("0.0%");
 
+        jProgressBar1.setForeground(new java.awt.Color(102, 255, 0));
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Poker");
 
         jLabel4.setText("0.0%");
+
+        jProgressBar2.setForeground(new java.awt.Color(51, 255, 51));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Full");
 
         jLabel6.setText("0.0%");
 
+        jProgressBar3.setForeground(new java.awt.Color(102, 255, 102));
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Color");
 
         jLabel8.setText("0.0%");
+
+        jProgressBar4.setForeground(new java.awt.Color(153, 255, 153));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Escalera");
 
         jLabel10.setText("0.0%");
 
+        jProgressBar5.setForeground(new java.awt.Color(153, 255, 153));
+
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Trio");
 
         jLabel12.setText("0.0%");
+
+        jProgressBar6.setForeground(new java.awt.Color(153, 255, 153));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Pareja Doble");
 
         jLabel14.setText("0.0%");
 
+        jProgressBar7.setForeground(new java.awt.Color(153, 255, 153));
+
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Pareja Over");
 
         jLabel16.setText("0.0%");
+
+        jProgressBar8.setForeground(new java.awt.Color(51, 255, 153));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("Pareja Top");
 
         jLabel18.setText("0.0%");
 
+        jProgressBar9.setForeground(new java.awt.Color(153, 255, 153));
+
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setText("Pareja Pocket");
 
         jLabel20.setText("0.0%");
+
+        jProgressBar10.setForeground(new java.awt.Color(153, 255, 153));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setText("Pareja Middle");
 
         jLabel22.setText("0.0%");
 
+        jProgressBar11.setForeground(new java.awt.Color(153, 255, 153));
+
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setText("Pareja Debil");
 
         jLabel24.setText("0.0%");
 
+        jProgressBar12.setForeground(new java.awt.Color(204, 255, 204));
+
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setText("No Manos Hechas");
 
         jLabel26.setText("0.0%");
+
+        jProgressBar13.setForeground(new java.awt.Color(204, 255, 153));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(51, 153, 255));
@@ -218,15 +244,21 @@ public class CombosGui extends javax.swing.JPanel {
 
         jLabel29.setText("0.0%");
 
+        jProgressBar14.setForeground(new java.awt.Color(0, 255, 204));
+
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel30.setText("Escalera a dos puntas");
 
         jLabel31.setText("0.0%");
 
+        jProgressBar15.setForeground(new java.awt.Color(0, 255, 204));
+
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel32.setText("Escalera con hueco");
 
         jLabel33.setText("0.0%");
+
+        jProgressBar16.setForeground(new java.awt.Color(0, 255, 204));
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(51, 153, 255));

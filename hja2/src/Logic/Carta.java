@@ -1,8 +1,8 @@
-package guihja;
-//
+package Logic;
+
 /**
  *
- * @author Grupo 1
+ * @author Grupo 01
  *
  */
 public class Carta {

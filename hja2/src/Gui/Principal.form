@@ -94,9 +94,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="guihja.Tablero" name="t">
+    <Component class="Gui.Tablero" name="t">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new guihja.Tablero()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Gui.Tablero()"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -140,7 +140,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="guihja.BoardGui" name="boardGui1">
+    <Component class="Gui.BoardGui" name="boardGui1">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
       </AuxValues>
@@ -195,7 +195,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="guihja.CombosGui" name="comboGui1">
+    <Component class="Gui.CombosGui" name="comboGui1">
     </Component>
   </SubComponents>
 </Form>

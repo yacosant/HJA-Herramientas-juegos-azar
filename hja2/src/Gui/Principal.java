@@ -1,23 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package guihja;
-//
+package Gui;
 
+import Logic.Logica;
 import java.util.ArrayList;
 
 /**
  *
- * @author YVCX
+ * @author Grupo 01
  */
 public class Principal extends javax.swing.JPanel {
+
     /**
      * Creates new form principal
      */
     private static ArrayList<String> posiciones = new ArrayList<String>();
-    
+
     public Principal() {
         initComponents();
         t.reset();
@@ -32,18 +28,18 @@ public class Principal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        t = new guihja.Tablero();
+        t = new Gui.Tablero();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        boardGui1 = new guihja.BoardGui();
+        boardGui1 = new Gui.BoardGui();
         jLabel3 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        comboGui1 = new guihja.CombosGui();
+        comboGui1 = new Gui.CombosGui();
 
         jLabel1.setText("Jugador ");
 
@@ -177,117 +173,122 @@ public class Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String input = jTextField1.getText(), linea="";
-        int a,b,temp,i=0,v=1, h=1, c,d,max=0;
-        
-        t.reset();
-        while(i<input.length()){
-            String[] aaa = input.split(",");
-            for(int k=0; k<aaa.length;k++)posiciones.add(aaa[k]);
-            
-            a=LogicaGui.CharToInt(input.charAt(i));
-            b=LogicaGui.CharToInt(input.charAt(i+1));
-            
-            //CAMBIO DE A<B 
-            if((i+2)<input.length() && ((input.charAt(i+2)=='o' && b<a) || (input.charAt(i+2)=='s' && a<b))){
-                temp=a;
-                a=b;
-                b=temp;
-            }  
-            
-            if((i+2)<input.length() && ((input.charAt(i+2)=='o' ) || (input.charAt(i+2)=='s' ))) i+=3;
-            else i+=2;
-            
-            //SI ES XX+
-            if(i<input.length() && input.charAt(i)=='+'){
-                max=t.tam()-a+2;
-                
-                if(a<b){
-                    v=0;
-                    h=1;
-                    max=b-a;
-                }
-                else if(a>b){
-                    h=0;
-                    v=1;
-                    max=a-b;
-                }
-                else{
-                    v=1;
-                    h=1;
-                }
-                   
-                for(int x=0;x<max; x++){
-                    t.pintar(a+x*h, b+x*v,0);
-                    LogicaGui.sumarPorcentaje(a+x*h, b+x*v);
-                }
-               i++;
-            }
-            
-            if((i)<input.length() && input.charAt(i)=='-'){
-                i++;
-                c=LogicaGui.CharToInt(input.charAt(i));
-                d=LogicaGui.CharToInt(input.charAt(i+1));
-                
-               //CAMBIO DE A<B  parte2
-                if((i+2)<input.length() && ((input.charAt(i+2)=='o' && d<c) || (input.charAt(i+2)=='s' && c<d))){
-                    temp=c;
-                    c=d;
-                    d=temp;
-                }  
+        String input = jTextField1.getText(), linea = "";
+        int a, b, temp, i = 0, v = 1, h = 1, c, d, max = 0;
 
-                if((i+2)<input.length() && (input.charAt(i+2)=='o' || input.charAt(i+2)=='s')) i+=3;
-                else i+=2;
-                
-                if(a==c){
-                    max=b-d;
-                    h=0;
-                }
-                else if(b==d){
-                    max=a-c;
-                    v=0;
-                }
-                else  max=a-c;
-                
-                for(int x=0;x<=max; x++){
-                    t.pintar(c+x*h, d+x*v,0);
-                    LogicaGui.sumarPorcentaje(c+x*h, d+x*v);
-                }
-              
+        t.reset();
+        while (i < input.length()) {
+            String[] aaa = input.split(",");
+            for (int k = 0; k < aaa.length; k++) {
+                posiciones.add(aaa[k]);
             }
-            else {
-                t.pintar(a, b,0);
-                LogicaGui.sumarPorcentaje(a,b);
+
+            a = Logica.CharToInt(input.charAt(i));
+            b = Logica.CharToInt(input.charAt(i + 1));
+
+            //CAMBIO DE A<B 
+            if ((i + 2) < input.length() && ((input.charAt(i + 2) == 'o' && b < a) || (input.charAt(i + 2) == 's' && a < b))) {
+                temp = a;
+                a = b;
+                b = temp;
             }
-            
+
+            if ((i + 2) < input.length() && ((input.charAt(i + 2) == 'o') || (input.charAt(i + 2) == 's'))) {
+                i += 3;
+            } else {
+                i += 2;
+            }
+
+            //SI ES XX+
+            if (i < input.length() && input.charAt(i) == '+') {
+                max = t.tam() - a + 2;
+
+                if (a < b) {
+                    v = 0;
+                    h = 1;
+                    max = b - a;
+                } else if (a > b) {
+                    h = 0;
+                    v = 1;
+                    max = a - b;
+                } else {
+                    v = 1;
+                    h = 1;
+                }
+
+                for (int x = 0; x < max; x++) {
+                    t.pintar(a + x * h, b + x * v, 0);
+                    Logica.sumarPorcentaje(a + x * h, b + x * v);
+                }
+                i++;
+            }
+
+            if ((i) < input.length() && input.charAt(i) == '-') {
+                i++;
+                c = Logica.CharToInt(input.charAt(i));
+                d = Logica.CharToInt(input.charAt(i + 1));
+
+                //CAMBIO DE A<B  parte2
+                if ((i + 2) < input.length() && ((input.charAt(i + 2) == 'o' && d < c) || (input.charAt(i + 2) == 's' && c < d))) {
+                    temp = c;
+                    c = d;
+                    d = temp;
+                }
+
+                if ((i + 2) < input.length() && (input.charAt(i + 2) == 'o' || input.charAt(i + 2) == 's')) {
+                    i += 3;
+                } else {
+                    i += 2;
+                }
+
+                if (a == c) {
+                    max = b - d;
+                    h = 0;
+                } else if (b == d) {
+                    max = a - c;
+                    v = 0;
+                } else {
+                    max = a - c;
+                }
+
+                for (int x = 0; x <= max; x++) {
+                    t.pintar(c + x * h, d + x * v, 0);
+                    Logica.sumarPorcentaje(c + x * h, d + x * v);
+                }
+
+            } else {
+                t.pintar(a, b, 0);
+                Logica.sumarPorcentaje(a, b);
+            }
+
             i++; //saltar la coma
         }
-        jTextField2.setText(LogicaGui.getPorcentaje()+"%");
-        
+        jTextField2.setText(Logica.getPorcentaje() + "%");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
 
-        String tx= jTextField2.getText();
-        String valor = tx.substring(0,tx.length()-1);
-        String newName = valor.substring(0,valor.length()-2)+'.'+valor.substring(valor.length()-1);
-               
-        double v=Double.valueOf(newName);//Double.parseDouble(valor);
-        LogicaGui.pintarPor(v,t);
-        int a= (int)v*10;
+        String tx = jTextField2.getText();
+        String valor = tx.substring(0, tx.length() - 1);
+        String newName = valor.substring(0, valor.length() - 2) + '.' + valor.substring(valor.length() - 1);
+
+        double v = Double.valueOf(newName);
+        Logica.pintarPor(v, t);
+        int a = (int) v * 10;
         jSlider1.setValue(a);
-        
+
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        double valor= jSlider1.getValue();
-        valor=valor/10;
-        jTextField2.setText(valor+"%");
-        LogicaGui.setPorcentaje(valor);
+        double valor = jSlider1.getValue();
+        valor = valor / 10;
+        jTextField2.setText(valor + "%");
+        Logica.setPorcentaje(valor);
 
-        LogicaGui.pintarPor(valor,t);
-        Principal.pintarText(LogicaGui.rango());
-        LogicaGui.procesar();
+        Logica.pintarPor(valor, t);
+        Principal.pintarText(Logica.rango());
+        Logica.procesar();
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -296,27 +297,27 @@ public class Principal extends javax.swing.JPanel {
         t.reset();
         jSlider1.setValue(0);
         posiciones.clear();
-        LogicaGui.setPorcentaje(0.0);
-        LogicaGui.clearTab();
-        LogicaGui.clearPos();
+        Logica.setPorcentaje(0.0);
+        Logica.clearTab();
+        Logica.clearPos();
         CombosGui.resetCombos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         BoardGui.resetBoard();
     }//GEN-LAST:event_jButton4ActionPerformed
-    
-    public static void updateContador(){
-        jTextField2.setText(LogicaGui.getPorcentaje()+"%");
+
+    public static void updateContador() {
+        jTextField2.setText(Logica.getPorcentaje() + "%");
     }
-    
-    public static void pintarText(String s){
-      jTextField1.setText(s);
+
+    public static void pintarText(String s) {
+        jTextField1.setText(s);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static guihja.BoardGui boardGui1;
-    private guihja.CombosGui comboGui1;
+    private static Gui.BoardGui boardGui1;
+    private Gui.CombosGui comboGui1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -326,6 +327,6 @@ public class Principal extends javax.swing.JPanel {
     private javax.swing.JSlider jSlider1;
     private static javax.swing.JTextField jTextField1;
     private static javax.swing.JTextField jTextField2;
-    private guihja.Tablero t;
+    private Gui.Tablero t;
     // End of variables declaration//GEN-END:variables
 }

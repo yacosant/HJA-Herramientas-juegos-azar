@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package guihja;
+package Gui;
+
+import Logic.Logica;
 
 /**
  *
@@ -12,61 +9,64 @@ package guihja;
 public class CombosGui extends javax.swing.JPanel {
 
     /**
-     * Creates new form NewJPanel
+     * Creates new form CombosGui
      */
     public CombosGui() {
         initComponents();
     }
 
-     public static void setValues(double [] v, int to){
-        double tot=to;
-        if(tot==0)to=1;
-        jProgressBar1.setValue((int)(v[0]*100/tot));
-        jProgressBar2.setValue((int)(v[1]*100/tot));
-        jProgressBar3.setValue((int)(v[2]*100/tot));
-        jProgressBar4.setValue((int)(v[3]*100/tot));
-        jProgressBar5.setValue((int)(v[4]*100/tot));
-        jProgressBar6.setValue((int)(v[5]*100/tot));
-        jProgressBar7.setValue((int)(v[6]*100/tot));
-        jProgressBar8.setValue((int)(v[7]*100/tot));
-        jProgressBar9.setValue((int)(v[8]*100/tot));
-        jProgressBar10.setValue((int)(v[9]*100/tot));
-        jProgressBar11.setValue((int)(v[10]*100/tot));
-        jProgressBar12.setValue((int)(v[11]*100/tot));
-        jProgressBar13.setValue((int)(v[12]*100/tot));
-        
+    public static void setValues(double[] v, int to) {
+        double tot = to;
+        if (tot == 0) {
+            to = 1;
+        }
+        jProgressBar1.setValue((int) (v[0] * 100 / tot));
+        jProgressBar2.setValue((int) (v[1] * 100 / tot));
+        jProgressBar3.setValue((int) (v[2] * 100 / tot));
+        jProgressBar4.setValue((int) (v[3] * 100 / tot));
+        jProgressBar5.setValue((int) (v[4] * 100 / tot));
+        jProgressBar6.setValue((int) (v[5] * 100 / tot));
+        jProgressBar7.setValue((int) (v[6] * 100 / tot));
+        jProgressBar8.setValue((int) (v[7] * 100 / tot));
+        jProgressBar9.setValue((int) (v[8] * 100 / tot));
+        jProgressBar10.setValue((int) (v[9] * 100 / tot));
+        jProgressBar11.setValue((int) (v[10] * 100 / tot));
+        jProgressBar12.setValue((int) (v[11] * 100 / tot));
+        jProgressBar13.setValue((int) (v[12] * 100 / tot));
+
         //proyectos
-        jProgressBar14.setValue((int)(v[13]*100/tot));
-        jProgressBar15.setValue((int)(v[14]*100/tot));
-        jProgressBar16.setValue((int)(v[15]*100/tot));
-        
-        jLabel2.setText(Double.toString(LogicaGui.redondear((v[0]*100/tot),2))+"%");
-        jLabel4.setText(Double.toString(LogicaGui.redondear((v[1]*100/tot),2))+"%");
-        jLabel6.setText(Double.toString(LogicaGui.redondear((v[2]*100/tot),2))+"%");
-        jLabel8.setText(Double.toString(LogicaGui.redondear((v[3]*100/tot),2))+"%");
-        jLabel10.setText(Double.toString(LogicaGui.redondear((v[4]*100/tot),2))+"%");
-        jLabel12.setText(Double.toString(LogicaGui.redondear((v[5]*100/tot),2))+"%");
-        jLabel14.setText(Double.toString(LogicaGui.redondear((v[6]*100/tot),2))+"%");
-        jLabel16.setText(Double.toString(LogicaGui.redondear((v[7]*100/tot),2))+"%");
-        jLabel18.setText(Double.toString(LogicaGui.redondear((v[8]*100/tot),2))+"%");
-        jLabel20.setText(Double.toString(LogicaGui.redondear((v[9]*100/tot),2))+"%");
-        jLabel22.setText(Double.toString(LogicaGui.redondear((v[10]*100/tot),2))+"%");
-        jLabel24.setText(Double.toString(LogicaGui.redondear((v[11]*100/tot),2))+"%");
-        jLabel26.setText(Double.toString(LogicaGui.redondear((v[12]*100/tot),2))+"%");
+        jProgressBar14.setValue((int) (v[13] * 100 / tot));
+        jProgressBar15.setValue((int) (v[14] * 100 / tot));
+        jProgressBar16.setValue((int) (v[15] * 100 / tot));
+
+        jLabel2.setText(Double.toString(Logica.redondear((v[0] * 100 / tot), 2)) + "%");
+        jLabel4.setText(Double.toString(Logica.redondear((v[1] * 100 / tot), 2)) + "%");
+        jLabel6.setText(Double.toString(Logica.redondear((v[2] * 100 / tot), 2)) + "%");
+        jLabel8.setText(Double.toString(Logica.redondear((v[3] * 100 / tot), 2)) + "%");
+        jLabel10.setText(Double.toString(Logica.redondear((v[4] * 100 / tot), 2)) + "%");
+        jLabel12.setText(Double.toString(Logica.redondear((v[5] * 100 / tot), 2)) + "%");
+        jLabel14.setText(Double.toString(Logica.redondear((v[6] * 100 / tot), 2)) + "%");
+        jLabel16.setText(Double.toString(Logica.redondear((v[7] * 100 / tot), 2)) + "%");
+        jLabel18.setText(Double.toString(Logica.redondear((v[8] * 100 / tot), 2)) + "%");
+        jLabel20.setText(Double.toString(Logica.redondear((v[9] * 100 / tot), 2)) + "%");
+        jLabel22.setText(Double.toString(Logica.redondear((v[10] * 100 / tot), 2)) + "%");
+        jLabel24.setText(Double.toString(Logica.redondear((v[11] * 100 / tot), 2)) + "%");
+        jLabel26.setText(Double.toString(Logica.redondear((v[12] * 100 / tot), 2)) + "%");
         //proyectos
-        jLabel29.setText(Double.toString(LogicaGui.redondear((v[13]*100/tot),2))+"%");
-        jLabel31.setText(Double.toString(LogicaGui.redondear((v[14]*100/tot),2))+"%");
-        jLabel33.setText(Double.toString(LogicaGui.redondear((v[15]*100/tot),2))+"%");
-          
-      
+        jLabel29.setText(Double.toString(Logica.redondear((v[13] * 100 / tot), 2)) + "%");
+        jLabel31.setText(Double.toString(Logica.redondear((v[14] * 100 / tot), 2)) + "%");
+        jLabel33.setText(Double.toString(Logica.redondear((v[15] * 100 / tot), 2)) + "%");
+
     }
-    
-    public static void resetCombos(){
+
+    public static void resetCombos() {
         double[] v = new double[16];
-         for(int i=0; i<16; i++)v[i]=00.00;
-         setValues(v,1);
+        for (int i = 0; i < 16; i++) {
+            v[i] = 00.00;
+        }
+        setValues(v, 1);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -406,10 +406,11 @@ public class CombosGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -421,24 +422,27 @@ public class CombosGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -450,24 +454,27 @@ public class CombosGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(jProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel14)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jProgressBar8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel16)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18)
-                    .addComponent(jProgressBar9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17)
+                        .addComponent(jLabel18)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -519,18 +526,20 @@ public class CombosGui extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator17, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel30)
-                            .addComponent(jLabel31)
-                            .addComponent(jProgressBar15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jProgressBar15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel30)
+                                .addComponent(jLabel31)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator18, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jProgressBar10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel33)
-                    .addComponent(jProgressBar16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel32)
+                        .addComponent(jLabel33)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

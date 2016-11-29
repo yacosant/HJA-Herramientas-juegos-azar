@@ -921,6 +921,9 @@ public class LogicaGui {
     		gutI = false;
     	}
     	
+    	if(!draw)
+    		mejores = null;
+    	
     	return mejores;
     }
 

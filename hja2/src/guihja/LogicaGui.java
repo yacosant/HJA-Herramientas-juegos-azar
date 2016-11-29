@@ -857,7 +857,7 @@ public class LogicaGui {
     	
     	boolean draw = false,esc = false,seguir = true;
     	Carta[] mejores = new Carta[4];
-    	int cont,gut=0;
+    	int cont = 0,gut=0;
     	
     	for(int i = 0;i<cartas.length-1 && !esc;i++){
     		cont = 0;
@@ -870,7 +870,8 @@ public class LogicaGui {
     				mejores[cont] = cartas[i];
     			}else
     				seguir = false;
-    		}
+    		}else 
+    			seguir = false;
     		
     		cont++;
     		for(int j = i+1;j<cartas.length-1 && seguir;j++){
@@ -879,18 +880,17 @@ public class LogicaGui {
     				if(cont == 2){
 						mejores[cont] = cartas[j];
 						mejores[cont+1] = cartas[j+1];
-					}else
+					}else if(cont <3)
 						mejores[cont] = cartas[j];
 				
     				cont++;
-    			}else if(cartas[j].getValor()+2 == cartas[j+1].getValor()){
+    			}else if(gut == 0 && cartas[j].getValor()+2 == cartas[j+1].getValor()){
     				if(cont == 2){
     					mejores[cont] = cartas[j];
     					mejores[cont+1] = cartas[j+1];
-    				}else
+    				}else if(cont < 3)
     					mejores[cont] = cartas[j];
     				gut++;
-    				j++;
     				cont++;
     				
     			}else if(cont == 3 && cartas[j].getValor() == 5 && cartas[cartas.length-1].getValor() == 14)
@@ -899,9 +899,9 @@ public class LogicaGui {
     				seguir = false;
     			
     		}
-    		if(cont == 3)
+    		if(cont == 3 || (cont == 4 && gut == 1))
     			draw = true;
-    		else if (cont >= 4){
+    		else if (cont >= 4 && gut<1){
     			esc = true;
     			draw = false;
     		}
@@ -936,7 +936,7 @@ public class LogicaGui {
     					if(cont == 2){
     						mejores[cont] = cartas[j];
     						mejores[cont+1] = cartas[j+1];   						
-    					}else
+    					}else if(cont <3)
     						mejores[cont] = cartas[j];
 
     				}
@@ -978,7 +978,7 @@ public class LogicaGui {
         				if(cont == 2){
         					mejores[cont] = cartas[j];
         					mejores[cont+1] = cartas[i];
-        				}else
+        				}else if(cont < 3)
         					mejores[cont] = cartas[j];
         			}
         			

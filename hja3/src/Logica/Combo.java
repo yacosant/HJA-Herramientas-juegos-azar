@@ -12,6 +12,7 @@ public class Combo {
     private Carta carta1;
     private Carta carta2;
     private int peso;
+    private int victorias;
     private ArrayList<Carta> mejorMano;
 
     public Carta getCarta(int i) {
@@ -50,5 +51,12 @@ public class Combo {
 		return this.mejorMano;
 	}
 	
+	public int getVictorias(){
+		return this.victorias;
+	}
+	
+	public void setVictorias(int victorias){
+		this.victorias=victorias;
+	}
 
 }

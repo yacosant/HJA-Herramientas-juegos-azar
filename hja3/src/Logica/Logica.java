@@ -87,11 +87,47 @@ public class Logica {
 			jugadores[i].setCartas(listaCarta);
 		}
 		
-		ArrayList<Combo> ord = ordenarManos();
-		//metodo para sumar victorias o empates
+		ArrayList<Combo> ord = ordenarManos(); //EDU HE PENSADO QUE quizas seria interesante que  EL METODO ESTE TAMBIEN DEVUELVA LA PRIMERA POS
+		//Aun asi creo que esto pirula
+		
+		if(!sumaEmpates(ord)){ //Si no hay empate es que alguien ha ganado, si hay empate no gana nadie.
 
+			for(int j=0; j<jugadores.length;j++)
+				if(ord.get(j)==jugadores[j])
+					sumaVictorias(j);
+		}
 	}
 
+	
+	public void sumaVictorias(int j){
+		jugadores[j].setVictorias(jugadores[j].getVictorias()+1);
+	}
+	
+	public boolean sumaEmpates(ArrayList<Combo> ord){
+		int i=0;
+		int empatados=0;
+		boolean seguir=false,empate=false;
+		
+        while (!seguir && i < jugadores.length) {
+        	
+        	if (ord.get(i)!=ord.get(i+1)) {
+                seguir = true;
+            }
+        	
+        	else{
+        		empatados++;
+        		empate=true;
+        	}
+            i++;
+        }  
+        
+        if(empatados>0)
+        	for(int j=0; j<i;j++) //Recorremos los jugadores hasta donde ya no hay empatados
+        		if(ord.get(j)==jugadores[j])
+        			jugadores[j].setVictorias(jugadores[j].getVictorias()+(1/empatados)); 
+
+        return empate;
+	}
 
 	private void mirarGanadorTurn() {
 		// TODO Auto-generated method stub

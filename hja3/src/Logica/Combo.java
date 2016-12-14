@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Grupo 1
@@ -9,6 +11,8 @@ public class Combo {
 
     private Carta carta1;
     private Carta carta2;
+    private int peso;
+    private ArrayList<Carta> mejorMano;
 
     public Carta getCarta(int i) {
         Carta carta;
@@ -27,5 +31,24 @@ public class Combo {
         this.carta2 = carta2;
 
     }
+
+	public void setPeso(int peso) {
+		this.peso= peso;
+		
+	}
+
+	public void setCartas(ArrayList<Carta> listaCarta) {
+		this.mejorMano = listaCarta;
+		
+	}
+
+	public int getPeso() {
+		return this.peso;
+	}
+
+	public ArrayList<Carta> getCartas() {
+		return this.mejorMano;
+	}
+	
 
 }

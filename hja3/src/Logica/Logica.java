@@ -17,15 +17,25 @@ public class Logica {
 
 	private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private ArrayList<Carta> baraja = new ArrayList<Carta>();
-	private Combo jugadores[] =  new Combo[6];
-	private int ganadasJ1;
-	private int ganadasJ2;
-	private int ganadasJ3;
-	private int ganadasJ4;
-	private int ganadasJ5;
-	private int ganadasJ6;
+	private Combo jugadores[] =  new Combo[2];
 	private int NUM_VUELTAS = 600000;
-
+	
+	public Logica(){
+		for(int i=0;i<4;i++)
+			for(int j = 2;j<14;j++){
+				if(i==0)
+					baraja.add(new Carta(j,'h'));
+				else if(i==1)
+					baraja.add(new Carta(j,'d'));
+				else if(i==2)
+					baraja.add(new Carta(j,'c'));
+				else
+					baraja.add(new Carta(j,'s'));
+			}
+		
+		jugadores[0] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+		jugadores[1] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+	}
 	public String randomJug(int i){
 		//i es el numero del jugador 
 		String cartas;
@@ -48,7 +58,7 @@ public class Logica {
 		return c;
 	}
 
-	private void comprobarTotal(){
+	public void comprobarTotal(){
 
 		for(int j=0;j<4; j++){ //PreFlop-Flop-turn-River
 			for(int i=0; i<NUM_VUELTAS;i++){
@@ -62,19 +72,26 @@ public class Logica {
 				else if(j==3)
 					mirarGanadorRiver();
 			}
+			
+			double h = jugadores[0].getVictorias()/NUM_VUELTAS;
+			double o = jugadores[1].getVictorias()/NUM_VUELTAS;
+			
+			if(h>o);
+			
 		}  
 	}
 
 
 	private void mirarGanadorPreFlop(){
 		
-		ArrayList<Carta> baraja = this.baraja;
+		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
 		ArrayList<Carta> board = new ArrayList<Carta>();
 		Carta[] cartas,mejoresCartas;
-
+		jugadores[0].setPeso(0);
+		jugadores[1].setPeso(0);
 		for(int i = 0;i<5;i++)
 			board.add(getCartaRandom(baraja));
-
+		
 		for(int i=0;i<jugadores.length;i++){
 			cartas = juntar(board, jugadores[i]);
 			mejoresCartas = comprobar(cartas, i);
@@ -455,7 +472,7 @@ public class Logica {
 		Carta[] c = new Carta[5];
 
 		for(int i = 0; i < 5; i++) 
-			c[i] = cartas[cartas.length-i];
+			c[i] = cartas[cartas.length-1-i];
 		
 
 		return c;
@@ -491,12 +508,12 @@ public class Logica {
 			mejoresCartas = poker(cartas);
 			if (mejoresCartas != null) {
 				jugadores[h].setPeso(7);
-				for (int i = cartas.length - 1; i >= 0; i--) {
+				/*for (int i = cartas.length - 1; i >= 0; i--) {
 					if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
 						mejoresCartas[4] = cartas[i];
 						return mejoresCartas;
 					}
-				}
+				}*/
 				return mejoresCartas;
 			}
 			mejoresCartas = full(cartas);
@@ -518,7 +535,7 @@ public class Logica {
 			if (mejoresCartas != null) {
 				jugadores[h].setPeso(3);
 				boolean primero = true;
-				for (int i = cartas.length - 1; i >= 0; i--) {
+				/*for (int i = cartas.length - 1; i >= 0; i--) {
 					if (cartas[i].getValor() != mejoresCartas[0].getValor()) {
 						if (primero) {
 							mejoresCartas[3] = cartas[i];
@@ -528,7 +545,7 @@ public class Logica {
 							return mejoresCartas;
 						}
 					}
-				}
+				}*/
 				return mejoresCartas;
 			}
 			mejoresCartas = doblePareja(cartas);
@@ -540,14 +557,14 @@ public class Logica {
 			mejoresCartas = pareja(cartas);
 			if (mejoresCartas != null) {
 				jugadores[h].setPeso(1);
-				int cont = 2, pos = cartas.length - 1;
+				/*int cont = 2, pos = cartas.length - 1;
 				while (cont < 5) {
 					if (cartas[pos].getValor() != mejoresCartas[0].getValor()) {
 						mejoresCartas[cont] = cartas[pos];
 						cont++;
 					}
 					pos--;
-				}
+				}*/
 				return mejoresCartas;
 			}
 

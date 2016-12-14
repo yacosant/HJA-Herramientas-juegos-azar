@@ -12,7 +12,7 @@ public class Combo {
     private Carta carta1;
     private Carta carta2;
     private int peso;
-    private int victorias;
+    private double victorias;
     private ArrayList<Carta> mejorMano;
 
     public Carta getCarta(int i) {
@@ -30,7 +30,7 @@ public class Combo {
     public Combo(Carta carta1, Carta carta2) {
         this.carta1 = carta1;
         this.carta2 = carta2;
-
+        this.victorias = 0;
     }
 
 	public void setPeso(int peso) {
@@ -51,12 +51,12 @@ public class Combo {
 		return this.mejorMano;
 	}
 	
-	public int getVictorias(){
+	public double getVictorias(){
 		return this.victorias;
 	}
 	
-	public void setVictorias(int victorias){
-		this.victorias=victorias;
+	public void setVictorias(double d){
+		this.victorias=d;
 	}
 
 }

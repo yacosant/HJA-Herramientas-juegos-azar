@@ -6,6 +6,7 @@
 package hja3;
 
 import gui.Tablero;
+import Logica.Logica;
 import javax.swing.JFrame;
 
 /**
@@ -19,11 +20,13 @@ public class HJA3 {
      */
     public static void main(String[] args) {
         JFrame f = new JFrame("HJA: PRACTICA 3 - GRUPO 1");
+        Logica l = new Logica();
         f.add(new Tablero());
         f.setVisible(true);
         f.setSize(815, 700);
         f.setResizable(false);
         f.setLocationRelativeTo(null);
+        l.comprobarTotal();
     }
     
 }

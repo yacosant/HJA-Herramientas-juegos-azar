@@ -18,7 +18,7 @@ public class Logica {
 	private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private ArrayList<Carta> baraja = new ArrayList<Carta>();
 	private Combo jugadores[] =  new Combo[2];
-	private double NUM_VUELTAS = 1000000;
+	private double NUM_VUELTAS = 80;
 	
 	public Logica(){
 		for(int i=0;i<4;i++)
@@ -33,8 +33,14 @@ public class Logica {
 					baraja.add(new Carta(j,'s'));
 			}
 		
-		jugadores[0] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
-		jugadores[1] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+		jugadores[0] = new Combo(new Carta(13,'h'),new Carta(10,'d'));
+		jugadores[1] = new Combo(new Carta(9,'h'),new Carta(7,'d'));
+		
+		for(int i = 0; i<baraja.size();i++)
+			if(baraja.get(i)== jugadores[0].getCarta(1) || baraja.get(i)== jugadores[0].getCarta(2))
+				baraja.remove(i);
+			else if(baraja.get(i) == jugadores[1].getCarta(1) || baraja.get(i)== jugadores[1].getCarta(2))
+				baraja.remove(i);
 	}
 	public String randomJug(int i){
 		//i es el numero del jugador 
@@ -87,8 +93,7 @@ public class Logica {
 		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
 		ArrayList<Carta> board = new ArrayList<Carta>();
 		Carta[] cartas,mejoresCartas;
-		jugadores[0].setPeso(0);
-		jugadores[1].setPeso(0);
+
 		for(int i = 0;i<5;i++)
 			board.add(getCartaRandom(baraja));
 		
@@ -122,12 +127,12 @@ public class Logica {
 	
 	public boolean sumaEmpates(ArrayList<Combo> ord){
 		int i=0;
-		int empatados=0;
+		double empatados=0;
 		boolean seguir=false,empate=false;
 		
         while (!seguir && i < ord.size()-1) {
         	
-        	if (!ord.get(i).getCartas().equals(ord.get(i+1).getCartas())) {
+        	if (!iguales(ord.get(i),ord.get(i+1))) {
                 seguir = true;
             }
         	
@@ -141,12 +146,27 @@ public class Logica {
         if(empatados>0)
         	for(int j=0; j<=i;j++) //Recorremos los jugadores hasta donde ya no hay empatados
         		for(int h = 0;h<jugadores.length;h++)
-        			if(ord.get(j)==jugadores[h])
-        				jugadores[h].setVictorias(jugadores[h].getVictorias()+(1/(empatados+1))); 
+        			if(ord.get(j)==jugadores[h]){
+        				jugadores[h].setVictorias(jugadores[h].getVictorias() + (1/(empatados+1))); 
+        			}
 
         return empate;
 	}
 
+	private boolean iguales(Combo combo, Combo combo2) {
+		boolean iguales = true;
+		ArrayList<Carta> a = combo.getCartas(),b=combo2.getCartas();
+		
+		if(combo.getPeso() == combo2.getPeso()){ 
+			for(int i = 0;i<a.size();i++){
+				if(a.get(i) != b.get(i))
+					iguales = false;
+			}
+		}else
+			iguales = false;
+		
+		return iguales;
+	}
 	private void mirarGanadorTurn() {
 		// TODO Auto-generated method stub
 

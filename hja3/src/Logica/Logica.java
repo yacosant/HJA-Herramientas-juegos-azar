@@ -19,7 +19,8 @@ public class Logica {
 	private ArrayList<Carta> baraja = new ArrayList<Carta>();
 	private Combo jugadores[] =  new Combo[2];
 	private double NUM_VUELTAS = 1000000;
-	
+	private int estado=0;
+        
 	public Logica(){
 		for(int i=0;i<4;i++)
 			for(int j = 2;j<=14;j++){
@@ -58,6 +59,16 @@ public class Logica {
 		return c;
 	}
 
+        public void mirarGanador(){
+            switch(estado){
+                case 0: mirarGanadorPreFlop(); break;
+                case 1: mirarGanadorFlop(); break;
+                case 2: mirarGanadorTurn(); break;
+                case 3: mirarGanadorRiver(); estado=-1; break;
+            }
+            estado++;
+        }
+        
 	public void comprobarTotal(){
 
 		for(int j=0;j<4; j++){ //PreFlop-Flop-turn-River
@@ -808,4 +819,16 @@ public class Logica {
 
         return valor;
     }
+    
+    public String getEstado(){
+        String s="";
+        switch(estado){
+            case 0: s="Pre-Flop";break;
+            case 1: s="Flop";break;
+            case 2: s="Turn";break;
+            case 3: s="River";break;
+        }
+        return s;
+    }
+    
 }

@@ -5,12 +5,15 @@
  */
 package gui;
 
+import Logica.Logica;
+
 /**
  *
  * @author YVCX
  */
 public class Inicio extends javax.swing.JPanel {
 
+    private Logica log;
     /**
      * Creates new form Inicio
      */

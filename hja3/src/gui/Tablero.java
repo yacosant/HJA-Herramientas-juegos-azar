@@ -6,19 +6,29 @@
 package gui;
 
 import Logica.Carta;
+import Logica.Logica;
 
 /**
  *
  * @author YVCX
  */
 public class Tablero extends javax.swing.JPanel {
-
+    private Logica log;
     private String dir="/imgs/cards/";
+    
     /**
      * Creates new form Tablero
      */
     public Tablero() {
         initComponents();
+           jButton1.setVisible(false);
+        this.setSize(fondo.getWidth(), fondo.getHeight());
+    }
+    
+    public Tablero(Logica l) {
+        initComponents();
+        jButton1.setVisible(false);
+        log=l;
         this.setSize(fondo.getWidth(), fondo.getHeight());
     }
     
@@ -92,6 +102,7 @@ public class Tablero extends javax.swing.JPanel {
         b5 = new javax.swing.JLabel();
         fase = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setLayout(null);
@@ -194,14 +205,43 @@ public class Tablero extends javax.swing.JPanel {
         add(fase);
         fase.setBounds(30, 510, 120, 40);
 
-        jButton1.setText("Siguiente");
+        jButton1.setText("Cerrar");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1);
-        jButton1.setBounds(20, 550, 100, 23);
+        jButton1.setBounds(20, 580, 100, 23);
+
+        jButton2.setText("Siguiente");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(20, 550, 100, 23);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/fondo.png"))); // NOI18N
         add(fondo);
         fondo.setBounds(0, 0, 806, 625);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      //cerrar
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         log.mirarGanador();
+           String s=log.getEstado();
+            fase.setText(s);
+       if (s=="River"){
+           jButton1.setVisible(true);
+           jButton2.setVisible(false);
+       }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -231,5 +271,6 @@ public class Tablero extends javax.swing.JPanel {
     private javax.swing.JLabel j61;
     private javax.swing.JLabel j62;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

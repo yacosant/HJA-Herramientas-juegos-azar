@@ -18,11 +18,11 @@ public class Logica {
 	private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private ArrayList<Carta> baraja = new ArrayList<Carta>();
 	private Combo jugadores[] =  new Combo[2];
-	private int NUM_VUELTAS = 600000;
+	private double NUM_VUELTAS = 1000000;
 	
 	public Logica(){
 		for(int i=0;i<4;i++)
-			for(int j = 2;j<14;j++){
+			for(int j = 2;j<=14;j++){
 				if(i==0)
 					baraja.add(new Carta(j,'h'));
 				else if(i==1)
@@ -110,7 +110,7 @@ public class Logica {
 		if(!sumaEmpates(ord)){ //Si no hay empate es que alguien ha ganado, si hay empate no gana nadie.
 
 			for(int j=0; j<jugadores.length;j++)
-				if(ord.get(j)==jugadores[j])
+				if(ord.get(0)==jugadores[j])
 					sumaVictorias(j);
 		}
 	}
@@ -125,9 +125,9 @@ public class Logica {
 		int empatados=0;
 		boolean seguir=false,empate=false;
 		
-        while (!seguir && i < jugadores.length) {
+        while (!seguir && i < ord.size()-1) {
         	
-        	if (ord.get(i)!=ord.get(i+1)) {
+        	if (!ord.get(i).getCartas().equals(ord.get(i+1).getCartas())) {
                 seguir = true;
             }
         	
@@ -139,9 +139,10 @@ public class Logica {
         }  
         
         if(empatados>0)
-        	for(int j=0; j<i;j++) //Recorremos los jugadores hasta donde ya no hay empatados
-        		if(ord.get(j)==jugadores[j])
-        			jugadores[j].setVictorias(jugadores[j].getVictorias()+(1/empatados)); 
+        	for(int j=0; j<=i;j++) //Recorremos los jugadores hasta donde ya no hay empatados
+        		for(int h = 0;h<jugadores.length;h++)
+        			if(ord.get(j)==jugadores[h])
+        				jugadores[h].setVictorias(jugadores[h].getVictorias()+(1/(empatados+1))); 
 
         return empate;
 	}
@@ -469,15 +470,13 @@ public class Logica {
 
 	private static Carta[] cartaAlta(Carta[] cartas) {
 
-		Carta[] c = new Carta[5];
+		Carta[] cartas1 = new Carta[1];
 
-		for(int i = 0; i < 5; i++) 
-			c[i] = cartas[cartas.length-1-i];
-		
+		cartas1[0]= cartas[cartas.length-1];
 
-		return c;
+		return cartas1;
 	}
-
+	
 	public static void addBoard(Carta c) {
 		board.add(c);
 	}

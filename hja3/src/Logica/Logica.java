@@ -17,8 +17,8 @@ public class Logica {
 
 	private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private ArrayList<Carta> baraja = new ArrayList<Carta>();
-	private Combo jugadores[] =  new Combo[3];
-	double NUM_VUELTAS = 1712304;
+	private Combo jugadores[] =  new Combo[6];
+	double NUM_VUELTAS = 600000;
 	
 
 	private int estado=0;
@@ -39,6 +39,9 @@ public class Logica {
 		jugadores[0] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
 		jugadores[1] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
 		jugadores[2] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+		jugadores[3] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+		jugadores[4] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+		jugadores[5] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
 		
 	}
 	public String randomJug(int i){
@@ -73,29 +76,32 @@ public class Logica {
             estado++;
         }
         
-	public void comprobarTotal(){
+        public void comprobarTotal(){
 
-		for(int j=0;j<4; j++){ //PreFlop-Flop-turn-River
-			for(int i=0; i<NUM_VUELTAS;i++){
+        	int j = 0;
+        	for(int i=0; i<NUM_VUELTAS;i++){
 
-				if(j==0)
-					mirarGanadorPreFlop();
-				else if(j==1)
-					mirarGanadorFlop();
-				else if(j==2)
-					mirarGanadorTurn();
-				else if(j==3)
-					mirarGanadorRiver();
-			}
-			
-			double h = jugadores[0].getVictorias()/NUM_VUELTAS;
-			double o = jugadores[1].getVictorias()/NUM_VUELTAS;
-			double s = jugadores[2].getVictorias()/NUM_VUELTAS;
-			
-			if(h>o || h>s);
-			
-		}  
-	}
+        		if(j==0)
+        			mirarGanadorPreFlop();
+        		else if(j==1)
+        			mirarGanadorFlop();
+        		else if(j==2)
+        			mirarGanadorTurn();
+        		else if(j==3)
+        			mirarGanadorRiver();
+        	}
+
+        	double h = jugadores[0].getVictorias()/NUM_VUELTAS;
+        	double o = jugadores[1].getVictorias()/NUM_VUELTAS;
+        	double s = jugadores[2].getVictorias()/NUM_VUELTAS;
+        	double d = jugadores[3].getVictorias()/NUM_VUELTAS;
+        	double f = jugadores[4].getVictorias()/NUM_VUELTAS;
+        	double g = jugadores[5].getVictorias()/NUM_VUELTAS;
+
+        	double tot = h+o+s+d+f+g;;
+
+
+        }
 
 
 	private void mirarGanadorPreFlop(){
@@ -139,17 +145,15 @@ public class Logica {
 		double empatados=0;
 		boolean seguir=false,empate=false;
 		
-        while (!seguir && i < ord.size()-1) {
+        while (!seguir && i < ord.size()-1){
 
-        	if (!iguales(ord.get(i),ord.get(i+1)) && desempateFinal(ord) ) {
-                seguir = true;
-            }
-        	
-        	else{
+        	if(!desempateFinal(ord)){
         		empatados++;
         		empate=true;
-        	}
-            i++;
+        	}else
+        		seguir = true;
+
+        	i++;
         }  
         
         if(empatados>0)
@@ -178,20 +182,99 @@ public class Logica {
 		
 		return iguales;
 	}
+	
 	private void mirarGanadorTurn() {
-		// TODO Auto-generated method stub
+
+		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
+		ArrayList<Carta> board = (ArrayList<Carta>) this.board.clone();
+		Carta[] cartas,mejoresCartas;
+
+		board.add(getCartaRandom(baraja));
+
+		for(int i=0;i<jugadores.length;i++){
+			cartas = juntar(board, jugadores[i]);
+			mejoresCartas = comprobar(cartas, i);
+
+			ArrayList<Carta> listaCarta = new ArrayList<Carta>();
+
+			for (int j = 0; j < mejoresCartas.length; j++) 
+				listaCarta.add(mejoresCartas[j]); 
+
+			jugadores[i].setCartas(listaCarta);
+		}
+
+		ArrayList<Combo> ord = ordenarManos(); 
+
+		if(!sumaEmpates(ord)){ 
+
+			for(int j=0; j<jugadores.length;j++)
+				if(ord.get(0)==jugadores[j])
+					sumaVictorias(j);
+		}
+
 
 	}
 
 
 	private void mirarGanadorRiver() {
-		// TODO Auto-generated method stub
 
+		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
+		ArrayList<Carta> board = (ArrayList<Carta>) this.board.clone();
+		Carta[] cartas,mejoresCartas;
+
+
+		for(int i=0;i<jugadores.length;i++){
+			cartas = juntar(board, jugadores[i]);
+			mejoresCartas = comprobar(cartas, i);
+
+			ArrayList<Carta> listaCarta = new ArrayList<Carta>();
+
+			for (int j = 0; j < mejoresCartas.length; j++) 
+				listaCarta.add(mejoresCartas[j]); 
+
+			jugadores[i].setCartas(listaCarta);
+		}
+
+		ArrayList<Combo> ord = ordenarManos(); 
+
+		if(!sumaEmpates(ord)){ 
+
+			for(int j=0; j<jugadores.length;j++)
+				if(ord.get(0)==jugadores[j])
+					sumaVictorias(j);
+		}
 	}
 
 
 	private void mirarGanadorFlop() {
 
+		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
+		ArrayList<Carta> board = (ArrayList<Carta>) this.board.clone();
+		Carta[] cartas,mejoresCartas;
+
+		for(int i = 0;i<2;i++)
+			board.add(getCartaRandom(baraja));
+
+		for(int i=0;i<jugadores.length;i++){
+			cartas = juntar(board, jugadores[i]);
+			mejoresCartas = comprobar(cartas, i);
+
+			ArrayList<Carta> listaCarta = new ArrayList<Carta>();
+
+			for (int j = 0; j < mejoresCartas.length; j++) 
+				listaCarta.add(mejoresCartas[j]); 
+
+			jugadores[i].setCartas(listaCarta);
+		}
+
+		ArrayList<Combo> ord = ordenarManos(); 
+
+		if(!sumaEmpates(ord)){ 
+
+			for(int j=0; j<jugadores.length;j++)
+				if(ord.get(0)==jugadores[j])
+					sumaVictorias(j);
+		}
 
 	}
 
@@ -210,15 +293,40 @@ public class Logica {
 		return cart;
 	}
 	
+	private int devolverKikerColor(Carta carta1, Carta carta2, Carta cartaMaxColor){
+
+		Carta cartaAlta=null;
+		int i = -1;
+
+		if(carta1.getColor() == carta2.getColor()){
+			if(carta1.getColor() == cartaMaxColor.getColor())
+				if(carta1.getValor()>carta2.getValor())
+					cartaAlta=carta1;
+				else
+					cartaAlta=carta2;
+		}
+
+		else if(carta1.getColor() == cartaMaxColor.getColor())
+			cartaAlta=carta1;
+
+		else if(carta2.getColor() == cartaMaxColor.getColor())
+			cartaAlta=carta2;
+		
+		if(cartaAlta != null)
+			i = cartaAlta.getValor();
+
+		return i;
+	}
+	
 	private boolean desempateFinal(ArrayList<Combo> ord){
 
 		boolean desempateFinal=true;
 
 		for(int i=0; i<ord.size(); i++)
-			for(int j=i+1; j<=ord.size()-1; j++)
-				if(ord.get(i).getPeso() == ord.get(j).getPeso())
+			for(int j=i+1; j<ord.size()-1; j++)
+				if(iguales(ord.get(i), ord.get(j))){
 					if(ord.get(i).getPeso()==2 || ord.get(i).getPeso()==1 
-					|| ord.get(i).getPeso()==7 || ord.get(i).getPeso()==3 || ord.get(i).getPeso() == 0){ 
+					|| ord.get(i).getPeso()==7 || ord.get(i).getPeso()==3 || ord.get(i).getPeso() == 0 || ord.get(i).getPeso()==5){ 
 
 						int kikeri = devolverKiker(ord.get(i).getCarta(1), ord.get(i).getCarta(2));
 						int kikerj = devolverKiker(ord.get(j).getCarta(1), ord.get(j).getCarta(2));
@@ -230,7 +338,22 @@ public class Logica {
 							ord.set(0, ord.get(i));
 
 						else if(kikerj>kikeri)
-							ord.set(0, ord.get(j)); 
+							ord.set(0, ord.get(j));
+					}
+				}else
+					if(ord.get(i).getPeso()==5){
+						
+						int kiker1 = devolverKikerColor(ord.get(i).getCarta(1), ord.get(i).getCarta(2),ord.get(i).getCartas().get(0));
+						int kiker2 = devolverKikerColor(ord.get(j).getCarta(1), ord.get(j).getCarta(2),ord.get(i).getCartas().get(0));
+						
+						if(kiker1==kiker2)
+							desempateFinal=false;
+
+						else if(kiker1>kiker2)
+							ord.set(0, ord.get(i));
+
+						else if(kiker1>kiker2)
+							ord.set(0, ord.get(j));
 					}
 
 		return desempateFinal;

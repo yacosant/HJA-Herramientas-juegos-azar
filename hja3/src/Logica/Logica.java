@@ -17,8 +17,8 @@ public class Logica {
 
 	private static ArrayList<Carta> board = new ArrayList<Carta>();
 	private ArrayList<Carta> baraja = new ArrayList<Carta>();
-	private Combo jugadores[] =  new Combo[2];
-	double NUM_VUELTAS = 80;
+	private Combo jugadores[] =  new Combo[3];
+	double NUM_VUELTAS = 1712304;
 	
 
 	private int estado=0;
@@ -36,14 +36,10 @@ public class Logica {
 					baraja.add(new Carta(j,'s'));
 			}
 		
-		jugadores[0] = new Combo(new Carta(13,'h'),new Carta(10,'d'));
-		jugadores[1] = new Combo(new Carta(9,'h'),new Carta(7,'d'));
+		jugadores[0] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+		jugadores[1] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
+		jugadores[2] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
 		
-		for(int i = 0; i<baraja.size();i++)
-			if(baraja.get(i)== jugadores[0].getCarta(1) || baraja.get(i)== jugadores[0].getCarta(2))
-				baraja.remove(i);
-			else if(baraja.get(i) == jugadores[1].getCarta(1) || baraja.get(i)== jugadores[1].getCarta(2))
-				baraja.remove(i);
 	}
 	public String randomJug(int i){
 		//i es el numero del jugador 
@@ -94,8 +90,9 @@ public class Logica {
 			
 			double h = jugadores[0].getVictorias()/NUM_VUELTAS;
 			double o = jugadores[1].getVictorias()/NUM_VUELTAS;
+			double s = jugadores[2].getVictorias()/NUM_VUELTAS;
 			
-			if(h>o);
+			if(h>o || h>s);
 			
 		}  
 	}
@@ -122,10 +119,9 @@ public class Logica {
 			jugadores[i].setCartas(listaCarta);
 		}
 		
-		ArrayList<Combo> ord = ordenarManos(); //EDU HE PENSADO QUE quizas seria interesante que  EL METODO ESTE TAMBIEN DEVUELVA LA PRIMERA POS
-		//Aun asi creo que esto pirula
+		ArrayList<Combo> ord = ordenarManos(); 
 		
-		if(!sumaEmpates(ord)){ //Si no hay empate es que alguien ha ganado, si hay empate no gana nadie.
+		if(!sumaEmpates(ord)){ 
 
 			for(int j=0; j<jugadores.length;j++)
 				if(ord.get(0)==jugadores[j])
@@ -144,8 +140,8 @@ public class Logica {
 		boolean seguir=false,empate=false;
 		
         while (!seguir && i < ord.size()-1) {
-        	
-        	if (!iguales(ord.get(i),ord.get(i+1))) {
+
+        	if (!iguales(ord.get(i),ord.get(i+1)) && desempateFinal(ord) ) {
                 seguir = true;
             }
         	
@@ -170,11 +166,13 @@ public class Logica {
 		boolean iguales = true;
 		ArrayList<Carta> a = combo.getCartas(),b=combo2.getCartas();
 		
-		if(combo.getPeso() == combo2.getPeso()){ 
-			for(int i = 0;i<a.size();i++){
-				if(a.get(i) != b.get(i))
-					iguales = false;
-			}
+		if(combo.getPeso() == combo2.getPeso()){
+			if(combo.getPeso() == 5);
+			else
+				for(int i = 0;i<a.size();i++){
+					if(a.get(i).getValor() != b.get(i).getValor())
+						iguales = false;
+				}
 		}else
 			iguales = false;
 		
@@ -210,6 +208,44 @@ public class Logica {
 		}
 
 		return cart;
+	}
+	
+	private boolean desempateFinal(ArrayList<Combo> ord){
+
+		boolean desempateFinal=true;
+
+		for(int i=0; i<ord.size(); i++)
+			for(int j=i+1; j<=ord.size()-1; j++)
+				if(ord.get(i).getPeso() == ord.get(j).getPeso())
+					if(ord.get(i).getPeso()==2 || ord.get(i).getPeso()==1 
+					|| ord.get(i).getPeso()==7 || ord.get(i).getPeso()==3 || ord.get(i).getPeso() == 0){ 
+
+						int kikeri = devolverKiker(ord.get(i).getCarta(1), ord.get(i).getCarta(2));
+						int kikerj = devolverKiker(ord.get(j).getCarta(1), ord.get(j).getCarta(2));
+
+						if(kikeri==kikerj)
+							desempateFinal=false;
+
+						else if(kikeri>kikerj)
+							ord.set(0, ord.get(i));
+
+						else if(kikerj>kikeri)
+							ord.set(0, ord.get(j)); 
+					}
+
+		return desempateFinal;
+	}
+
+	private int devolverKiker(Carta carta1, Carta carta2){
+
+		Carta cartaAlta;
+
+		if(carta1.getValor()>carta2.getValor())
+			cartaAlta=carta1;
+		else
+			cartaAlta=carta2;
+
+		return cartaAlta.getValor();
 	}
 
 	private static Carta[] escaleraDeColor(Carta[] cartas) {

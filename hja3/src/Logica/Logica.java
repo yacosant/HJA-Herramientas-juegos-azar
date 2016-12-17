@@ -15,35 +15,57 @@ import java.util.Random;
  */
 public class Logica {
 
-	private static ArrayList<Carta> board = new ArrayList<Carta>();
+	private ArrayList<Carta> board = new ArrayList<Carta>();
 	private ArrayList<Carta> baraja = new ArrayList<Carta>();
-	private Combo jugadores[] =  new Combo[6];
+	private Jugador jugadores[] =  new Jugador[6];
 	double NUM_VUELTAS = 600000;
 	
 
 	private int estado=0;
 
 	public Logica(){
-		for(int i=0;i<4;i++)
-			for(int j = 2;j<=14;j++){
-				if(i==0)
-					baraja.add(new Carta(j,'h'));
-				else if(i==1)
-					baraja.add(new Carta(j,'d'));
-				else if(i==2)
-					baraja.add(new Carta(j,'c'));
-				else
-					baraja.add(new Carta(j,'s'));
-			}
-		
-		jugadores[0] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
-		jugadores[1] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
-		jugadores[2] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
-		jugadores[3] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
-		jugadores[4] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
-		jugadores[5] = new Combo(getCartaRandom(baraja),getCartaRandom(baraja));
-		
+            crearBaraja();
+            randomBoard();      //solo en debugueo
+            generarJugadores(); //solo en debugueo
+            
 	}
+        
+        public void crearBaraja(){
+            baraja.clear();
+            for(int i=0;i<4;i++)
+                for(int j = 2;j<=14;j++){
+                        if(i==0)
+                                baraja.add(new Carta(j,'h'));
+                        else if(i==1)
+                                baraja.add(new Carta(j,'d'));
+                        else if(i==2)
+                                baraja.add(new Carta(j,'c'));
+                        else
+                                baraja.add(new Carta(j,'s'));
+                }
+        }
+        
+        private void generarJugadores(){
+            jugadores[0] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
+            jugadores[1] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
+            jugadores[2] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
+            jugadores[3] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
+            jugadores[4] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
+            jugadores[5] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
+        }
+        
+        public String randomBoard(){
+           String s="";
+           Carta c;
+            for(int i=0; i<5; i++){
+                c=getCartaRandom(baraja);
+                board.add(c);
+                s+=intToChar(c.getValor())+c.getColor();
+                if(i!=4)s+=",";
+            }
+           return s;
+        }
+        
 	public String randomJug(int i){
 		//i es el numero del jugador 
 		String cartas;
@@ -51,9 +73,9 @@ public class Logica {
 		c=getCartaRandom(this.baraja);
 		c2=getCartaRandom(this.baraja);
 
-		jugadores[i]= new Combo(c,c2);
+		jugadores[i]= new Jugador(c,c2);
 
-		return ""+c.getValor()+c.getColor()+","+c2.getValor()+c2.getColor();
+		return ""+intToChar(c.getValor())+c.getColor()+","+intToChar(c2.getValor())+c2.getColor();
 	}
 
 
@@ -66,14 +88,17 @@ public class Logica {
 		return c;
 	}
 
-        public void mirarGanador(){
-            switch(estado){
-                case 0: mirarGanadorPreFlop(); break;
-                case 1: mirarGanadorFlop(); break;
-                case 2: mirarGanadorTurn(); break;
-                case 3: mirarGanadorRiver(); estado=-1; break;
+        public double[] mirarGanador(){
+            for(int i=0; i<NUM_VUELTAS;i++){
+                switch(estado){
+                    case 0: mirarGanadorPreFlop(); break;
+                    case 1: mirarGanadorFlop(); break;
+                    case 2: mirarGanadorTurn(); break;
+                    case 3: mirarGanadorRiver(); estado=-1; break;
+                }
             }
             estado++;
+            return calcularPorcentajes();
         }
         
         public void comprobarTotal(){
@@ -99,11 +124,15 @@ public class Logica {
         	double g = jugadores[5].getVictorias()/NUM_VUELTAS;
 
         	double tot = h+o+s+d+f+g;;
-
-
         }
 
-
+        private double[] calcularPorcentajes(){
+            double por[] = new double[6];
+                for(int i=0; i<6; i++) por[i] = (jugadores[i].getVictorias()/NUM_VUELTAS);
+            
+                return por;
+        }
+                
 	private void mirarGanadorPreFlop(){
 		
 		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
@@ -125,7 +154,7 @@ public class Logica {
 			jugadores[i].setCartas(listaCarta);
 		}
 		
-		ArrayList<Combo> ord = ordenarManos(); 
+		ArrayList<Jugador> ord = ordenarManos(); 
 		
 		if(!sumaEmpates(ord)){ 
 
@@ -140,7 +169,7 @@ public class Logica {
 		jugadores[j].setVictorias(jugadores[j].getVictorias()+1);
 	}
 	
-	public boolean sumaEmpates(ArrayList<Combo> ord){
+	public boolean sumaEmpates(ArrayList<Jugador> ord){
 		int i=0;
 		double empatados=0;
 		boolean seguir=false,empate=false;
@@ -166,7 +195,7 @@ public class Logica {
         return empate;
 	}
 
-	private boolean iguales(Combo combo, Combo combo2) {
+	private boolean iguales(Jugador combo, Jugador combo2) {
 		boolean iguales = true;
 		ArrayList<Carta> a = combo.getCartas(),b=combo2.getCartas();
 		
@@ -186,13 +215,13 @@ public class Logica {
 	private void mirarGanadorTurn() {
 
 		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
-		ArrayList<Carta> board = (ArrayList<Carta>) this.board.clone();
+		ArrayList<Carta> b = (ArrayList<Carta>) board.clone();
 		Carta[] cartas,mejoresCartas;
 
-		board.add(getCartaRandom(baraja));
+		b.add(4, getCartaRandom(baraja));
 
 		for(int i=0;i<jugadores.length;i++){
-			cartas = juntar(board, jugadores[i]);
+			cartas = juntar(b, jugadores[i]);
 			mejoresCartas = comprobar(cartas, i);
 
 			ArrayList<Carta> listaCarta = new ArrayList<Carta>();
@@ -203,7 +232,7 @@ public class Logica {
 			jugadores[i].setCartas(listaCarta);
 		}
 
-		ArrayList<Combo> ord = ordenarManos(); 
+		ArrayList<Jugador> ord = ordenarManos(); 
 
 		if(!sumaEmpates(ord)){ 
 
@@ -235,7 +264,7 @@ public class Logica {
 			jugadores[i].setCartas(listaCarta);
 		}
 
-		ArrayList<Combo> ord = ordenarManos(); 
+		ArrayList<Jugador> ord = ordenarManos(); 
 
 		if(!sumaEmpates(ord)){ 
 
@@ -249,14 +278,13 @@ public class Logica {
 	private void mirarGanadorFlop() {
 
 		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
-		ArrayList<Carta> board = (ArrayList<Carta>) this.board.clone();
+		ArrayList<Carta> b = (ArrayList<Carta>) board.clone();
 		Carta[] cartas,mejoresCartas;
 
-		for(int i = 0;i<2;i++)
-			board.add(getCartaRandom(baraja));
+		for(int i = 3;i<5;i++) b.add(i, getCartaRandom(baraja));
 
 		for(int i=0;i<jugadores.length;i++){
-			cartas = juntar(board, jugadores[i]);
+			cartas = juntar(b, jugadores[i]);
 			mejoresCartas = comprobar(cartas, i);
 
 			ArrayList<Carta> listaCarta = new ArrayList<Carta>();
@@ -267,7 +295,7 @@ public class Logica {
 			jugadores[i].setCartas(listaCarta);
 		}
 
-		ArrayList<Combo> ord = ordenarManos(); 
+		ArrayList<Jugador> ord = ordenarManos(); 
 
 		if(!sumaEmpates(ord)){ 
 
@@ -278,7 +306,7 @@ public class Logica {
 
 	}
 
-	private static Carta[] juntar(ArrayList<Carta> board, Combo c) { //Metodo para juntar el arrayList mano y arrayList mesa
+	private static Carta[] juntar(ArrayList<Carta> board, Jugador c) { //Metodo para juntar el arrayList mano y arrayList mesa
 		Carta[] cart;
 		ArrayList<Carta> cartas = new ArrayList<Carta>();
 		cartas = (ArrayList<Carta>) board.clone();
@@ -318,7 +346,7 @@ public class Logica {
 		return i;
 	}
 	
-	private boolean desempateFinal(ArrayList<Combo> ord,Combo a,Combo b){
+	private boolean desempateFinal(ArrayList<Jugador> ord,Jugador a,Jugador b){
 
 		boolean desempateFinal=true;
 
@@ -668,10 +696,7 @@ public class Logica {
 		return cartas1;
 	}
 	
-	public static void addBoard(Carta c) {
-		board.add(c);
-	}
-
+	
 	private static void ordenador(Carta[] cartas) { //Metodo para ordenar las cartas. Util para escaleras
 
 		for (int i = 0; i < cartas.length - 1; i++) {
@@ -766,15 +791,15 @@ public class Logica {
 			return mejoresCartas;	
 	}
 
-	private ArrayList<Combo> ordenarManos() {
+	private ArrayList<Jugador> ordenarManos() {
 		
 		int contJug = 0, peso = 8, nPesos, posMejor, pos;
 		boolean seguir = false;
 
-		ArrayList<Combo> empatados, ordenados = new ArrayList<Combo>();
+		ArrayList<Jugador> empatados, ordenados = new ArrayList<Jugador>();
 		while (peso >= 0) {
 			posMejor = -1;
-			empatados = new ArrayList<Combo>();
+			empatados = new ArrayList<Jugador>();
 			nPesos = 0;
 			pos = 0;
 			if (contJug < jugadores.length) {
@@ -811,7 +836,7 @@ public class Logica {
 		return ordenados;
 	}
 
-    private int desempateManos(ArrayList<Combo> jugadores) {
+    private int desempateManos(ArrayList<Jugador> jugadores) {
 
         int posMano = -1, valorAct = 0, valorAnt = 0, valorMax = 0, posMax = 0;
 
@@ -1010,5 +1035,37 @@ public class Logica {
         }
         return s;
     }
+
+    public ArrayList<Carta> getBoard() {
+        return board;
+    }
+
+    public Jugador[] getJugadores() {
+        return jugadores;
+    }
     
+    private String intToChar(int valor) {
+        String carta = null;
+        switch (valor) {
+            case 10:
+                carta = "T";
+                break;
+            case 11:
+                carta = "J";
+                break;
+            case 12:
+                carta = "Q";
+                break;
+            case 13:
+                carta = "K";
+                break;
+            case 14:
+                carta = "A";
+                break;
+            default:
+                carta = Integer.toString(valor);
+                break;
+        }
+        return carta;
+    }
 }

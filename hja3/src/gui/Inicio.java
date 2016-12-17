@@ -6,6 +6,7 @@
 package gui;
 
 import Logica.Logica;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -78,35 +79,70 @@ public class Inicio extends javax.swing.JPanel {
 
         jButton2.setBackground(new java.awt.Color(0, 255, 204));
         jButton2.setText("Random");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Jugador 3");
 
         jButton3.setBackground(new java.awt.Color(0, 255, 204));
         jButton3.setText("Random");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Jugador 4");
 
         jButton4.setBackground(new java.awt.Color(0, 255, 204));
         jButton4.setText("Random");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Jugador 5");
 
         jButton5.setBackground(new java.awt.Color(0, 255, 204));
         jButton5.setText("Random");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Jugador 6");
 
         jButton6.setBackground(new java.awt.Color(0, 255, 204));
         jButton6.setText("Random");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Board");
 
         jButton7.setBackground(new java.awt.Color(0, 255, 204));
         jButton7.setText("Random");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setBackground(new java.awt.Color(0, 204, 51));
         jButton8.setText("CALCULAR");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton10.setBackground(new java.awt.Color(255, 51, 51));
         jButton10.setText("Limpiar");
@@ -257,11 +293,54 @@ public class Inicio extends javax.swing.JPanel {
         jTextField5.setText("");
         jTextField6.setText("");
         jTextField7.setText("");
+        log.crearBaraja();
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton5.setEnabled(true);
+        jButton6.setEnabled(true);
+        
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        jTextField1.setText(log.randomJug(0));
+        jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextField2.setText(log.randomJug(1));
+        jButton2.setEnabled(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jTextField3.setText(log.randomJug(2));
+        jButton3.setEnabled(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        jTextField4.setText(log.randomJug(3));
+        jButton4.setEnabled(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        jTextField5.setText(log.randomJug(4));
+        jButton5.setEnabled(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        jTextField6.setText(log.randomJug(5));
+        jButton6.setEnabled(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        jTextField7.setText(log.randomBoard());
+        jButton7.setEnabled(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       JOptionPane.showMessageDialog(new Tablero(log),null);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

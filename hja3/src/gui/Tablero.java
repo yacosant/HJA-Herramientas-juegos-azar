@@ -6,7 +6,9 @@
 package gui;
 
 import Logica.Carta;
+import Logica.Jugador;
 import Logica.Logica;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +18,8 @@ public class Tablero extends javax.swing.JPanel {
 
     private Logica log;
     private String dir="/imgs/cards/";
+    //private Jugador[] jugs;
+    private ArrayList<Carta> board = new ArrayList<Carta>();
     /**
      * Creates new form Tablero
      */
@@ -30,35 +34,51 @@ public class Tablero extends javax.swing.JPanel {
          jButton2.setVisible(false);
         this.setSize(fondo.getWidth(), fondo.getHeight());
         log = l;
+        setJugadores();   
+        log.mirarGanador();
     }
     
-    //poner en logica
-    public String cartaPng(Carta c){
+    private String cartaPng(Carta c){
         return ""+c.getValor()+c.getColor()+".png";
     }
 
     private void setJugadores(){
-        j11.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j12.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j21.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j22.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j31.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j32.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j41.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j42.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j51.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j52.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j61.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        j62.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
+        String d;
+        Jugador[] jugs=log.getJugadores();
+        
+        d=cartaPng(jugs[0].getCarta(1));
+        j11.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[0].getCarta(0));
+        j12.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[1].getCarta(1));
+        j21.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[1].getCarta(0));
+        j22.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[2].getCarta(1));
+        j31.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[2].getCarta(0));
+        j32.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[3].getCarta(1));
+        j41.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[3].getCarta(0));
+        j42.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[4].getCarta(1));
+        j51.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[4].getCarta(0));
+        j52.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[5].getCarta(1));
+        j61.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        d=cartaPng(jugs[5].getCarta(0));
+        j62.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
     }
     
-    private void setPorcentajes(){
-        j1.setText("");
-        j2.setText("");
-        j3.setText("");
-        j4.setText("");
-        j5.setText("");
-        j6.setText("");
+    private void setPorcentajes(double[] por){
+        j1.setText(""+por[0]);
+        j2.setText(""+por[1]);
+        j3.setText(""+por[2]);
+        j4.setText(""+por[3]);
+        j5.setText(""+por[4]);
+        j6.setText(""+por[5]);
     }
     
     private void setBoard(){
@@ -230,7 +250,7 @@ public class Tablero extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        log.mirarGanador();
+        setPorcentajes(log.mirarGanador());
         String s=log.getEstado();
          fase.setText(s);
        if (s=="River"){

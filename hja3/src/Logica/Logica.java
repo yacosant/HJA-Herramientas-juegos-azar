@@ -147,7 +147,7 @@ public class Logica {
 		
         while (!seguir && i < ord.size()-1){
 
-        	if(!desempateFinal(ord)){
+        	if(!desempateFinal(ord,ord.get(i),ord.get(i+1))){
         		empatados++;
         		empate=true;
         	}else
@@ -318,43 +318,42 @@ public class Logica {
 		return i;
 	}
 	
-	private boolean desempateFinal(ArrayList<Combo> ord){
+	private boolean desempateFinal(ArrayList<Combo> ord,Combo a,Combo b){
 
 		boolean desempateFinal=true;
 
-		for(int i=0; i<ord.size(); i++)
-			for(int j=i+1; j<ord.size()-1; j++)
-				if(iguales(ord.get(i), ord.get(j))){
-					if(ord.get(i).getPeso()==2 || ord.get(i).getPeso()==1 
-					|| ord.get(i).getPeso()==7 || ord.get(i).getPeso()==3 || ord.get(i).getPeso() == 0 || ord.get(i).getPeso()==5){ 
 
-						int kikeri = devolverKiker(ord.get(i).getCarta(1), ord.get(i).getCarta(2));
-						int kikerj = devolverKiker(ord.get(j).getCarta(1), ord.get(j).getCarta(2));
+		if(iguales(a, b)){
+			if(a.getPeso()==2 || a.getPeso()==1 
+					|| a.getPeso()==7 || a.getPeso()==3 || a.getPeso() == 0 || a.getPeso()==5){ 
 
-						if(kikeri==kikerj)
-							desempateFinal=false;
+				int kikeri = devolverKiker(a.getCarta(1), a.getCarta(2));
+				int kikerj = devolverKiker(b.getCarta(1), b.getCarta(2));
 
-						else if(kikeri>kikerj)
-							ord.set(0, ord.get(i));
+				if(kikeri==kikerj)
+					desempateFinal=false;
 
-						else if(kikerj>kikeri)
-							ord.set(0, ord.get(j));
-					}
-				}else
-					if(ord.get(i).getPeso()==5){
-						
-						int kiker1 = devolverKikerColor(ord.get(i).getCarta(1), ord.get(i).getCarta(2),ord.get(i).getCartas().get(0));
-						int kiker2 = devolverKikerColor(ord.get(j).getCarta(1), ord.get(j).getCarta(2),ord.get(i).getCartas().get(0));
-						
-						if(kiker1==kiker2)
-							desempateFinal=false;
+				else if(kikeri>kikerj)
+					ord.set(0,a);
 
-						else if(kiker1>kiker2)
-							ord.set(0, ord.get(i));
+				else if(kikerj>kikeri)
+					ord.set(0,b);
+			}
+		}else
+			if(a.getPeso()==5){
 
-						else if(kiker1>kiker2)
-							ord.set(0, ord.get(j));
-					}
+				int kiker1 = devolverKikerColor(a.getCarta(1), a.getCarta(2),a.getCartas().get(0));
+				int kiker2 = devolverKikerColor(b.getCarta(1), b.getCarta(2),a.getCartas().get(0));
+
+				if(kiker1==kiker2)
+					desempateFinal=false;
+
+				else if(kiker1>kiker2)
+					ord.set(0,a);
+
+				else if(kiker1>kiker2)
+					ord.set(0,b);
+			}
 
 		return desempateFinal;
 	}

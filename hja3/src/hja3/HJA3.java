@@ -20,12 +20,12 @@ public class HJA3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JFrame f = new JFrame("HJA: PRACTICA 3 - GRUPO 1");
+        JFrame f = new JFrame("HJA: PRACTICA 3");
         Logica l = new Logica();
-        //f.add(new Inicio());
-        f.add(new Tablero(l));
+        f.add(new Inicio());
+        //f.add(new Tablero(l));
         f.setVisible(true);
-        f.setSize(815, 700);
+        f.setSize(300, 500);
         f.setResizable(false);
         f.setLocationRelativeTo(null);
         //l.comprobarTotal();

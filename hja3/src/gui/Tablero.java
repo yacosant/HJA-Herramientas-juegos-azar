@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Grupo 01
  */
-public class Tablero extends javax.swing.JPanel {
+public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
 
     private Logica log;
     private String dir="/imgs/cards/";
@@ -32,7 +32,11 @@ public class Tablero extends javax.swing.JPanel {
      public Tablero(Logica l) {
         initComponents();
          jButton2.setVisible(false);
-        this.setSize(fondo.getWidth(), fondo.getHeight());
+        //this.setSize(fondo.getWidth(), fondo.getHeight());
+        this.setSize(810, 650);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setTitle("HJA: PRACTICA3 - TABLERO - GRUPO 01");
         log = l;
         setJugadores();   
         setPorcentajes(log.mirarGanador());

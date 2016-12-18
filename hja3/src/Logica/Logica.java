@@ -25,8 +25,8 @@ public class Logica {
 
 	public Logica(){
             crearBaraja();
-            randomBoard();      //solo en debugueo
-            generarJugadores(); //solo en debugueo
+            //randomBoard();      //solo en debugueo
+            //generarJugadores(); //solo en debugueo
             
 	}
         

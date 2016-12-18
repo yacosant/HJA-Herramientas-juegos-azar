@@ -23,12 +23,12 @@ public class HJA3 {
         JFrame f = new JFrame("HJA: PRACTICA 3 - GRUPO 1");
         Logica l = new Logica();
         //f.add(new Inicio());
-        f.add(new Tablero());
+        f.add(new Tablero(l));
         f.setVisible(true);
         f.setSize(815, 700);
         f.setResizable(false);
         f.setLocationRelativeTo(null);
-        l.comprobarTotal();
+        //l.comprobarTotal();
     }
     
 }

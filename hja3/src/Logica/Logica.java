@@ -94,7 +94,7 @@ public class Logica {
                     case 0: mirarGanadorPreFlop(); break;
                     case 1: mirarGanadorFlop(); break;
                     case 2: mirarGanadorTurn(); break;
-                    case 3: mirarGanadorRiver(); estado=-1; break;
+                    case 3: mirarGanadorRiver(); estado=-2; break;
                 }
             }
             estado++;
@@ -128,7 +128,7 @@ public class Logica {
 
         private double[] calcularPorcentajes(){
             double por[] = new double[6];
-                for(int i=0; i<6; i++) por[i] = (jugadores[i].getVictorias()/NUM_VUELTAS);
+                for(int i=0; i<6; i++) por[i] = redondear(100*jugadores[i].getVictorias()/NUM_VUELTAS,3);
             
                 return por;
         }
@@ -1032,6 +1032,7 @@ public class Logica {
             case 1: s="Flop";break;
             case 2: s="Turn";break;
             case 3: s="River";break;
+            default: s="Fin";break;
         }
         return s;
     }
@@ -1067,5 +1068,54 @@ public class Logica {
                 break;
         }
         return carta;
+    }
+    
+     private double redondear(double numero, int digitos) {
+        int cifras = (int) Math.pow(10, digitos);
+        return Math.rint(numero * cifras) / cifras;
+    }
+     
+    public int CharToInt(char valor) {
+        int carta;
+        switch (valor) {
+            case 'T':
+                carta = 10;
+                break;
+            case 'J':
+                carta = 11;
+                break;
+            case 'Q':
+                carta = 12;
+                break;
+            case 'K':
+                carta = 13;
+                break;
+            case 'A':
+                carta = 14;
+                break;
+            case 't':
+                carta = 10;
+                break;
+            case 'j':
+                carta = 11;
+                break;
+            case 'q':
+                carta = 12;
+                break;
+            case 'k':
+                carta = 13;
+                break;
+            case 'a':
+                carta = 14;
+                break;
+            default:
+                carta = Character.getNumericValue(valor);
+                break;
+        }
+        return carta;
+    }
+
+    public void setJugador(int i, Jugador jugador) {
+        jugadores[i]=jugador;
     }
 }

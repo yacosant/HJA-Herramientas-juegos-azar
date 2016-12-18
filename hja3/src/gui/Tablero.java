@@ -35,7 +35,7 @@ public class Tablero extends javax.swing.JPanel {
         this.setSize(fondo.getWidth(), fondo.getHeight());
         log = l;
         setJugadores();   
-        log.mirarGanador();
+        setPorcentajes(log.mirarGanador());
     }
     
     private String cartaPng(Carta c){
@@ -73,20 +73,33 @@ public class Tablero extends javax.swing.JPanel {
     }
     
     private void setPorcentajes(double[] por){
-        j1.setText(""+por[0]);
-        j2.setText(""+por[1]);
-        j3.setText(""+por[2]);
-        j4.setText(""+por[3]);
-        j5.setText(""+por[4]);
-        j6.setText(""+por[5]);
+        j1.setText(""+por[0]+" %");
+        j2.setText(""+por[1]+" %");
+        j3.setText(""+por[2]+" %");
+        j4.setText(""+por[3]+" %");
+        j5.setText(""+por[4]+" %");
+        j6.setText(""+por[5]+" %");
     }
     
     private void setBoard(){
-        b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        b3.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        b4.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
-        b5.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+"carta.png")));
+        ArrayList<Carta> b=log.getBoard();
+        String d;
+        if(log.getEstado()=="Flop"){
+            d=cartaPng(b.get(0));
+            b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+            d=cartaPng(b.get(1));
+            b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+            d=cartaPng(b.get(2));
+            b3.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        }
+        else if(log.getEstado()=="Turn"){
+            d=cartaPng(b.get(3));
+            b4.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        }
+        else {
+            d=cartaPng(b.get(4));
+            b5.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -249,18 +262,20 @@ public class Tablero extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        setPorcentajes(log.mirarGanador());
         String s=log.getEstado();
-         fase.setText(s);
-       if (s=="River"){
-           jButton1.setVisible(true);
-           jButton2.setVisible(false);
+        setBoard(); 
+        setPorcentajes(log.mirarGanador());
+        fase.setText(s);
+        s=log.getEstado();
+        
+       if (s=="Fin"){
+           jButton1.setVisible(false);
+           jButton2.setVisible(true);
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // cerrar pantalla.
+        // cerrar pantalla
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

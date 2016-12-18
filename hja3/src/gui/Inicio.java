@@ -5,6 +5,8 @@
  */
 package gui;
 
+import Logica.Carta;
+import Logica.Jugador;
 import Logica.Logica;
 import javax.swing.JOptionPane;
 
@@ -285,7 +287,33 @@ public class Inicio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void getTextos(){
+        if(jButton1.isEnabled()) parseo(jTextField1.getText());
+        if(jButton2.isEnabled()) parseo(jTextField2.getText());
+        if(jButton3.isEnabled()) parseo(jTextField3.getText());
+        if(jButton4.isEnabled()) parseo(jTextField4.getText());
+        if(jButton5.isEnabled()) parseo(jTextField5.getText());
+        if(jButton6.isEnabled()) parseo(jTextField6.getText());
+        
+        if(jButton7.isEnabled()) parseoBoard(jTextField7.getText());
+    }
+    
+    private void parseo(String s){
+        Carta c=new Carta(log.CharToInt(s.charAt(0)),s.charAt(1));
+        Carta c2=new Carta(log.CharToInt(s.charAt(3)),s.charAt(4));
+        log.setJugador(0,new Jugador(c,c2));
+     }
+    
+     private void parseoBoard(String s){ //EN CONSTRUCCION
+        for(int i=0; i<14;i++){
+            Carta c=new Carta(log.CharToInt(s.charAt(0)),s.charAt(1));
+            Carta c2=new Carta(log.CharToInt(s.charAt(3)),s.charAt(4));
+            log.setJugador(0,new Jugador(c,c2));
+        }
+     }
+    
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        log.crearBaraja();
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
@@ -293,48 +321,64 @@ public class Inicio extends javax.swing.JPanel {
         jTextField5.setText("");
         jTextField6.setText("");
         jTextField7.setText("");
-        log.crearBaraja();
+        
         jButton1.setEnabled(true);
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
         jButton5.setEnabled(true);
         jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
         
+        jTextField1.setEditable(true);
+        jTextField2.setEditable(true);
+        jTextField3.setEditable(true);
+        jTextField4.setEditable(true);
+        jTextField5.setEditable(true);
+        jTextField6.setEditable(true);
+        jTextField7.setEditable(true);
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jTextField1.setText(log.randomJug(0));
+        jTextField1.setEditable(false);
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jTextField2.setText(log.randomJug(1));
+        jTextField2.setEditable(false);
         jButton2.setEnabled(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jTextField3.setText(log.randomJug(2));
+        jTextField3.setEditable(false);
         jButton3.setEnabled(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jTextField4.setText(log.randomJug(3));
+        jTextField4.setEditable(false);
         jButton4.setEnabled(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jTextField5.setText(log.randomJug(4));
+        jTextField5.setEditable(false);
         jButton5.setEnabled(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         jTextField6.setText(log.randomJug(5));
+        jTextField6.setEditable(false);
         jButton6.setEnabled(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         jTextField7.setText(log.randomBoard());
+        jTextField7.setEditable(false);
         jButton7.setEnabled(false);
     }//GEN-LAST:event_jButton7ActionPerformed
 

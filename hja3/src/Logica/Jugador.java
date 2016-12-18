@@ -42,7 +42,7 @@ public class Jugador {
 		this.mejorMano = listaCarta;
 		
 	}
-
+	
 	public int getPeso() {
 		return this.peso;
 	}

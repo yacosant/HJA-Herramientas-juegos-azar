@@ -89,14 +89,24 @@ public class Logica {
 	}
 
         public double[] mirarGanador(){
+        	if(estado != -2)
+        		for(int a = 0;a<jugadores.length;a++)
+        			jugadores[a].setVictorias(0);
+
             for(int i=0; i<NUM_VUELTAS;i++){
                 switch(estado){
                     case 0: mirarGanadorPreFlop(); break;
                     case 1: mirarGanadorFlop(); break;
                     case 2: mirarGanadorTurn(); break;
-                    case 3: mirarGanadorRiver(); estado=-2; break;
+                    case 3: break;
                 }
             }
+            
+            if(estado == 3){
+            	mirarGanadorRiver();
+            	estado = -2;
+            }
+            
             estado++;
             return calcularPorcentajes();
         }
@@ -128,7 +138,15 @@ public class Logica {
 
         private double[] calcularPorcentajes(){
             double por[] = new double[6];
+            if(estado != -1)
                 for(int i=0; i<6; i++) por[i] = redondear(100*jugadores[i].getVictorias()/NUM_VUELTAS,3);
+            else
+            	 for(int j=0; j<6; j++)
+            		 if(jugadores[j].getVictorias() == 1)
+            			 por[j] = 100;
+            		 else
+            			 por[j] = 0;
+            
             
                 return por;
         }
@@ -215,9 +233,13 @@ public class Logica {
 	private void mirarGanadorTurn() {
 
 		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
-		ArrayList<Carta> b = (ArrayList<Carta>) board.clone();
+		ArrayList<Carta> b = new ArrayList<Carta>();
 		Carta[] cartas,mejoresCartas;
-
+		
+		b.add(board.get(0));
+		b.add(board.get(1));
+		b.add(board.get(2));
+		b.add(board.get(3));
 		b.add(4, getCartaRandom(baraja));
 
 		for(int i=0;i<jugadores.length;i++){
@@ -278,9 +300,13 @@ public class Logica {
 	private void mirarGanadorFlop() {
 
 		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
-		ArrayList<Carta> b = (ArrayList<Carta>) board.clone();
+		ArrayList<Carta> b = new ArrayList<Carta>();
 		Carta[] cartas,mejoresCartas;
-
+		
+		b.add(board.get(0));
+		b.add(board.get(1));
+		b.add(board.get(2));
+		
 		for(int i = 3;i<5;i++) b.add(i, getCartaRandom(baraja));
 
 		for(int i=0;i<jugadores.length;i++){

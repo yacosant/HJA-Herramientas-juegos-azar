@@ -47,12 +47,12 @@ public class Logica {
         }
         
         private void generarJugadores(){
-            jugadores[0] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
-            jugadores[1] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
-            jugadores[2] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
-            jugadores[3] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
-            jugadores[4] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
-            jugadores[5] = new Jugador(getCartaRandom(baraja),getCartaRandom(baraja));
+            jugadores[0] = new Jugador(getCartaRandomBorrando(baraja),getCartaRandomBorrando(baraja));
+            jugadores[1] = new Jugador(getCartaRandomBorrando(baraja),getCartaRandomBorrando(baraja));
+            jugadores[2] = new Jugador(getCartaRandomBorrando(baraja),getCartaRandomBorrando(baraja));
+            jugadores[3] = new Jugador(getCartaRandomBorrando(baraja),getCartaRandomBorrando(baraja));
+            jugadores[4] = new Jugador(getCartaRandomBorrando(baraja),getCartaRandomBorrando(baraja));
+            jugadores[5] = new Jugador(getCartaRandomBorrando(baraja),getCartaRandomBorrando(baraja));
         }
         
         public String randomBoard(){
@@ -71,8 +71,8 @@ public class Logica {
 		//i es el numero del jugador 
 		String cartas;
 		Carta c,c2;
-		c=getCartaRandom(this.baraja);
-		c2=getCartaRandom(this.baraja);
+		c=getCartaRandomBorrando(this.baraja);
+		c2=getCartaRandomBorrando(this.baraja);
 
 		jugadores[i]= new Jugador(c,c2);
 
@@ -80,15 +80,20 @@ public class Logica {
 	}
 
 
-	private Carta getCartaRandom(ArrayList<Carta> baraja){
+	private Carta getCartaRandomBorrando(ArrayList<Carta> baraja){
+		Carta c= getCartaRandom(baraja);
+                baraja.remove(c);
+		return c;
+	}
+        
+        private Carta getCartaRandom(ArrayList<Carta> baraja){
 		Random rnd = new Random();
 		int i= (int) (rnd.nextDouble() * baraja.size());
-		Carta c;
-		c= baraja.get(i);
-		baraja.remove(i);
+		Carta c= baraja.get(i);
 		return c;
 	}
 
+                
         public double[] mirarGanador(){
         	if(estado != -2)
         		for(int a = 0;a<jugadores.length;a++)
@@ -234,14 +239,17 @@ public class Logica {
 	
 	private void mirarGanadorTurn() {
 
-		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
+		ArrayList<Carta> baraja; //= (ArrayList<Carta>) this.baraja.clone();
 		ArrayList<Carta> b = new ArrayList<Carta>();
 		Carta[] cartas,mejoresCartas;
 		
-		b.add(board.get(0));
-		b.add(board.get(1));
-		b.add(board.get(2));
-		b.add(board.get(3));
+		Carta c=null;
+                for(int i=0;i<4;i++){
+                   c=board.get(i);
+                   b.add(c);
+                }
+                this.baraja.remove(c);
+                baraja = (ArrayList<Carta>) this.baraja.clone();
 		b.add(4, getCartaRandom(baraja));
 
 		for(int i=0;i<jugadores.length;i++){
@@ -303,14 +311,16 @@ public class Logica {
 
 	private void mirarGanadorFlop() {
 
-		ArrayList<Carta> baraja = (ArrayList<Carta>) this.baraja.clone();
+		ArrayList<Carta> baraja; // = (ArrayList<Carta>) this.baraja.clone();
 		ArrayList<Carta> b = new ArrayList<Carta>();
 		Carta[] cartas,mejoresCartas;
-		
-		b.add(board.get(0));
-		b.add(board.get(1));
-		b.add(board.get(2));
-		
+		Carta c;
+                for(int i=0;i<3;i++){
+                   c=board.get(i);
+                   b.add(c);
+                   this.baraja.remove(c);
+                }
+		baraja = (ArrayList<Carta>) this.baraja.clone();		
 		for(int i = 3;i<5;i++) b.add(i, getCartaRandom(baraja));
 
 		for(int i=0;i<jugadores.length;i++){

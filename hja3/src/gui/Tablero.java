@@ -140,106 +140,112 @@ public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
         fase = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
-        setLayout(null);
+        getContentPane().setLayout(null);
 
         j1.setText("00.00%");
-        add(j1);
-        j1.setBounds(250, 130, 50, 20);
+        getContentPane().add(j1);
+        j1.setBounds(260, 140, 50, 10);
 
         j2.setText("00.00%");
-        add(j2);
-        j2.setBounds(520, 130, 50, 20);
+        getContentPane().add(j2);
+        j2.setBounds(530, 140, 50, 10);
 
         j3.setText("00.00%");
-        add(j3);
-        j3.setBounds(700, 300, 50, 20);
+        getContentPane().add(j3);
+        j3.setBounds(720, 310, 50, 10);
 
         j4.setText("00.00%");
-        add(j4);
-        j4.setBounds(510, 470, 50, 20);
+        getContentPane().add(j4);
+        j4.setBounds(510, 476, 50, 14);
 
         j5.setText("00.00%");
-        add(j5);
-        j5.setBounds(280, 470, 50, 20);
+        getContentPane().add(j5);
+        j5.setBounds(280, 480, 50, 10);
 
         j6.setText("00.00%");
-        add(j6);
-        j6.setBounds(50, 300, 50, 20);
+        getContentPane().add(j6);
+        j6.setBounds(60, 310, 50, 10);
 
         j11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j11);
+        getContentPane().add(j11);
         j11.setBounds(250, 20, 70, 100);
 
         j12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j12);
+        getContentPane().add(j12);
         j12.setBounds(170, 20, 70, 100);
 
         j21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j21);
+        getContentPane().add(j21);
         j21.setBounds(490, 20, 70, 100);
 
         j22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j22);
+        getContentPane().add(j22);
         j22.setBounds(570, 20, 70, 100);
 
         j31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j31);
+        getContentPane().add(j31);
         j31.setBounds(640, 190, 70, 100);
 
         j32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j32);
+        getContentPane().add(j32);
         j32.setBounds(720, 190, 70, 100);
 
         j41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j41);
+        getContentPane().add(j41);
         j41.setBounds(480, 510, 70, 100);
 
         j42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j42);
+        getContentPane().add(j42);
         j42.setBounds(560, 510, 70, 100);
 
         j51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j51);
+        getContentPane().add(j51);
         j51.setBounds(200, 510, 70, 100);
 
         j52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j52);
+        getContentPane().add(j52);
         j52.setBounds(280, 510, 70, 100);
 
         j61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j61);
+        getContentPane().add(j61);
         j61.setBounds(10, 190, 70, 100);
 
         j62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/10c.png"))); // NOI18N
-        add(j62);
+        getContentPane().add(j62);
         j62.setBounds(90, 190, 70, 100);
 
         b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/down.png"))); // NOI18N
-        add(b1);
+        getContentPane().add(b1);
         b1.setBounds(200, 250, 70, 110);
 
         b2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/down.png"))); // NOI18N
-        add(b2);
+        getContentPane().add(b2);
         b2.setBounds(280, 250, 70, 110);
 
         b3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/down.png"))); // NOI18N
-        add(b3);
+        getContentPane().add(b3);
         b3.setBounds(360, 250, 70, 110);
 
         b4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/down.png"))); // NOI18N
-        add(b4);
+        getContentPane().add(b4);
         b4.setBounds(440, 250, 70, 110);
 
         b5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/cards/down.png"))); // NOI18N
-        add(b5);
+        getContentPane().add(b5);
         b5.setBounds(520, 250, 70, 110);
 
         fase.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         fase.setForeground(new java.awt.Color(255, 255, 255));
         fase.setText("Pre-Flop");
-        add(fase);
+        getContentPane().add(fase);
         fase.setBounds(30, 510, 120, 40);
 
         jButton1.setText("Siguiente");
@@ -248,7 +254,7 @@ public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1);
+        getContentPane().add(jButton1);
         jButton1.setBounds(20, 550, 100, 23);
 
         jButton2.setText("Cerrar");
@@ -257,11 +263,47 @@ public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2);
+        getContentPane().add(jButton2);
         jButton2.setBounds(20, 580, 100, 23);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("J1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(230, 130, 20, 17);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("J2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(500, 130, 20, 17);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("J3");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(690, 300, 20, 17);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("J4");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(480, 470, 20, 17);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("J5");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(250, 470, 20, 17);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("J6");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(30, 300, 20, 17);
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/fondo.png"))); // NOI18N
-        add(fondo);
+        getContentPane().add(fondo);
         fondo.setBounds(0, 0, 806, 625);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -311,5 +353,11 @@ public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
     private javax.swing.JLabel j62;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

@@ -173,6 +173,7 @@ public class Logica {
 		}
 		
 		ArrayList<Jugador> ord = ordenarManos(); 
+		ordenadorKicker(ord);
 		
 		if(!sumaEmpates(ord)){ 
 
@@ -255,7 +256,8 @@ public class Logica {
 		}
 
 		ArrayList<Jugador> ord = ordenarManos(); 
-
+		ordenadorKicker(ord);
+		
 		if(!sumaEmpates(ord)){ 
 
 			for(int j=0; j<jugadores.length;j++)
@@ -287,7 +289,8 @@ public class Logica {
 		}
 
 		ArrayList<Jugador> ord = ordenarManos(); 
-
+		ordenadorKicker(ord);
+		
 		if(!sumaEmpates(ord)){ 
 
 			for(int j=0; j<jugadores.length;j++)
@@ -322,7 +325,8 @@ public class Logica {
 		}
 
 		ArrayList<Jugador> ord = ordenarManos(); 
-
+		ordenadorKicker(ord);
+		
 		if(!sumaEmpates(ord)){ 
 
 			for(int j=0; j<jugadores.length;j++)
@@ -1148,5 +1152,18 @@ public class Logica {
     public void setBoard(ArrayList<Carta> board) {
         this.board = board;
     }
+    
+	private void ordenadorKicker(ArrayList<Jugador> cartas) {
+		for (int i = 0; i < cartas.size() - 1; i++) {
+			for (int j = i + 1; j < cartas.size(); j++) {
+				if (cartas.get(i).getKicker() < cartas.get(j).getKicker() && cartas.get(i).getPeso() == cartas.get(j).getPeso()) {
+					Jugador aux = cartas.get(i);
+					cartas.set(i, cartas.get(j));
+					cartas.set(j, aux);
+
+				}
+			}
+		}
+	}
     
 }

@@ -13,6 +13,7 @@ public class Jugador {
     private Carta carta2;
     private int peso;
     private double victorias;
+    private int kicker;
     private ArrayList<Carta> mejorMano;
 
     public Carta getCarta(int i) {
@@ -31,6 +32,11 @@ public class Jugador {
         this.carta1 = carta1;
         this.carta2 = carta2;
         this.victorias = 0;
+        
+        if(carta1.getValor() > carta2.getValor())
+        	this.kicker = carta1.getValor();
+        else
+        	this.kicker = carta2.getValor();
     }
 
 	public void setPeso(int peso) {
@@ -58,5 +64,12 @@ public class Jugador {
 	public void setVictorias(double d){
 		this.victorias=d;
 	}
+	
+	public void setKicker(int kiker){
+		this.kicker=kiker;
+	}
 
+	public int getKicker(){
+		return kicker;
+	}
 }

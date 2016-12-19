@@ -1144,4 +1144,9 @@ public class Logica {
     public void setJugador(int i, Jugador jugador) {
         jugadores[i]=jugador;
     }
+
+    public void setBoard(ArrayList<Carta> board) {
+        this.board = board;
+    }
+    
 }

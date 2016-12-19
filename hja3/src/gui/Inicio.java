@@ -8,6 +8,7 @@ package gui;
 import Logica.Carta;
 import Logica.Jugador;
 import Logica.Logica;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -300,11 +301,14 @@ public class Inicio extends javax.swing.JPanel {
      }
     
      private void parseoBoard(String s){ //EN CONSTRUCCION
-        for(int i=0; i<14;i=i+4){
+       ArrayList<Carta> board = new ArrayList<Carta>();
+         for(int i=0; i<14;i=i+2){
+            
             Carta c=new Carta(log.CharToInt(s.charAt(i)),s.charAt(i+1));
-            Carta c2=new Carta(log.CharToInt(s.charAt(i+2)),s.charAt(i+3));
-            log.setJugador(0,new Jugador(c,c2));
+            i++;
+            board.add(c);
         }
+         log.setBoard(board);
      }
     
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed

@@ -31,6 +31,7 @@ public class Logica {
 	}
         
         public void crearBaraja(){
+            estado=0;
             baraja.clear();
             for(int i=0;i<4;i++)
                 for(int j = 2;j<=14;j++){
@@ -1151,6 +1152,13 @@ public class Logica {
 
     public void setBoard(ArrayList<Carta> board) {
         this.board = board;
+        for(int i=0; i<5;i++){
+            for(int j=0; j<baraja.size();j++){
+            if(baraja.get(j).getValor()==board.get(j).getValor() && baraja.get(i).getColor()==board.get(i).getColor()){
+                baraja.remove(j);
+            }
+            }
+        }
     }
     
 	private void ordenadorKicker(ArrayList<Jugador> cartas) {

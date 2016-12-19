@@ -300,7 +300,7 @@ public class Inicio extends javax.swing.JPanel {
         log.setJugador(i,new Jugador(c,c2));
      }
     
-     private void parseoBoard(String s){ //EN CONSTRUCCION
+     private void parseoBoard(String s){ 
        ArrayList<Carta> board = new ArrayList<Carta>();
          for(int i=0; i<14;i=i+2){
             

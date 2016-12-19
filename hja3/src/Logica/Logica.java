@@ -248,7 +248,7 @@ public class Logica {
                    c=board.get(i);
                    b.add(c);
                 }
-                this.baraja.remove(c);
+                remove(c);
                 baraja = (ArrayList<Carta>) this.baraja.clone();
 		b.add(4, getCartaRandom(baraja));
 
@@ -308,6 +308,11 @@ public class Logica {
 		}
 	}
 
+        private void remove(Carta c){
+            for(int i=0; i<baraja.size(); i++){
+               if( baraja.get(i).getValor() == c.getValor() && baraja.get(i).getColor() ==c.getColor()) baraja.remove(i);
+            }
+        }
 
 	private void mirarGanadorFlop() {
 
@@ -318,7 +323,7 @@ public class Logica {
                 for(int i=0;i<3;i++){
                    c=board.get(i);
                    b.add(c);
-                   this.baraja.remove(c);
+                   remove(c);
                 }
 		baraja = (ArrayList<Carta>) this.baraja.clone();		
 		for(int i = 3;i<5;i++) b.add(i, getCartaRandom(baraja));
@@ -1081,7 +1086,8 @@ public class Logica {
     public ArrayList<Carta> getBoard() {
         return board;
     }
-
+    
+    
     public Jugador[] getJugadores() {
         return jugadores;
     }
@@ -1162,13 +1168,6 @@ public class Logica {
 
     public void setBoard(ArrayList<Carta> board) {
         this.board = board;
-        for(int i=0; i<5;i++){
-            for(int j=0; j<baraja.size();j++){
-            if(baraja.get(j).getValor()==board.get(j).getValor() && baraja.get(i).getColor()==board.get(i).getColor()){
-                baraja.remove(j);
-            }
-            }
-        }
     }
     
 	private void ordenadorKicker(ArrayList<Jugador> cartas) {

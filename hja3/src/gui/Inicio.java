@@ -283,20 +283,20 @@ public class Inicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getTextos(){
-        if(jButton1.isEnabled()) parseo(jTextField1.getText());
-        if(jButton2.isEnabled()) parseo(jTextField2.getText());
-        if(jButton3.isEnabled()) parseo(jTextField3.getText());
-        if(jButton4.isEnabled()) parseo(jTextField4.getText());
-        if(jButton5.isEnabled()) parseo(jTextField5.getText());
-        if(jButton6.isEnabled()) parseo(jTextField6.getText());
+        if(jButton1.isEnabled()) parseo(0,jTextField1.getText());
+        if(jButton2.isEnabled()) parseo(1,jTextField2.getText());
+        if(jButton3.isEnabled()) parseo(2,jTextField3.getText());
+        if(jButton4.isEnabled()) parseo(3,jTextField4.getText());
+        if(jButton5.isEnabled()) parseo(4,jTextField5.getText());
+        if(jButton6.isEnabled()) parseo(5,jTextField6.getText());
         
         if(jButton7.isEnabled()) parseoBoard(jTextField7.getText());
     }
     
-    private void parseo(String s){
+    private void parseo(int i, String s){
         Carta c=new Carta(log.CharToInt(s.charAt(0)),s.charAt(1));
         Carta c2=new Carta(log.CharToInt(s.charAt(3)),s.charAt(4));
-        log.setJugador(0,new Jugador(c,c2));
+        log.setJugador(i,new Jugador(c,c2));
      }
     
      private void parseoBoard(String s){ //EN CONSTRUCCION
@@ -378,6 +378,7 @@ public class Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       getTextos();
        Tablero t= new Tablero(log);
        t.setModal(true);
        t.setVisible(true);

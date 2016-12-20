@@ -321,7 +321,12 @@ public class Inicio extends javax.swing.JPanel {
         jTextField6.setText("");
         jTextField7.setText("");
         
-        jButton1.setEnabled(true);
+        setTodoEditable();
+
+    }//GEN-LAST:event_jButton10ActionPerformed
+    
+    private void setTodoEditable(){
+         jButton1.setEnabled(true);
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
@@ -336,9 +341,8 @@ public class Inicio extends javax.swing.JPanel {
         jTextField5.setEditable(true);
         jTextField6.setEditable(true);
         jTextField7.setEditable(true);
-
-    }//GEN-LAST:event_jButton10ActionPerformed
-
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jTextField1.setText(log.randomJug(0));
         jTextField1.setEditable(false);
@@ -384,8 +388,10 @@ public class Inicio extends javax.swing.JPanel {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
        getTextos();
        Tablero t= new Tablero(log);
+       setTodoEditable();
        t.setModal(true);
        t.setVisible(true);
+       log.crearBaraja();
     }//GEN-LAST:event_jButton8ActionPerformed
 
 

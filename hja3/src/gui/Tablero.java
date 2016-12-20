@@ -19,7 +19,7 @@ public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
     private Logica log;
     private String dir="/imgs/cards/";
     //private Jugador[] jugs;
-    private ArrayList<Carta> board = new ArrayList<Carta>();
+   // private ArrayList<Carta> board = new ArrayList<Carta>();
     /**
      * Creates new form Tablero
      */

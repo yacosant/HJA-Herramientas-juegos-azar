@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Grupo 1
+ * @author Grupo 01
  *
  */
 public class Jugador {
@@ -32,44 +32,45 @@ public class Jugador {
         this.carta1 = carta1;
         this.carta2 = carta2;
         this.victorias = 0;
-        
-        if(carta1.getValor() > carta2.getValor())
-        	this.kicker = carta1.getValor();
-        else
-        	this.kicker = carta2.getValor();
+
+        if (carta1.getValor() > carta2.getValor()) {
+            this.kicker = carta1.getValor();
+        } else {
+            this.kicker = carta2.getValor();
+        }
     }
 
-	public void setPeso(int peso) {
-		this.peso= peso;
-		
-	}
+    public void setPeso(int peso) {
+        this.peso = peso;
 
-	public void setCartas(ArrayList<Carta> listaCarta) {
-		this.mejorMano = listaCarta;
-		
-	}
-	
-	public int getPeso() {
-		return this.peso;
-	}
+    }
 
-	public ArrayList<Carta> getCartas() {
-		return this.mejorMano;
-	}
-	
-	public double getVictorias(){
-		return this.victorias;
-	}
-	
-	public void setVictorias(double d){
-		this.victorias=d;
-	}
-	
-	public void setKicker(int kiker){
-		this.kicker=kiker;
-	}
+    public void setCartas(ArrayList<Carta> listaCarta) {
+        this.mejorMano = listaCarta;
 
-	public int getKicker(){
-		return kicker;
-	}
+    }
+
+    public int getPeso() {
+        return this.peso;
+    }
+
+    public ArrayList<Carta> getCartas() {
+        return this.mejorMano;
+    }
+
+    public double getVictorias() {
+        return this.victorias;
+    }
+
+    public void setVictorias(double d) {
+        this.victorias = d;
+    }
+
+    public void setKicker(int kiker) {
+        this.kicker = kiker;
+    }
+
+    public int getKicker() {
+        return kicker;
+    }
 }

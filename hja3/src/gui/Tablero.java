@@ -14,12 +14,11 @@ import java.util.ArrayList;
  *
  * @author Grupo 01
  */
-public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
+public class Tablero extends javax.swing.JDialog {
 
     private Logica log;
-    private String dir="/imgs/cards/";
-    //private Jugador[] jugs;
-   // private ArrayList<Carta> board = new ArrayList<Carta>();
+    private String dir = "/imgs/cards/";
+
     /**
      * Creates new form Tablero
      */
@@ -28,83 +27,81 @@ public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
         jButton2.setVisible(false);
         this.setSize(fondo.getWidth(), fondo.getHeight());
     }
-    
-     public Tablero(Logica l) {
+
+    public Tablero(Logica l) {
         initComponents();
-         jButton2.setVisible(false);
-        //this.setSize(fondo.getWidth(), fondo.getHeight());
+        jButton2.setVisible(false);
         this.setSize(810, 650);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("HJA: PRACTICA3 - TABLERO - GRUPO 01");
         log = l;
-        setJugadores();   
+        setJugadores();
         setPorcentajes(log.mirarGanador());
     }
-    
-    private String cartaPng(Carta c){
-        return ""+c.getValor()+c.getColor()+".png";
+
+    private String cartaPng(Carta c) {
+        return "" + c.getValor() + c.getColor() + ".png";
     }
 
-    private void setJugadores(){
+    private void setJugadores() {
         String d;
-        Jugador[] jugs=log.getJugadores();
-        
-        d=cartaPng(jugs[0].getCarta(1));
-        j11.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[0].getCarta(0));
-        j12.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[1].getCarta(1));
-        j21.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[1].getCarta(0));
-        j22.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[2].getCarta(1));
-        j31.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[2].getCarta(0));
-        j32.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[3].getCarta(1));
-        j41.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[3].getCarta(0));
-        j42.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[4].getCarta(1));
-        j51.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[4].getCarta(0));
-        j52.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[5].getCarta(1));
-        j61.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        d=cartaPng(jugs[5].getCarta(0));
-        j62.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        Jugador[] jugs = log.getJugadores();
+
+        d = cartaPng(jugs[0].getCarta(1));
+        j11.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[0].getCarta(0));
+        j12.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[1].getCarta(1));
+        j21.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[1].getCarta(0));
+        j22.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[2].getCarta(1));
+        j31.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[2].getCarta(0));
+        j32.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[3].getCarta(1));
+        j41.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[3].getCarta(0));
+        j42.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[4].getCarta(1));
+        j51.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[4].getCarta(0));
+        j52.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[5].getCarta(1));
+        j61.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        d = cartaPng(jugs[5].getCarta(0));
+        j62.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
     }
-    
-    private void setPorcentajes(double[] por){
-        j1.setText(""+por[0]+" %");
-        j2.setText(""+por[1]+" %");
-        j3.setText(""+por[2]+" %");
-        j4.setText(""+por[3]+" %");
-        j5.setText(""+por[4]+" %");
-        j6.setText(""+por[5]+" %");
+
+    private void setPorcentajes(double[] por) {
+        j1.setText("" + por[0] + " %");
+        j2.setText("" + por[1] + " %");
+        j3.setText("" + por[2] + " %");
+        j4.setText("" + por[3] + " %");
+        j5.setText("" + por[4] + " %");
+        j6.setText("" + por[5] + " %");
     }
-    
-    private void setBoard(){
-        ArrayList<Carta> b=log.getBoard();
+
+    private void setBoard() {
+        ArrayList<Carta> b = log.getBoard();
         String d;
-        if(log.getEstado()=="Flop"){
-            d=cartaPng(b.get(0));
-            b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-            d=cartaPng(b.get(1));
-            b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-            d=cartaPng(b.get(2));
-            b3.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        }
-        else if(log.getEstado()=="Turn"){
-            d=cartaPng(b.get(3));
-            b4.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
-        }
-        else {
-            d=cartaPng(b.get(4));
-            b5.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir+d)));
+        if (log.getEstado() == "Flop") {
+            d = cartaPng(b.get(0));
+            b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+            d = cartaPng(b.get(1));
+            b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+            d = cartaPng(b.get(2));
+            b3.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        } else if (log.getEstado() == "Turn") {
+            d = cartaPng(b.get(3));
+            b4.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
+        } else {
+            d = cartaPng(b.get(4));
+            b5.setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d)));
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -308,16 +305,16 @@ public class Tablero  extends javax.swing.JDialog{//extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String s=log.getEstado();
-        setBoard(); 
+        String s = log.getEstado();
+        setBoard();
         setPorcentajes(log.mirarGanador());
         fase.setText(s);
-        s=log.getEstado();
-        
-       if (s=="Fin"){
-           jButton1.setVisible(false);
-           jButton2.setVisible(true);
-       }
+        s = log.getEstado();
+
+        if (s == "Fin") {
+            jButton1.setVisible(false);
+            jButton2.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

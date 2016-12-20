@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Grupo 1
+ * @author Grupo 01
  *
  */
 public class Combo {
@@ -33,30 +33,30 @@ public class Combo {
         this.victorias = 0;
     }
 
-	public void setPeso(int peso) {
-		this.peso= peso;
-		
-	}
+    public void setPeso(int peso) {
+        this.peso = peso;
 
-	public void setCartas(ArrayList<Carta> listaCarta) {
-		this.mejorMano = listaCarta;
-		
-	}
+    }
 
-	public int getPeso() {
-		return this.peso;
-	}
+    public void setCartas(ArrayList<Carta> listaCarta) {
+        this.mejorMano = listaCarta;
 
-	public ArrayList<Carta> getCartas() {
-		return this.mejorMano;
-	}
-	
-	public double getVictorias(){
-		return this.victorias;
-	}
-	
-	public void setVictorias(double d){
-		this.victorias=d;
-	}
+    }
+
+    public int getPeso() {
+        return this.peso;
+    }
+
+    public ArrayList<Carta> getCartas() {
+        return this.mejorMano;
+    }
+
+    public double getVictorias() {
+        return this.victorias;
+    }
+
+    public void setVictorias(double d) {
+        this.victorias = d;
+    }
 
 }

@@ -21,15 +21,15 @@ public class Inicio extends javax.swing.JPanel {
    
     public Inicio() {
         initComponents();
-        j= new JLabel[]{j1,j2,j3,j4,j5,j6};
-        r= new JCheckBox[]{r1,r2,r3,r4,r5,r6};
+        j= new JLabel[]{j1,j2,j3,j4};
+        r= new JCheckBox[]{r1,r2,r3,r4};
     }
     
     public Inicio(Logica l){
         logica=l;
         initComponents();
-        j= new JLabel[]{j1,j2,j3,j4,j5,j6};
-        r= new JCheckBox[]{r1,r2,r3,r4,r5,r6};
+        j= new JLabel[]{j1,j2,j3,j4};
+        r= new JCheckBox[]{r1,r2,r3,r4};
     }
 
     /**
@@ -48,19 +48,13 @@ public class Inicio extends javax.swing.JPanel {
         j2 = new javax.swing.JLabel();
         j3 = new javax.swing.JLabel();
         j4 = new javax.swing.JLabel();
-        j5 = new javax.swing.JLabel();
-        j6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jButton8 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        r6 = new javax.swing.JCheckBox();
         r1 = new javax.swing.JCheckBox();
         r2 = new javax.swing.JCheckBox();
         r3 = new javax.swing.JCheckBox();
         r4 = new javax.swing.JCheckBox();
-        r5 = new javax.swing.JCheckBox();
         jSeparator5 = new javax.swing.JSeparator();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,31 +66,17 @@ public class Inicio extends javax.swing.JPanel {
         add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, 200, -1));
 
         j1.setText("Jugador 1");
-        add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
+        add(j1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 20));
 
         j2.setText("Jugador 2");
-        add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
+        add(j2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
 
         j3.setText("Jugador 3");
-        j3.setEnabled(false);
-        add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, 20));
+        add(j3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
 
         j4.setText("Jugador 4");
-        j4.setEnabled(false);
-        add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 20));
-
-        j5.setText("Jugador 5");
-        j5.setEnabled(false);
-        add(j5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, 20));
-
-        j6.setText("Jugador 6");
-        j6.setEnabled(false);
-        add(j6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, 20));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setText("Numero de Jugadores");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, -1, -1));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 200, -1));
+        add(j4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, 20));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 200, -1));
 
         jButton8.setBackground(new java.awt.Color(0, 204, 51));
         jButton8.setText("Jugar");
@@ -105,7 +85,7 @@ public class Inicio extends javax.swing.JPanel {
                 jButton8ActionPerformed(evt);
             }
         });
-        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 80, 20));
+        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 80, 20));
 
         jButton10.setBackground(new java.awt.Color(255, 51, 51));
         jButton10.setText("Reset");
@@ -114,68 +94,38 @@ public class Inicio extends javax.swing.JPanel {
                 jButton10ActionPerformed(evt);
             }
         });
-        add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 80, 20));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
-
-        r6.setText("Jugador Automatico");
-        r6.setEnabled(false);
-        r6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                r6ActionPerformed(evt);
-            }
-        });
-        add(r6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, 20));
+        add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 80, 20));
 
         r1.setText("Jugador Automatico");
-        add(r1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, 20));
+        add(r1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, 20));
 
         r2.setText("Jugador Automatico");
-        add(r2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, 20));
+        add(r2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, 20));
 
         r3.setText("Jugador Automatico");
-        r3.setEnabled(false);
-        add(r3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 20));
+        add(r3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, 20));
 
         r4.setText("Jugador Automatico");
-        r4.setEnabled(false);
-        add(r4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, 20));
-
-        r5.setText("Jugador Automatico");
-        r5.setEnabled(false);
-        add(r5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, 20));
-        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 200, -1));
+        add(r4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 20));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
   
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        jComboBox1.setSelectedIndex(0);
+      
     }//GEN-LAST:event_jButton10ActionPerformed
     
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        String op = (String)jComboBox1.getSelectedItem();
-        int max = Integer.parseInt(op);
-        for(int i=0; i<max; i++){
-            if(r[i].isSelected()) logica.addJugador();
-            else logica.addJugadorAutomatico();
+       
+        for(int i=0; i<4; i++){
+            if(r[i].isSelected()){
+               logica.addJugadorAutomatico();
+               logica.marcarBot(i);
+            }
+            else logica.addJugador();
         }
         
     }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void r6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_r6ActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String op = (String)jComboBox1.getSelectedItem();
-        enable(Integer.parseInt(op));
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void enable(int num){
         int i;
@@ -195,13 +145,9 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JLabel j2;
     private javax.swing.JLabel j3;
     private javax.swing.JLabel j4;
-    private javax.swing.JLabel j5;
-    private javax.swing.JLabel j6;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
@@ -210,7 +156,5 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JCheckBox r2;
     private javax.swing.JCheckBox r3;
     private javax.swing.JCheckBox r4;
-    private javax.swing.JCheckBox r5;
-    private javax.swing.JCheckBox r6;
     // End of variables declaration//GEN-END:variables
 }

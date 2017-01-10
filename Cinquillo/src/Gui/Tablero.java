@@ -5,18 +5,36 @@
  */
 package Gui;
 
+import Logica.Carta;
+import Logica.Jugador;
+import Logica.Logica;
+import java.util.ArrayList;
+import javax.swing.JButton;
+
 /**
  *
  * @author Grupo 01
  */
 public class Tablero extends javax.swing.JDialog {
 
+    private JButton cartas[];
+    private Logica logica;
+    private String dir = "/imgs/baraja/";
+    private JButton j1[];
+    private JButton j2[];
+    private JButton j3[];
+    private JButton j4[];
     /**
      * Creates new form Tablero
      */
     public Tablero(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cartas= new JButton[]{j10,j11,j12,j13,j14,j15,j16,j17,j18,j19,j20,j21,j22,j23,j24,j25,j26,j27,j28,j29,j30,j31,j32,j33,j34,j35,j36,j37,j38,j39,j40,j41,j42,j43,j44,j45,j46,j47,j48,j49};
+      /*  j1= new JButton[]{j10,j11,j12,j13,j14,j15,j16,j17,j18,j19};
+        j2= new JButton[]{j20,j21,j22,j23,j24,j25,j26,j27,j28,j29};
+        j3= new JButton[]{j30,j31,j32,j33,j34,j35,j36,j37,j38,j39};
+        j4= new JButton[]{j40,j41,j42,j43,j44,j45,j46,j47,j48,j49};*/
     }
     
     private void ocultarTab(){
@@ -63,8 +81,25 @@ public class Tablero extends javax.swing.JDialog {
         t47.setVisible(false);
         t48.setVisible(false);
         t49.setVisible(false);
-        
     }
+    
+    private void pintarCartas(){
+        Jugador ju;
+        String d="";
+        ArrayList<Carta> c;
+        for(int i=0; i<4;i++){
+            if(!logica.esBot(i)){
+               ju= logica.getJugador(i);
+               c = ju.getCartas();
+               for(int j=0; j<10;j++){
+                   d= "" +c.get(i).getValor() + c.get(i).getColor();
+                   cartas[j+(10*i)].setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d + ".png")));
+               }
+            }
+        }     
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,62 +109,26 @@ public class Tablero extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel56 = new javax.swing.JLabel();
-        jLabel57 = new javax.swing.JLabel();
-        jLabel58 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
-        jLabel60 = new javax.swing.JLabel();
-        jLabel63 = new javax.swing.JLabel();
-        jLabel64 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        jLabel65 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
+        j15 = new javax.swing.JButton();
+        j16 = new javax.swing.JButton();
+        j17 = new javax.swing.JButton();
+        j18 = new javax.swing.JButton();
+        j19 = new javax.swing.JButton();
+        j10 = new javax.swing.JButton();
+        j11 = new javax.swing.JButton();
+        j12 = new javax.swing.JButton();
+        j13 = new javax.swing.JButton();
+        j14 = new javax.swing.JButton();
+        j20 = new javax.swing.JButton();
+        j21 = new javax.swing.JButton();
+        j22 = new javax.swing.JButton();
+        j23 = new javax.swing.JButton();
+        j24 = new javax.swing.JButton();
+        j25 = new javax.swing.JButton();
+        j26 = new javax.swing.JButton();
+        j27 = new javax.swing.JButton();
+        j28 = new javax.swing.JButton();
+        j29 = new javax.swing.JButton();
         separador = new javax.swing.JLabel();
         t10 = new javax.swing.JLabel();
         t11 = new javax.swing.JLabel();
@@ -171,235 +170,231 @@ public class Tablero extends javax.swing.JDialog {
         t47 = new javax.swing.JLabel();
         t48 = new javax.swing.JLabel();
         t49 = new javax.swing.JLabel();
+        j30 = new javax.swing.JButton();
+        j31 = new javax.swing.JButton();
+        j32 = new javax.swing.JButton();
+        j33 = new javax.swing.JButton();
+        j34 = new javax.swing.JButton();
+        j35 = new javax.swing.JButton();
+        j36 = new javax.swing.JButton();
+        j37 = new javax.swing.JButton();
+        j38 = new javax.swing.JButton();
+        j39 = new javax.swing.JButton();
+        j40 = new javax.swing.JButton();
+        j41 = new javax.swing.JButton();
+        j42 = new javax.swing.JButton();
+        j43 = new javax.swing.JButton();
+        j44 = new javax.swing.JButton();
+        j45 = new javax.swing.JButton();
+        j46 = new javax.swing.JButton();
+        j47 = new javax.swing.JButton();
+        j48 = new javax.swing.JButton();
+        j49 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(410, 40, 70, 100);
+        j15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j15.setBorderPainted(false);
+        j15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j15ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j15);
+        j15.setBounds(60, 30, 60, 100);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(200, 40, 70, 100);
+        j16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j16.setBorderPainted(false);
+        j16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j16ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j16);
+        j16.setBounds(130, 30, 60, 100);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(270, 40, 70, 100);
+        j17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j17.setBorderPainted(false);
+        j17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j17ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j17);
+        j17.setBounds(200, 30, 60, 100);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(130, 40, 70, 100);
+        j18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j18.setBorderPainted(false);
+        j18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j18ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j18);
+        j18.setBounds(270, 30, 60, 100);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(340, 40, 70, 100);
+        j19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j19.setBorderPainted(false);
+        j19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j19ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j19);
+        j19.setBounds(340, 30, 60, 100);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(390, 10, 70, 100);
+        j10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j10.setBorderPainted(false);
+        j10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j10);
+        j10.setBounds(80, 10, 60, 100);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(180, 10, 70, 100);
+        j11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j11.setBorderPainted(false);
+        j11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j11ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j11);
+        j11.setBounds(150, 10, 60, 100);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(250, 10, 70, 100);
+        j12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j12.setBorderPainted(false);
+        j12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j12ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j12);
+        j12.setBounds(220, 10, 60, 100);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(110, 10, 70, 100);
+        j13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j13.setBorderPainted(false);
+        j13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j13ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j13);
+        j13.setBounds(290, 10, 60, 100);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(320, 10, 70, 100);
+        j14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j14.setBorderPainted(false);
+        j14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j14ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j14);
+        j14.setBounds(360, 10, 60, 100);
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(910, 40, 70, 100);
+        j20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j20.setBorderPainted(false);
+        j20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j20ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j20);
+        j20.setBounds(640, 30, 60, 100);
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(700, 40, 70, 100);
+        j21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j21.setBorderPainted(false);
+        j21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j21ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j21);
+        j21.setBounds(710, 30, 60, 100);
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(770, 40, 70, 100);
+        j22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j22.setBorderPainted(false);
+        j22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j22ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j22);
+        j22.setBounds(780, 30, 60, 100);
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(630, 40, 70, 100);
+        j23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j23.setBorderPainted(false);
+        j23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j23ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j23);
+        j23.setBounds(850, 30, 60, 100);
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel15);
-        jLabel15.setBounds(840, 40, 70, 100);
+        j24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j24.setBorderPainted(false);
+        j24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j24ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j24);
+        j24.setBounds(920, 30, 60, 100);
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel16);
-        jLabel16.setBounds(890, 10, 70, 100);
+        j25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j25.setBorderPainted(false);
+        j25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j25ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j25);
+        j25.setBounds(660, 10, 60, 100);
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(680, 10, 70, 100);
+        j26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j26.setBorderPainted(false);
+        j26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j26ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j26);
+        j26.setBounds(730, 10, 60, 100);
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel18);
-        jLabel18.setBounds(750, 10, 70, 100);
+        j27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j27.setBorderPainted(false);
+        j27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j27ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j27);
+        j27.setBounds(800, 10, 60, 100);
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(610, 10, 70, 100);
+        j28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j28.setBorderPainted(false);
+        j28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j28ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j28);
+        j28.setBounds(870, 10, 60, 100);
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel20);
-        jLabel20.setBounds(820, 10, 70, 100);
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel21);
-        jLabel21.setBounds(950, 630, 70, 100);
-
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel22);
-        jLabel22.setBounds(740, 630, 70, 100);
-
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel23);
-        jLabel23.setBounds(810, 630, 70, 100);
-
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel24);
-        jLabel24.setBounds(670, 630, 70, 100);
-
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel25);
-        jLabel25.setBounds(880, 630, 70, 100);
-
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel26);
-        jLabel26.setBounds(930, 600, 70, 100);
-
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel27);
-        jLabel27.setBounds(720, 600, 70, 100);
-
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel28);
-        jLabel28.setBounds(790, 600, 70, 100);
-
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel29);
-        jLabel29.setBounds(650, 600, 70, 100);
-
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel30);
-        jLabel30.setBounds(860, 600, 70, 100);
-
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel31);
-        jLabel31.setBounds(310, 630, 70, 100);
-
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel32);
-        jLabel32.setBounds(100, 630, 70, 100);
-
-        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel33);
-        jLabel33.setBounds(170, 630, 70, 100);
-
-        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel34);
-        jLabel34.setBounds(30, 630, 70, 100);
-
-        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel35);
-        jLabel35.setBounds(240, 630, 70, 100);
-
-        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel36);
-        jLabel36.setBounds(290, 600, 70, 100);
-
-        jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel37);
-        jLabel37.setBounds(80, 600, 70, 100);
-
-        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel38);
-        jLabel38.setBounds(150, 600, 70, 100);
-
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel39);
-        jLabel39.setBounds(10, 600, 70, 100);
-
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel40);
-        jLabel40.setBounds(220, 600, 70, 100);
-
-        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel41);
-        jLabel41.setBounds(960, 370, 70, 100);
-
-        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel52);
-        jLabel52.setBounds(890, 240, 70, 100);
-
-        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel53);
-        jLabel53.setBounds(960, 240, 70, 100);
-
-        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel55);
-        jLabel55.setBounds(890, 370, 70, 100);
-
-        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel54);
-        jLabel54.setBounds(870, 340, 70, 100);
-
-        jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel56);
-        jLabel56.setBounds(940, 340, 70, 100);
-
-        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel57);
-        jLabel57.setBounds(870, 210, 70, 100);
-
-        jLabel58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel58);
-        jLabel58.setBounds(940, 210, 70, 100);
-
-        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel59);
-        jLabel59.setBounds(10, 200, 70, 100);
-
-        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel60);
-        jLabel60.setBounds(80, 200, 70, 100);
-
-        jLabel63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel63);
-        jLabel63.setBounds(10, 330, 70, 100);
-
-        jLabel64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel64);
-        jLabel64.setBounds(80, 330, 70, 100);
-
-        jLabel61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel61);
-        jLabel61.setBounds(30, 230, 70, 100);
-
-        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel62);
-        jLabel62.setBounds(100, 230, 70, 100);
-
-        jLabel65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel65);
-        jLabel65.setBounds(30, 360, 70, 100);
-
-        jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
-        getContentPane().add(jLabel66);
-        jLabel66.setBounds(100, 360, 70, 100);
+        j29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j29.setBorderPainted(false);
+        j29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j29ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j29);
+        j29.setBounds(940, 10, 60, 100);
         getContentPane().add(separador);
         separador.setBounds(10, 10, 0, 0);
 
@@ -563,6 +558,206 @@ public class Tablero extends javax.swing.JDialog {
         getContentPane().add(t49);
         t49.setBounds(720, 490, 70, 100);
 
+        j30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j30.setBorderPainted(false);
+        j30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j30ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j30);
+        j30.setBounds(640, 630, 60, 100);
+
+        j31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j31.setBorderPainted(false);
+        j31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j31ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j31);
+        j31.setBounds(710, 630, 60, 100);
+
+        j32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j32.setBorderPainted(false);
+        j32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j32ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j32);
+        j32.setBounds(780, 630, 60, 100);
+
+        j33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j33.setBorderPainted(false);
+        j33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j33ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j33);
+        j33.setBounds(850, 630, 60, 100);
+
+        j34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j34.setBorderPainted(false);
+        j34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j34ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j34);
+        j34.setBounds(920, 630, 60, 100);
+
+        j35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j35.setBorderPainted(false);
+        j35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j35ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j35);
+        j35.setBounds(660, 610, 60, 100);
+
+        j36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j36.setBorderPainted(false);
+        j36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j36ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j36);
+        j36.setBounds(730, 610, 60, 100);
+
+        j37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j37.setBorderPainted(false);
+        j37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j37ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j37);
+        j37.setBounds(800, 610, 60, 100);
+
+        j38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j38.setBorderPainted(false);
+        j38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j38ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j38);
+        j38.setBounds(870, 610, 60, 100);
+
+        j39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j39.setBorderPainted(false);
+        j39.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j39ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j39);
+        j39.setBounds(940, 610, 60, 100);
+
+        j40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j40.setBorderPainted(false);
+        j40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j40ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j40);
+        j40.setBounds(20, 630, 60, 100);
+
+        j41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j41.setBorderPainted(false);
+        j41.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j41ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j41);
+        j41.setBounds(90, 630, 60, 100);
+
+        j42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j42.setBorderPainted(false);
+        j42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j42ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j42);
+        j42.setBounds(160, 630, 60, 100);
+
+        j43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j43.setBorderPainted(false);
+        j43.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j43ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j43);
+        j43.setBounds(230, 630, 60, 100);
+
+        j44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j44.setBorderPainted(false);
+        j44.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j44ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j44);
+        j44.setBounds(300, 630, 60, 100);
+
+        j45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j45.setBorderPainted(false);
+        j45.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j45ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j45);
+        j45.setBounds(40, 610, 60, 100);
+
+        j46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j46.setBorderPainted(false);
+        j46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j46ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j46);
+        j46.setBounds(110, 610, 60, 100);
+
+        j47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j47.setBorderPainted(false);
+        j47.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j47ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j47);
+        j47.setBounds(180, 610, 60, 100);
+
+        j48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j48.setBorderPainted(false);
+        j48.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j48ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j48);
+        j48.setBounds(250, 610, 60, 100);
+
+        j49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/baraja/atras.png"))); // NOI18N
+        j49.setBorderPainted(false);
+        j49.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                j49ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(j49);
+        j49.setBounds(320, 610, 60, 100);
+
         fondo.setBackground(new java.awt.Color(0, 0, 0));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/fondo1.png"))); // NOI18N
         getContentPane().add(fondo);
@@ -570,6 +765,166 @@ public class Tablero extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void j11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j11ActionPerformed
+
+    private void j12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j12ActionPerformed
+
+    private void j13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j13ActionPerformed
+
+    private void j14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j14ActionPerformed
+
+    private void j15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j15ActionPerformed
+
+    private void j16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j16ActionPerformed
+
+    private void j17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j17ActionPerformed
+
+    private void j18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j18ActionPerformed
+
+    private void j19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j19ActionPerformed
+
+    private void j10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j10ActionPerformed
+
+    private void j20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j20ActionPerformed
+
+    private void j21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j21ActionPerformed
+
+    private void j22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j22ActionPerformed
+
+    private void j23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j23ActionPerformed
+
+    private void j24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j24ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j24ActionPerformed
+
+    private void j25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j25ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j25ActionPerformed
+
+    private void j26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j26ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j26ActionPerformed
+
+    private void j27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j27ActionPerformed
+
+    private void j28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j28ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j28ActionPerformed
+
+    private void j29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j29ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j29ActionPerformed
+
+    private void j30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j30ActionPerformed
+
+    private void j31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j31ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j31ActionPerformed
+
+    private void j32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j32ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j32ActionPerformed
+
+    private void j33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j33ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j33ActionPerformed
+
+    private void j34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j34ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j34ActionPerformed
+
+    private void j35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j35ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j35ActionPerformed
+
+    private void j36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j36ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j36ActionPerformed
+
+    private void j37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j37ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j37ActionPerformed
+
+    private void j38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j38ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j38ActionPerformed
+
+    private void j39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j39ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j39ActionPerformed
+
+    private void j40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j40ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j40ActionPerformed
+
+    private void j41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j41ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j41ActionPerformed
+
+    private void j42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j42ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j42ActionPerformed
+
+    private void j43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j43ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j43ActionPerformed
+
+    private void j44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j44ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j44ActionPerformed
+
+    private void j45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j45ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j45ActionPerformed
+
+    private void j46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j46ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j46ActionPerformed
+
+    private void j47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j47ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j47ActionPerformed
+
+    private void j48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j48ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j48ActionPerformed
+
+    private void j49ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_j49ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_j49ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -615,62 +970,46 @@ public class Tablero extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton j10;
+    private javax.swing.JButton j11;
+    private javax.swing.JButton j12;
+    private javax.swing.JButton j13;
+    private javax.swing.JButton j14;
+    private javax.swing.JButton j15;
+    private javax.swing.JButton j16;
+    private javax.swing.JButton j17;
+    private javax.swing.JButton j18;
+    private javax.swing.JButton j19;
+    private javax.swing.JButton j20;
+    private javax.swing.JButton j21;
+    private javax.swing.JButton j22;
+    private javax.swing.JButton j23;
+    private javax.swing.JButton j24;
+    private javax.swing.JButton j25;
+    private javax.swing.JButton j26;
+    private javax.swing.JButton j27;
+    private javax.swing.JButton j28;
+    private javax.swing.JButton j29;
+    private javax.swing.JButton j30;
+    private javax.swing.JButton j31;
+    private javax.swing.JButton j32;
+    private javax.swing.JButton j33;
+    private javax.swing.JButton j34;
+    private javax.swing.JButton j35;
+    private javax.swing.JButton j36;
+    private javax.swing.JButton j37;
+    private javax.swing.JButton j38;
+    private javax.swing.JButton j39;
+    private javax.swing.JButton j40;
+    private javax.swing.JButton j41;
+    private javax.swing.JButton j42;
+    private javax.swing.JButton j43;
+    private javax.swing.JButton j44;
+    private javax.swing.JButton j45;
+    private javax.swing.JButton j46;
+    private javax.swing.JButton j47;
+    private javax.swing.JButton j48;
+    private javax.swing.JButton j49;
     private javax.swing.JLabel separador;
     private javax.swing.JLabel t10;
     private javax.swing.JLabel t11;

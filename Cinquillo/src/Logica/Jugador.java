@@ -27,4 +27,8 @@ public abstract class Jugador {
     public void setCartas(ArrayList<Carta> c){
         cartas=(ArrayList<Carta>)c.clone();
     }
+    
+    public ArrayList<Carta> getCartas(){
+        return cartas;
+    }
 }

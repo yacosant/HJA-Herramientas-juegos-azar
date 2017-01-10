@@ -13,29 +13,34 @@ import java.util.Random;
  * @author Grupo 01
  */
 public class Logica {
-    private int numJug;
+    private int jugActual;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Carta> baraja = new ArrayList<Carta>();
-    private ArrayList<Carta> pozo = new ArrayList<Carta>();
+    private boolean hayGanador = false;
     
     
     public Logica(){
         crearBaraja();
+        repartir();
     }
     
-    public void partida(){
-        int cont=0;
-        //saca el que tenga 5 de oros. cont++;
-        
-        while(cont<40){
-            for(int i=0; i<jugadores.size(); i++){
-                
-            }
-        }
-        
+    
+    public int partida(){
+    	
+    	while(!hayGanador){
+
+    		jugadores.get(jugActual).jugar();
+    		hayGanador = ganador();
+
+    		if(!hayGanador)
+    			pasarTurno();
+    	}
+    	
+    	return jugActual;
     }
+  
     public void addJugador(){
-        jugadores.add(new JugadorHumano());
+    	jugadores.add(new JugadorHumano());
     }
     
     public void addJugadorAutomatico(){
@@ -46,26 +51,10 @@ public class Logica {
         jugadores.clear();
     }
 
-    public void setNumJug(int numJug) {
-        this.numJug = numJug;
-    }
-    
-    private int cartasPorJugador(){
-       int num=10;
-        switch(numJug){
-            case 4: num=10; break;
-            case 5: num=8; break;
-            case 6: num=6; break;
-            default: num=10;
-        }
-        return num;
-    }
-    
     private void repartir(){
         ArrayList<Carta> c  = new ArrayList<Carta>();
-        int num=cartasPorJugador();
         for(int i=0; i<jugadores.size();i++){
-            c=random(num);
+            c=random(10);
             jugadores.get(i).setCartas(c);
         }
     }
@@ -102,4 +91,42 @@ public class Logica {
             }
         }
     }
+    
+    private int encontrarJugInicial(){
+    	boolean inicio = false;
+    	int i = 0, j;
+    	carta c;
+    	
+    	while(!inicio && i < jugadores.size()){
+    		j = 0;
+    		while(j<jugadores.get(i).getCartas().size()){
+    			c=jugadores.get(i).getCartas().get(j)
+    			if(c.getValor() == 5 && c.getColor() == 'o'){
+    				inicio=true;
+    			}
+    			j++;
+    		}
+    		i++;
+    		
+    	}
+    	jugActual = i-1;
+    	
+    	return i-1;
+    }
+    
+    private void pasarTurno(){
+    	switch(jugActual){
+
+    	case 0 : jugActual =1; break;
+    	case 1 : jugActual =2; break;
+    	case 2 : jugActual =3; break;
+    	default : jugActual =0;
+
+    	}
+    }
+    
+    private boolean ganador(){
+    	return jugadores.get(JugActual).getCartas().size() == 0;
+    }
+
 }

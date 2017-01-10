@@ -24,11 +24,11 @@ public abstract class Jugador {
     }
     public abstract String getModo();
     
-    public void setCartas(ArrayList<Carta> c){
-        cartas=(ArrayList<Carta>)c.clone();
+    public ArrayList<Carta> getCartas(){
+        return cartas:
     }
     
-    public ArrayList<Carta> getCartas(){
-        return cartas;
+    public void setCartas(ArrayList<Carta> c){
+        cartas=(ArrayList<Carta>)c.clone();
     }
 }

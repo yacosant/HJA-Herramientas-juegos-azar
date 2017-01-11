@@ -2,6 +2,7 @@
 package Gui;
 
 import Logica.Logica;
+
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
@@ -112,7 +113,10 @@ public class Inicio extends javax.swing.JPanel {
 
   
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-      
+    	r1.setSelected(false);
+        r2.setSelected(false);
+        r3.setSelected(false);
+        r4.setSelected(false);
     }//GEN-LAST:event_jButton10ActionPerformed
     
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -125,6 +129,7 @@ public class Inicio extends javax.swing.JPanel {
             else logica.addJugador();
         }
         
+        Tablero t = new Tablero(null, true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void enable(int num){

@@ -95,12 +95,12 @@ public class Logica {
     private int encontrarJugInicial(){
     	boolean inicio = false;
     	int i = 0, j;
-    	carta c;
+    	Carta c;
     	
     	while(!inicio && i < jugadores.size()){
     		j = 0;
     		while(j<jugadores.get(i).getCartas().size()){
-    			c=jugadores.get(i).getCartas().get(j)
+    			c=jugadores.get(i).getCartas().get(j);
     			if(c.getValor() == 5 && c.getColor() == 'o'){
     				inicio=true;
     			}
@@ -126,7 +126,25 @@ public class Logica {
     }
     
     private boolean ganador(){
-    	return jugadores.get(JugActual).getCartas().size() == 0;
+    	return jugadores.get(jugActual).getCartas().size() == 0;
     }
+
+
+	public void marcarBot(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public boolean esBot(int i) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public Jugador getJugador(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -25,7 +25,7 @@ public abstract class Jugador {
     public abstract String getModo();
     
     public ArrayList<Carta> getCartas(){
-        return cartas:
+        return cartas;
     }
     
     public void setCartas(ArrayList<Carta> c){

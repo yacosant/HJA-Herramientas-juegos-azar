@@ -6,6 +6,8 @@
 package cinquillo;
 
 import Gui.Inicio;
+import Logica.Logica;
+
 import javax.swing.JFrame;
 
 /**
@@ -19,7 +21,8 @@ public class Cinquillo {
      */
     public static void main(String[] args) {
        JFrame f = new JFrame("HJA: PRACTICA 3");
-        f.add(new Inicio());
+       Logica l = new Logica();
+        f.add(new Inicio(l));
         f.setVisible(true);
         f.setSize(300, 500);
         f.setResizable(false);

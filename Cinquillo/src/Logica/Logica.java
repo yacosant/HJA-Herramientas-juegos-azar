@@ -17,11 +17,12 @@ public class Logica {
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Carta> baraja = new ArrayList<Carta>();
     private boolean hayGanador = false;
+    private boolean bots[] =  {false,false,false,false};
     
     
     public Logica(){
         crearBaraja();
-        repartir();
+        //repartir();
     }
     
     
@@ -51,7 +52,7 @@ public class Logica {
         jugadores.clear();
     }
 
-    private void repartir(){
+    public void repartir(){
         ArrayList<Carta> c  = new ArrayList<Carta>();
         for(int i=0; i<jugadores.size();i++){
             c=random(10);
@@ -131,20 +132,17 @@ public class Logica {
 
 
 	public void marcarBot(int i) {
-		// TODO Auto-generated method stub
-		
+            bots[i]=true;
 	}
 
 
 	public boolean esBot(int i) {
-		// TODO Auto-generated method stub
-		return false;
+            return bots[i];
 	}
 
 
 	public Jugador getJugador(int i) {
-		// TODO Auto-generated method stub
-		return null;
+		return jugadores.get(i);
 	}
 
 }

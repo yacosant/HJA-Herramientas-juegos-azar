@@ -129,7 +129,9 @@ public class Inicio extends javax.swing.JPanel {
             else logica.addJugador();
         }
         
-        Tablero t = new Tablero(null, true);
+        Tablero t = new Tablero(null, true,logica);
+        t.setVisible(true); //invekelater comentado y puesto visible auqi
+        
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void enable(int num){

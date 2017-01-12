@@ -79,7 +79,9 @@ public class Logica {
         
         baraja.clear();
         for (int i = 0; i < 4; i++) {
-            for (int j = 1; j <= 13; j++) {
+            for (int j = 1; j < 13; j++) {
+                if(j==8) j=10;
+                
                 if (i == 0) {
                     baraja.add(new Carta(j, 'o'));
                 } else if (i == 1) {
@@ -91,7 +93,7 @@ public class Logica {
                 }
             }
         }
-    }
+    } 
     
     private int encontrarJugInicial(){
     	boolean inicio = false;

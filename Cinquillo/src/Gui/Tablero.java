@@ -12,6 +12,7 @@ import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -29,7 +30,7 @@ public class Tablero extends javax.swing.JDialog {
 	/**
 	 * Creates new form Tablero
 	 */
-	public Tablero(java.awt.Frame parent, boolean modal, Logica l) {
+	public Tablero(java.awt.Frame parent, boolean modal, Logica l) throws InterruptedException {
 		super(parent, modal);
 		initComponents();
 		cartas = new JButton[] { j10, j11, j12, j13, j14, j15, j16, j17, j18, j19, j20, j21, j22, j23, j24, j25, j26,
@@ -38,7 +39,7 @@ public class Tablero extends javax.swing.JDialog {
                 board = new JLabel[] { t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26,
 				t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38, t39, t40, t41, t42, t43, t44, t45, t46, t47,
 				t48, t49 };
-		//ocultarTab();
+		ocultarTab();
         this.setSize(1030, 778);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -94,24 +95,6 @@ public class Tablero extends javax.swing.JDialog {
 		t48.setVisible(false);
 		t49.setVisible(false);
 	}
-
-	/*private void pintarCartas() {
-		Jugador ju;
-		String d = "";
-		ArrayList<Carta> c;
-		for (int i = 0; i < 4; i++) {
-			if (!logica.esBot(i)) {
-				ju = logica.getJugador(i);
-				c = ju.getCartas();
-				for (int j = 0; j < 10; j++) {
-					d = "" + c.get(i).getValor() + c.get(i).getColor();
-					cartas[j + (10 * i)].setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + d + ".png")));
-				}
-			}
-		}
-	}
-        */
-
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -630,26 +613,32 @@ public class Tablero extends javax.swing.JDialog {
         ActionListener ac;
         String valor="";
         ArrayList<Carta> c;
+        c = logica.getJugador(1).getCartas();
+        valor = ""+c.get(5).getValor();
+                valor += c.get(5).getColor();
         
         for (int i = 0; i <4; i++) {
+            if(!logica.esBot(i)){
             c = logica.getJugador(i).getCartas();
             for (int j = 0; j < 10; j++) {
                 valor = ""+c.get(j).getValor();
                 valor += c.get(j).getColor();
                 
+                
                 cartas[j + (10 * i)].setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + valor+ ".png")));
-		
-                cartas[i*10 + j].setName(valor); 		
+                
+                cartas[i*10 + j].setName(valor); 
+          
                 ac = new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                        
-                        javax.swing.JLabel label = (javax.swing.JLabel) e.getSource();
+                        javax.swing.JButton label = (javax.swing.JButton) e.getSource();
                         String tecla = label.getName();
                         int pos;
                         if(pulsado(tecla)){
                            label.setVisible(false);
                            pos = getPosBoard(tecla);
-                           cartas[pos].setVisible(true);
+                           board[pos-1].setVisible(true);
                         }
                     }
 
@@ -658,30 +647,35 @@ public class Tablero extends javax.swing.JDialog {
                 cartas[i*10 + j].addActionListener(ac);
             }
         }
+        }
     }
     
     private boolean pulsado(String boton){
-        boolean ok = false;
+        boolean ok = true;
         char c;
         int val;
-        val=  Integer.parseInt (boton.substring(0, boton.length()-2));
-        c=boton.charAt(boton.length()-1);
-       //pasar vcarta a logica        
+        c= boton.substring(boton.length()-1).charAt(0);
+        String v= boton.substring(boton.length()-2,boton.length()-1);
+        val=  Integer.parseInt (v);
+        
+       //pasar vcarta a logica     y si no es valida, ok=false;   
         return ok;
     }
     
     private int getPosBoard(String text){
-        int num,aux=0;
+        int aux=0;
         char c;
-        num = Integer.parseInt (text.substring(0, text.length()-2));
-        c=text.charAt(text.length()-1);
+        int val;
+        c= text.substring(text.length()-1).charAt(0);
+        String v= text.substring(text.length()-2,text.length()-1);
+        val=  Integer.parseInt (v);
         switch(c){
-            case 'c': aux=1; break;
-            case 'b': aux=2; break;
-            case 'o': aux=3; break;
-            case 'e': aux=4; break;
+            case 'c': aux=0; break;
+            case 'b': aux=1; break;
+            case 'o': aux=2; break;
+            case 'e': aux=3; break;
         }
-        return (num+10*aux);
+        return (val+10*aux);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

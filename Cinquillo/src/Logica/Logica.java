@@ -14,6 +14,8 @@ import java.util.Random;
  */
 public class Logica {
     private int jugActual;
+    private int extremoOrosBajo,extremoOrosAlto,extremoBastosBajo,extremoBastosAlto,
+    			extremoCopasBajo,extremoCopasAlto,extremoEspadasBajo,extremoEspadasAlto;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Carta> baraja = new ArrayList<Carta>();
     private boolean hayGanador = false;
@@ -145,6 +147,78 @@ public class Logica {
 
 	public Jugador getJugador(int i) {
 		return jugadores.get(i);
+	}
+	
+	public boolean esPosible(Carta c){
+		boolean posible = false;
+		int valor = c.getValor();
+		char color = c.getColor();
+		
+		if(!esCinco(c)){
+			if(color == 'o')
+				if(valor-1 == extremoOrosAlto){
+					posible = true;
+					extremoOrosAlto++;
+				}else if(valor+1 == extremoOrosBajo){
+					posible = true;
+					extremoOrosBajo--;
+				}
+			else if(color == 'b')
+				if(valor-1 == extremoBastosAlto){
+					posible = true;
+					extremoBastosAlto++;
+				}else if(valor+1 == extremoBastosBajo){
+					posible = true;
+					extremoBastosBajo--;
+				}
+			else if(color == 'e')
+				if(valor-1 == extremoEspadasAlto){
+					posible = true;
+					extremoEspadasAlto++;
+				}else if(valor+1 == extremoEspadasBajo){
+					posible = true;
+					extremoEspadasBajo--;
+				}
+			else
+				if(valor-1 == extremoBastosAlto){
+					posible = true;
+					extremoBastosAlto++;
+				}else if(valor+1 == extremoBastosBajo){
+					posible = true;
+					extremoBastosBajo--;
+				}	
+		}else
+			posible = true;
+		
+		
+		return posible;
+	}
+	
+	private boolean esCinco(Carta c){
+		
+		boolean cinco = false;
+		
+		if(c.getValor() == 5){
+			cinco = true;
+			char col = c.getColor();
+			
+			if(col == 'o'){
+				extremoOrosAlto = 5;
+				extremoOrosBajo = 5;
+			}else if(col == 'b'){
+				extremoBastosAlto = 5;
+				extremoBastosBajo = 5;
+			}else if(col == 'e'){
+				extremoEspadasAlto = 5;
+				extremoOrosBajo = 5;
+			}else{
+				extremoCopasAlto = 5;
+				extremoCopasBajo = 5;
+			}
+		}
+		
+		return cinco;
+		
 	}
 
 }

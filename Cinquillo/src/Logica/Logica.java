@@ -221,4 +221,28 @@ public class Logica {
 		
 	}
 
+    
+    private ArrayList<Integer> ContarCuantasPaloJug(int jugador){
+    	  ArrayList<Integer> contadorFinal = new ArrayList<Integer>();
+    	  ArrayList<Carta> cartas = jugadores.get(jugActual).getCartas();
+    	  int cont = 0, contadorOro = 0, contadorBastos= 0, contadorEspadas = 0, contadorCopas = 0;
+    	  while (cartas.size() > cont){
+    	   if (cartas.get(cont).getColor() == 'o')
+    	    contadorOro++;
+    	   if (cartas.get(cont).getColor() == 'b')
+    	    contadorBastos++;
+    	   if (cartas.get(cont).getColor() == 'c')
+    	    contadorCopas++;
+    	   if (cartas.get(cont).getColor() == 'e')
+    	    contadorEspadas++;
+    	   cont++;
+    	  }
+    	  
+    	  contadorFinal.add(contadorOro);
+    	  contadorFinal.add(contadorBastos);
+    	  contadorFinal.add(contadorCopas);
+    	  contadorFinal.add(contadorEspadas);
+    	  
+    	  return contadorFinal;
+    }
 }

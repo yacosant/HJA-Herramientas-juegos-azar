@@ -180,12 +180,12 @@ public class Logica {
 					extremoEspadasBajo--;
 				}
 			else
-				if(valor-1 == extremoBastosAlto){
+				if(valor-1 == extremoCopasAlto){
 					posible = true;
-					extremoBastosAlto++;
-				}else if(valor+1 == extremoBastosBajo){
+					extremoCopasAlto++;
+				}else if(valor+1 == extremoCopasBajo){
 					posible = true;
-					extremoBastosBajo--;
+					extremoCopasBajo--;
 				}	
 		}else
 			posible = true;

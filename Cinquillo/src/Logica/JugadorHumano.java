@@ -13,17 +13,21 @@ public class JugadorHumano extends Jugador{
 
     @Override
     public Carta jugar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try {
+        Thread.sleep (10000);
+        } catch (Exception e) {
+        // Mensaje en caso de que falle
+        }
+        return null;
     }
 
     @Override
     public void pasar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getModo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "Humano";
     }
 
     

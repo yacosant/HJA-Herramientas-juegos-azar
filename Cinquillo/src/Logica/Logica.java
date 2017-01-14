@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class Logica {
     private int jugActual;
-    private int extremoOrosBajo,extremoOrosAlto,extremoBastosBajo,extremoBastosAlto,
-    			extremoCopasBajo,extremoCopasAlto,extremoEspadasBajo,extremoEspadasAlto;
+    private int extremoOrosBajo=-10,extremoOrosAlto=-10,extremoBastosBajo=-10,extremoBastosAlto=-10,
+    			extremoCopasBajo=-10,extremoCopasAlto=-10,extremoEspadasBajo=-10,extremoEspadasAlto=-10;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Carta> baraja = new ArrayList<Carta>();
     private boolean hayGanador = false;
@@ -29,14 +29,16 @@ public class Logica {
     
     
     public int partida(){
-    	
+    	hayGanador = ganador();
     	while(!hayGanador){
-
-    		jugadores.get(jugActual).jugar();
-    		hayGanador = ganador();
-
-    		if(!hayGanador)
-    			pasarTurno();
+                if(jugadores.get(jugActual).getModo()== "Humano"){
+                    return jugActual;
+                }
+                else{
+                    jugadores.get(jugActual).jugar();
+                }
+    		
+    		if(!hayGanador) pasarTurno();
     	}
     	
     	return jugActual;
@@ -97,7 +99,7 @@ public class Logica {
         }
     } 
     
-    private int encontrarJugInicial(){
+    public int encontrarJugInicial(){
     	boolean inicio = false;
     	int i = 0, j;
     	Carta c;
@@ -155,41 +157,45 @@ public class Logica {
 		char color = c.getColor();
 		
 		if(!esCinco(c)){
-			if(color == 'o')
+			if(color == 'o'){
 				if(valor-1 == extremoOrosAlto){
 					posible = true;
-					extremoOrosAlto++;
+					extremoOrosAlto=valor;
 				}else if(valor+1 == extremoOrosBajo){
 					posible = true;
-					extremoOrosBajo--;
+					extremoOrosBajo=valor;
 				}
-			else if(color == 'b')
+                        }
+			else if(color == 'b'){
 				if(valor-1 == extremoBastosAlto){
 					posible = true;
-					extremoBastosAlto++;
+					extremoBastosAlto=valor;
 				}else if(valor+1 == extremoBastosBajo){
 					posible = true;
-					extremoBastosBajo--;
+					extremoBastosBajo=valor;
 				}
-			else if(color == 'e')
+                        }
+			else if(color == 'e'){
 				if(valor-1 == extremoEspadasAlto){
 					posible = true;
-					extremoEspadasAlto++;
+					extremoEspadasAlto=valor;
 				}else if(valor+1 == extremoEspadasBajo){
 					posible = true;
-					extremoEspadasBajo--;
+					extremoEspadasBajo=valor;
 				}
-			else
+                        }
+			else if(color == 'c'){
 				if(valor-1 == extremoCopasAlto){
 					posible = true;
-					extremoCopasAlto++;
+					extremoCopasAlto=valor;
 				}else if(valor+1 == extremoCopasBajo){
 					posible = true;
-					extremoCopasBajo--;
-				}	
+					extremoCopasBajo=valor;
+				}
+                        }
+                        else posible=false;
 		}else
 			posible = true;
-		
 		
 		return posible;
 	}

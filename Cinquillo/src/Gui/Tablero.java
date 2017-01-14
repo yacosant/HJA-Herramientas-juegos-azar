@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,7 @@ public class Tablero extends javax.swing.JDialog {
 	private Logica logica;
 	private String dir = "/imgs/baraja/";
 	private JLabel board[];
-
+        private int turno;
 	/**
 	 * Creates new form Tablero
 	 */
@@ -39,7 +40,7 @@ public class Tablero extends javax.swing.JDialog {
                 board = new JLabel[] { t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25, t26,
 				t27, t28, t29, t30, t31, t32, t33, t34, t35, t36, t37, t38, t39, t40, t41, t42, t43, t44, t45, t46, t47,
 				t48, t49 };
-		ocultarTab();
+        ocultarTab();
         this.setSize(1030, 778);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -47,7 +48,10 @@ public class Tablero extends javax.swing.JDialog {
         this.setVisible(true);
         logica=l;
         logica.repartir();
+        turno= logica.encontrarJugInicial()+1;
+        numTurno.setText(Integer.toString(turno));
         inicializarBotones();
+        logica.partida();
 	}
 
 	private void ocultarTab() {
@@ -186,6 +190,8 @@ public class Tablero extends javax.swing.JDialog {
         j47 = new javax.swing.JButton();
         j48 = new javax.swing.JButton();
         j49 = new javax.swing.JButton();
+        lTurno = new javax.swing.JLabel();
+        numTurno = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -554,6 +560,18 @@ public class Tablero extends javax.swing.JDialog {
         getContentPane().add(j49);
         j49.setBounds(320, 610, 60, 100);
 
+        lTurno.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        lTurno.setForeground(new java.awt.Color(255, 255, 255));
+        lTurno.setText("Turno de Jugador:");
+        getContentPane().add(lTurno);
+        lTurno.setBounds(10, 180, 190, 50);
+
+        numTurno.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        numTurno.setForeground(new java.awt.Color(255, 255, 0));
+        numTurno.setText("X");
+        getContentPane().add(numTurno);
+        numTurno.setBounds(200, 194, 50, 20);
+
         fondo.setBackground(new java.awt.Color(0, 0, 0));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/fondo1.png"))); // NOI18N
         getContentPane().add(fondo);
@@ -640,6 +658,9 @@ public class Tablero extends javax.swing.JDialog {
                            pos = getPosBoard(tecla);
                            board[pos-1].setVisible(true);
                         }
+                        else{
+                            JOptionPane.showMessageDialog(null, "No puedes jugar esa carta ahora mismo");
+                        }
                     }
 
                 };
@@ -651,15 +672,12 @@ public class Tablero extends javax.swing.JDialog {
     }
     
     private boolean pulsado(String boton){
-        boolean ok = true;
         char c;
         int val;
         c= boton.substring(boton.length()-1).charAt(0);
         String v= boton.substring(boton.length()-2,boton.length()-1);
         val=  Integer.parseInt (v);
-        
-       //pasar vcarta a logica     y si no es valida, ok=false;   
-        return ok;
+        return logica.esPosible(new Carta(val,c));
     }
     
     private int getPosBoard(String text){
@@ -720,6 +738,8 @@ public class Tablero extends javax.swing.JDialog {
     private javax.swing.JButton j47;
     private javax.swing.JButton j48;
     private javax.swing.JButton j49;
+    private javax.swing.JLabel lTurno;
+    private javax.swing.JLabel numTurno;
     private javax.swing.JLabel separador;
     private javax.swing.JLabel t10;
     private javax.swing.JLabel t11;

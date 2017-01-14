@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Gui.Tablero;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,8 +30,9 @@ public class Logica {
     
     
     public int partida(){
-    	hayGanador = ganador();
+    	encontrarJugInicial();
     	while(!hayGanador){
+            Tablero.actualizaTurno(jugActual+1);
                 if(jugadores.get(jugActual).getModo()== "Humano"){
                     return jugActual;
                 }
@@ -38,6 +40,8 @@ public class Logica {
                     jugadores.get(jugActual).jugar();
                 }
     		
+    		hayGanador = ganador();
+
     		if(!hayGanador) pasarTurno();
     	}
     	
@@ -123,7 +127,6 @@ public class Logica {
     
     private void pasarTurno(){
     	switch(jugActual){
-
     	case 0 : jugActual =1; break;
     	case 1 : jugActual =2; break;
     	case 2 : jugActual =3; break;
@@ -196,7 +199,10 @@ public class Logica {
                         else posible=false;
 		}else
 			posible = true;
-		
+		if(posible){
+                    borrarCarta(c,jugActual);
+                    pasarTurno();
+                }
 		return posible;
 	}
 	
@@ -226,7 +232,18 @@ public class Logica {
 		return cinco;
 		
 	}
-
+    
+    private void borrarCarta(Carta c, int jug){
+        boolean encontrado=false;
+        int i=0;
+        ArrayList<Carta> cartas = jugadores.get(jug).getCartas();
+        
+        while(!encontrado){
+            encontrado = (c.getValor()== cartas.get(i).getValor() && c.getColor()== cartas.get(i).getColor());
+            i++;
+        }
+        cartas.remove(i-1);
+    }
     
     private ArrayList<Integer> ContarCuantasPaloJug(int jugador){
     	  ArrayList<Integer> contadorFinal = new ArrayList<Integer>();

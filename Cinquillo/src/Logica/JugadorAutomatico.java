@@ -12,21 +12,25 @@ package Logica;
  * @author Grupo 01
  */
 public class JugadorAutomatico extends Jugador{
-
+    private Logica log;
+    private HebraJugador h;
     @Override
     public Carta jugar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       h= new HebraJugador(log);
+       return log.getJugador(3).getCartas().get(0);
     }
 
     @Override
     public void pasar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(h!=null){
+			h.interrupt();
+			h=null;
+		} 
     }
 
     @Override
     public String getModo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+       return "Automatico";}
 
     public boolean buenasParaJugar(){
         

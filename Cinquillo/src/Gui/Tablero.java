@@ -6,13 +6,10 @@
 package Gui;
 
 import Logica.Carta;
-import Logica.Jugador;
 import Logica.Logica;
-import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,8 +45,6 @@ public class Tablero extends javax.swing.JDialog {
         this.setVisible(true);
         logica=l;
         logica.repartir();
-        turno= logica.encontrarJugInicial()+1;
-        numTurno.setText(Integer.toString(turno));
         inicializarBotones();
         logica.partida();
 	}
@@ -645,7 +640,7 @@ public class Tablero extends javax.swing.JDialog {
                 
                 cartas[j + (10 * i)].setIcon(new javax.swing.ImageIcon(getClass().getResource(dir + valor+ ".png")));
                 
-                cartas[i*10 + j].setName(valor); 
+                cartas[i*10 + j].setName(valor);
           
                 ac = new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -678,6 +673,7 @@ public class Tablero extends javax.swing.JDialog {
         String v= boton.substring(boton.length()-2,boton.length()-1);
         val=  Integer.parseInt (v);
         return logica.esPosible(new Carta(val,c));
+        //CAMBIAR A STRING CON MENSAJE DE ERROR O OK
     }
     
     private int getPosBoard(String text){
@@ -694,6 +690,10 @@ public class Tablero extends javax.swing.JDialog {
             case 'e': aux=3; break;
         }
         return (val+10*aux);
+    }
+    
+    public static void actualizaTurno(int j){
+        numTurno.setText(Integer.toString(j));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -739,7 +739,7 @@ public class Tablero extends javax.swing.JDialog {
     private javax.swing.JButton j48;
     private javax.swing.JButton j49;
     private javax.swing.JLabel lTurno;
-    private javax.swing.JLabel numTurno;
+    private static javax.swing.JLabel numTurno;
     private javax.swing.JLabel separador;
     private javax.swing.JLabel t10;
     private javax.swing.JLabel t11;

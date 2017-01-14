@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Grupo 01
  */
 public class Logica {
-    private int jugActual;
+    private int jugActual=-1;
     private int extremoOrosBajo=-10,extremoOrosAlto=-10,extremoBastosBajo=-10,extremoBastosAlto=-10,
     			extremoCopasBajo=-10,extremoCopasAlto=-10,extremoEspadasBajo=-10,extremoEspadasAlto=-10;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
@@ -30,24 +30,25 @@ public class Logica {
     
     
     public int partida(){
-    	encontrarJugInicial();
-    	while(!hayGanador){
-            Tablero.actualizaTurno(jugActual+1);
-                if(jugadores.get(jugActual).getModo()== "Humano"){
-                    return jugActual;
-                }
-                else{
+    if(jugActual==-1)    encontrarJugInicial();
+    	if(!hayGanador){
+            Tablero.actualizaTurno(jugActual); 
+            
+                hayGanador = ganador();
+                if(jugadores.get(jugActual).getModo()== "Automatico"){
                     jugadores.get(jugActual).jugar();
-                }
-    		
-    		hayGanador = ganador();
-
-    		if(!hayGanador) pasarTurno();
+                  // if(!hayGanador) 
+                    //pasarTurno();
+                }		
     	}
     	
     	return jugActual;
     }
   
+    public void siguiente(){
+        
+        
+    }    
     public void addJugador(){
     	jugadores.add(new JugadorHumano());
     }
@@ -125,18 +126,22 @@ public class Logica {
     	return i-1;
     }
     
-    private void pasarTurno(){
+    public void pasarTurno(){
     	switch(jugActual){
     	case 0 : jugActual =1; break;
     	case 1 : jugActual =2; break;
     	case 2 : jugActual =3; break;
     	default : jugActual =0;
-
-    	}
+        }
     }
     
     private boolean ganador(){
-    	return jugadores.get(jugActual).getCartas().size() == 0;
+    	hayGanador=jugadores.get(jugActual).getCartas().size() == 0;
+        return hayGanador;
+    }
+    
+    public boolean getGanador(){
+         return hayGanador;
     }
 
 

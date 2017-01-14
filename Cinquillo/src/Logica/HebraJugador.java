@@ -30,7 +30,7 @@ public class HebraJugador extends Thread{
 	    
 			public void run() {
 				//log.movAleatorio();
-                                System.out.println("HOLA JEJE");
+                                System.out.println("HOLA JEJE");//debug
 				}
 			
 			});

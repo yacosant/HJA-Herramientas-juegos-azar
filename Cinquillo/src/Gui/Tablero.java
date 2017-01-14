@@ -6,6 +6,7 @@
 package Gui;
 
 import Logica.Carta;
+import Logica.Jugador;
 import Logica.Logica;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +25,8 @@ public class Tablero extends javax.swing.JDialog {
 	private Logica logica;
 	private String dir = "/imgs/baraja/";
 	private JLabel board[];
-        private int turno;
+        private static int turno;
+        private boolean hayGanador=false;
 	/**
 	 * Creates new form Tablero
 	 */
@@ -45,10 +47,17 @@ public class Tablero extends javax.swing.JDialog {
         this.setVisible(true);
         logica=l;
         logica.repartir();
-        inicializarBotones();
         logica.partida();
+        inicializarBotones();
+       
 	}
 
+        private void partida(){
+            Jugador j;
+            
+            
+        }
+        
 	private void ocultarTab() {
 		t10.setVisible(false);
 		t11.setVisible(false);
@@ -187,6 +196,7 @@ public class Tablero extends javax.swing.JDialog {
         j49 = new javax.swing.JButton();
         lTurno = new javax.swing.JLabel();
         numTurno = new javax.swing.JLabel();
+        botonPasar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -567,6 +577,15 @@ public class Tablero extends javax.swing.JDialog {
         getContentPane().add(numTurno);
         numTurno.setBounds(200, 194, 50, 20);
 
+        botonPasar.setText("Pasar Turno");
+        botonPasar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPasarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonPasar);
+        botonPasar.setBounds(50, 230, 90, 23);
+
         fondo.setBackground(new java.awt.Color(0, 0, 0));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/fondo1.png"))); // NOI18N
         getContentPane().add(fondo);
@@ -574,6 +593,11 @@ public class Tablero extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonPasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPasarActionPerformed
+        //logica.pasarTurno();
+        logica.partida();
+    }//GEN-LAST:event_botonPasarActionPerformed
 
 	/**
 	 * @param args
@@ -649,9 +673,11 @@ public class Tablero extends javax.swing.JDialog {
                         String tecla = label.getName();
                         int pos;
                         if(pulsado(tecla)){
+                           if(logica.getGanador()) terminar();
                            label.setVisible(false);
                            pos = getPosBoard(tecla);
                            board[pos-1].setVisible(true);
+                           logica.partida();
                         }
                         else{
                             JOptionPane.showMessageDialog(null, "No puedes jugar esa carta ahora mismo");
@@ -664,6 +690,10 @@ public class Tablero extends javax.swing.JDialog {
             }
         }
         }
+    }
+    
+    private void terminar(){
+         JOptionPane.showMessageDialog(null, "Partida acabada. El ganador es el jugador "+ turno);
     }
     
     private boolean pulsado(String boton){
@@ -693,10 +723,12 @@ public class Tablero extends javax.swing.JDialog {
     }
     
     public static void actualizaTurno(int j){
-        numTurno.setText(Integer.toString(j));
+        turno=j;
+        numTurno.setText(Integer.toString(j+1));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonPasar;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton j10;
     private javax.swing.JButton j11;

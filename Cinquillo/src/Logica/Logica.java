@@ -39,7 +39,7 @@ public class Logica {
                     jugadores.get(jugActual).jugar();
                   // if(!hayGanador) 
                     //pasarTurno();
-                }		
+                }
     	}
     	
     	return jugActual;
@@ -158,7 +158,7 @@ public class Logica {
 	public Jugador getJugador(int i) {
 		return jugadores.get(i);
 	}
-	
+	/*
 	public boolean esPosible(Carta c){
 		boolean posible = false;
 		int valor = c.getValor();
@@ -209,10 +209,94 @@ public class Logica {
                     pasarTurno();
                 }
 		return posible;
+	}*/
+        
+        public String esPosible(Carta c){
+            String msg=null;
+		boolean posible = false;
+		int valor = c.getValor();
+		char color = c.getColor();
+		
+		if(!esCinco(c)){
+
+				if(color == 'o'){
+
+					if(extremoOrosAlto==7 && valor==10){
+						posible=true;
+						extremoOrosAlto = valor;
+					}
+					
+					else if(valor-1 == extremoOrosAlto){
+						posible = true;
+						extremoOrosAlto=valor;
+					}else if(valor+1 == extremoOrosBajo){
+						posible = true;
+						extremoOrosBajo=valor;
+					}
+				}
+				
+				
+				else if(color == 'b'){
+					
+					if(extremoBastosAlto==7 && valor==10){
+						posible=true;
+						extremoBastosAlto = valor;
+					}
+                                        
+					else if(valor-1 == extremoBastosAlto){
+						posible = true;
+						extremoBastosAlto=valor;
+					}else if(valor+1 == extremoBastosBajo){
+						posible = true;
+						extremoBastosBajo=valor;
+					}
+				}
+				
+				else if(color == 'e'){
+					
+					if(extremoEspadasAlto==7 && valor==10){
+						posible=true;
+						extremoEspadasAlto = valor;
+					}
+					
+                                        else if(valor-1 == extremoEspadasAlto){
+						posible = true;
+						extremoEspadasAlto=valor;
+					}else if(valor+1 == extremoEspadasBajo){
+						posible = true;
+						extremoEspadasBajo=valor;
+					}
+				}
+				else if(color == 'c'){
+					
+					if(extremoCopasAlto==7 && valor==10){
+						posible=true;
+						extremoCopasAlto = valor;
+					}
+					
+					else if(valor-1 == extremoCopasAlto){
+						posible = true;
+						extremoCopasAlto=valor;
+					}else if(valor+1 == extremoCopasBajo){
+						posible = true;
+						extremoCopasBajo=valor;
+					}
+				}
+				else posible=false;
+			
+		}else
+			posible = true;
+
+
+		if(posible){
+			if(!borrarCarta(c,jugActual)) msg="No es tu turno aún.";
+			pasarTurno();
+		}
+                else msg="No puedes jugar esa carta ahora mismo.";
+		return msg;
 	}
 	
 	private boolean esCinco(Carta c){
-		
 		boolean cinco = false;
 		
 		if(c.getValor() == 5){
@@ -227,7 +311,7 @@ public class Logica {
 				extremoBastosBajo = 5;
 			}else if(col == 'e'){
 				extremoEspadasAlto = 5;
-				extremoOrosBajo = 5;
+				extremoEspadasBajo = 5;
 			}else{
 				extremoCopasAlto = 5;
 				extremoCopasBajo = 5;
@@ -238,16 +322,17 @@ public class Logica {
 		
 	}
     
-    private void borrarCarta(Carta c, int jug){
+    private boolean borrarCarta(Carta c, int jug){
         boolean encontrado=false;
         int i=0;
         ArrayList<Carta> cartas = jugadores.get(jug).getCartas();
         
-        while(!encontrado){
+        while(!encontrado && i<cartas.size()){
             encontrado = (c.getValor()== cartas.get(i).getValor() && c.getColor()== cartas.get(i).getColor());
             i++;
         }
-        cartas.remove(i-1);
+        if(encontrado) cartas.remove(i-1);
+        return encontrado;
     }
     
     private ArrayList<Integer> ContarCuantasPaloJug(int jugador){
@@ -273,4 +358,35 @@ public class Logica {
     	  
     	  return contadorFinal;
     }
+    
+     public int extremoA(char c){
+    	int extremo;
+    	
+    	if(c == 'o')
+    		extremo = extremoOrosAlto;
+    	else if(c == 'b')
+    		extremo = extremoBastosAlto;
+    	else if(c == 'e')
+    		extremo = extremoEspadasAlto;
+    	else
+    		extremo = extremoCopasAlto;
+    	
+    	return extremo;
+    }
+    
+    public int extremoB(char c){
+    	int extremo;
+    	
+    	if(c == 'o')
+    		extremo = extremoOrosBajo;
+    	else if(c == 'b')
+    		extremo = extremoBastosBajo;
+    	else if(c == 'e')
+    		extremo = extremoEspadasBajo;
+    	else
+    		extremo = extremoCopasBajo;
+    	
+    	return extremo;
+    }
+    
 }

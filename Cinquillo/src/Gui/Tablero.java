@@ -584,7 +584,7 @@ public class Tablero extends javax.swing.JDialog {
             }
         });
         getContentPane().add(botonPasar);
-        botonPasar.setBounds(50, 230, 90, 23);
+        botonPasar.setBounds(40, 230, 160, 23);
 
         fondo.setBackground(new java.awt.Color(0, 0, 0));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/fondo1.png"))); // NOI18N
@@ -595,7 +595,7 @@ public class Tablero extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonPasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPasarActionPerformed
-        //logica.pasarTurno();
+        logica.pasarTurno();
         logica.partida();
     }//GEN-LAST:event_botonPasarActionPerformed
 
@@ -672,7 +672,8 @@ public class Tablero extends javax.swing.JDialog {
                         javax.swing.JButton label = (javax.swing.JButton) e.getSource();
                         String tecla = label.getName();
                         int pos;
-                        if(pulsado(tecla)){
+                        String msg=pulsado(tecla);
+                        if(msg==null){
                            if(logica.getGanador()) terminar();
                            label.setVisible(false);
                            pos = getPosBoard(tecla);
@@ -680,7 +681,7 @@ public class Tablero extends javax.swing.JDialog {
                            logica.partida();
                         }
                         else{
-                            JOptionPane.showMessageDialog(null, "No puedes jugar esa carta ahora mismo");
+                            JOptionPane.showMessageDialog(null, msg);
                         }
                     }
 
@@ -696,7 +697,7 @@ public class Tablero extends javax.swing.JDialog {
          JOptionPane.showMessageDialog(null, "Partida acabada. El ganador es el jugador "+ turno);
     }
     
-    private boolean pulsado(String boton){
+    private String pulsado(String boton){
         char c;
         int val;
         c= boton.substring(boton.length()-1).charAt(0);
@@ -726,9 +727,12 @@ public class Tablero extends javax.swing.JDialog {
         turno=j;
         numTurno.setText(Integer.toString(j+1));
     }
-
+    public static void bloquearPasar(boolean t){
+        botonPasar.enable(t);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonPasar;
+    private static javax.swing.JButton botonPasar;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton j10;
     private javax.swing.JButton j11;

@@ -27,6 +27,7 @@ public class Tablero extends javax.swing.JDialog {
 	private JLabel board[];
         private static int turno;
         private boolean hayGanador=false;
+        private static int pos;
 	/**
 	 * Creates new form Tablero
 	 */
@@ -730,6 +731,25 @@ public class Tablero extends javax.swing.JDialog {
     public static void bloquearPasar(boolean t){
         botonPasar.enable(t);
     }
+    
+    public static int posBot(Carta carta){
+        int val=carta.getValor();
+        char c=carta.getColor();
+        int aux=0;
+        switch(c){
+            case 'c': aux=0; break;
+            case 'b': aux=1; break;
+            case 'o': aux=2; break;
+            case 'e': aux=3; break;
+        }
+        return (val+10*aux); 
+    }
+    
+    public void jugarBot(Carta carta){
+        int pos= posBot(carta);
+        board[pos-1].setVisible(true);
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton botonPasar;

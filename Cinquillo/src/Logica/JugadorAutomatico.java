@@ -5,6 +5,10 @@
  */
 package Logica;
 
+import Gui.Tablero;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 /**
@@ -14,10 +18,28 @@ package Logica;
 public class JugadorAutomatico extends Jugador{
     private Logica log;
     private HebraJugador h;
-    @Override
+    private int num;
+    
+    
+    public JugadorAutomatico(Logica l, int i){
+        log=l;
+        num=i;
+    }
+    @Override      
     public Carta jugar() {
-       h= new HebraJugador(log);
-       return log.getJugador(3).getCartas().get(0);
+        Carta c;
+        Tablero.bloquearPasar(false);
+        try {
+            //h= new HebraJugador(log);
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(JugadorAutomatico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c=mejorCarta();
+        Tablero.posBot(c);
+        log.borrarCarta(c,num);
+       Tablero.bloquearPasar(true);
+       return c;
     }
 
     @Override

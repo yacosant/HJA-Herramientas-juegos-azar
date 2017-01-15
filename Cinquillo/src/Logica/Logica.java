@@ -30,15 +30,19 @@ public class Logica {
     
     
     public int partida(){
+    boolean bot=true;
     if(jugActual==-1)    encontrarJugInicial();
-    	if(!hayGanador){
+    	if(!hayGanador && bot){
             Tablero.actualizaTurno(jugActual); 
             
                 hayGanador = ganador();
                 if(jugadores.get(jugActual).getModo()== "Automatico"){
                     jugadores.get(jugActual).jugar();
-                  // if(!hayGanador) 
-                    //pasarTurno();
+                   if(!hayGanador) {
+                      pasarTurno(); 
+                     bot=bots[jugActual];
+                   }
+                    
                 }
     	}
     	
@@ -53,8 +57,8 @@ public class Logica {
     	jugadores.add(new JugadorHumano());
     }
     
-    public void addJugadorAutomatico(){
-       jugadores.add(new JugadorAutomatico());
+    public void addJugadorAutomatico(int i){
+       jugadores.add(new JugadorAutomatico(this, i));
     }
     
     public void reset(){
@@ -158,59 +162,7 @@ public class Logica {
 	public Jugador getJugador(int i) {
 		return jugadores.get(i);
 	}
-	/*
-	public boolean esPosible(Carta c){
-		boolean posible = false;
-		int valor = c.getValor();
-		char color = c.getColor();
-		
-		if(!esCinco(c)){
-			if(color == 'o'){
-				if(valor-1 == extremoOrosAlto){
-					posible = true;
-					extremoOrosAlto=valor;
-				}else if(valor+1 == extremoOrosBajo){
-					posible = true;
-					extremoOrosBajo=valor;
-				}
-                        }
-			else if(color == 'b'){
-				if(valor-1 == extremoBastosAlto){
-					posible = true;
-					extremoBastosAlto=valor;
-				}else if(valor+1 == extremoBastosBajo){
-					posible = true;
-					extremoBastosBajo=valor;
-				}
-                        }
-			else if(color == 'e'){
-				if(valor-1 == extremoEspadasAlto){
-					posible = true;
-					extremoEspadasAlto=valor;
-				}else if(valor+1 == extremoEspadasBajo){
-					posible = true;
-					extremoEspadasBajo=valor;
-				}
-                        }
-			else if(color == 'c'){
-				if(valor-1 == extremoCopasAlto){
-					posible = true;
-					extremoCopasAlto=valor;
-				}else if(valor+1 == extremoCopasBajo){
-					posible = true;
-					extremoCopasBajo=valor;
-				}
-                        }
-                        else posible=false;
-		}else
-			posible = true;
-		if(posible){
-                    borrarCarta(c,jugActual);
-                    pasarTurno();
-                }
-		return posible;
-	}*/
-        
+	        
         public String esPosible(Carta c){
             String msg=null;
 		boolean posible = false;
@@ -322,7 +274,7 @@ public class Logica {
 		
 	}
     
-    private boolean borrarCarta(Carta c, int jug){
+    protected boolean borrarCarta(Carta c, int jug){
         boolean encontrado=false;
         int i=0;
         ArrayList<Carta> cartas = jugadores.get(jug).getCartas();

@@ -123,7 +123,7 @@ public class Inicio extends javax.swing.JPanel {
        
         for(int i=0; i<4; i++){
             if(r[i].isSelected()){
-               logica.addJugadorAutomatico();
+               logica.addJugadorAutomatico(i);
                logica.marcarBot(i);
             }
             else logica.addJugador();

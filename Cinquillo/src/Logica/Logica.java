@@ -21,7 +21,7 @@ public class Logica {
     private ArrayList<Carta> baraja = new ArrayList<Carta>();
     private boolean hayGanador = false;
     private boolean bots[] =  {false,false,false,false};
-    
+    private boolean primeraVez=true;
     
     public Logica(){
         crearBaraja();
@@ -30,22 +30,34 @@ public class Logica {
     
     
     public int partida(){
-    boolean bot=true;
-    if(jugActual==-1)    encontrarJugInicial();
-    	if(!hayGanador && bot){
+     boolean bot=false;
+     int aux;
+    if(primeraVez){
+        encontrarJugInicial(); 
+        bot=bots[jugActual];
+    }else if(!bots[jugActual]){
+    if(jugActual==0)aux=3;
+    else aux=jugActual-1;
+    bot=bots[aux];
+    }
+    else  bot=bots[jugActual];
+     
+    	if(!hayGanador ){//&& bot){
             Tablero.actualizaTurno(jugActual); 
             
                 hayGanador = ganador();
-                if(jugadores.get(jugActual).getModo()== "Automatico"){
+                if(bot){//jugadores.get(jugActual).getModo()== "Automatico"){
                     jugadores.get(jugActual).jugar();
-                   if(!hayGanador) {
-                      pasarTurno(); 
-                     bot=bots[jugActual];
+                   if(!primeraVez || bot){
+                    if(!hayGanador) {
+                    pasarTurno(); 
+                      Tablero.actualizaTurno(jugActual); 
+                    }
                    }
-                    
+                   else primeraVez=false;
                 }
     	}
-    	
+    	if(primeraVez) primeraVez=false;
     	return jugActual;
     }
   
@@ -286,7 +298,7 @@ public class Logica {
         if(encontrado) cartas.remove(i-1);
         return encontrado;
     }
-    
+   
     private ArrayList<Integer> ContarCuantasPaloJug(int jugador){
     	  ArrayList<Integer> contadorFinal = new ArrayList<Integer>();
     	  ArrayList<Carta> cartas = jugadores.get(jugActual).getCartas();

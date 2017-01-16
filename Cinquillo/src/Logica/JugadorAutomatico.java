@@ -28,15 +28,17 @@ public class JugadorAutomatico extends Jugador{
     @Override      
     public Carta jugar() {
         Carta c;
+        int pos;
         Tablero.bloquearPasar(false);
-        try {
+       /* try {
             //h= new HebraJugador(log);
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(JugadorAutomatico.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         c=mejorCarta();
-        Tablero.posBot(c);
+        //pos=Tablero.posBot(c);
+        Tablero.jugarBot(c);
         log.borrarCarta(c,num);
        Tablero.bloquearPasar(true);
        return c;
@@ -102,9 +104,9 @@ public class JugadorAutomatico extends Jugador{
     	Carta mejorOpcion = null;
     	int cont = 0;
     	boolean cartasAltas = false,abrir = false;
-    	if(cincoDeOros()){
+    	if(cincoDeOros()){  //¡PORQUE NO DEVOLVEIS NULL SI NO LO TIENE O POS SI LA TIENE Y NO LA BUSCAIS DOS VECES?
     		for(int i = 0;i< cartas.size();i++)
-    			if(cartas.get(i).getValor() == 5 && cartas.get(i).getColor() == 'o')
+    			if(cartas.get(i).getValor() == 5 && cartas.get(i).getColor() == 'o')//MISMO FOR QUE CINCODEOROS();
     				mejorOpcion = cartas.get(i);
     	}else{
     		for(int i = 0; i < cartas.size() && !abrir;i++){

@@ -21,10 +21,10 @@ import javax.swing.JOptionPane;
  */
 public class Tablero extends javax.swing.JDialog {
 
-	private JButton cartas[];
+	private static JButton cartas[];
 	private Logica logica;
 	private String dir = "/imgs/baraja/";
-	private JLabel board[];
+	private static JLabel board[];
         private static int turno;
         private boolean hayGanador=false;
         private static int pos;
@@ -691,6 +691,7 @@ public class Tablero extends javax.swing.JDialog {
                 cartas[i*10 + j].addActionListener(ac);
             }
         }
+        else if(turno==i) cartas[i*10].setVisible(false);
         }
     }
     
@@ -729,7 +730,7 @@ public class Tablero extends javax.swing.JDialog {
         numTurno.setText(Integer.toString(j+1));
     }
     public static void bloquearPasar(boolean t){
-        botonPasar.enable(t);
+        botonPasar.setEnabled(t);
     }
     
     public static int posBot(Carta carta){
@@ -745,8 +746,13 @@ public class Tablero extends javax.swing.JDialog {
         return (val+10*aux); 
     }
     
-    public void jugarBot(Carta carta){
+    public static void jugarBot(Carta carta){
         int pos= posBot(carta);
+        int i=turno*10;
+       while(!cartas[i].isVisible()&& i<10){
+           i++;
+       }
+        cartas[i].setVisible(false);
         board[pos-1].setVisible(true);
     }
     

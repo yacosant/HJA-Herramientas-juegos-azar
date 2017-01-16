@@ -22,6 +22,7 @@ public class Inicio extends javax.swing.JPanel {
    
     public Inicio() {
         initComponents();
+        logica=new Logica();
         j= new JLabel[]{j1,j2,j3,j4};
         r= new JCheckBox[]{r1,r2,r3,r4};
     }

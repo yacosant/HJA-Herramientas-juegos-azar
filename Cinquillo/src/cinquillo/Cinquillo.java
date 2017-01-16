@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author YVCX
+ * @author Grupo 01
  */
 public class Cinquillo {
 
@@ -21,8 +21,7 @@ public class Cinquillo {
      */
     public static void main(String[] args) {
        JFrame f = new JFrame("HJA: PRACTICA 3");
-       Logica l = new Logica();
-        f.add(new Inicio(l));
+       f.add(new Inicio());
         f.setVisible(true);
         f.setSize(300, 500);
         f.setResizable(false);

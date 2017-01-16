@@ -56,18 +56,22 @@ public class Logica {
             
                 hayGanador = ganador();
                 if(bot){//jugadores.get(jugActual).getModo()== "Automatico"){
+                   
                     jugadores.get(jugActual).jugar();
                    if(!primeraVez || bot){
                     if(!hayGanador) {
-                    pasarTurno(); 
+                   // pasarTurno();
                       //Tablero.actualizaTurno(jugActual); 
                       
                     }
                    }
-                   else primeraVez=false;
+                 /*  if(!primeraVez && jugActual!=3)jugActual++;
+                   else if(!primeraVez)jugActual=0;*/
+                   Tablero.actualizaTurno(jugActual); 
                 }
+               
                 Tablero.siguienteEsbot(bots[jugActual]);
-              
+                Tablero.bloquearPasar(!bots[jugActual]);
     	}
     	if(primeraVez) primeraVez=false;
     	return jugActual;
@@ -267,7 +271,7 @@ public class Logica {
 
 		if(posible){
 			if(!borrarCarta(c,jugActual)) msg="No es tu turno aún.";
-			pasarTurno();
+			//pasarTurno(); no llamar aqui porque en cada comprobacioon baila el turno.
 		}
                 else msg="No puedes jugar esa carta ahora mismo.";
 		return msg;

@@ -569,7 +569,7 @@ public class Tablero extends javax.swing.JDialog {
 
         numTurno.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         numTurno.setForeground(new java.awt.Color(255, 255, 0));
-        numTurno.setText("X");
+        numTurno.setText("1");
         getContentPane().add(numTurno);
         numTurno.setBounds(200, 194, 50, 20);
 
@@ -688,6 +688,7 @@ public class Tablero extends javax.swing.JDialog {
                            pos = getPosBoard(tecla);
                            board[pos-1].setVisible(true);
                            //logica.partida();
+                           logica.pasarTurno();
                            logica.partida(false);
                         }
                         else{
@@ -700,7 +701,7 @@ public class Tablero extends javax.swing.JDialog {
                 cartas[i*10 + j].addActionListener(ac);
             }
         }
-        else if(turno==i) cartas[i*10].setVisible(false);
+       // else if(turno==i) cartas[i*10].setVisible(false);
         }
     }
     
@@ -761,7 +762,7 @@ public class Tablero extends javax.swing.JDialog {
     public static void jugarBot(Carta carta){
         int pos= posBot(carta);
         int i=turno*10;
-       while(!cartas[i].isVisible()&& i<10){
+       while(!cartas[i].isVisible()&& i<(turno*10+10)){
            i++;
        }
         cartas[i].setVisible(false);

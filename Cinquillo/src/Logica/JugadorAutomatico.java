@@ -38,8 +38,12 @@ public class JugadorAutomatico extends Jugador{
         }*/
         c=mejorCarta();
         //pos=Tablero.posBot(c);
+        if(c!=null){
         Tablero.jugarBot(c);
-        log.borrarCarta(c,num);
+        //log.borrarCarta(c,num);
+        }
+        log.pasarTurno();
+        Tablero.actualizaTurno(num+1);
        Tablero.bloquearPasar(true);
        return c;
     }
@@ -239,7 +243,7 @@ public class JugadorAutomatico extends Jugador{
         					}
     					}
     				}else{
-    					if(buenasParaAbrir(cartas.get(i).getColor()) || contarCuantasPalo(cartas.get(i).getColor()) >= 5){
+    					if((buenasParaAbrir(cartas.get(i).getColor()) || contarCuantasPalo(cartas.get(i).getColor()) >= 5)&&log.esPosible(cartas.get(i)) == null){
     						abrir = true;
     						mejorOpcion = cartas.get(i);
     					}

@@ -28,21 +28,30 @@ public class Logica {
         //repartir();
     }
     
+    public void partida(){
+        encontrarJugInicial(); 
+        boolean bot=bots[jugActual];
+        partida(bot);
+    }
     
-    public int partida(){
-     boolean bot=false;
+    public int partida(boolean bot){
+     //boolean bot=false;
      int aux;
-    if(primeraVez){
+   /* if(primeraVez){
         encontrarJugInicial(); 
         bot=bots[jugActual];
-    }else if(!bots[jugActual]){
-    if(jugActual==0)aux=3;
+    }
+    *///en partida();
+   
+    /*else if(!bots[jugActual]){
+    
+        if(jugActual==0)aux=3;
     else aux=jugActual-1;
     bot=bots[aux];
     }
     else  bot=bots[jugActual];
-     
-    	if(!hayGanador ){//&& bot){
+     */
+       if(!hayGanador ){//&& bot){
             Tablero.actualizaTurno(jugActual); 
             
                 hayGanador = ganador();
@@ -51,16 +60,20 @@ public class Logica {
                    if(!primeraVez || bot){
                     if(!hayGanador) {
                     pasarTurno(); 
-                      Tablero.actualizaTurno(jugActual); 
+                      //Tablero.actualizaTurno(jugActual); 
+                      
                     }
                    }
                    else primeraVez=false;
                 }
+                Tablero.siguienteEsbot(bots[jugActual]);
+              
     	}
     	if(primeraVez) primeraVez=false;
     	return jugActual;
     }
-  
+    
+    
     public void siguiente(){
         
         
@@ -352,5 +365,6 @@ public class Logica {
     	
     	return extremo;
     }
+
     
 }

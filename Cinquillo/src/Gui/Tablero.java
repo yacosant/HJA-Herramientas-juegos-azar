@@ -53,13 +53,7 @@ public class Tablero extends javax.swing.JDialog {
        
 	}
 
-        private void partida(){
-            Jugador j;
-            
-            
-        }
-        
-	private void ocultarTab() {
+        private void ocultarTab() {
 		t10.setVisible(false);
 		t11.setVisible(false);
 		t12.setVisible(false);
@@ -198,6 +192,7 @@ public class Tablero extends javax.swing.JDialog {
         lTurno = new javax.swing.JLabel();
         numTurno = new javax.swing.JLabel();
         botonPasar = new javax.swing.JButton();
+        jugarBot = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -587,6 +582,15 @@ public class Tablero extends javax.swing.JDialog {
         getContentPane().add(botonPasar);
         botonPasar.setBounds(40, 230, 160, 23);
 
+        jugarBot.setText("Poner Aleatorio");
+        jugarBot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jugarBotActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jugarBot);
+        jugarBot.setBounds(40, 270, 160, 23);
+
         fondo.setBackground(new java.awt.Color(0, 0, 0));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/fondo1.png"))); // NOI18N
         getContentPane().add(fondo);
@@ -597,8 +601,12 @@ public class Tablero extends javax.swing.JDialog {
 
     private void botonPasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPasarActionPerformed
         logica.pasarTurno();
-        logica.partida();
+        logica.partida(false);
     }//GEN-LAST:event_botonPasarActionPerformed
+
+    private void jugarBotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarBotActionPerformed
+        logica.partida(true);
+    }//GEN-LAST:event_jugarBotActionPerformed
 
 	/**
 	 * @param args
@@ -679,7 +687,8 @@ public class Tablero extends javax.swing.JDialog {
                            label.setVisible(false);
                            pos = getPosBoard(tecla);
                            board[pos-1].setVisible(true);
-                           logica.partida();
+                           //logica.partida();
+                           logica.partida(false);
                         }
                         else{
                             JOptionPane.showMessageDialog(null, msg);
@@ -733,6 +742,9 @@ public class Tablero extends javax.swing.JDialog {
         botonPasar.setEnabled(t);
     }
     
+    public static void siguienteEsbot(boolean t){
+        jugarBot.setVisible(t);
+    }
     public static int posBot(Carta carta){
         int val=carta.getValor();
         char c=carta.getColor();
@@ -800,6 +812,7 @@ public class Tablero extends javax.swing.JDialog {
     private javax.swing.JButton j47;
     private javax.swing.JButton j48;
     private javax.swing.JButton j49;
+    private static javax.swing.JButton jugarBot;
     private javax.swing.JLabel lTurno;
     private static javax.swing.JLabel numTurno;
     private javax.swing.JLabel separador;

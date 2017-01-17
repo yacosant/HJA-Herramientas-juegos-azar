@@ -205,15 +205,15 @@ public class Logica {
 
 					if(extremoOrosAlto==7 && valor==10){
 						posible=true;
-						extremoOrosAlto = valor;
+						if(borrar)extremoOrosAlto = valor;
 					}
 					
 					else if(valor-1 == extremoOrosAlto){
 						posible = true;
-						extremoOrosAlto=valor;
+						if(borrar)extremoOrosAlto=valor;
 					}else if(valor+1 == extremoOrosBajo){
 						posible = true;
-						extremoOrosBajo=valor;
+						if(borrar)extremoOrosBajo=valor;
 					}
 				}
 				
@@ -222,15 +222,15 @@ public class Logica {
 					
 					if(extremoBastosAlto==7 && valor==10){
 						posible=true;
-						extremoBastosAlto = valor;
+						if(borrar)extremoBastosAlto = valor;
 					}
                                         
 					else if(valor-1 == extremoBastosAlto){
 						posible = true;
-						extremoBastosAlto=valor;
+						if(borrar)extremoBastosAlto=valor;
 					}else if(valor+1 == extremoBastosBajo){
 						posible = true;
-						extremoBastosBajo=valor;
+						if(borrar)extremoBastosBajo=valor;
 					}
 				}
 				
@@ -238,30 +238,30 @@ public class Logica {
 					
 					if(extremoEspadasAlto==7 && valor==10){
 						posible=true;
-						extremoEspadasAlto = valor;
+						if(borrar)extremoEspadasAlto = valor;
 					}
 					
                                         else if(valor-1 == extremoEspadasAlto){
 						posible = true;
-						extremoEspadasAlto=valor;
+						if(borrar)extremoEspadasAlto=valor;
 					}else if(valor+1 == extremoEspadasBajo){
 						posible = true;
-						extremoEspadasBajo=valor;
+						if(borrar)extremoEspadasBajo=valor;
 					}
 				}
 				else if(color == 'c'){
 					
 					if(extremoCopasAlto==7 && valor==10){
 						posible=true;
-						extremoCopasAlto = valor;
+						if(borrar)extremoCopasAlto = valor;
 					}
 					
 					else if(valor-1 == extremoCopasAlto){
 						posible = true;
-						extremoCopasAlto=valor;
+						if(borrar)extremoCopasAlto=valor;
 					}else if(valor+1 == extremoCopasBajo){
 						posible = true;
-						extremoCopasBajo=valor;
+						if(borrar)extremoCopasBajo=valor;
 					}
 				}
 				else posible=false;

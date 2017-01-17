@@ -715,7 +715,7 @@ public class Tablero extends javax.swing.JDialog {
         c= boton.substring(boton.length()-1).charAt(0);
         String v= boton.substring(boton.length()-2,boton.length()-1);
         val=  Integer.parseInt (v);
-        return logica.esPosible(new Carta(val,c));
+        return logica.esPosible(new Carta(val,c),true);
         //CAMBIAR A STRING CON MENSAJE DE ERROR O OK
     }
     

@@ -193,7 +193,7 @@ public class Logica {
 		return jugadores.get(i);
 	}
 	        
-        public String esPosible(Carta c){
+        public String esPosible(Carta c,boolean borrar){
             String msg=null;
 		boolean posible = false;
 		int valor = c.getValor();
@@ -271,7 +271,8 @@ public class Logica {
 
 
 		if(posible){
-			if(!borrarCarta(c,jugActual)) msg="No es tu turno aún.";
+			if(borrar)
+				if(!borrarCarta(c,jugActual)) msg="No es tu turno aún.";
 			//pasarTurno(); no llamar aqui porque en cada comprobacioon baila el turno.
 		}
                 else msg="No puedes jugar esa carta ahora mismo.";

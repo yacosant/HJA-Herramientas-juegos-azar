@@ -115,139 +115,143 @@ public class JugadorAutomatico extends Jugador{
     			if(cartas.get(i).getValor() > 5){
     				if(cartas.get(i).getColor() == 'o'){
     					if(cartasAltas('o') && cartasAltas){
-    						if(numCartasAltas('o') >= cont && log.esPosible(cartas.get(i)) == null){
+    						if(numCartasAltas('o') >= cont && log.esPosible(cartas.get(i),false) == null){
     							cont = numCartasAltas('o');
-    							mejorOpcion = log.getCarta();
+    							mejorOpcion = cartas.get(i);
     						}
-    					}else if(!cartasAltas && cartasAltas('o') && log.esPosible(cartas.get(i)) == null){
+    					}else if(!cartasAltas && cartasAltas('o') && log.esPosible(cartas.get(i),false) == null){
     						cartasAltas = true;
     						cont = numCartasAltas('o');
-    						mejorOpcion = log.getCarta();
-    					}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    						mejorOpcion = cartas.get(i);
+    					}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
     						cartasAltas = cartasAltas('o');
     						cont = numCartasAltas('o');
-    						mejorOpcion = log.getCarta();
+    						mejorOpcion = cartas.get(i);
     					}
     					}else if(cartas.get(i).getColor() == 'e'){
     						if(cartasAltas('e') && cartasAltas){
-    							if(numCartasAltas('e') >= cont && log.esPosible(cartas.get(i)) == null){
+    							if(numCartasAltas('e') >= cont && log.esPosible(cartas.get(i),false) == null){
     								cont = numCartasAltas('e');
-    								mejorOpcion = log.getCarta();
+    								mejorOpcion = cartas.get(i);
     							}
-    						}else if(!cartasAltas && cartasAltas('e') && log.esPosible(cartas.get(i)) == null){
+    						}else if(!cartasAltas && cartasAltas('e') && log.esPosible(cartas.get(i),false) == null){
     							cartasAltas = true;
     							cont = numCartasAltas('e');
-    							mejorOpcion = log.getCarta();
-    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    							mejorOpcion = cartas.get(i);
+    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
         						cartasAltas = cartasAltas('e');
         						cont = numCartasAltas('e');
-        						mejorOpcion = log.getCarta();
+        						mejorOpcion = cartas.get(i);
         					}
     					}else if(cartas.get(i).getColor() == 'b'){
     						if(cartasAltas('b') && cartasAltas){
-    							if(numCartasAltas('b') >= cont && log.esPosible(cartas.get(i)) == null){
+    							if(numCartasAltas('b') >= cont && log.esPosible(cartas.get(i),false) == null){
     								cont = numCartasAltas('b');
-    								mejorOpcion = log.getCarta();
+    								mejorOpcion = cartas.get(i);
     							}
-    						}else if(!cartasAltas && cartasAltas('b') && log.esPosible(cartas.get(i)) == null){
+    						}else if(!cartasAltas && cartasAltas('b') && log.esPosible(cartas.get(i),false) == null){
     							cartasAltas = true;
     							cont = numCartasAltas('b');
-    							mejorOpcion = log.getCarta();
-    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    							mejorOpcion = cartas.get(i);
+    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
         						cartasAltas = cartasAltas('b');
         						cont = numCartasAltas('b');
-        						mejorOpcion = log.getCarta();
+        						mejorOpcion = cartas.get(i);
         					}
     					}else{
     						if(cartasAltas('c') && cartasAltas){
-    							if(numCartasAltas('c') >= cont && log.esPosible(cartas.get(i)) == null){
+    							if(numCartasAltas('c') >= cont && log.esPosible(cartas.get(i),false) == null){
     								cont = numCartasAltas('c');
-    								mejorOpcion = log.getCarta();
+    								mejorOpcion = cartas.get(i);
     							}
-    						}else if(!cartasAltas && cartasAltas('c') && log.esPosible(cartas.get(i)) == null){
+    						}else if(!cartasAltas && cartasAltas('c') && log.esPosible(cartas.get(i),false) == null){
     							cartasAltas = true;
     							cont = numCartasAltas('c');
-    							mejorOpcion = log.getCarta();
-    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    							mejorOpcion = cartas.get(i);
+    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
         						cartasAltas = cartasAltas('c');
         						cont = numCartasAltas('c');
-        						mejorOpcion = log.getCarta();
+        						mejorOpcion = cartas.get(i);
         					}
     					}				
     				}else if(cartas.get(i).getValor() < 5){
     					if(cartas.get(i).getColor() == 'o'){
     						if(cartaBajas('o') && cartasAltas){
-    							if(numCartasAltas('o') >= cont && log.esPosible(cartas.get(i)) == null){
+    							if(numCartasAltas('o') >= cont && log.esPosible(cartas.get(i),false) == null){
     								cont = numCartaBajas('o');
-    								mejorOpcion = log.getCarta();
+    								mejorOpcion = cartas.get(i);
     							}
-    						}else if(!cartasAltas && cartaBajas('o') && log.esPosible(cartas.get(i)) == null){
+    						}else if(!cartasAltas && cartaBajas('o') && log.esPosible(cartas.get(i),false) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('o');
-    							mejorOpcion = log.getCarta();
+    							mejorOpcion = cartas.get(i);
     							
-    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
         						cartasAltas = cartasAltas('o');
         						cont = numCartasAltas('o');
-        						mejorOpcion = log.getCarta();
+        						mejorOpcion = cartas.get(i);
         					}
     					}else if(cartas.get(i).getColor() == 'e'){
     						if(cartaBajas('e') && cartasAltas){
-    							if(numCartaBajas('e') >= cont && log.esPosible(cartas.get(i)) == null){
+    							if(numCartaBajas('e') >= cont && log.esPosible(cartas.get(i),false) == null){
     								cont = numCartaBajas('e');
-    								mejorOpcion = log.getCarta();
+    								mejorOpcion = cartas.get(i);
     							}
-    						}else if(!cartasAltas && cartaBajas('e') && log.esPosible(cartas.get(i)) == null){
+    						}else if(!cartasAltas && cartaBajas('e') && log.esPosible(cartas.get(i),false) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('e');
-    							mejorOpcion = log.getCarta();
+    							mejorOpcion = cartas.get(i);
     							
-    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
         						cartasAltas = cartasAltas('e');
         						cont = numCartasAltas('e');
-        						mejorOpcion = log.getCarta();
+        						mejorOpcion = cartas.get(i);
         					}					
     					}else if(cartas.get(i).getColor() == 'b'){
     						if(cartaBajas('b') && cartasAltas){
-    							if(numCartaBajas('b') >= cont && log.esPosible(cartas.get(i)) == null){
+    							if(numCartaBajas('b') >= cont && log.esPosible(cartas.get(i),false) == null){
     								cont = numCartaBajas('b');
-    								mejorOpcion = log.getCarta();
+    								mejorOpcion = cartas.get(i);
     							}
-    						}else if(!cartasAltas && cartaBajas('b') && log.esPosible(cartas.get(i)) == null){
+    						}else if(!cartasAltas && cartaBajas('b') && log.esPosible(cartas.get(i),false) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('b');
-    							mejorOpcion = log.getCarta();
+    							mejorOpcion = cartas.get(i);
     							
-    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
         						cartasAltas = cartasAltas('b');
         						cont = numCartasAltas('b');
-        						mejorOpcion = log.getCarta();
+        						mejorOpcion = cartas.get(i);
         					}					
     					}else{
     						if(cartaBajas('c') && cartasAltas){
-    							if(numCartaBajas('c') >= cont && log.esPosible(cartas.get(i)) == null){
+    							if(numCartaBajas('c') >= cont && log.esPosible(cartas.get(i),false) == null){
     								cont = numCartaBajas('c');
-    								mejorOpcion = log.getCarta();
+    								mejorOpcion = cartas.get(i);
     							}
-    						}else if(!cartasAltas && cartaBajas('c') && log.esPosible(cartas.get(i)) == null){
+    						}else if(!cartasAltas && cartaBajas('c') && log.esPosible(cartas.get(i),false) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('c');
-    							mejorOpcion = log.getCarta();
+    							mejorOpcion = cartas.get(i);
     							
-    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
+    						}else if(mejorOpcion == null && log.esPosible(cartas.get(i),false) == null){
         						cartasAltas = cartasAltas('c');
         						cont = numCartasAltas('c');
-        						mejorOpcion = log.getCarta();
+        						mejorOpcion = cartas.get(i);
         					}
     					}
     				}else{
-    					if((buenasParaAbrir(cartas.get(i).getColor()) || contarCuantasPalo(cartas.get(i).getColor()) >= 5)&&log.esPosible(cartas.get(i)) == null){
+    					
     						abrir = true;
-    						mejorOpcion = log.getCarta();
-    					}
+    						mejorOpcion = cartas.get(i);
+    					
     				}
     		}
     	}
+    	
+    	if(mejorOpcion != null)
+    		log.esPosible(mejorOpcion, true);
+    	
     	return mejorOpcion;
     }
     

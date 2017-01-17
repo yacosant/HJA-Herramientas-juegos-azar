@@ -6,7 +6,6 @@
 package Gui;
 
 import Logica.Carta;
-import Logica.Jugador;
 import Logica.Logica;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -641,7 +640,8 @@ public class Tablero extends javax.swing.JDialog {
 		// </editor-fold>
 
 		/* Create and display the dialog */
-		/*java.awt.EventQueue.invokeLater(new Runnable() {
+		
+               /* java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				Tablero dialog = new Tablero(new javax.swing.JFrame(), true);
                                	dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -653,6 +653,7 @@ public class Tablero extends javax.swing.JDialog {
 				dialog.setVisible(true);
 			}
 		});*/
+               
 	}
     
     private void inicializarBotones(){
@@ -687,7 +688,6 @@ public class Tablero extends javax.swing.JDialog {
                            label.setVisible(false);
                            pos = getPosBoard(tecla);
                            board[pos-1].setVisible(true);
-                           //logica.partida();
                            logica.pasarTurno();
                            logica.partida(false);
                         }
@@ -701,11 +701,11 @@ public class Tablero extends javax.swing.JDialog {
                 cartas[i*10 + j].addActionListener(ac);
             }
         }
-       // else if(turno==i) cartas[i*10].setVisible(false);
+     
         }
     }
     
-    private void terminar(){
+    public static void terminar(){
          JOptionPane.showMessageDialog(null, "Partida acabada. El ganador es el jugador "+ turno);
     }
     
@@ -728,17 +728,8 @@ public class Tablero extends javax.swing.JDialog {
         rest=text.length();
         String v= text.substring(text.length()-rest,text.length()-1);
         val=  Integer.parseInt (v);
-        if(val==10)val=8;
-        else if(val==11)val=9;
-        else if(val==12)val=10;
         
-        switch(c){
-            case 'c': aux=0; break;
-            case 'b': aux=1; break;
-            case 'o': aux=2; break;
-            case 'e': aux=3; break;
-        }
-        return (val+10*aux);
+        return calcularVal(val,c);
     }
     
     public static void actualizaTurno(int j){
@@ -755,6 +746,11 @@ public class Tablero extends javax.swing.JDialog {
     public static int posBot(Carta carta){
         int val=carta.getValor();
         char c=carta.getColor();
+                
+        return calcularVal(val,c);
+    }
+    
+    private static int calcularVal(int val, char c){
         int aux=0;
         if(val==10)val=8;
         else if(val==11)val=9;
@@ -766,7 +762,8 @@ public class Tablero extends javax.swing.JDialog {
             case 'o': aux=2; break;
             case 'e': aux=3; break;
         }
-        return (val+10*aux); 
+        
+        return (val+10*aux);
     }
     
     public static void jugarBot(Carta carta){

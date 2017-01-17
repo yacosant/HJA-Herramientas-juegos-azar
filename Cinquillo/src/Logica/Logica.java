@@ -26,7 +26,6 @@ public class Logica {
     
     public Logica(){
         crearBaraja();
-        //repartir();
     }
     
     public void partida(){
@@ -36,44 +35,28 @@ public class Logica {
     }
     
     public int partida(boolean bot){
-     //boolean bot=false;
      int aux;
-   /* if(primeraVez){
-        encontrarJugInicial(); 
-        bot=bots[jugActual];
-    }
-    *///en partida();
-   
-    /*else if(!bots[jugActual]){
-    
-        if(jugActual==0)aux=3;
-    else aux=jugActual-1;
-    bot=bots[aux];
-    }
-    else  bot=bots[jugActual];
-     */
-       if(!hayGanador ){//&& bot){
+
+       if(!hayGanador ){
             Tablero.actualizaTurno(jugActual); 
             
-                hayGanador = ganador();
-                if(bot){//jugadores.get(jugActual).getModo()== "Automatico"){
-                   
-                    jugadores.get(jugActual).jugar();
-                   if(!primeraVez || bot){
-                    if(!hayGanador) {
-                   // pasarTurno();
-                      //Tablero.actualizaTurno(jugActual); 
-                      
-                    }
-                   }
-                 /*  if(!primeraVez && jugActual!=3)jugActual++;
-                   else if(!primeraVez)jugActual=0;*/
+                
+                if(bot){
+                   jugadores.get(jugActual).jugar();
                    Tablero.actualizaTurno(jugActual); 
                 }
                
                 Tablero.siguienteEsbot(bots[jugActual]);
                 Tablero.bloquearPasar(!bots[jugActual]);
     	}
+      
+       hayGanador = ganador(); 
+       
+       if(hayGanador){
+                Tablero.terminar();
+                Tablero.siguienteEsbot(false);
+                Tablero.bloquearPasar(false);
+       }
     	if(primeraVez) primeraVez=false;
     	return jugActual;
     }
@@ -170,7 +153,9 @@ public class Logica {
     }
     
     private boolean ganador(){
-    	hayGanador=jugadores.get(jugActual).getCartas().size() == 0;
+        int aux=jugActual-1;
+        if(aux==-1)aux=3;
+    	hayGanador=jugadores.get(aux).getCartas().size() == 0;
         return hayGanador;
     }
     
@@ -354,6 +339,4 @@ public class Logica {
     	
     	return extremo;
     }
-
-    
 }

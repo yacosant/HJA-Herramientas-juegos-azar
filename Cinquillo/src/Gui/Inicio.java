@@ -121,7 +121,7 @@ public class Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton10ActionPerformed
     
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       
+        logica=new Logica();
         for(int i=0; i<4; i++){
             if(r[i].isSelected()){
                logica.addJugadorAutomatico(i);
@@ -136,8 +136,7 @@ public class Inicio extends javax.swing.JPanel {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-        t.setVisible(true); //invekelater comentado y puesto visible auqi
-        
+        t.setVisible(true); 
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void enable(int num){

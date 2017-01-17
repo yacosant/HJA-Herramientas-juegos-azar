@@ -6,10 +6,6 @@
 package Logica;
 
 import Gui.Tablero;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
 
 /**
  *
@@ -17,7 +13,6 @@ import java.util.logging.Logger;
  */
 public class JugadorAutomatico extends Jugador{
     private Logica log;
-    private HebraJugador h;
     private int num;
     
     
@@ -28,32 +23,21 @@ public class JugadorAutomatico extends Jugador{
     @Override      
     public Carta jugar() {
         Carta c;
-        int pos;
         Tablero.bloquearPasar(false);
-       /* try {
-            //h= new HebraJugador(log);
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(JugadorAutomatico.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-         c=mejorCarta();
-        //pos=Tablero.posBot(c);
+        c=mejorCarta();
+        
         if(c!=null){
-        Tablero.jugarBot(c);
-        //log.borrarCarta(c,num);
+            Tablero.jugarBot(c);
         }
+        
         log.pasarTurno();
         Tablero.actualizaTurno(num+1);
-       Tablero.bloquearPasar(true);
+        Tablero.bloquearPasar(true);
        return c;
     }
 
     @Override
     public void pasar() {
-        if(h!=null){
-			h.interrupt();
-			h=null;
-		} 
     }
 
     @Override

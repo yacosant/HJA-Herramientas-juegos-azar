@@ -6,8 +6,6 @@
 package cinquillo;
 
 import Gui.Inicio;
-import Logica.Logica;
-
 import javax.swing.JFrame;
 
 /**

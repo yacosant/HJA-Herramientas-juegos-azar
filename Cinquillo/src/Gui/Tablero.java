@@ -711,21 +711,27 @@ public class Tablero extends javax.swing.JDialog {
     
     private String pulsado(String boton){
         char c;
-        int val;
+        int val, aux;
         c= boton.substring(boton.length()-1).charAt(0);
-        String v= boton.substring(boton.length()-2,boton.length()-1);
+        aux=boton.length();
+        String v= boton.substring(boton.length()-aux,boton.length()-1);
         val=  Integer.parseInt (v);
         return logica.esPosible(new Carta(val,c),true);
-        //CAMBIAR A STRING CON MENSAJE DE ERROR O OK
     }
     
     private int getPosBoard(String text){
         int aux=0;
         char c;
-        int val;
+        int val,rest;
+        
         c= text.substring(text.length()-1).charAt(0);
-        String v= text.substring(text.length()-2,text.length()-1);
+        rest=text.length();
+        String v= text.substring(text.length()-rest,text.length()-1);
         val=  Integer.parseInt (v);
+        if(val==10)val=8;
+        else if(val==11)val=9;
+        else if(val==12)val=10;
+        
         switch(c){
             case 'c': aux=0; break;
             case 'b': aux=1; break;
@@ -750,6 +756,10 @@ public class Tablero extends javax.swing.JDialog {
         int val=carta.getValor();
         char c=carta.getColor();
         int aux=0;
+        if(val==10)val=8;
+        else if(val==11)val=9;
+        else if(val==12)val=10;
+        
         switch(c){
             case 'c': aux=0; break;
             case 'b': aux=1; break;

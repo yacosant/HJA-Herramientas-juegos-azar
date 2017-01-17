@@ -15,13 +15,14 @@ import java.util.Random;
  */
 public class Logica {
     private int jugActual=-1;
-    private int extremoOrosBajo=-10,extremoOrosAlto=-10,extremoBastosBajo=-10,extremoBastosAlto=-10,
+    private int extremoOrosBajo=5,extremoOrosAlto=5,extremoBastosBajo=-10,extremoBastosAlto=-10,
     			extremoCopasBajo=-10,extremoCopasAlto=-10,extremoEspadasBajo=-10,extremoEspadasAlto=-10;
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Carta> baraja = new ArrayList<Carta>();
     private boolean hayGanador = false;
     private boolean bots[] =  {false,false,false,false};
     private boolean primeraVez=true;
+    private Carta carta =null;
     
     public Logica(){
         crearBaraja();
@@ -312,32 +313,15 @@ public class Logica {
             encontrado = (c.getValor()== cartas.get(i).getValor() && c.getColor()== cartas.get(i).getColor());
             i++;
         }
-        if(encontrado) cartas.remove(i-1);
+        if(encontrado){
+        	carta = cartas.get(i-1);
+        	cartas.remove(i-1);
+        }
         return encontrado;
     }
    
-    private ArrayList<Integer> ContarCuantasPaloJug(int jugador){
-    	  ArrayList<Integer> contadorFinal = new ArrayList<Integer>();
-    	  ArrayList<Carta> cartas = jugadores.get(jugActual).getCartas();
-    	  int cont = 0, contadorOro = 0, contadorBastos= 0, contadorEspadas = 0, contadorCopas = 0;
-    	  while (cartas.size() > cont){
-    	   if (cartas.get(cont).getColor() == 'o')
-    	    contadorOro++;
-    	   if (cartas.get(cont).getColor() == 'b')
-    	    contadorBastos++;
-    	   if (cartas.get(cont).getColor() == 'c')
-    	    contadorCopas++;
-    	   if (cartas.get(cont).getColor() == 'e')
-    	    contadorEspadas++;
-    	   cont++;
-    	  }
-    	  
-    	  contadorFinal.add(contadorOro);
-    	  contadorFinal.add(contadorBastos);
-    	  contadorFinal.add(contadorCopas);
-    	  contadorFinal.add(contadorEspadas);
-    	  
-    	  return contadorFinal;
+    public Carta getCarta(){
+    	return carta;
     }
     
      public int extremoA(char c){

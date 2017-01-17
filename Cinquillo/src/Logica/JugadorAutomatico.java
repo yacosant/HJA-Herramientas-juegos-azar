@@ -36,7 +36,7 @@ public class JugadorAutomatico extends Jugador{
         } catch (InterruptedException ex) {
             Logger.getLogger(JugadorAutomatico.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        c=mejorCarta();
+         c=mejorCarta();
         //pos=Tablero.posBot(c);
         if(c!=null){
         Tablero.jugarBot(c);
@@ -108,10 +108,8 @@ public class JugadorAutomatico extends Jugador{
     	Carta mejorOpcion = null;
     	int cont = 0;
     	boolean cartasAltas = false,abrir = false;
-    	if(cincoDeOros()){  //¡PORQUE NO DEVOLVEIS NULL SI NO LO TIENE O POS SI LA TIENE Y NO LA BUSCAIS DOS VECES?
-    		for(int i = 0;i< cartas.size();i++)
-    			if(cartas.get(i).getValor() == 5 && cartas.get(i).getColor() == 'o')//MISMO FOR QUE CINCODEOROS();
-    				mejorOpcion = cartas.get(i);
+    	if(cincoDeOros() != -1){  
+    		mejorOpcion = cartas.get(cincoDeOros());
     	}else{
     		for(int i = 0; i < cartas.size() && !abrir;i++){
     			if(cartas.get(i).getValor() > 5){
@@ -119,61 +117,61 @@ public class JugadorAutomatico extends Jugador{
     					if(cartasAltas('o') && cartasAltas){
     						if(numCartasAltas('o') >= cont && log.esPosible(cartas.get(i)) == null){
     							cont = numCartasAltas('o');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     						}
     					}else if(!cartasAltas && cartasAltas('o') && log.esPosible(cartas.get(i)) == null){
     						cartasAltas = true;
     						cont = numCartasAltas('o');
-    						mejorOpcion = cartas.get(i);
+    						mejorOpcion = log.getCarta();
     					}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
     						cartasAltas = cartasAltas('o');
     						cont = numCartasAltas('o');
-    						mejorOpcion = cartas.get(i);
+    						mejorOpcion = log.getCarta();
     					}
     					}else if(cartas.get(i).getColor() == 'e'){
     						if(cartasAltas('e') && cartasAltas){
     							if(numCartasAltas('e') >= cont && log.esPosible(cartas.get(i)) == null){
     								cont = numCartasAltas('e');
-    								mejorOpcion = cartas.get(i);
+    								mejorOpcion = log.getCarta();
     							}
     						}else if(!cartasAltas && cartasAltas('e') && log.esPosible(cartas.get(i)) == null){
     							cartasAltas = true;
     							cont = numCartasAltas('e');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
         						cartasAltas = cartasAltas('e');
         						cont = numCartasAltas('e');
-        						mejorOpcion = cartas.get(i);
+        						mejorOpcion = log.getCarta();
         					}
     					}else if(cartas.get(i).getColor() == 'b'){
     						if(cartasAltas('b') && cartasAltas){
     							if(numCartasAltas('b') >= cont && log.esPosible(cartas.get(i)) == null){
     								cont = numCartasAltas('b');
-    								mejorOpcion = cartas.get(i);
+    								mejorOpcion = log.getCarta();
     							}
     						}else if(!cartasAltas && cartasAltas('b') && log.esPosible(cartas.get(i)) == null){
     							cartasAltas = true;
     							cont = numCartasAltas('b');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
         						cartasAltas = cartasAltas('b');
         						cont = numCartasAltas('b');
-        						mejorOpcion = cartas.get(i);
+        						mejorOpcion = log.getCarta();
         					}
     					}else{
     						if(cartasAltas('c') && cartasAltas){
     							if(numCartasAltas('c') >= cont && log.esPosible(cartas.get(i)) == null){
     								cont = numCartasAltas('c');
-    								mejorOpcion = cartas.get(i);
+    								mejorOpcion = log.getCarta();
     							}
     						}else if(!cartasAltas && cartasAltas('c') && log.esPosible(cartas.get(i)) == null){
     							cartasAltas = true;
     							cont = numCartasAltas('c');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
         						cartasAltas = cartasAltas('c');
         						cont = numCartasAltas('c');
-        						mejorOpcion = cartas.get(i);
+        						mejorOpcion = log.getCarta();
         					}
     					}				
     				}else if(cartas.get(i).getValor() < 5){
@@ -181,71 +179,71 @@ public class JugadorAutomatico extends Jugador{
     						if(cartaBajas('o') && cartasAltas){
     							if(numCartasAltas('o') >= cont && log.esPosible(cartas.get(i)) == null){
     								cont = numCartaBajas('o');
-    								mejorOpcion = cartas.get(i);
+    								mejorOpcion = log.getCarta();
     							}
     						}else if(!cartasAltas && cartaBajas('o') && log.esPosible(cartas.get(i)) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('o');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     							
     						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
         						cartasAltas = cartasAltas('o');
         						cont = numCartasAltas('o');
-        						mejorOpcion = cartas.get(i);
+        						mejorOpcion = log.getCarta();
         					}
     					}else if(cartas.get(i).getColor() == 'e'){
     						if(cartaBajas('e') && cartasAltas){
     							if(numCartaBajas('e') >= cont && log.esPosible(cartas.get(i)) == null){
     								cont = numCartaBajas('e');
-    								mejorOpcion = cartas.get(i);
+    								mejorOpcion = log.getCarta();
     							}
     						}else if(!cartasAltas && cartaBajas('e') && log.esPosible(cartas.get(i)) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('e');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     							
     						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
         						cartasAltas = cartasAltas('e');
         						cont = numCartasAltas('e');
-        						mejorOpcion = cartas.get(i);
+        						mejorOpcion = log.getCarta();
         					}					
     					}else if(cartas.get(i).getColor() == 'b'){
     						if(cartaBajas('b') && cartasAltas){
     							if(numCartaBajas('b') >= cont && log.esPosible(cartas.get(i)) == null){
     								cont = numCartaBajas('b');
-    								mejorOpcion = cartas.get(i);
+    								mejorOpcion = log.getCarta();
     							}
     						}else if(!cartasAltas && cartaBajas('b') && log.esPosible(cartas.get(i)) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('b');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     							
     						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
         						cartasAltas = cartasAltas('b');
         						cont = numCartasAltas('b');
-        						mejorOpcion = cartas.get(i);
+        						mejorOpcion = log.getCarta();
         					}					
     					}else{
     						if(cartaBajas('c') && cartasAltas){
     							if(numCartaBajas('c') >= cont && log.esPosible(cartas.get(i)) == null){
     								cont = numCartaBajas('c');
-    								mejorOpcion = cartas.get(i);
+    								mejorOpcion = log.getCarta();
     							}
     						}else if(!cartasAltas && cartaBajas('c') && log.esPosible(cartas.get(i)) == null){
     							cartasAltas = true;
     							cont = numCartaBajas('c');
-    							mejorOpcion = cartas.get(i);
+    							mejorOpcion = log.getCarta();
     							
     						}else if(mejorOpcion == null && log.esPosible(cartas.get(i)) == null){
         						cartasAltas = cartasAltas('c');
         						cont = numCartasAltas('c');
-        						mejorOpcion = cartas.get(i);
+        						mejorOpcion = log.getCarta();
         					}
     					}
     				}else{
     					if((buenasParaAbrir(cartas.get(i).getColor()) || contarCuantasPalo(cartas.get(i).getColor()) >= 5)&&log.esPosible(cartas.get(i)) == null){
     						abrir = true;
-    						mejorOpcion = cartas.get(i);
+    						mejorOpcion = log.getCarta();
     					}
     				}
     		}
@@ -272,15 +270,15 @@ public class JugadorAutomatico extends Jugador{
 	    	  return contador;
 	    }
 	   
-		private boolean cincoDeOros(){
-			boolean empezar = false;
+		private int cincoDeOros(){
+			int pos = -1;
 			
-			for(int i = 0;i<cartas.size() && !empezar;i++)
+			for(int i = 0;i<cartas.size();i++)
 				if(cartas.get(i).getValor() == 5 && cartas.get(i).getColor() == 'o')
-					empezar = true;
+					pos = i;
 			
 			
-			return empezar;
+			return pos;
 		}
 		
 		private boolean cartasAltas(char c){
@@ -293,18 +291,19 @@ public class JugadorAutomatico extends Jugador{
 			extCopasA = log.extremoA('c');
 
 			for(int i = 0; i < cartas.size() && !altas;i++){
-				if(c == 'o')
+				if(c == 'o'){
 					if(cartas.get(i).getColor() == 'o' && cartas.get(i).getValor() > extOroA+2)
 						altas = true;
-					else if(c == 'e')
+				}else if(c == 'e'){
 						if(cartas.get(i).getColor() == 'e' && cartas.get(i).getValor() > extEspA+2)
 							altas = true;
-						else if(c == 'b')
-							if(cartas.get(i).getColor() == 'b' && cartas.get(i).getValor() > extBastA+2)
-								altas = true;
-							else
-								if(cartas.get(i).getColor() == 'c' && cartas.get(i).getValor() > extCopasA+2)
-									altas = true;
+				}else if(c == 'b'){
+						if(cartas.get(i).getColor() == 'b' && cartas.get(i).getValor() > extBastA+2)
+							altas = true;
+				}else
+								
+					if(cartas.get(i).getColor() == 'c' && cartas.get(i).getValor() > extCopasA+2)
+						altas = true;
 
 			}
 			return altas;
@@ -321,18 +320,18 @@ public class JugadorAutomatico extends Jugador{
 			extCopasB = log.extremoB('c');
 
 			for(int i = 0; i < cartas.size() && !altas;i++){
-				if(c == 'o')
-					if(cartas.get(i).getColor() == 'o' && cartas.get(i).getValor() > extOroB-2)
+				if(c == 'o'){
+					if(cartas.get(i).getColor() == 'o' && cartas.get(i).getValor() < extOroB-2)
 						altas = true;
-					else if(c == 'e')
-						if(cartas.get(i).getColor() == 'e' && cartas.get(i).getValor() > extEspB-2)
-							altas = true;
-						else if(c == 'b')
-							if(cartas.get(i).getColor() == 'b' && cartas.get(i).getValor() > extBastB-2)
-								altas = true;
-							else
-								if(cartas.get(i).getColor() == 'c' && cartas.get(i).getValor() > extCopasB-2)
-									altas = true;
+				}else if(c == 'e'){
+					if(cartas.get(i).getColor() == 'e' && cartas.get(i).getValor() < extEspB-2)
+						altas = true;
+				}else if(c == 'b'){
+					if(cartas.get(i).getColor() == 'b' && cartas.get(i).getValor() < extBastB-2)
+						altas = true;
+				}else
+					if(cartas.get(i).getColor() == 'c' && cartas.get(i).getValor() < extCopasB-2)
+						altas = true;
 
 			}
 			return altas;
@@ -378,18 +377,18 @@ public class JugadorAutomatico extends Jugador{
 			extCopasB = log.extremoB('c');
 
 			for(int i = 0; i < cartas.size();i++){
-				if(c == 'o')
-					if(cartas.get(i).getColor() == 'o' && cartas.get(i).getValor() > extOroB-2)
+				if(c == 'o'){
+					if(cartas.get(i).getColor() == 'o' && cartas.get(i).getValor() < extOroB-2)
 						altas++;
-					else if(c == 'e')
-						if(cartas.get(i).getColor() == 'e' && cartas.get(i).getValor() > extEspB-2)
-							altas++;
-						else if(c == 'b')
-							if(cartas.get(i).getColor() == 'b' && cartas.get(i).getValor() > extBastB-2)
-								altas++;
-							else
-								if(cartas.get(i).getColor() == 'c' && cartas.get(i).getValor() > extCopasB-2)
-									altas++;
+				}else if(c == 'e'){
+					if(cartas.get(i).getColor() == 'e' && cartas.get(i).getValor() < extEspB-2)
+						altas++;
+				}else if(c == 'b'){
+					if(cartas.get(i).getColor() == 'b' && cartas.get(i).getValor() < extBastB-2)
+						altas++;
+				}else
+					if(cartas.get(i).getColor() == 'c' && cartas.get(i).getValor() < extCopasB-2)
+						altas++;
 
 			}
 			return altas;
